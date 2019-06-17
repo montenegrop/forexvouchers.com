@@ -9,4 +9,4 @@
 
 | Username | password |
 |----------|----------|
-| Password | admin    |
+| admin    | admin    |
