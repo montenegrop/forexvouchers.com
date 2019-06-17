@@ -77,7 +77,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     body = RichTextField(max_length=500)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    link = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
+    link = models.OneToOneField(Affiliate, on_delete=models.CASCADE, primary_key=True)
 
 
 class Voucher(models.Model):
