@@ -17,6 +17,13 @@ class Category(models.Model):
     name = models.CharField(max_length=30)
     attributes = models.ManyToManyField('Attribute', blank=True)
 
+    panels = [
+        FieldPanel('name')
+    ]
+
+    def __str__(self):
+        return self.name
+
 
 class Service(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -27,11 +34,17 @@ class Service(models.Model):
     def getAttributeValues(self):
         return AttributeValue.objects.filter(service=self)
 
+    def __str__(self):
+        return self.name
+
 
 class Attribute(models.Model):
     name = models.CharField(max_length=50)
     categories = models.ManyToManyField('Category', through=Category.attributes.through, blank=True)
     services = models.ManyToManyField('Service', through=Service.attributes.through, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class AttributeValue(models.Model):
@@ -39,8 +52,38 @@ class AttributeValue(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     value = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.value
+
+
+class Affiliate(models.Model):
+    linkTypes = [('out', 'out'), ('visit', 'visit'), ('go', 'go')]
+    type = models.CharField(
+        max_length=10,
+        choices=linkTypes,
+        default='go'
+    )
+    cloakedLink = models.URLField(max_length=500)
+    slug = models.CharField(max_length=200, unique=True, null=False)
+
+    def getLink(self):
+        return f"/{self.type}/{self.slug}"
+
+    def __str__(self):
+        return self.getLink()
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    body = RichTextField(max_length=500)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    link = models.ForeignKey(Affiliate, on_delete=models.CASCADE)
+
 
 class Voucher(models.Model):
     type = models.CharField(max_length=30)
     name = models.CharField(max_length=50)
     description = models.TextField()
+
+    def __str__(self):
+        return self.name
