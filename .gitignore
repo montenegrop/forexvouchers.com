@@ -1,3 +1,7 @@
 .idea
 __pycache__
 *.pyc
+.sass-cache
+node_modules
+static
+forexvouchers/static/css/forexvouchers.css
