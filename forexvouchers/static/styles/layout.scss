@@ -1,8 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+}
+nav {
+  width: 100%;
+}
+
 .header{
-  background-color: #252A2F;
+  background-color: $bg-color;
 
   h1{
-    color: #55ecff;
+    color: white;
   }
+}
+
+.content {
+  flex:1;
+}
+
+
+.footer{
+  background-color: $bg-color;
 
 }
