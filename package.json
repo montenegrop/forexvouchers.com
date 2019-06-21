@@ -4,7 +4,9 @@
   "description": "user admin pass admin",
   "main": "index.js",
   "scripts": {
-    "build": "node-sass forexvouchers/static/scss/base.scss > forexvouchers/static/css/forexvouchers.css; python manage.py collectstatic --noinput",
+    "build": "parcel build forexvouchers/static/js/forexvouchers.js forexvouchers/static/styles/base.scss -d forexvouchers/static/dist",
+    "build:static": "npm run build; python manage.py collectstatic --noinput",
+    "watch": "parcel forexvouchers/static/js/forexvouchers.js forexvouchers/static/styles/base.scss -d forexvouchers/static/dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +21,7 @@
   "homepage": "https://github.com/ahmerkhanz/fxvouchers#readme",
   "devDependencies": {
     "bootstrap": "^4.1.3",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "parcel-bundler": "^1.12.3"
   }
 }
