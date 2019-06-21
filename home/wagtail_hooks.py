@@ -1,6 +1,6 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
-from .models import Category, Service, Attribute, AttributeValue, Voucher, Affiliate, Product
+from .models import Category, Service, Attribute, Voucher, Affiliate, Product, AttributeService, AttributeServiceValue
 
 
 class CategoryAdmin(ModelAdmin):
@@ -30,8 +30,11 @@ class AttributeAdmin(ModelAdmin):
     model = Attribute
 
 
-class AttributeValueAdmin(ModelAdmin):
-    model = AttributeValue
+class AttributeServiceValueAdmin(ModelAdmin):
+    model = AttributeServiceValue
+
+class AttributeServiceAdmin(ModelAdmin):
+    model = AttributeService
 
 
 class VoucherAdmin(ModelAdmin):
@@ -50,7 +53,7 @@ class ProductsGroup(ModelAdminGroup):
     menu_label = 'Products'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (CategoryAdmin, ServiceAdmin, AttributeAdmin, AttributeValueAdmin, ProductAdmin)
+    items = (CategoryAdmin, ServiceAdmin, AttributeAdmin, AttributeServiceAdmin, AttributeServiceValueAdmin, ProductAdmin)
 
 
 # Now you just need to register your customised ModelAdmin class with Wagtail

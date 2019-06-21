@@ -32,7 +32,8 @@ class Service(models.Model):
     attributes = models.ManyToManyField('Attribute', blank=True)
 
     def getAttributeValues(self):
-        return AttributeValue.objects.filter(service=self)
+        # return AttributeValue.objects.filter(service=self)
+        pass
 
     def __str__(self):
         return self.name
@@ -47,9 +48,15 @@ class Attribute(models.Model):
         return self.name
 
 
-class AttributeValue(models.Model):
+class AttributeService(models.Model):
     attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.attribute}-{self.service}"
+
+class AttributeServiceValue(models.Model):
+    attributeService = models.ForeignKey(AttributeService, on_delete=models.CASCADE)
     value = models.CharField(max_length=50)
 
     def __str__(self):
