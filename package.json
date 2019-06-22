@@ -6,9 +6,11 @@
   "scripts": {
     "build": "parcel build forexvouchers/static/js/forexvouchers.js forexvouchers/static/styles/base.scss -d forexvouchers/static/dist",
     "build:styles": "parcel build forexvouchers/static/styles/base.scss --no-minify -d forexvouchers/static/dist/styles",
+    "build:js": "parcel build forexvouchers/static/js/forexvouchers.js --no-minify -d forexvouchers/static/dist/js",
     "build:static": "npm run build; python manage.py collectstatic --noinput",
-    "watch": "parcel forexvouchers/static/js/* forexvouchers/static/styles/* -d forexvouchers/static/dist",
+    "watch": "npm-run-all -p -r watch:styles watch:js",
     "watch:styles": "nodemon --watch forexvouchers/static/styles/**/*.scss -e scss --exec 'npm run build:styles'",
+    "watch:js": "nodemon --watch forexvouchers/static/**/*.js -e scss --exec 'npm run build:js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +28,7 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
+    "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.3"
   },
   "dependencies": {

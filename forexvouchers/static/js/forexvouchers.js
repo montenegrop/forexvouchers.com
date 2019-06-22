@@ -1,11 +1,12 @@
-import Vue from 'vue'
+//import Vue from 'vue'
+import Vue from 'vue/dist/vue'
 import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
 
-
 const app = new Vue({
-    el: '#app',
+    delimiters: ['[[', ']]'],
+    el: '#root',
     data: {
       message: 'Hello Vue!'
     }
