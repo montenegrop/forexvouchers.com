@@ -5,7 +5,7 @@
  3. `npm install`
  4. Run the following commands in 2 separate terminals: 
     1. `python manage.py runserver`
-    2. npm run watch
+    2. `npm run watch`
 
 ## Technologies used
 
