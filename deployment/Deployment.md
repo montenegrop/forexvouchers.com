@@ -25,6 +25,7 @@ VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 workon fxvouchers
 cd /var/www/fxvouchers
 git fetch --all
 git checkout --force master
+git merge origin/master
 
 pip install -r requirements.txt
 npm install
