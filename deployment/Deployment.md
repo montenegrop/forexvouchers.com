@@ -15,7 +15,7 @@ git clone git@github.com:ahmerkhanz/fxvouchers.git
 
 pip install -r requirements.txt
 npm install
-npm run build
+npm run build:static
 gunicorn forexvouchers.wsgi
 
 
@@ -29,7 +29,7 @@ git reset --hard origin/master
 
 pip install -r requirements.txt
 npm install
-npm run build
+npm run build:static
 
 gunicorn forexvouchers.wsgi
 
