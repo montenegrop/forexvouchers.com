@@ -23,7 +23,7 @@ workon fxvouchers
 
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec gunicorn ${DJANGO_WSGI_MODULE}:application \
+exec /home/ubuntu/.virtualenvs/fxvouchers/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
