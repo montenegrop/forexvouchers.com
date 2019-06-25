@@ -30,9 +30,6 @@ class AttributeAdmin(ModelAdmin):
     model = Attribute
 
 
-class AttributeServiceValueAdmin(ModelAdmin):
-    model = AttributeServiceValue
-
 class AttributeServiceAdmin(ModelAdmin):
     model = AttributeService
 
@@ -53,7 +50,7 @@ class ProductsGroup(ModelAdminGroup):
     menu_label = 'Products'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (CategoryAdmin, ServiceAdmin, AttributeAdmin, AttributeServiceAdmin, AttributeServiceValueAdmin, ProductAdmin)
+    items = (CategoryAdmin, ServiceAdmin, AttributeAdmin, AttributeServiceAdmin, ProductAdmin)
 
 
 # Now you just need to register your customised ModelAdmin class with Wagtail

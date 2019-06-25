@@ -1,8 +1,17 @@
 from django.db import models
 
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import (
+    MultiFieldPanel,
+    InlinePanel,
+    FieldPanel,
+)
+
+from wagtail.core.models import Orderable
 
 
 class HomePage(Page):
@@ -47,16 +56,30 @@ class Attribute(models.Model):
     def __str__(self):
         return self.name
 
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("categories"),
+    ]
 
-class AttributeService(models.Model):
+
+class AttributeService(ClusterableModel):
     attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.attribute}-{self.service}"
 
-class AttributeServiceValue(models.Model):
-    attributeService = models.ForeignKey(AttributeService, on_delete=models.CASCADE)
+    panels = [
+        MultiFieldPanel([
+            FieldPanel("attribute"),
+            FieldPanel("service"),
+        ], heading="attribute-service"),
+        InlinePanel("attserval", label="values")
+    ]
+
+
+class AttributeServiceValue(Orderable):
+    attributeService = ParentalKey("AttributeService", related_name="attserval")
     value = models.CharField(max_length=50)
 
     def __str__(self):
