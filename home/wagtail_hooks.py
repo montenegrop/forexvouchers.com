@@ -1,5 +1,9 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
+from wagtail.core import hooks
+
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.utils.html import format_html
 from .models import Category, Service, Attribute, Voucher, Affiliate, Product, AttributeService, AttributeServiceValue
 
 
@@ -58,3 +62,11 @@ class ProductsGroup(ModelAdminGroup):
 # modeladmin_register(ServiceAdmin)
 modeladmin_register(ProductsGroup)
 modeladmin_register(AffiliateAdmin)
+
+
+@hooks.register("insert_global_admin_js", order=100)
+def global_admin_js():
+    """Add /static/css/custom.js to the admin."""
+    return format_html(
+        '<script></script>'
+    )

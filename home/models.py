@@ -1,7 +1,10 @@
 from django.db import models
 
+from django_extensions.db.fields import AutoSlugField
+
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
+from wagtail.core.models import Orderable
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
@@ -11,7 +14,9 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
 )
 
-from wagtail.core.models import Orderable
+
+
+from wagtail.core.blocks import ChoiceBlock
 
 
 class HomePage(Page):
@@ -25,9 +30,13 @@ class HomePage(Page):
 class Category(models.Model):
     name = models.CharField(max_length=30)
     attributes = models.ManyToManyField('Attribute', blank=True)
+    slug = AutoSlugField(populate_from='name', editable=True)
 
     panels = [
-        FieldPanel('name')
+        MultiFieldPanel([
+        FieldPanel('name'),
+        FieldPanel('slug')
+            ], heading="Category")
     ]
 
     def __str__(self):
@@ -37,8 +46,9 @@ class Category(models.Model):
 class Service(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    premium = models.BooleanField(null=True)
+    premium = models.BooleanField(null=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
+    slug = AutoSlugField(populate_from='name', editable=True)
 
     def getAttributeValues(self):
         # return AttributeValue.objects.filter(service=self)
@@ -48,10 +58,20 @@ class Service(models.Model):
         return self.name
 
 
-class Attribute(models.Model):
+class Option(models.Model):
+    name = models.CharField(max_length=50)
+    attribute = ParentalKey("Attribute", related_name="options")
+    slug = AutoSlugField(populate_from='name', editable=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Attribute(ClusterableModel):
     name = models.CharField(max_length=50)
     categories = models.ManyToManyField('Category', through=Category.attributes.through, blank=True)
     services = models.ManyToManyField('Service', through=Service.attributes.through, blank=True)
+    slug = AutoSlugField(populate_from='name', editable=True)
 
     def __str__(self):
         return self.name
@@ -59,6 +79,7 @@ class Attribute(models.Model):
     panels = [
         FieldPanel("name"),
         FieldPanel("categories"),
+        InlinePanel("options", label="options")
     ]
 
 
@@ -74,13 +95,14 @@ class AttributeService(ClusterableModel):
             FieldPanel("attribute"),
             FieldPanel("service"),
         ], heading="attribute-service"),
-        InlinePanel("attserval", label="values")
+        InlinePanel("attSerVal", label="values")
     ]
 
 
 class AttributeServiceValue(Orderable):
-    attributeService = ParentalKey("AttributeService", related_name="attserval")
+    attributeService = ParentalKey("AttributeService", related_name="attSerVal")
     value = models.CharField(max_length=50)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.value
@@ -108,12 +130,14 @@ class Product(models.Model):
     body = RichTextField(max_length=500)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     link = models.OneToOneField(Affiliate, on_delete=models.CASCADE, primary_key=True)
+    slug = AutoSlugField(populate_from='name', editable=True)
 
 
 class Voucher(models.Model):
     type = models.CharField(max_length=30)
     name = models.CharField(max_length=50)
     description = models.TextField()
+    slug = AutoSlugField(populate_from='name', editable=True)
 
     def __str__(self):
         return self.name
