@@ -129,7 +129,7 @@ class AttributeService(Orderable, ClusterableModel):
 class AttributeServiceValue(Orderable):
     attributeService = ParentalKey("AttributeService", related_name="attSerVal")
     value = models.CharField(max_length=50, blank=True)
-    option = models.ForeignKey(Option, on_delete=models.CASCADE, blank=True)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE, blank=True, default=None)
 
     panels = [
         FieldPanel("value"),
