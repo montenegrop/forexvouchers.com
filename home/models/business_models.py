@@ -87,12 +87,12 @@ class Attribute(ClusterableModel):
     slug = AutoSlugField(populate_from='name', editable=True)
 
     SECTION_CHOICES = (
-        (1, ("General Information")),
-        (2, ("Account Options")),
-        (3, ("Customer Service")),
-        (4, ("Trading")),
-        (5, ("Account")),
-        (6, ("General information about IC Markets"))
+        (1, "General Information"),
+        (2, "Account Options"),
+        (3, "Customer Service"),
+        (4, "Trading"),
+        (5, "Account"),
+        (6, "General information about IC Markets")
     )
 
     section = models.IntegerField(choices=SECTION_CHOICES, default=1, null=False)
@@ -129,7 +129,7 @@ class AttributeService(Orderable, ClusterableModel):
 class AttributeServiceValue(Orderable):
     attributeService = ParentalKey("AttributeService", related_name="attSerVal")
     value = models.CharField(max_length=50, blank=True)
-    option = models.ForeignKey(Option, on_delete=models.CASCADE, blank=True, default=None)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE, blank=True, default='', null=True)
 
     panels = [
         FieldPanel("value"),

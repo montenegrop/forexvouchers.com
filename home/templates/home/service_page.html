@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{# Load CSS and JavaScript #}
+
+<!---->
+{% block body_class %}template-homepage{% endblock %} <!--que hace esto?-->
+
+
+{% block content %}
+
+
+<table class="table table-hover table-dark table_home table-bordered">
+    <thead>
+    <tr>
+        <th colspan="2" scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for service in table_rows %}
+    <tr>
+        <th scope="row">{{ service.name }}</th>
+        <td>{{ service.country.value }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
