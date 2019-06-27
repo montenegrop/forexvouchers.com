@@ -8,4 +8,5 @@ git reset --hard origin/master
 pip install -r requirements.txt
 npm install
 npm run build:static
+python manage.py migrate
 sudo supervisorctl restart all

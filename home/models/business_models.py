@@ -6,8 +6,6 @@ from django import forms
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable
-
-from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
@@ -16,14 +14,6 @@ from wagtail.admin.edit_handlers import (
 )
 
 from wagtail.core.blocks import ChoiceBlock
-
-
-class HomePage(Page):
-    body = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
-    ]
 
 
 class Category(models.Model):
@@ -45,13 +35,17 @@ class Category(models.Model):
 class Service(ClusterableModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    premium = models.BooleanField(null=True)
+    premium = models.BooleanField(null=False, default=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
 
-    def getAttributeValues(self):
-        # return AttributeValue.objects.filter(service=self)
-        pass
+    @property
+    def country(self):
+        attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
+        attrServ = [attrServ for attrServ in attributeServices if attrServ.attribute.slug == 'country']
+        attrServValues = AttributeServiceValue.objects.filter(attributeService=attrServ[0])
+        return ', '.join([asv.__str__() for asv in attrServValues])
+
 
     def __str__(self):
         return self.name
@@ -131,11 +125,16 @@ class AttributeService(Orderable, ClusterableModel):
 
 class AttributeServiceValue(Orderable):
     attributeService = ParentalKey("AttributeService", related_name="attSerVal")
-    value = models.CharField(max_length=50)
-    option = models.ForeignKey(Option, on_delete=models.CASCADE, null=True)
+    value = models.CharField(max_length=50, blank=True)
+    option = models.ForeignKey(Option, on_delete=models.CASCADE, blank=True)
+
+    panels = [
+        FieldPanel("value"),
+        FieldPanel("option"),
+    ]
 
     def __str__(self):
-        return self.value
+        return self.option.name if self.option else self.value
 
 
 class Affiliate(models.Model):

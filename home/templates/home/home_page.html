@@ -6,8 +6,46 @@
 
 
 {% block content %}
+
+
+<table class="table table-hover table-dark table_home table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Broker + Logo</th>
+        <th scope="col">Country + Regulation</th>
+        <th scope="col">Broker Type</th>
+        <th scope="col">Minimum Deposit</th>
+        <th scope="col">Leverage</th>
+        <th scope="col">Spread</th>
+        <th scope="col">Commission Fee</th>
+        <th scope="col">Rating & Reviews</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for service in table_rows %}
+    <tr>
+        <th scope="row">{{ service.name }}</th>
+        <td>{{ service.country }}</td>
+        <td>True ECN</td>
+        <td>$100</td>
+        <td>500x</td>
+        <td>0,2</td>
+        <td>$5</td>
+        <td>4.7 Stars</td>
+    </tr>
+      {% endfor %}
+    <tr>
+        <th scope="row">OctaFX</th>
+        <td>Australia</td>
+        <td>True ECN</td>
+        <td>$100</td>
+        <td>500x</td>
+        <td>0,2</td>
+        <td>$5</td>
+        <td>4.7 Stars</td>
+    </tr>
+    </tbody>
+</table>
+
 {{ page.body | richtext }}
-
-hello mathew
-
 {% endblock %}
