@@ -8,3 +8,4 @@ git reset --hard origin/master
 pip install -r requirements.txt
 npm install
 npm run build:static
+sudo supervisorctl restart all
