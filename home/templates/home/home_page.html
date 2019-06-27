@@ -25,26 +25,15 @@
         {% for service in table_rows %}
     <tr>
         <th scope="row">{{ service.name }}</th>
-        <td>{{ service.country }}</td>
-        <td>True ECN</td>
-        <td>$100</td>
-        <td>500x</td>
-        <td>0,2</td>
-        <td>$5</td>
+        <td>{{ service.country.value }}</td>
+        <td>{{ service.broker_type.value }}</td>
+        <td>{{ service.minimum_deposit.value }}</td>
+        <td>{{ service.leverage.value }}</td>
+        <td>{{ service.spread.value }}</td>
+        <td>{{ service.comission_fee.value }}</td>
         <td>4.7 Stars</td>
     </tr>
       {% endfor %}
-    <tr>
-        <th scope="row">OctaFX</th>
-        <td>Australia</td>
-        <td>True ECN</td>
-        <td>$100</td>
-        <td>500x</td>
-        <td>0,2</td>
-        <td>$5</td>
-        <td>4.7 Stars</td>
-    </tr>
-    </tbody>
 </table>
 
 {{ page.body | richtext }}

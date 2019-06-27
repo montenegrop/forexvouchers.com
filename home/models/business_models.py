@@ -39,13 +39,13 @@ class Service(ClusterableModel):
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
 
-    @property
-    def country(self):
+    def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
-        attrServ = [attrServ for attrServ in attributeServices if attrServ.attribute.slug == 'country']
-        attrServValues = AttributeServiceValue.objects.filter(attributeService=attrServ[0])
-        return ', '.join([asv.__str__() for asv in attrServValues])
-
+        attributes = { attributeService.attribute.getKey(): { 
+            'label': attributeService.attribute.name, 
+            'value': ','.join([value.__str__() for value in attributeService.attSerVal.all()])
+        } for attributeService in attributeServices }
+        return attributes
 
     def __str__(self):
         return self.name
@@ -100,6 +100,9 @@ class Attribute(ClusterableModel):
     def __str__(self):
         return self.name
 
+    def getKey(self):
+        return self.slug.replace('-', '_')    
+
     panels = [
         FieldPanel("name"),
         FieldPanel("categories", widget=forms.CheckboxSelectMultiple),
@@ -134,7 +137,7 @@ class AttributeServiceValue(Orderable):
     ]
 
     def __str__(self):
-        return self.option.name if self.option else self.value
+        return self.option.name if hasattr(self, 'option') else self.value
 
 
 class Affiliate(models.Model):
