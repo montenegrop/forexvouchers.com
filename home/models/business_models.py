@@ -137,7 +137,7 @@ class AttributeServiceValue(Orderable):
     ]
 
     def __str__(self):
-        return self.option.name if hasattr(self, 'option') else self.value
+        return self.option.name if hasattr(self, 'option') and self.option else self.value
 
 
 class Affiliate(models.Model):
