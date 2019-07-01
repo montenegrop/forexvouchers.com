@@ -1,6 +1,9 @@
+@import "variables";
+@import "theme/variables";
+
+
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/variables";
-@import "variables";
 
 // bootstrap
 @import "../../../node_modules/bootstrap/scss/mixins";
@@ -36,6 +39,8 @@
 @import "../../../node_modules/bootstrap/scss/carousel";
 @import "../../../node_modules/bootstrap/scss/utilities";
 @import "../../../node_modules/bootstrap/scss/print";
+
+@import "theme/bootswatch";
 
 // bootstrap vue
 @import '../../../node_modules/bootstrap-vue/src/index.scss';

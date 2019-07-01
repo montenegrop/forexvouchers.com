@@ -32,14 +32,7 @@
 
 <div id="root" class="container-fluid wrapper">
     <div class="row header">
-        <div class="col-6 col-md-3">.col-6 .col-md-3</div>
-        <div class="col-12 col-md-6">
-            <h1>Forex Vouchers</h1>
-            
-        </div>
-        <div class="col-6 col-md-3">.col-6 .col-md-3</div>
-        
-        {% include "includes/navbar.html" %} 
+        {% include "includes/navbar.html" %}
     </div>
 
     <div class="row content">
@@ -47,16 +40,16 @@
         <div class="col-12 col-md-6">
                 {% block content %}{% endblock %}
         </div>
-        <div class="col-6 col-md-3"></div>
+        <div class="col-6 col-md-3"> <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>  </div>
 
     </div>
 
 
 
     <div class="row footer">
-        <div class="col-6 col-md-3">.col-6 .col-md-3</div>
-        <div class="col-12 col-md-6">.col-6 .col-md-6</div>
-        <div class="col-6 col-md-3">.col-6 .col-md-3</div>
+        <div class="col-6 col-md-3"></div>
+        <div class="col-12 col-md-6">Main footer</div>
+        <div class="col-6 col-md-3"></div>
     </div>
 </div>
 
