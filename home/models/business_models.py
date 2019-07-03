@@ -1,5 +1,6 @@
 from django.db import models
 
+
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
@@ -13,7 +14,9 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
 )
 
-from wagtail.core.blocks import ChoiceBlock
+
+
+# from wagtail.core.blocks import ChoiceBlock
 
 
 class Category(models.Model):
@@ -173,3 +176,4 @@ class Voucher(models.Model):
 
     def __str__(self):
         return self.name
+
