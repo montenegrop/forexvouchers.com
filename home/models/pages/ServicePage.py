@@ -1,7 +1,7 @@
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
-from ..business_models import Attribute
+from home.models.business_models import Attribute
 
 
 class ServicePage(Page):

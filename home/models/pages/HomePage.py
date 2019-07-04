@@ -1,8 +1,8 @@
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
-from ..business_models import Service
-from helpers.services import get_service_context
+from home.models.business_models import Service
+from home.helpers.services import get_service_context
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 

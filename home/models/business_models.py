@@ -44,11 +44,15 @@ class Service(ClusterableModel):
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
-        attributes = { attributeService.attribute.getKey(): { 
+        attributes = { attributeService.attribute.getKey(): {
             'label': attributeService.attribute.name, 
             'value': ','.join([value.__str__() for value in attributeService.attSerVal.all()])
         } for attributeService in attributeServices }
         return attributes
+
+
+
+
 
     def __str__(self):
         return self.name
@@ -104,7 +108,7 @@ class Attribute(ClusterableModel):
         return self.name
 
     def getKey(self):
-        return self.slug.replace('-', '_')    
+        return self.slug.replace('-', '_')
 
     panels = [
         FieldPanel("name"),

@@ -3,13 +3,36 @@
 {# Load CSS and JavaScript #}
 
 <!---->
-{% block body_class %}template-homepage{% endblock %} <!--que hace esto?-->
+{% block body_class %}template-homepage{% endblock %}
 
 
 {% block content %}
 
 
-ddd
+
+
+
+
+<table class="table table-hover table-dark table_home table-bordered">
+    <thead>
+    <tr>
+        <th colspan="2" scope="col">general info</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        {% for att in service.attributes %}
+    <tr>
+        <!--<td scope="row">{{ att.section }}</td>-->
+        <th scope="row">{{ att.name }}</th>
+        <td scope="row">{{ att.value }}</td>
+
+    </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+
 
 
 {% endblock %}
