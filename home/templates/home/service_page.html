@@ -9,30 +9,37 @@
 {% block content %}
 
 
+    <table class="table table-hover table-dark table_home table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2" scope="col">{{ service.name }}</th>
 
+        </tr>
+        </thead>
+        <tbody>
+        {% for sec_id, description in service.sections.items %}
 
+            <tr>
+                <th colspan="2" scope="row">{{ description }}</th>
+            </tr>
 
+            {% for att in service.attributes %}
 
-<table class="table table-hover table-dark table_home table-bordered">
-    <thead>
-    <tr>
-        <th colspan="2" scope="col">general info</th>
+                {% if att.section_id == sec_id %}
 
-    </tr>
-    </thead>
-    <tbody>
-        {% for att in service.attributes %}
-    <tr>
-        <!--<td scope="row">{{ att.section }}</td>-->
-        <th scope="row">{{ att.name }}</th>
-        <td scope="row">{{ att.value }}</td>
+                    <tr>
+                        <th scope="row">{{ att.name }}</th>
+                        <td scope="row">{{ att.value }}</td>
 
-    </tr>
-      {% endfor %}
-    </tbody>
-</table>
+                    </tr>
 
+                {% endif %}
 
+            {% endfor %}
+
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 {% endblock %}

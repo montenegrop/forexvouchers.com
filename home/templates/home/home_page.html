@@ -8,34 +8,34 @@
 {% block content %}
 
 
-<table class="table table-hover table-dark table_home table-bordered">
-    <thead>
-    <tr>
-        <th scope="col">Broker + Logo</th>
-        <th scope="col">Country + Regulation</th>
-        <th scope="col">Broker Type</th>
-        <th scope="col">Minimum Deposit</th>
-        <th scope="col">Leverage</th>
-        <th scope="col">Spread</th>
-        <th scope="col">Commission Fee</th>
-        <th scope="col">Rating & Reviews</th>
-    </tr>
-    </thead>
-    <tbody>
+    <table class="table table-hover table-dark table_home table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Broker + Logo</th>
+            <th scope="col">Country + Regulation</th>
+            <th scope="col">Broker Type</th>
+            <th scope="col">Minimum Deposit</th>
+            <th scope="col">Leverage</th>
+            <th scope="col">Spread</th>
+            <th scope="col">Commission Fee</th>
+            <th scope="col">Rating & Reviews</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for service in table_rows %}
-    <tr>
-        <th scope="row">{{ service.name }}</th>
-        <td>{{ service.country.value }}</td>
-        <td>{{ service.broker_type.value }}</td>
-        <td>{{ service.minimum_deposit.value }}</td>
-        <td>{{ service.leverage.value }}</td>
-        <td>{{ service.spread.value }}</td>
-        <td>{{ service.comission_fee.value }}</td>
-        <td>4.7 Stars</td>
-    </tr>
-      {% endfor %}
-    </tbody>
-</table>
+            <tr>
+                <th scope="row"><a href="/services/{{ service.slug }}">{{ service.name }}</a></th>
+                <td>{{ service.country.value }}</td>
+                <td>{{ service.broker_type.value }}</td>
+                <td>{{ service.minimum_deposit.value }}</td>
+                <td>{{ service.leverage.value }}</td>
+                <td>{{ service.spread.value }}</td>
+                <td>{{ service.comission_fee.value }}</td>
+                <td>4.7 Stars</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{{ page.body | richtext }}
+    {{ page.body | richtext }}
 {% endblock %}

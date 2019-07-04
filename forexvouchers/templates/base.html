@@ -6,12 +6,12 @@
     <meta charset="utf-8"/>
     <title>
         {% block title %}
-        {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
         {% endblock %}
         {% block title_suffix %}
-        {% with self.get_site.site_name as site_name %}
-        {% if site_name %}- {{ site_name }}{% endif %}
-        {% endwith %}
+            {% with self.get_site.site_name as site_name %}
+                {% if site_name %}- {{ site_name }}{% endif %}
+            {% endwith %}
         {% endblock %}
     </title>
     <meta name="description" content=""/>
@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'dist/styles/base.css' %}">
 
     {% block extra_css %}
-    {# Override this in templates to add extra stylesheets #}
+        {# Override this in templates to add extra stylesheets #}
     {% endblock %}
 </head>
 
@@ -38,12 +38,11 @@
     <div class="row content">
         <div class="col-6 col-md-3 d-none d-lg-block"></div>
         <div class="col-12 col-md-6">
-                {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
         <div class="col-6 col-md-3"></div>
 
     </div>
-
 
 
     <div class="row footer">
@@ -60,7 +59,7 @@
 <script type="text/javascript" src="{% static 'dist/js/forexvouchers.js' %}"></script>
 
 {% block extra_js %}
-{# Override this in templates to add extra javascript #}
+    {# Override this in templates to add extra javascript #}
 {% endblock %}
 </body>
 </html>

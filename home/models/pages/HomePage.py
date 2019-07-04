@@ -18,6 +18,7 @@ class HomePage(RoutablePageMixin, Page):
         for service in Service.objects.all():
             attrs = service.getAttributes()
             attrs['name'] = service.name
+            attrs['slug'] = service.slug
             context['table_rows'].append(attrs)
         return context
 
