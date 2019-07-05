@@ -12,7 +12,7 @@
     <table class="table table-hover table-dark table_home table-bordered">
         <thead>
         <tr>
-            <th colspan="2" scope="col">{{ service.name }}</th>
+            <th class="text-center" colspan="2" scope="col">{{ service.name }}</th>
 
         </tr>
         </thead>
@@ -20,7 +20,7 @@
         {% for sec_id, description in service.sections.items %}
 
             <tr>
-                <th colspan="2" scope="row">{{ description }}</th>
+                <td class="text-center" colspan="2" scope="row">{{ description }}</td>
             </tr>
 
             {% for att in service.attributes %}
@@ -28,9 +28,8 @@
                 {% if att.section_id == sec_id %}
 
                     <tr>
-                        <th scope="row">{{ att.name }}</th>
+                        <td scope="row">{{ att.name }}:</td>
                         <td scope="row">{{ att.value }}</td>
-
                     </tr>
 
                 {% endif %}
