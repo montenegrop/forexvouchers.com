@@ -7,8 +7,9 @@ const app = new Vue({
     delimiters: ['[[', ']]'],
     el: '#root',
     data: {
-      message: 'Hello Vue!'
-    }
+      message: 'Hello Vue!',
+      ...window.data
+  }
   })
 
   const elems = document.querySelectorAll(".vue-init");

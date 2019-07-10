@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
+    'jsonify'
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'builtins': ['jsonify.templatetags.jsonify'],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

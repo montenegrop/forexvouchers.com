@@ -3,3 +3,4 @@ wagtail>=2.5,<2.6
 django-debug-toolbar==2.0
 django-extensions==2.1.5
 gunicorn==19.9
+django-jsonify==19.1
