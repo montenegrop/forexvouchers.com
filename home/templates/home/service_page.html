@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
+{% load comments %}
 {# Load CSS and JavaScript #}
 
 <!---->
@@ -39,6 +40,26 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% get_comment_count for model as comment_count %}
+    {{ comment_count }}
+    {% render_comment_list for model %}
+
+
+    {% get_comment_form for model as form %}
+    <form action="{% comment_form_target %}" method="POST">
+        {% csrf_token %}
+        {{ form.name }}
+        {{ form.email }}
+        {{ form.comment }}
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+
+        <input type="hidden" name="next" value="/services/{{ model.slug }}"/>
+        <input type="submit" value="Add comment" id="id_submit"/>
+    </form>
 
 
 {% endblock %}

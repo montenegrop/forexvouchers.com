@@ -26,14 +26,11 @@ class HomePage(RoutablePageMixin, Page):
         FieldPanel('body', classname="full")
     ]
 
-
-
-
-    @route(r'^services/(.+)/$')
+    @route(r'^services/(.+)/$', name='service_url')
     def get_service_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request)
         slug = args[0]
         context['service'] = get_service_context(slug)
-
+        context['model'] = Service.objects.get(slug=slug)
 
         return render(request, "../templates/home/service_page.html", context)
