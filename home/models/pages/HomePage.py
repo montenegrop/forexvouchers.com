@@ -34,6 +34,7 @@ class HomePage(RoutablePageMixin, Page):
         context = super(HomePage, self).get_context(request)
         slug = args[0]
         context['service'] = get_service_context(slug)
+        context['model'] = Service.objects.get(slug=slug)
 
 
         return render(request, "../templates/home/service_page.html", context)

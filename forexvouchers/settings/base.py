@@ -53,6 +53,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
+
+    'threadedcomments',
+    'django_comments',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +172,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
 ]
+
+COMMENTS_APP = 'threadedcomments'
+
+SITE_ID = 1
