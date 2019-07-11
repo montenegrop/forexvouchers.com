@@ -1,4 +1,4 @@
-from home.models.business_models import Service, Attribute
+from cms.models.business_models import Service, Attribute
 
 
 def get_service_context(slug):

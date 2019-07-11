@@ -1,8 +1,8 @@
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
-from home.models.business_models import Service
-from home.helpers.services import get_service_context
+from cms.models.business_models import Service
+from cms.helpers.services import get_service_context
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -36,4 +36,4 @@ class HomePage(RoutablePageMixin, Page):
         context['service'] = get_service_context(slug)
 
 
-        return render(request, "../templates/home/service_page.html", context)
+        return render(request, "../templates/cms/service_page.html", context)
