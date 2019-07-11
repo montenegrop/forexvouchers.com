@@ -1,6 +1,5 @@
 from django.db import models
 
-
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
@@ -13,7 +12,6 @@ from wagtail.admin.edit_handlers import (
     InlinePanel,
     FieldPanel,
 )
-
 
 
 # from wagtail.core.blocks import ChoiceBlock
@@ -44,15 +42,11 @@ class Service(ClusterableModel):
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
-        attributes = { attributeService.attribute.getKey(): {
-            'label': attributeService.attribute.name, 
+        attributes = {attributeService.attribute.getKey(): {
+            'label': attributeService.attribute.name,
             'value': ','.join([value.__str__() for value in attributeService.attSerVal.all()])
-        } for attributeService in attributeServices }
+        } for attributeService in attributeServices}
         return attributes
-
-
-
-
 
     def __str__(self):
         return self.name
@@ -84,7 +78,6 @@ class Option(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class Attribute(ClusterableModel):
@@ -181,3 +174,27 @@ class Voucher(models.Model):
     def __str__(self):
         return self.name
 
+
+class Comment(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, default=None)
+    stars = models.IntegerField(choices=((1, 1), (2, 2), (3, 3), (4, 4), (5, 5)), null=True)
+    name = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+    review = models.CharField(max_length=500)
+    comment_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    ip = models.CharField(max_length=20, null=True)
+    active = models.BooleanField(default=False)
+
+    panels = [
+        FieldPanel("service"),
+        FieldPanel("stars"),
+        FieldPanel("name"),
+        FieldPanel("country"),
+        FieldPanel("comment_id"),
+        FieldPanel("active"),
+    ]
+
+    def __str__(self):
+        return self.review

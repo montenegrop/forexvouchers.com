@@ -4,7 +4,7 @@ from wagtail.core import hooks
 
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.html import format_html
-from .models import Category, Service, Attribute, Voucher, Affiliate, Product, AttributeService, AttributeServiceValue
+from .models import Category, Service, Attribute, Voucher, Affiliate, Product, Comment
 
 
 class CategoryAdmin(ModelAdmin):
@@ -25,7 +25,7 @@ class ServiceAdmin(ModelAdmin):
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('name', 'category', 'premium')  # que hace name aca???
+    list_display = ('name', 'category', 'premium')
     list_filter = ('premium',)
     search_fields = ('name',)
 
@@ -53,11 +53,16 @@ class ProductsGroup(ModelAdminGroup):
     items = (CategoryAdmin, ServiceAdmin, AttributeAdmin, ProductAdmin)
 
 
+class CommentAdmin(ModelAdmin):
+    model = Comment
+
+
 # Now you just need to register your customised ModelAdmin class with Wagtail
 # modeladmin_register(CategoryAdmin)
 # modeladmin_register(ServiceAdmin)
 modeladmin_register(ProductsGroup)
 modeladmin_register(AffiliateAdmin)
+modeladmin_register(CommentAdmin)
 
 
 @hooks.register("insert_global_admin_js", order=100)
