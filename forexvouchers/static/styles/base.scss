@@ -3,8 +3,8 @@
 
 
 @import "../../../node_modules/bootstrap/scss/functions";
-@import "../../../node_modules/bootstrap/scss/variables";
 
+@import "../../../node_modules/bootstrap/scss/variables";
 // bootstrap
 @import "../../../node_modules/bootstrap/scss/mixins";
 @import "../../../node_modules/bootstrap/scss/root";
@@ -44,7 +44,10 @@
 
 // bootstrap vue
 @import '../../../node_modules/bootstrap-vue/src/index.scss';
+// flags
+$flag-icon-css-path: '../../../node_modules/flag-icon-css/flags';
+@import '../../../node_modules/flag-icon-css/sass/flag-icon.scss';
 
-//
+// cms
 @import './layout';
 @import './comments';

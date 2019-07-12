@@ -9,8 +9,8 @@
     "build:js": "parcel build forexvouchers/static/js/forexvouchers.js --no-minify -d forexvouchers/static/dist/js",
     "build:static": "npm run build; python manage.py collectstatic --noinput",
     "watch": "npm-run-all -p -r watch:styles watch:js",
-    "watch:styles": "nodemon --watch forexvouchers/static/styles/**/*.scss -e scss --exec 'npm run build:styles'",
-    "watch:js": "nodemon --watch forexvouchers/static/**/*.js -e scss --exec 'npm run build:js'",
+    "watch:styles": "nodemon --watch forexvouchers/**/*.scss --ignore 'forexvouchers/static/dist/' -e scss --exec 'npm run build:styles; true'",
+    "watch:js": "nodemon --watch forexvouchers/**/*.js --ignore 'forexvouchers/static/dist/' --exec 'npm run build:js; true'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,6 +35,7 @@
     "@babel/runtime": "^7.4.5",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
+    "flag-icon-css": "^3.3.0",
     "vue": "^2.6.10"
   }
 }
