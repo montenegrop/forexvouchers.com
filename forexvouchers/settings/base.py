@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
-    'jsonify'
+    'jsonify',
+
+    'django.contrib.gis',
 ]
 
 MIDDLEWARE = [
@@ -171,3 +173,5 @@ INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
 ]
+
+GEOIP_PATH = BASE_DIR + '/forexvouchers/geolocation'

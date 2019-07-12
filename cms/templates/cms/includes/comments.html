@@ -4,24 +4,27 @@
             <div class="panel panel-info">
                 <ul class="media-list">
                     {% for comment in comments %}
-                        <li class="media">
-                            <a href="#" class="pull-left">
-                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
-                            </a>
-                            <div class="media-body">
+
+                        {% if forloop.counter < 4 %}
+                            <li class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                                </a>
+                                <div class="media-body">
                                 <span class="text-muted pull-right">
                                     <small class="text-muted">{{ comment.created_at }}</small>
                                 </span>
-                                <strong class="text-success">{{ comment.name }}</strong>
-                                <p>
+                                    <strong class="text-success">{{ comment.name }}</strong>
+                                    <p>
 
-                                    {{ comment.review }}
+                                        {{ comment.review }}
 
-                                </p>
-                            </div>
+                                    </p>
+                                </div>
 
 
-                        </li>
+                            </li>
+                        {% endif %}
 
                         <ul>
                             {% for child in comment.children %}
@@ -49,19 +52,30 @@
                     {% endfor %}
 
                 </ul>
+
+
+            <div class="container">
+
+            </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
                 <form action="/savecomment" method="post">
                     {% csrf_token %}
                     <div class="panel-body">
                         <input type="hidden" name="slug" value="{{ service.slug }}">
-                        <textarea class="form-control" placeholder="post a review" name="review" rows="3"></textarea>
+                        <textarea class="form-control" placeholder="post a review" name="review" rows="1" cols="2"></textarea>
+                        <textarea class="form-control" placeholder="post a review" name="review" rows="3" cols="2"></textarea>
                         <br/>
                         <button type="submit" class="btn btn-info pull-right">Post</button>
                         <div class="clearfix"></div>
                         <hr/>
                     </div>
                 </form>
-            </div>
-        </div>
-
-    </div>
-</div>
