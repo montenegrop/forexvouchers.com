@@ -2,7 +2,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from cms.models.business_models import Service
-from cms.helpers.services import get_service_context
+from cms.helpers.services import get_service_context, get_comments_by_service
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -26,14 +26,12 @@ class HomePage(RoutablePageMixin, Page):
         FieldPanel('body', classname="full")
     ]
 
-
-
-
     @route(r'^services/(.+)/$')
     def get_service_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request)
         slug = args[0]
-        context['service'] = get_service_context(slug)
-
+        service = Service.objects.get(slug=slug)
+        context['service'] = get_service_context(service)
+        context['comments'] = get_comments_by_service(service)
 
         return render(request, "../templates/cms/service_page.html", context)

@@ -181,20 +181,33 @@ class Comment(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=50)
     review = models.CharField(max_length=500)
-    comment_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     ip = models.CharField(max_length=20, null=True)
     active = models.BooleanField(default=False)
 
     panels = [
+        FieldPanel("review"),
         FieldPanel("service"),
         FieldPanel("stars"),
         FieldPanel("name"),
         FieldPanel("country"),
-        FieldPanel("comment_id"),
+        FieldPanel("parent_comment"),
         FieldPanel("active"),
     ]
 
     def __str__(self):
         return self.review
+
+    def toDict(self):
+        return {'name': self.name,
+                'stars': self.stars,
+                'country': self.country,
+                'review': self.review,
+                'comment': self.parent_comment,
+                'created_at': self.created_at,
+                'updated_at': self.updated_at,
+                'ip': self.ip,
+                'active': self.active
+                }
