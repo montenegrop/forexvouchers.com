@@ -4,8 +4,8 @@
   "description": "user admin pass admin",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build forexvouchers/static/js/forexvouchers.js forexvouchers/static/styles/base.scss -d forexvouchers/static/dist",
-    "build:styles": "parcel build forexvouchers/static/styles/base.scss --no-minify -d forexvouchers/static/dist/styles",
+    "build": "parcel build --public-url '/static/dist/styles' forexvouchers/static/js/forexvouchers.js forexvouchers/static/styles/base.scss -d forexvouchers/static/dist",
+    "build:styles": "parcel build forexvouchers/static/styles/base.scss --public-url '/static/dist/styles' --no-minify -d forexvouchers/static/dist/styles",
     "build:js": "parcel build forexvouchers/static/js/forexvouchers.js --no-minify -d forexvouchers/static/dist/js",
     "build:static": "npm run build; python manage.py collectstatic --noinput",
     "watch": "npm-run-all -p -r watch:styles watch:js",
