@@ -36,6 +36,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
     "flag-icon-css": "^3.3.0",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-rate": "^2.2.0"
   }
 }

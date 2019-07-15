@@ -1,9 +1,27 @@
+<b-container class="comment">
+
+
+
+    <b-row class="infoAndImage">
+        <b-col cols="8" class="text-left">info</b-col>
+        <b-col cols="4" class="flag text-right"><span class="flag-icon flag-icon-ar"></span></b-col>
+    </b-row>
+
+    <b-row>
+        this is a nice commentss
+        <rate :length="5" :value="2"/>
+    </b-row>
+
+</b-container>
+
+
 <div class="row bootstrap snippets">
     <div class="col-md- col-sm-12">
         <div class="comment-wrapper">
             <div class="panel panel-info">
                 <ul class="media-list">
                     {% for comment in comments %}
+
 
                         {% if forloop.counter < 4 %}
                             <li class="media">
@@ -54,11 +72,9 @@
                 </ul>
 
 
-            <div class="container">
+                <div class="container">
 
-            </div>
-
-
+                </div>
 
 
             </div>
@@ -67,15 +83,15 @@
     </div>
 </div>
 
-                <form action="/savecomment" method="post">
-                    {% csrf_token %}
-                    <div class="panel-body">
-                        <input type="hidden" name="slug" value="{{ service.slug }}">
-                        <textarea class="form-control" placeholder="post a review" name="review" rows="1" cols="2"></textarea>
-                        <textarea class="form-control" placeholder="post a review" name="review" rows="3" cols="2"></textarea>
-                        <br/>
-                        <button type="submit" class="btn btn-info pull-right">Post</button>
-                        <div class="clearfix"></div>
-                        <hr/>
-                    </div>
-                </form>
+<form action="/savecomment" method="post">
+    {% csrf_token %}
+    <div class="panel-body">
+        <input type="hidden" name="slug" value="{{ service.slug }}">
+        <textarea class="form-control" placeholder="post a review" name="review" rows="1" cols="2"></textarea>
+        <textarea class="form-control" placeholder="post a review" name="review" rows="3" cols="2"></textarea>
+        <br/>
+        <button type="submit" class="btn btn-info pull-right">Post</button>
+        <div class="clearfix"></div>
+        <hr/>
+    </div>
+</form>
