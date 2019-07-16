@@ -207,6 +207,7 @@ class Comment(models.Model):
                 'stars': self.stars,
                 'country': self.country,
                 'review': self.review,
+                'stars': self.stars,
                 'comment': self.parent_comment,
                 'created_at': self.created_at,
                 'updated_at': self.updated_at,

@@ -3,6 +3,21 @@
     overflow:auto;
 }
 
+.comment-wrapper {
+  li {
+    list-style: none;
+  }
+
+
+}
+
+.rate-container {
+  button:focus, button {
+    outline: none;
+    padding: 0 !important;
+  }
+}
+
 .comment-wrapper .media-list .media img {
     width:64px;
     height:64px;
