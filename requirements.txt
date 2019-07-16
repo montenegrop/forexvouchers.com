@@ -4,3 +4,4 @@ django-debug-toolbar==2.0
 django-extensions==2.1.5
 gunicorn==19.9
 django-jsonify==0.3.0
+geoip2==2.9.0
