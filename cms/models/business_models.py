@@ -200,7 +200,7 @@ class Comment(models.Model):
     ]
 
     def __str__(self):
-        return self.review
+        return self.review[:20]
 
     def toDict(self):
         return {'name': self.name,

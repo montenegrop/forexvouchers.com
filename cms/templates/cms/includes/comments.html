@@ -1,10 +1,10 @@
 <form action="/savecomment" method="post">
     {% csrf_token %}
     <div class="panel-body">
-        <div class="form-group">
-            <label for="">Select a rate:</label>
+        <div class="form-group text-dark">
+            <label for=""><h5>Select a rate:</h5></label>
             <div class="rate-container">
-                <rate :length="5" :value="0"/>
+                <rate :length="5" :value="1"/>
             </div>
 
         </div>
@@ -25,14 +25,18 @@
         <div class="clearfix"></div>
         <hr/>
     </div>
-
 </form>
 
-<b-container class="comment comment-wrapper">
-
+<b-container class="comment-wrapper">
+    <b-row class="text-dark">
+        <b-col>
+            <h5>Reviews:</h5>
+        </b-col>
+    </b-row>
+    <hr/>
     <ul>
         {% for comment in comments %}
-            {% if forloop.counter < 4 %}
+            {% if forloop.counter < 9 %}
                 <li>
                     <b-row class="infoAndImage">
                         <b-col cols="8" class="text-left">
@@ -41,108 +45,39 @@
                                 <rate :length="5" :value="{{ comment.stars }}" readonly/>
                             </div>
                             <p>by {{ comment.name }}</p>
-                            {{ comment.review }}
+                            <p class="text-primary">{{ comment.review }}</p>
                         </b-col>
-                        <b-col cols="4" class="flag text-right">
-                            <p class="text-with-flag margin-0">{{ comment.created_at }}</p>
+                        <b-col cols="4" class="flag text-right text-dark">
+                            <p class="text-with-flag">{{ comment.created_at }}</p>
                             <span class="flag-icon flag-icon-{{ comment.country_code|lower }}"></span>
                             <div class="text-with-flag"><strong> {{ comment.country }} </strong></div>
                         </b-col>
                     </b-row>
                 </li>
+                <hr/>
             {% endif %}
-
             <ul>
-
                 {% for child in comment.children %}
-                    {% if forloop.counter < 4 %}
+                    {% if forloop.counter < 9 %}
                         <li>
-                            <b-row class="infoAndImage">
+                            <b-row class="infoAndImage-answer">
                                 <b-col cols="8" class="text-left">
-                                    <p>by {{ child.name }}</p>
-                                    {{ child.review }}
+                                    <p class="text-danger">by {{ child.name }}</p>
+                                    <p class="text-primary">{{ child.review }}</p>
                                 </b-col>
-                                <b-col cols="4" class="flag text-right">
-                                    <p class="text-with-flag margin-0">{{ child.created_at }}</p>
-                                    <span class="flag-icon flag-icon-{{ comment.country_code|lower }}"></span>
-                                    <p class="text-with-flag"><strong> {{ child.country }} </strong></p>
+                                <b-col cols="4" class="flag text-right text-dark">
+                                    <p class="text-with-flag">{{ child.created_at }}</p>
+                                    <span class="flag-icon flag-icon-{{ child.country_code|lower }}"></span>
+                                    <p class="text-with-flag h-"><strong>  {{ child.country }} </strong></p>
                                 </b-col>
                             </b-row>
-
                         </li>
+                        {% if forloop < 8 %}
+                            <hr/>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </ul>
         {% endfor %}
     </ul>
 </b-container>
-
-{##}
-{#<div class="row bootstrap snippets">#}
-{#    <div class="col-md- col-sm-12">#}
-{#        <div class="comment-wrapper">#}
-{#            <div class="panel panel-info">#}
-{#                <ul class="media-list">#}
-{#                    {% for comment in comments %}#}
-{##}
-{##}
-{#                        {% if forloop.counter < 4 %}#}
-{#                            <li class="media">#}
-{#                                <a href="#" class="pull-left">#}
-{#                                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">#}
-{#                                </a>#}
-{#                                <div class="media-body">#}
-{#                                <span class="text-muted pull-right">#}
-{#                                    <small class="text-muted">{{ comment.created_at }}</small>#}
-{#                                </span>#}
-{#                                    <strong class="text-success">{{ comment.name }}</strong>#}
-{#                                    <p>#}
-{##}
-{#                                        {{ comment.review }} {% filter lower %}{{ comment.country_code }}{% endfilter %}j {{ comment.country_code }}#}
-{##}
-{#                                    </p>#}
-{#                                </div>#}
-{##}
-{##}
-{#                            </li>#}
-{#                        {% endif %}#}
-{##}
-{#                        <ul>#}
-{#                            {% for child in comment.children %}#}
-{##}
-{#                                <li class="media">#}
-{#                                    <a href="#" class="pull-left">#}
-{#                                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt=""#}
-{#                                             class="img-circle">#}
-{#                                    </a>#}
-{#                                    <div class="media-body">#}
-{#                                <span class="text-muted pull-right">#}
-{#                                    <small class="text-muted">{{ child.created_at }}</small>#}
-{#                                </span>#}
-{#                                        <strong class="text-success">{{ child.name }}</strong>#}
-{#                                        <p>#}
-{##}
-{#                                            {{ child.review }}#}
-{##}
-{#                                        </p>#}
-{#                                    </div>#}
-{#                                </li>#}
-{##}
-{#                            {% endfor %}#}
-{#                        </ul>#}
-{#                    {% endfor %}#}
-{##}
-{#                </ul>#}
-{##}
-{##}
-{#                <div class="container">#}
-{##}
-{#                </div>#}
-{##}
-{##}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#    </div>#}
-{#</div>#}
-{##}

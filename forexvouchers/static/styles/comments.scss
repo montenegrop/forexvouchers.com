@@ -1,15 +1,13 @@
-.comment-wrapper .panel-body {
-    max-height:650px;
-    overflow:auto;
+.comment-wrapper{
+  hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 3px solid rgba(46, 49, 49, 1);
+}
 }
 
-.comment-wrapper {
-  li {
-    list-style: none;
-  }
-
-
-}
+rgba(46, 49, 49, 1)
 
 .rate-container {
   button:focus, button {
@@ -18,16 +16,7 @@
   }
 }
 
-.comment-wrapper .media-list .media img {
-    width:64px;
-    height:64px;
-    border:2px solid #e52de8;
-}
 
-.comment-wrapper .media-list .media {
-    border-bottom:1px dashed #efefef;
-    margin-bottom:25px;
-}
 
 .comment-wrapper{
     ul ul li{margin-left: 75px;}
@@ -48,3 +37,5 @@
   padding-top: 0;
   padding-bottom: 0;
 }
+
+content:"\e138";
