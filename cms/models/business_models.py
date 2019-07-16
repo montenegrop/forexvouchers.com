@@ -177,16 +177,16 @@ class Voucher(models.Model):
 
 class Comment(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, default=None)
-    stars = models.IntegerField(choices=((1, 1), (2, 2), (3, 3), (4, 4), (5, 5)), null=True)
+    stars = models.IntegerField(choices=((1, 1), (2, 2), (3, 3), (4, 4), (5, 5)), blank=True, null=True)
     name = models.CharField(max_length=100)
-    country = models.CharField(max_length=50)
+    country = models.CharField(max_length=50, default='Argentina')
     review = models.CharField(max_length=500)
     parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     ip = models.CharField(max_length=20, null=True)
     active = models.BooleanField(default=False)
-    country_code = models.CharField(max_length=2)
+    country_code = models.CharField(max_length=2, default='AR')
 
     panels = [
         FieldPanel("review"),

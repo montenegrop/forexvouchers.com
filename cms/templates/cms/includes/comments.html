@@ -29,18 +29,22 @@
 
 <b-container class="comment-wrapper">
     <b-row class="text-dark">
-        <b-col>
+        <b-col cols="8">
             <h5>Reviews:</h5>
         </b-col>
-        <b-col>
-            <i class="fa fa-user"></i>
+        <b-col cols="2" class="border-left">
+            <i class="fa fa-sort"></i>
+            Sort: <strong>Relevance</strong>
+        </b-col>
+        <b-col cols="2" class="border-left border-right">
             <i class="fas fa-filter"></i>
+            Filter: <strong>All star</strong>
         </b-col>
     </b-row>
     <hr/>
     <ul>
         {% for comment in comments %}
-            {% if forloop.counter < 9 %}
+            {% if forloop.counter < 4 %}
                 <li>
                     <b-row class="infoAndImage">
                         <b-col cols="8" class="text-left">
@@ -62,7 +66,7 @@
             {% endif %}
             <ul>
                 {% for child in comment.children %}
-                    {% if forloop.counter < 9 %}
+                    {% if forloop.counter < 4 %}
                         <li>
                             <b-row class="infoAndImage-answer">
                                 <b-col cols="8" class="text-left">
@@ -76,9 +80,7 @@
                                 </b-col>
                             </b-row>
                         </li>
-                        {% if forloop < 8 %}
-                            <hr/>
-                        {% endif %}
+                        <hr/>
                     {% endif %}
                 {% endfor %}
             </ul>
