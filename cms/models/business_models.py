@@ -186,6 +186,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     ip = models.CharField(max_length=20, null=True)
     active = models.BooleanField(default=False)
+    country_code = models.CharField(max_length=2)
 
     panels = [
         FieldPanel("review"),
@@ -195,6 +196,7 @@ class Comment(models.Model):
         FieldPanel("country"),
         FieldPanel("parent_comment"),
         FieldPanel("active"),
+        FieldPanel("country_code")
     ]
 
     def __str__(self):
@@ -209,5 +211,6 @@ class Comment(models.Model):
                 'created_at': self.created_at,
                 'updated_at': self.updated_at,
                 'ip': self.ip,
-                'active': self.active
+                'active': self.active,
+                'country_code': self.country_code
                 }

@@ -17,6 +17,10 @@ def savecomments(request):
         comment.country = g.city(request.META.get('REMOTE_ADDR'))['country_name']
     except AddressNotFoundError:
         pass
+    try:
+        comment.country_code = g.city(request.META.get('REMOTE_ADDR'))['country_code']
+    except AddressNotFoundError:
+        pass
 
     comment.save()
 

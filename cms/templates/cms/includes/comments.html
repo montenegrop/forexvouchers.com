@@ -1,17 +1,42 @@
-<b-container class="comment">
-
-
-
-    <b-row class="infoAndImage">
-        <b-col cols="8" class="text-left">info</b-col>
-        <b-col cols="4" class="flag text-right"><span class="flag-icon flag-icon-ar"></span></b-col>
-    </b-row>
-
-    <b-row>
-        this is a nice commentss
-        <rate :length="5" :value="2"/>
-    </b-row>
-
+<b-container class="comment comment-wrapper">
+    {% for comment in comments %}
+    {% if forloop.counter < 4 %}
+        <li>
+            <b-row class="infoAndImage">
+                <b-col cols="8" class="text-left">
+                    <p>by {{ comment.name }}</p>
+                </b-col>
+                <b-col cols="4" class="flag text-right">
+                    <p class="text-with-flag margin-0">{{ comment.created_at }}</p>
+                    <span class="flag-icon flag-icon-{% filter lower %}{{ comment.country_code }}{% endfilter %}"></span>
+                    <p class="text-with-flag"><strong> {{ comment.country }} </strong></p>
+                </b-col>
+            </b-row>
+            <b-row>
+                {{ comment.review }}
+            </b-row>
+        </li>
+    {% endif %}
+    {% for child in comment.children %}
+        {% if forloop.counter < 4 %}
+            <li>
+                <b-row class="infoAndImage">
+                    <b-col cols="8" class="text-left">
+                        <p>by {{ child.name }}</p>
+                    </b-col>
+                    <b-col cols="4" class="flag text-right">
+                        <p class="text-with-flag margin-0">{{ child.created_at }}</p>
+                        <span class="flag-icon flag-icon-{% filter lower %}{{ child.country_code }}{% endfilter %}"></span>
+                        <p class="text-with-flag"><strong> {{ child.country }} </strong></p>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    {{ child.review }}
+                </b-row>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
 </b-container>
 
 
@@ -35,7 +60,7 @@
                                     <strong class="text-success">{{ comment.name }}</strong>
                                     <p>
 
-                                        {{ comment.review }}
+                                        {{ comment.review }} {% filter lower %}{{ comment.country_code }}{% endfilter %}j {{ comment.country_code }}
 
                                     </p>
                                 </div>
