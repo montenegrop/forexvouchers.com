@@ -55,9 +55,9 @@
                             <p>by {{ comment.name }}</p>
                             <p class="text-primary">{{ comment.review }}</p>
                         </b-col>
-                        <b-col cols="4" class="flag text-right text-dark">
+                        <b-col cols="4" class="text-right text-dark">
                             <p class="text-with-flag">{{ comment.created_at }}</p>
-                            <span class="flag-icon flag-icon-{{ comment.country_code|lower }}"></span>
+                            <span class="flag flag-icon flag-icon-squared flag-icon-{{ comment.country_code|lower }}"></span>
                             <div class="text-with-flag"><strong> {{ comment.country }} </strong></div>
                         </b-col>
                     </b-row>
@@ -73,9 +73,9 @@
                                     <p class="text-danger">by {{ child.name }}</p>
                                     <p class="text-primary">{{ child.review }}</p>
                                 </b-col>
-                                <b-col cols="4" class="flag text-right text-dark">
+                                <b-col cols="4" class="text-right text-dark">
                                     <p class="text-with-flag">{{ child.created_at }}</p>
-                                    <span class="flag-icon flag-icon-{{ child.country_code|lower }}"></span>
+                                    <span class="flag flag-icon flag-icon-squared flag-icon-{{ child.country_code|lower }}"></span>
                                     <p class="text-with-flag h-"><strong>  {{ child.country }} </strong></p>
                                 </b-col>
                             </b-row>

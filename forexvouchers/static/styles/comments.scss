@@ -1,13 +1,16 @@
-.comment-wrapper{
+.comment-wrapper {
   hr {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 2px solid rgba(46, 49, 49, 1);
-}
-}
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgba(46, 49, 49, 1);
+  }
 
-rgba(46, 49, 49, 1)
+  li {
+    list-style-type: none;
+
+  }
+}
 
 .rate-container {
   button:focus, button {
@@ -16,22 +19,24 @@ rgba(46, 49, 49, 1)
   }
 }
 
-
-
-.comment-wrapper{
-    ul ul li{margin-left: 75px;}
+.comment-wrapper {
+  ul ul li {
+    margin-left: 75px;
+  }
 }
 
-.flag{
-    font-size: 45px;
+.flag {
+  font-size: 50px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  background-size: cover;
 }
 
-.text-with-flag{
-    font-size: 15px;
-    margin-top: -11px;
+.text-with-flag {
+  font-size: 15px;
 }
 
-.margin-0{
+.margin-0 {
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 0;
