@@ -45,7 +45,7 @@
     <ul>
         {% for comment in comments %}
             {% if forloop.counter < 4 %}
-                <li class="border border-primary margin-comment">
+                <li class="margin-comment">
                     <b-row class="infoAndImage">
                         <b-col cols="8" class="text-left">
 
@@ -62,11 +62,12 @@
                         </b-col>
                     </b-row>
                 </li>
+                <hr/>
             {% endif %}
             <ul>
                 {% for child in comment.children %}
                     {% if forloop.counter < 4 %}
-                        <li class="border border-primary margin-comment">
+                        <li class="margin-comment">
                             <b-row class="infoAndImage-answer">
                                 <b-col cols="8" class="text-left">
                                     <p class="text-danger">by {{ child.name }}</p>
@@ -74,11 +75,12 @@
                                 </b-col>
                                 <b-col cols="4" class="text-right text-dark">
                                     <p class="text-with-flag">{{ child.created_at }}</p>
-                                    <span class="flag flag-icon flag-icon-squared flag-icon-{{ child.country_code|lower }} border border-secondary"></span>
+                                    <span class="flag flag-icon flag-icon-squared flag-icon-{{ child.country_code|lower }} rounded-circle border border-secondary"></span>
                                     <p class="text-with-flag h-"><strong>  {{ child.country }} </strong></p>
                                 </b-col>
                             </b-row>
                         </li>
+                        <hr/>
                     {% endif %}
                 {% endfor %}
             </ul>
