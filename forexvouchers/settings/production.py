@@ -1,9 +1,9 @@
 from .base import *
 
 SECRET_KEY = 'l3l=c@)xb2wid_q9upki$ggwi^nj85)z^lie9qt*q0ojc&68+%'
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEBUG=False
+DEBUG = False
 
 LOGGING = {
     'version': 1,
@@ -23,6 +23,11 @@ LOGGING = {
         }
     },
     'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/forexvouchers-debug.log',
+        },
         'console': {
             'level': 'INFO',
             'filters': ['require_debug_true'],
@@ -48,7 +53,7 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': ['console'],
+            'handlers': ['console','file'],
             'level': 'INFO',
         },
         'django': {
