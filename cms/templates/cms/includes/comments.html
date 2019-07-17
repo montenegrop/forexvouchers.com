@@ -1,7 +1,7 @@
 <form action="/savecomment" method="post">
     {% csrf_token %}
     <div class="panel-body">
-        <div class="form-group text-dark">
+        <div class="form-group text-dark no-shadow">
             <label for=""><h5>Select a rate:</h5></label>
             <div class="rate-container">
                 <rate :length="5" :value="1"/>
@@ -27,7 +27,7 @@
     </div>
 </form>
 
-<b-container class="comment-wrapper">
+<b-container class="comment-wrapper no-shadow">
     <b-row class="text-dark">
         <b-col cols="8">
             <h5>Reviews:</h5>
@@ -45,7 +45,7 @@
     <ul>
         {% for comment in comments %}
             {% if forloop.counter < 4 %}
-                <li>
+                <li class="border border-primary margin-comment">
                     <b-row class="infoAndImage">
                         <b-col cols="8" class="text-left">
 
@@ -57,17 +57,16 @@
                         </b-col>
                         <b-col cols="4" class="text-right text-dark">
                             <p class="text-with-flag">{{ comment.created_at }}</p>
-                            <span class="flag flag-icon flag-icon-squared flag-icon-{{ comment.country_code|lower }}"></span>
+                            <span class="flag flag-icon flag-icon-squared flag-icon-{{ comment.country_code|lower }} rounded-circle border border-secondary"></span>
                             <div class="text-with-flag"><strong> {{ comment.country }} </strong></div>
                         </b-col>
                     </b-row>
                 </li>
-                <hr/>
             {% endif %}
             <ul>
                 {% for child in comment.children %}
                     {% if forloop.counter < 4 %}
-                        <li>
+                        <li class="border border-primary margin-comment">
                             <b-row class="infoAndImage-answer">
                                 <b-col cols="8" class="text-left">
                                     <p class="text-danger">by {{ child.name }}</p>
@@ -75,12 +74,11 @@
                                 </b-col>
                                 <b-col cols="4" class="text-right text-dark">
                                     <p class="text-with-flag">{{ child.created_at }}</p>
-                                    <span class="flag flag-icon flag-icon-squared flag-icon-{{ child.country_code|lower }}"></span>
+                                    <span class="flag flag-icon flag-icon-squared flag-icon-{{ child.country_code|lower }} border border-secondary"></span>
                                     <p class="text-with-flag h-"><strong>  {{ child.country }} </strong></p>
                                 </b-col>
                             </b-row>
                         </li>
-                        <hr/>
                     {% endif %}
                 {% endfor %}
             </ul>

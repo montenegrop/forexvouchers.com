@@ -7,13 +7,10 @@
 
 
 {% block content %}
-    <table class="table table-hover table-dark table_home table-bordered">
-        <thead>
-        <tr>
-            <th class="text-center" colspan="2" scope="col">{{ service.name }}</th>
-
-        </tr>
-        </thead>
+    <h1 class="service-title text-center no-shadow text-dark">
+        {{ service.name }}
+    </h1>
+    <table class="table table-hover table-light text-dark font-weight-bold table_home table-bordered table-service no-shadow">
         <tbody>
         {% for sec_id, description in service.sections.items %}
 
