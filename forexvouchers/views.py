@@ -18,7 +18,6 @@ def savecomments(request):
         ip = request.META.get('REMOTE_ADDR')
         comment.country = g.city(ip)['country_name']
         comment.country_code = g.city(ip)['country_code']
-        print(comment.country_code)
     except AddressNotFoundError:
         pass
 
