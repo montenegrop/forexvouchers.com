@@ -27,6 +27,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/var/log/forexvouchers-debug.log',
+
         },
         'console': {
             'level': 'INFO',
@@ -53,7 +54,7 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': ['console','file'],
+            'handlers': ['console', 'file'],
             'level': 'INFO',
         },
         'django': {
