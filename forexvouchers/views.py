@@ -16,8 +16,10 @@ def savecomments(request):
 
     g = GeoIP2()
     try:
+        ip2 = request.META.get('HTTP_X_FORWARDED_FOR')
         ip = request.META.get('REMOTE_ADDR')
         logger.info(f"current ip {ip}")
+        logger.info(f"current ip2 {ip2}")
         comment.country = g.city(ip)['country_name']
         comment.country_code = g.city(ip)['country_code']
     except AddressNotFoundError:
