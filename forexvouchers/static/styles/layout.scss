@@ -9,7 +9,7 @@ nav {
 }
 
 .header {
-  background-color: $bg-color;  
+  background-color: $bg-color;
 
   h1 {
     color: white;
@@ -25,11 +25,11 @@ nav {
 
 }
 
-.table_home {
+.table-home {
   margin-top: 20px;
 }
 
-.service-title{
+.service-title {
   margin-top: 50px;
 }
 
@@ -49,7 +49,13 @@ nav {
 }
 
 .no-shadow {
-    text-shadow: none;
+  text-shadow: none;
+}
+
+@include media-breakpoint-up(md) {
+  .service-main {
+    flex-direction: row-reverse;
+  }
 }
 
 

@@ -10,33 +10,49 @@
     <h1 class="service-title text-center no-shadow text-dark">
         {{ service.name }}
     </h1>
-    <table class="table table-hover table-light text-dark font-weight-bold table_home table-bordered table-service no-shadow">
+
+
+
+    {% include "includes/service_info.html" %}
+
+    {% include "includes/service_tabs.html" %}
+
+
+
+
+
+
+    <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
         <tbody>
         {% for sec_id, description in service.sections.items %}
+            {% if forloop.counter > 1 %}
 
-            <tr>
-                <td class="text-center" colspan="2" scope="row">{{ description }}</td>
-            </tr>
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold" scope="row"
+                        colspan="2">{{ description }}</td>
+                </tr>
 
-            {% for att in service.attributes %}
+                {% for att in service.attributes %}
 
-                {% if att.section_id == sec_id %}
+                    {% if att.section_id == sec_id %}
 
-                    <tr>
-                        <td scope="row">{{ att.name }}:</td>
-                        <td scope="row">{{ att.value }}</td>
-                    </tr>
+                        <tr>
+                            <td class="border border-light" scope="row" width="25%">{{ att.name }}:</td>
+                            <td class="border border-light" scope="row" width="75%">{{ att.value }}</td>
+                        </tr>
 
-                {% endif %}
+                    {% endif %}
 
-            {% endfor %}
+                {% endfor %}
+
+            {% endif %}
 
         {% endfor %}
         </tbody>
     </table>
 
 
-    {% include "includes/comments.html" %}
+    {% include "includes/service_comments.html" %}
 
 
 
