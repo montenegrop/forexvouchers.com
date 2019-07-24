@@ -1,0 +1,28 @@
+    <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
+        <tbody>
+        {% for sec_id, description in service.sections.items %}
+            {% if forloop.counter > 1 %}
+
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold" scope="row"
+                        colspan="2">{{ description }}</td>
+                </tr>
+
+                {% for att in service.attributes %}
+
+                    {% if att.section_id == sec_id %}
+
+                        <tr>
+                            <td class="border border-light" scope="row" width="25%">{{ att.name }}:</td>
+                            <td class="border border-light" scope="row" width="75%">{{ att.value }}</td>
+                        </tr>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endfor %}
+        </tbody>
+    </table>
