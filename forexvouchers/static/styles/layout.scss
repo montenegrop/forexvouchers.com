@@ -52,10 +52,4 @@ nav {
   text-shadow: none;
 }
 
-@include media-breakpoint-up(md) {
-  .service-main {
-    flex-direction: row-reverse;
-  }
-}
-
 

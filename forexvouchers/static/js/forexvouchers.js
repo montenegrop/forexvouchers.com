@@ -11,8 +11,18 @@ const app = new Vue({
     el: '#root',
     data: {
       message: 'Hello Vue!',
+      tabIndex: 0,
       ...window.data
-  }
+    },
+     methods: {
+      linkClass(idx) {
+        if (this.tabIndex === idx) {
+          return ['bg-primary', 'text-light']
+        } else {
+          return ['bg-light', 'text-info']
+        }
+      }
+    }
   })
 
   const elems = document.querySelectorAll(".vue-init");

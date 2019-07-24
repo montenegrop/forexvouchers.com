@@ -1,48 +1,65 @@
-    <b-container>
-        <b-row class="service-main">
+<b-container>
+    <b-row class="service-main">
 
-            <b-col class="col-12 col-md-5">
+        <b-col class="col-12 col-md-5 service-overview">
 
-                <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid">
-
-
-            </b-col>
+            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid">
+            <p class="service-text-blue">{{ service.name }}</p>
 
 
-            <b-col class="col-12 col-md-7">
-
-                <table class="table table-sm text-dark table-home table-bordered border-warning table-service no-shadow">
-                    <tbody>
-                    {% for sec_id, description in service.sections.items %}
-                        {% if forloop.counter < 2 %}
-
-                            <tr>
-                                <td class="text-center border border-light text-dark font-weight-bold" scope="row"
-                                    colspan="2">{{ description }}</td>
-                            </tr>
-
-                            {% for att in service.attributes %}
-
-                                {% if att.section_id == sec_id %}
-
-                                    <tr>
-                                        <td class="border border-light" scope="row" width="35%">{{ att.name }}:</td>
-                                        <td class="border border-light" scope="row" width="65%">{{ att.value }}</td>
-                                    </tr>
-
-                                {% endif %}
-
-                            {% endfor %}
-
-                        {% endif %}
-
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <b-row>
+                <b-col class="col-1">4</b-col>
+                <b-col class="col-11">
+                    <div class="rate-container">
+                        <rate :length="5" :value="4"/>
+                    </div>
+                </b-col>
+            </b-row>
 
 
-            </b-col>
+            <p class="service-text-blue">150 reviews</p>
+            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
+
+            <button type="button" class="btn btn-success btn-block font-weight-bold h4">website</button>
 
 
-        </b-row>
-    </b-container>
+        </b-col>
+
+
+        <b-col class="col-12 col-md-7">
+
+            <table class="table table-sm text-dark table-home table-bordered border-warning table-service no-shadow">
+                <tbody>
+                {% for sec_id, description in service.sections.items %}
+                    {% if forloop.counter < 2 %}
+
+                        <tr>
+                            <td class="text-center border border-light text-dark font-weight-bold" scope="row"
+                                colspan="2">{{ description }}</td>
+                        </tr>
+
+                        {% for att in service.attributes %}
+
+                            {% if att.section_id == sec_id %}
+
+                                <tr>
+                                    <td class="border border-light" scope="row" width="45%">{{ att.name }}:</td>
+                                    <td class="border border-light" scope="row" width="55%">{{ att.value }}</td>
+                                </tr>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </b-col>
+
+
+    </b-row>
+</b-container>
