@@ -23,3 +23,10 @@ def get_comments_by_service(service):
         data['children'] = [comment.toDict() for comment in children]
         comments.append(data)
     return comments
+
+
+def get_services_by_category(service):
+    services = []
+    for service in Service.objects.filter(category=service.category).order_by('name'):
+        services.append(service)
+    return services

@@ -15,7 +15,6 @@
     width: 225px;
   }
 
-
   .tabs {
     .nav-link {
       color: black;
@@ -37,8 +36,8 @@
       line-height: 0.5;
       font-size: 1.5375rem;
       margin-top: 5px;
-      padding-left:  30px;
-      padding-right:  30px;
+      padding-left: 30px;
+      padding-right: 30px;
     }
 
     .service-overview {
@@ -76,6 +75,17 @@
   .flexible {
     flex: 1 0 auto;
     word-wrap: break-word;
+  }
+
+  .tabs-margin {
+    margin-bottom: 60px;
+  }
+
+  .list-group-item:hover {
+    background-color: $light;
+    .text-primary {
+      text-decoration: none;
+    }
   }
 
 }

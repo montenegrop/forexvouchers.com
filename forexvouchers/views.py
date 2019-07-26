@@ -19,7 +19,6 @@ def savecomments(request):
         ip2 = request.META.get('HTTP_X_FORWARDED_FOR')
         ip = request.META.get('REMOTE_ADDR')
 
-
         logger.info(f"current ip {ip}")
         logger.info(f"current ip2 {ip2}")
 
@@ -31,3 +30,5 @@ def savecomments(request):
     comment.save()
 
     return HttpResponseRedirect('/services/' + request.POST['slug'])
+
+
