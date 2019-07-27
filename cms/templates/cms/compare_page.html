@@ -10,12 +10,45 @@
 {% block content %}
 
 
+    <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
+        <tbody>
+        {% for sec1_id, description1 in service1.sections.items %}
+            {% if forloop.counter > 1 %}
 
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold" scope="row"
+                        colspan="3">{{ description1 }}</td>
+                </tr>
 
+                {% for att1 in service1.attributes %}
 
+                    {% if att1.section_id == sec1_id %}
 
+                        <tr>
+                            <td class="border border-light" scope="col" width="20%">{{ att1.name }}:</td>
+                            <td class="border border-light" scope="col" width="40%">{{ att1.value }}</td>
 
+                            {% for att2 in service2.attributes %}
 
+                                {% if att2.name == att1.name %}
+
+                                    <td class="border border-light" scope="col" width="40%"> {{ att2.value }}  </td>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </tr>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 {% endblock %}

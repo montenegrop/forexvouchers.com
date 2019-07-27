@@ -1,10 +1,11 @@
-from cms.models.business_models import Service, Comment
+from cms.models.business_models import Service, Comment, AttributeService
 
 
 def get_service_context(service):
     data = {'attributes': [], 'sections': {}}
     service_attributes = service.getAttributes()
-    for attribute in service.category.attributes.all():
+    for attser in AttributeService.objects.filter(service=service):
+        attribute = attser.attribute
         data['sections'][attribute.section] = attribute.get_section_display()
         data_attribute = {'name': attribute.name,
                           'section_id': attribute.section,

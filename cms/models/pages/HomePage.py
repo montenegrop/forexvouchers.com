@@ -46,4 +46,4 @@ class HomePage(RoutablePageMixin, Page):
         context['service1'] = get_service_context(service1)
         context['service2'] = get_service_context(service2)
 
-        return render(request, "../templates/cms/compare_page.html")
+        return render(request, "../templates/cms/compare_page.html", context)

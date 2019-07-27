@@ -1,7 +1,7 @@
     <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
         <tbody>
         {% for sec_id, description in service.sections.items %}
-            {% if forloop.counter > 1 %}
+            {% if forloop.counter > 1 %} {# try different approach #}
 
                 <tr>
                     <td class="text-center border border-light text-dark font-weight-bold" scope="row"
