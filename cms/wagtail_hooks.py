@@ -26,7 +26,7 @@ class ServiceAdmin(ModelAdmin):
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('name', 'category', 'premium')
-    list_filter = ('premium',)
+    list_filter = ('premium', 'category',)
     search_fields = ('name',)
 
 
@@ -77,5 +77,11 @@ def global_admin_js():
 def global_admin_js():
     """Add /static/css/custom.js to the admin."""
     return format_html(
-        '<script></script>'
+        '''<script></script>'''
     )
+
+@hooks.register("insert_global_admin_css", order=100)
+def global_admin_css():
+    return format_html('<link rel="stylesheet" href="{}">', static('css/custom_admin.css'))
+
+

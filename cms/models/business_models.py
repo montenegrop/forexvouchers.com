@@ -46,15 +46,45 @@ class Service(ClusterableModel):
     slug = AutoSlugField(populate_from='name', editable=True)
 
     # Company profile
-    founded = models.IntegerField(max_length=4, default=1, null=False)
-    status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True)
+    founded = models.IntegerField(default=1, null=False, blank=True)
+    status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True, blank=True)
     broker_type = models.ForeignKey("BrokerType", on_delete=models.CASCADE, null=True, blank=True)
     regulation = models.ForeignKey("Regulation", on_delete=models.CASCADE, null=True, blank=True)
-    countries = ParentalManyToManyField("Country", related_name='countries')
-    international_offices = ParentalManyToManyField("Country", related_name='offices')
+    countries = ParentalManyToManyField("Country", related_name='countries', blank=True)
+    international_offices = ParentalManyToManyField("Country", related_name='offices', blank=True)
     license = models.CharField(max_length=30, blank=True, default=None, null=True)
     accept_us_clients =  models.BooleanField(null=False, default=True)
     accept_eu_clients = models.BooleanField(null=False, default=True)
+
+    # Trading setup
+    timezone = ParentalKey("Timezone", null=True, default=600, blank=True)
+    trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
+    platforms_supported = ParentalManyToManyField("PlatformsSupported", blank=True)
+    ea_robots = models.BooleanField(null=False, default=True)
+    scalping = models.BooleanField(null=False, default=True)
+    hedging = models.BooleanField(null=False, default=True)
+
+    # Customer support
+    email = models.EmailField(blank=True, default=None, null=True)
+    phone = models.CharField(max_length=500, blank=True, default=None, null=True)
+    office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
+    chat = ParentalManyToManyField("Chat", null=True, default=None, blank=True)
+    support_languages = ParentalManyToManyField("Language", null=True, default=None, blank=True)
+
+    # Details
+    training_courses = ParentalManyToManyField("TrainingCourse", blank=True)
+    training_type = ParentalManyToManyField("TrainingType", blank=True)
+    methodology = ParentalManyToManyField("Methodology", blank=True)
+    training_tools = ParentalManyToManyField("TrainingTools", blank=True)
+    instructor = models.CharField(max_length=500, blank=True, default=None, null=True)
+    pricing_model = ParentalManyToManyField("PricingModel", blank=True)
+    system_type = ParentalManyToManyField("SystemType", blank=True)
+    trading_type = ParentalManyToManyField("TradingType", blank=True)
+    required_software = ParentalManyToManyField("TradingSoftware", blank=True, related_name='required_software')
+    signal_alerts = ParentalManyToManyField("SignalAlert", blank=True)
+    frequency = models.CharField(max_length=500, blank=True, default=None, null=True)
+
+
 
 
     def getAttributes(self):
@@ -82,15 +112,55 @@ class Service(ClusterableModel):
             [
                 FieldPanel('status', classname="col6"),
                 FieldPanel('founded', classname="col6"),
-                AutocompletePanel("countries", target_model="cms.Country", is_single=False),
-                AutocompletePanel('international_offices', target_model="cms.Country", is_single=False),
                 FieldPanel('broker_type', classname="col6"),
                 FieldPanel('regulation', classname="col6"),
                 FieldPanel('license', classname="col6"),
                 FieldPanel('accept_us_clients', classname="col6"),
                 FieldPanel('accept_eu_clients', classname="col6"),
+                AutocompletePanel("countries", target_model="cms.Country", is_single=False),
+                AutocompletePanel('international_offices', target_model="cms.Country", is_single=False),
             ],
-            heading="company profile",
+            heading="Company Profile",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('instructor', classname="col12"),
+                FieldPanel('frequency', classname="col12"),
+                AutocompletePanel("training_courses", target_model="cms.TrainingCourse", is_single=False),
+                AutocompletePanel("training_type", target_model="cms.TrainingType", is_single=False),
+                AutocompletePanel("methodology", target_model="cms.Methodology", is_single=False),
+                AutocompletePanel("training_tools", target_model="cms.TrainingTools", is_single=False),
+                AutocompletePanel("pricing_model", target_model="cms.PricingModel", is_single=False),
+                AutocompletePanel("system_type", target_model="cms.SystemType", is_single=False),
+                AutocompletePanel("trading_type", target_model="cms.TradingType", is_single=False),
+                AutocompletePanel("required_software", target_model="cms.TradingSoftware", is_single=False),
+                AutocompletePanel("signal_alerts", target_model="cms.SignalAlert", is_single=False),
+
+            ],
+            heading="Details",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("ea_robots", classname="col4"),
+                FieldPanel("scalping", classname="col4"),
+                FieldPanel("hedging", classname="col4"),
+                AutocompletePanel("timezone", target_model="cms.Timezone"),
+                AutocompletePanel("trading_software", target_model="cms.TradingSoftware", is_single=False),
+                AutocompletePanel("platforms_supported", target_model="cms.PlatformsSupported", is_single=False),
+            ],
+            heading="Trading setup",
+        ),
+        MultiFieldPanel(
+            [
+
+                FieldPanel("email", classname="col6"),
+                FieldPanel("phone", classname="col6"),
+                FieldPanel("office_address", classname="col12"),
+                AutocompletePanel("chat", target_model="cms.Chat", is_single=False),
+                AutocompletePanel("support_languages", target_model="cms.Language", is_single=False),
+
+            ],
+            heading="Customer Support",
         ),
         MultiFieldPanel(
             [

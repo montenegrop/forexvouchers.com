@@ -82,7 +82,7 @@ class Country(AbstractField, models.Model):
         return self.name
 
 
-class Timezone(AbstractField, models.Model):
+class Timezone(AbstractField, ClusterableModel):
     name = models.CharField(max_length=30)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
