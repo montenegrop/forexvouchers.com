@@ -5,3 +5,5 @@ django-extensions==2.1.5
 gunicorn==19.9
 django-jsonify==0.3.0
 geoip2==2.9.0
+wagtail-autocomplete=0.3.1
+

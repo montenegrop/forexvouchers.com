@@ -1,12 +1,17 @@
 from django.db import models
+#from cms.models.fields import *
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
-from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable
 from wagtail.core.fields import RichTextField
+from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalManyToManyField
+
+from wagtailautocomplete.edit_handlers import AutocompletePanel
+
 from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
     InlinePanel,
@@ -40,6 +45,18 @@ class Service(ClusterableModel):
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
 
+    # Company profile
+    founded = models.IntegerField(max_length=4, default=1, null=False)
+    status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True)
+    broker_type = models.ForeignKey("BrokerType", on_delete=models.CASCADE, null=True, blank=True)
+    regulation = models.ForeignKey("Regulation", on_delete=models.CASCADE, null=True, blank=True)
+    countries = ParentalManyToManyField("Country", related_name='countries')
+    international_offices = ParentalManyToManyField("Country", related_name='offices')
+    license = models.CharField(max_length=30, blank=True, default=None, null=True)
+    accept_us_clients =  models.BooleanField(null=False, default=True)
+    accept_eu_clients = models.BooleanField(null=False, default=True)
+
+
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
         attributes = {attributeService.attribute.getKey(): {
@@ -60,6 +77,20 @@ class Service(ClusterableModel):
                 FieldPanel("slug")
             ],
             heading="service",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('status', classname="col6"),
+                FieldPanel('founded', classname="col6"),
+                AutocompletePanel("countries", target_model="cms.Country", is_single=False),
+                AutocompletePanel('international_offices', target_model="cms.Country", is_single=False),
+                FieldPanel('broker_type', classname="col6"),
+                FieldPanel('regulation', classname="col6"),
+                FieldPanel('license', classname="col6"),
+                FieldPanel('accept_us_clients', classname="col6"),
+                FieldPanel('accept_eu_clients', classname="col6"),
+            ],
+            heading="company profile",
         ),
         MultiFieldPanel(
             [
@@ -204,7 +235,6 @@ class Comment(models.Model):
 
     def toDict(self):
         return {'name': self.name,
-                'stars': self.stars,
                 'country': self.country,
                 'review': self.review,
                 'stars': self.stars,

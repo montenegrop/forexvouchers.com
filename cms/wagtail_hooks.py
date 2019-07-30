@@ -71,3 +71,11 @@ def global_admin_js():
     return format_html(
         '<script></script>'
     )
+
+
+@hooks.register("insert_editor_js", order=100)
+def global_admin_js():
+    """Add /static/css/custom.js to the admin."""
+    return format_html(
+        '<script></script>'
+    )
