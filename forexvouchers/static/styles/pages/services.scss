@@ -21,6 +21,11 @@
 
       &.active {
         color: #0ca0d6;
+        border-bottom-color: #fff;
+      }
+
+      &.active {
+        color: #0ca0d6;
       }
     }
   }
@@ -79,6 +84,7 @@
 
   .tabs-margin {
     margin-bottom: 60px;
+
   }
 
   .list-group-item:hover {
@@ -103,6 +109,7 @@
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.52);
     transition: all .85s ease;
   }
+
 
 }
 

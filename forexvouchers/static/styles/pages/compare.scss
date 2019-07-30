@@ -11,11 +11,15 @@
   }
 
   .header-compare {
-    position: fixed;
   }
 
-  .margin-for-header{
+  .margin-for-header {
     margin-top: 150px;
+  }
+
+  .table td {
+    padding: 0.4rem;
+    vertical-align: middle;
   }
 
 }

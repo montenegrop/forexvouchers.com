@@ -37,7 +37,9 @@
     "@babel/runtime": "^7.4.5",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
+    "credit-card-logos": "^1.0.5",
     "flag-icon-css": "^3.3.0",
+    "payment-icons": "^1.2.1",
     "vue": "^2.6.10",
     "vue-rate": "^2.2.0"
   },

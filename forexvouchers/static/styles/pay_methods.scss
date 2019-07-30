@@ -1,0 +1,23 @@
+.visa {
+  background-image: url(../../../node_modules/payment-icons/svg/flat/visa.svg);
+
+  position: relative;
+  display: inline-block;
+  width: 1.33333em;
+  line-height: 1.333333em;
+  font-size: 37px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* align-items: inherit; */
+  background-position: 50%;
+
+  &:before {
+    content: '\00a0';
+    box-sizing: border-box;
+  }
+
+}
+
+.visa-min {
+  background-image: url(../../../node_modules/payment-icons/min/flat/visa.svg);
+}
