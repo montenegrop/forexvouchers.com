@@ -25,7 +25,7 @@ def savecomments(request):
         comment.country = g.city(ip2)['country_name']
         comment.country_code = g.city(ip2)['country_code']
     except AddressNotFoundError:
-        logger.error(f"This ip {ip} is not valid")
+        logger.error(f"This ip {ip2} is not valid")
 
     comment.save()
 
