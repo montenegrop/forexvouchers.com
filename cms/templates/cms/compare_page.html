@@ -12,7 +12,7 @@
     <div class="compare-page">
 
 
-        <div class="row header-compare col-12">
+        <div class="row header-compare col-12" id="compareHeader">
 
             <div class="col-2"></div>
 
@@ -41,6 +41,7 @@
             </div>
 
         </div>
+
 
         <div class="row">
 
@@ -96,6 +97,25 @@
     </div>
 
 
+    <script>
+    window.addEventListener('load', function() {
+        window.onscroll = function () {
+            myFunction()
+        };
+
+        var header = document.getElementById("compareHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                console.log(header)
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    });
+    </script>
 
 
 {% endblock %}

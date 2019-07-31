@@ -10,16 +10,22 @@
     align-items: center;
   }
 
-  .header-compare {
-  }
-
-  .margin-for-header {
-    margin-top: 150px;
+  .compare-header {
+    padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;
   }
 
   .table td {
     padding: 0.4rem;
     vertical-align: middle;
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: red;
   }
 
 }
