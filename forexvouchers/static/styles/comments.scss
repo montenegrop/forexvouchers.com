@@ -10,6 +10,10 @@
     list-style-type: none;
 
   }
+  .flag.flag-icon {
+  font-size: 50px;
+  background-size: cover;
+}
 }
 
 .rate-container {
@@ -25,10 +29,7 @@
   }
 }
 
-.flag {
-  font-size: 50px;
-  background-size: cover;
-}
+
 
 .text-with-flag {
   font-size: 15px;

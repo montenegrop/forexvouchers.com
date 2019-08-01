@@ -26,8 +26,10 @@ def savecomments(request):
         comment.country_code = g.city(ip2)['country_code']
     except AddressNotFoundError:
         logger.error(f"This ip {ip2} is not valid")
-
-    comment.save()
+    except TypeError:
+        logger.error(f"This ip {ip2} is not valid")
+    finally:
+        comment.save()
 
     return HttpResponseRedirect('/services/' + request.POST['slug'])
 

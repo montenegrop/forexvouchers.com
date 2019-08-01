@@ -6,6 +6,11 @@
     }
   }
 
+  .flag {
+    font-size: 25px;
+    background-size: cover;
+  }
+
   .service-title {
     margin-top: 50px;
     font-weight: bold;
@@ -109,7 +114,6 @@
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.52);
     transition: all .85s ease;
   }
-
 
 }
 

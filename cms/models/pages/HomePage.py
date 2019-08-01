@@ -35,13 +35,11 @@ class HomePage(RoutablePageMixin, Page):
         service = Service.objects.get(slug=slug)
         helper = ServiceHelper(service)
 
-        context['service'] = service
         context['service_helper'] = helper
+
+        context['service'] = service
         context['comments'] = get_comments_by_service(service)
         context['services'] = get_services_by_category(service)
-
-
-
 
         return render(request, "../templates/cms/service_page.html", context)
 
@@ -56,9 +54,7 @@ class HomePage(RoutablePageMixin, Page):
         context['service1'] = get_service_context(service1)
         context['service2'] = get_service_context(service2)
 
-        context['fields1'] = get_fields_by_service(service1)
-        context['fields2'] = get_fields_by_service(service2)
-
-
+        context['service_helper1'] = ServiceHelper(service1)
+        context['service_helper2'] = ServiceHelper(service2)
 
         return render(request, "../templates/cms/compare_page.html", context)

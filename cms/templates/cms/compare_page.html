@@ -54,41 +54,79 @@
             <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
                 <tbody>
 
-                {% for code_id1, description1 in fields1.codes.items %}
 
+                {% for field1 in service_helper1.company_profile %}
+                    {% if forloop.counter == 1 %}
+                        <tr>
+                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                                colspan="3">{{ 'Company Profile' }}</td>
+                        </tr>
+                    {% endif %}
                     <tr>
-                        <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
-                            colspan="3"> {{ code_id1 }}
-                        </td>
+                        <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                        <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                        {% for field2 in service_helper2.company_profile %}
+                            {% if field1.label == field2.label %}
+                                <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
-
-                    {% for field1 in fields1.fields %}
-
-                        {% if field1.code == description1 %}
-
-                            <tr>
-                                <td class="border border-light" scope="col" width="20%">{{ field1.name }}:</td>
-                                <td class="border border-light" scope="col" width="40%"> {{ field1.value }} </td>
-
-
-
-                                {% for field2 in fields2.fields %}
-
-                                    {% if field2.name == field1.name %}
-
-                                        <td class="border border-light" scope="col" width="40%">{{ field2.value }}</td>
-
-                                    {% endif %}
-
-                                {% endfor %}
-
-                            </tr>
-
-                        {% endif %}
-
-                    {% endfor %}
-
                 {% endfor %}
+
+                {% for field1 in service_helper1.trading_setup %}
+                    {% if forloop.counter == 1 %}
+                        <tr>
+                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                                colspan="3">{{ 'Trading Setup' }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                        <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                        {% for field2 in service_helper2.trading_setup %}
+                            {% if field1.label == field2.label %}
+                                <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% for field1 in service_helper1.customer_support %}
+                    {% if forloop.counter == 1 %}
+                        <tr>
+                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                                colspan="3">{{ 'Customer Support' }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                        <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                        {% for field2 in service_helper2.customer_support %}
+                            {% if field1.label == field2.label %}
+                                <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% for field1 in service_helper1.details %}
+                    {% if forloop.counter == 1 %}
+                        <tr>
+                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                                colspan="3">{{ 'Details' }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                        <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                        {% for field2 in service_helper2.details %}
+                            {% if field1.label == field2.label %}
+                                <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
 
                 </tbody>
 

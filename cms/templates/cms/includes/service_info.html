@@ -1,60 +1,62 @@
-    <b-row class="service-main">
+<b-row class="service-main">
 
-        <b-col class="col-12 col-md-5 service-overview">
+    <b-col class="col-12 col-md-5 service-overview">
 
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
+        <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+        <p class="service-text-blue">{{ service.name }}</p>
 
-            <div class="flex-container">
-                <div class="star-value flexible">4.0</div>
-                <div class="rate-container flexible">
-                    <rate :length="5" :value="4"/>
-                </div>
+        <div class="flex-container">
+            <div class="star-value flexible">4.0</div>
+            <div class="rate-container flexible">
+                <rate :length="5" :value="4"/>
             </div>
+        </div>
 
-            <p class="service-text-blue">150 reviews</p>
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
+        <p class="service-text-blue">150 reviews</p>
+        <img src="/static/images/ic-markets-site.webp" class="img-fluid">
 
-            <button type="button" class="btn btn-success font-weight-bold h4">website</button>
-
-
-        </b-col>
+        <button type="button" class="btn btn-success font-weight-bold h4">website</button>
 
 
-        <b-col class="col-12 col-md-7">
-
-            <table class="table table-sm text-dark table-home table-bordered border-warning table-service no-shadow">
-                <tbody>
-                {{ service_helper  }}
-{#                {% for sec_id, description in service_helper.company_profile %}#}
-{#                    {% if forloop.counter < 2 %}#}
-{##}
-{#                        <tr>#}
-{#                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"#}
-{#                                colspan="2">{{ description }}</td>#}
-{#                        </tr>#}
-{##}
-{#                        {% for att in service.attributes %}#}
-{##}
-{#                            {% if att.section_id == sec_id %}#}
-{##}
-{#                                <tr>#}
-{#                                    <td class="border border-light" scope="row" width="45%">{{ att.name }}:</td>#}
-{#                                    <td class="border border-light" scope="row" width="55%">{{ att.value }}</td>#}
-{#                                </tr>#}
-{##}
-{#                            {% endif %}#}
-{##}
-{#                        {% endfor %}#}
-{##}
-{#                    {% endif %}#}
-{##}
-{#                {% endfor %}#}
-                </tbody>
-            </table>
+    </b-col>
 
 
-        </b-col>
+    <b-col class="col-12 col-md-7">
+
+        <table class="table table-sm text-dark table-home table-bordered border-warning table-service no-shadow">
+            <tbody>
 
 
-    </b-row>
+            {% for field in service_helper.company_profile %}
+
+                {% if forloop.counter == 1 %}
+
+                    <tr>
+                        <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                            colspan="2">{{ 'Company Profile' }}</td>
+                    </tr>
+
+                {% endif %}
+
+
+
+
+                <tr>
+                    <td class="border border-light" scope="row" width="45%">{{ field.label }}:</td>
+                    <td class="border border-light" scope="row" width="55%">{{ field | safe }}</td>
+                </tr>
+
+
+
+
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+
+
+    </b-col>
+
+
+</b-row>
