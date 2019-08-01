@@ -68,8 +68,8 @@ class Service(ClusterableModel):
     email = models.EmailField(blank=True, default=None, null=True)
     phone = models.CharField(max_length=500, blank=True, default=None, null=True)
     office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
-    chat = ParentalManyToManyField("Chat", null=True, default=None, blank=True)
-    support_languages = ParentalManyToManyField("Language", null=True, default=None, blank=True)
+    chat = ParentalManyToManyField("Chat", default=None, blank=True)
+    support_languages = ParentalManyToManyField("Language", default=None, blank=True)
 
     # Details
     training_courses = ParentalManyToManyField("TrainingCourse", blank=True)

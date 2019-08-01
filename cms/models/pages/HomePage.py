@@ -2,7 +2,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from cms.models.business_models import Service
-from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category
+from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, get_fields_by_service
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -36,7 +36,11 @@ class HomePage(RoutablePageMixin, Page):
         context['comments'] = get_comments_by_service(service)
         context['services'] = get_services_by_category(service)
 
+
+
+
         return render(request, "../templates/cms/service_page.html", context)
+
 
     @route(r'^f./compare/(.+)/$')
     def get_compare_context(self, request, *args, **kwargs):
@@ -46,5 +50,10 @@ class HomePage(RoutablePageMixin, Page):
         service2 = Service.objects.get(slug=slugs[1])
         context['service1'] = get_service_context(service1)
         context['service2'] = get_service_context(service2)
+
+        context['fields1'] = get_fields_by_service(service1)
+        context['fields2'] = get_fields_by_service(service2)
+
+
 
         return render(request, "../templates/cms/compare_page.html", context)

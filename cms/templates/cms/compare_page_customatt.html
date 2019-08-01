@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{# Load CSS and JavaScript #}
+
+<!---->
+{% block body_class %}template-homepage{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="compare-page">
+
+
+        <div class="row header-compare col-12" id="compareHeader">
+
+            <div class="col-2"></div>
+
+            <div class="col-5">
+
+                <b-col class="col-12 service-overview">
+
+                    <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+                    <p class="service-text-blue">{{ service1.name }}</p>
+                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                </b-col>
+
+            </div>
+
+            <div class="col-5">
+
+                <b-col class="col-12 service-overview">
+
+                    <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+                    <p class="service-text-blue">{{ service2.name }}</p>
+                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                </b-col>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+
+            <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
+                <tbody>
+                {% for sec1_id, description1 in service1.sections.items %}
+
+                    <tr>
+                        <td class="text-center border border-light text-dark font-weight-bold" scope="row"
+                            colspan="3">{{ description1 }}</td>
+                    </tr>
+
+                    {% for att1 in service1.attributes %}
+
+                        {% if att1.section_id == sec1_id %}
+
+                            <tr>
+                                <td class="border border-light" scope="col" width="20%">{{ att1.name }}:</td>
+                                <td class="border border-light" scope="col" width="40%">
+
+                                    {% if att1.name == 'Country' %}
+                                        <div class="visa"></div>
+                                    {% endif %}
+                                    {{ att1.value }}
+                                </td>
+
+
+
+                                {% for att2 in service2.attributes %}
+
+                                    {% if att2.name == att1.name %}
+
+                                        <td class="border border-light" scope="col" width="40%"> {{ att2.value }}  </td>
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </tr>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+
+{#    <script>#}
+{#    window.addEventListener('load', function() {#}
+{#        window.onscroll = function () {#}
+{#            myFunction()#}
+{#        };#}
+{##}
+{#        var header = document.getElementById("compareHeader");#}
+{#        var sticky = header.offsetTop;#}
+{##}
+{#        function myFunction() {#}
+{#            if (window.pageYOffset > sticky) {#}
+{#                header.classList.add("sticky");#}
+{#                console.log(header)#}
+{#            } else {#}
+{#                header.classList.remove("sticky");#}
+{#            }#}
+{#        }#}
+{#    });#}
+{#    </script>#}
+
+
+{% endblock %}
