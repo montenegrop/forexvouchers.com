@@ -99,27 +99,33 @@
     </div>
 
 
-    {#    <script>#}
-    {#    window.addEventListener('load', function() {#}
-    {#        window.onscroll = function () {#}
-    {#            myFunction()#}
-    {#        };#}
-    {##}
-    {#        var header = document.getElementById("compareHeader");#}
-    {#        var sticky = header.offsetTop;#}
-    {##}
-    {#        function myFunction() {#}
-    {#            if (window.pageYOffset > sticky) {#}
-    {#                header.classList.add("sticky");#}
-    {#                console.log(header)#}
-    {#            } else {#}
-    {#                header.classList.remove("sticky");#}
-    {#            }#}
-    {#        }#}
-    {#    });#}
-    {#    </script>#}
 
 
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script>
+        window.addEventListener('load', function () {
+            window.onscroll = function () {
+                onScroll()
+            };
+
+            var header = document.getElementById("compareHeader");
+            var sticky = header.offsetTop;
+
+            function onScroll() {
+                if (window.pageYOffset > sticky) {
+                    header.parentNode.style["padding-top"] = header.clientHeight + "px";
+                    header.classList.add("sticky");
+                } else {
+                    header.parentNode.style["padding-top"] = 0;
+                    header.classList.remove("sticky");
+                }
+            }
+        });
+    </script>
 {% endblock %}
 
 
