@@ -41,6 +41,7 @@ var headers = {
     'Customer Support': [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]
 }
 
+
 function service_fields(id) {
     var showFields = Object.keys(fields).filter(function (key) { return fields[key].indexOf(id) !== -1});
     var hideFields = Object.keys(fields).filter(function (key) { return fields[key].indexOf(id) === -1});
