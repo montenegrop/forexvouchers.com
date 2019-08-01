@@ -4,6 +4,7 @@ from wagtail.core import hooks
 
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.html import format_html
+from django.conf import settings
 from .models import Category, Service, Attribute, Voucher, Affiliate, Product, Comment
 from .models import Regulation, Country
 
@@ -94,5 +95,5 @@ modeladmin_register(FieldGroup)
 def global_admin_js():
     """Add /static/css/custom.js to the admin."""
     return format_html(
-        '<script></script>'
+        '<script src="'+ settings.STATIC_URL+'js/custom_admin.js"></script>'
     )

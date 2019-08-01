@@ -149,13 +149,11 @@ class Service(ClusterableModel):
         ),
         MultiFieldPanel(
             [
-
                 FieldPanel("email", classname="col6"),
                 FieldPanel("phone", classname="col6"),
                 FieldPanel("office_address", classname="col12"),
                 AutocompletePanel("chat", target_model="cms.Chat", is_single=False),
                 AutocompletePanel("support_languages", target_model="cms.Language", is_single=False),
-
             ],
             heading="Customer Support",
         ),
