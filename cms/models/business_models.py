@@ -57,7 +57,7 @@ class Service(ClusterableModel):
     accept_eu_clients = models.BooleanField(null=False, default=True)
 
     # Trading setup
-    timezone = ParentalKey("Timezone", null=True, default=600, blank=True)
+    timezone = models.ForeignKey("Timezone", on_delete=models.CASCADE, null=True, blank=True)
     trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
     platforms_supported = ParentalManyToManyField("PlatformsSupported", blank=True)
     ea_robots = models.BooleanField(null=False, default=True)
@@ -141,7 +141,8 @@ class Service(ClusterableModel):
                 FieldPanel("ea_robots", classname="col4"),
                 FieldPanel("scalping", classname="col4"),
                 FieldPanel("hedging", classname="col4"),
-                AutocompletePanel("timezone", target_model="cms.Timezone"),
+                FieldPanel("timezone", classname="col12"),
+
                 AutocompletePanel("trading_software", target_model="cms.TradingSoftware", is_single=False),
                 AutocompletePanel("platforms_supported", target_model="cms.PlatformsSupported", is_single=False),
             ],
