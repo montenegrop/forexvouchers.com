@@ -25,30 +25,31 @@
 
             <table class="table table-sm text-dark table-home table-bordered border-warning table-service no-shadow">
                 <tbody>
-                {% for sec_id, description in service.sections.items %}
-                    {% if forloop.counter < 2 %}
-
-                        <tr>
-                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
-                                colspan="2">{{ description }}</td>
-                        </tr>
-
-                        {% for att in service.attributes %}
-
-                            {% if att.section_id == sec_id %}
-
-                                <tr>
-                                    <td class="border border-light" scope="row" width="45%">{{ att.name }}:</td>
-                                    <td class="border border-light" scope="row" width="55%">{{ att.value }}</td>
-                                </tr>
-
-                            {% endif %}
-
-                        {% endfor %}
-
-                    {% endif %}
-
-                {% endfor %}
+                {{ service_helper  }}
+{#                {% for sec_id, description in service_helper.company_profile %}#}
+{#                    {% if forloop.counter < 2 %}#}
+{##}
+{#                        <tr>#}
+{#                            <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"#}
+{#                                colspan="2">{{ description }}</td>#}
+{#                        </tr>#}
+{##}
+{#                        {% for att in service.attributes %}#}
+{##}
+{#                            {% if att.section_id == sec_id %}#}
+{##}
+{#                                <tr>#}
+{#                                    <td class="border border-light" scope="row" width="45%">{{ att.name }}:</td>#}
+{#                                    <td class="border border-light" scope="row" width="55%">{{ att.value }}</td>#}
+{#                                </tr>#}
+{##}
+{#                            {% endif %}#}
+{##}
+{#                        {% endfor %}#}
+{##}
+{#                    {% endif %}#}
+{##}
+{#                {% endfor %}#}
                 </tbody>
             </table>
 

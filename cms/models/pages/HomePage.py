@@ -3,6 +3,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from cms.models.business_models import Service
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, get_fields_by_service
+from cms.helpers.ServiceHelper import ServiceHelper
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -32,7 +33,10 @@ class HomePage(RoutablePageMixin, Page):
         context = super(HomePage, self).get_context(request)
         slug = args[0]
         service = Service.objects.get(slug=slug)
-        context['service'] = get_service_context(service)
+        helper = ServiceHelper(service)
+
+        context['service'] = service
+        context['service_helper'] = helper
         context['comments'] = get_comments_by_service(service)
         context['services'] = get_services_by_category(service)
 
@@ -48,6 +52,7 @@ class HomePage(RoutablePageMixin, Page):
         slugs = args[0].split("-vs-")
         service1 = Service.objects.get(slug=slugs[0])
         service2 = Service.objects.get(slug=slugs[1])
+
         context['service1'] = get_service_context(service1)
         context['service2'] = get_service_context(service2)
 
