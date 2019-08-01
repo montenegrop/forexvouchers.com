@@ -34,6 +34,15 @@ def get_services_by_category(service):
     return services
 
 
+
+
+def toBoolean(value):
+    return 'Yes' if value else 'No'
+
+def toMultiple(values):
+    pass
+
+
 def get_fields_by_service(service):
     data = {'fields': [], 'codes': {}}
 
@@ -52,7 +61,7 @@ def get_fields_by_service(service):
         data_field = {'name': 'Regulation', 'value': service.regulation, 'code': 'cp'}
         data['fields'].append(data_field)
 
-        data_field = {'name': 'Countries', 'value': service.countries, 'code': 'cp'}
+        data_field = {'name': 'Countries', 'value': toMultiple(service.countries), 'code': 'cp'}
         data['fields'].append(data_field)
 
         data_field = {'name': 'International Offices', 'value': service.international_offices, 'code': 'cp'}
@@ -81,7 +90,7 @@ def get_fields_by_service(service):
         data_field = {'name': 'ea robots', 'value': service.ea_robots, 'code': 'ts'}
         data['fields'].append(data_field)
 
-        data_field = {'name': 'Scalping', 'value': service.scalping, 'code': 'ts'}
+        data_field = {'name': 'Scalping', 'value': toBoolean(service.scalping), 'code': 'ts'}
         data['fields'].append(data_field)
 
         data_field = {'name': 'Hedging', 'value': service.hedging, 'code': 'ts'}
