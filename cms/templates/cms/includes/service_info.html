@@ -1,9 +1,8 @@
 <b-row class="service-main">
 
-    <b-col class="col-12 col-md-5 service-overview">
+    <div class="col-12 col-md-5 service-overview">
 
         <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-        <p class="service-text-blue">{{ service.name }}</p>
 
         <div class="flex-container">
             <div class="star-value flexible">4.0</div>
@@ -15,15 +14,13 @@
         <p class="service-text-blue">150 reviews</p>
         <img src="/static/images/ic-markets-site.webp" class="img-fluid">
 
-        <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+    </div>
 
 
-    </b-col>
+    <div class="col-12 col-md-7">
 
-
-    <b-col class="col-12 col-md-7">
-
-        <table class="table table-sm text-dark table-home table-bordered border-warning table-service no-shadow">
+        <table class="table table-sm text-dark table-bordered">
             <tbody>
 
 
@@ -42,9 +39,10 @@
 
 
                 <tr>
-                    <td class="border border-light" scope="row" width="45%">{{ field.label }}:</td>
-                    <td class="border border-light" scope="row" width="55%">{{ field | safe }}</td>
+                    <td class="border border-light no-float" scope="row" width="45%">{{ field.label }}:</td>
+                    <td class="border border-light no-float" scope="row" width="55%">{{ field | safe }}</td>
                 </tr>
+
 
 
 
@@ -56,7 +54,10 @@
         </table>
 
 
-    </b-col>
+    </div>
 
 
 </b-row>
+
+<button type="button" class="btn btn-success font-weight-bold h4">website</button>
+

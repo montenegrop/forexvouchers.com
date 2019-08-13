@@ -1,5 +1,11 @@
 .compare-page {
 
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+
+  }
+
   .service-logo {
     width: 195px;
   }
@@ -16,18 +22,20 @@
     color: #f1f1f1;
   }
 
+
   .table td {
     padding: 0.4rem;
     vertical-align: middle;
   }
 
   .sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     background-color: white;
     border-bottom: 1px solid;
+    z-index: 10000;
   }
 
 }

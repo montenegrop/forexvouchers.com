@@ -12,31 +12,57 @@
     <div class="compare-page">
 
 
-        <div class="row header-compare col-12" id="compareHeader">
+        <div class="row col-12" id="compareHeader">
 
             <div class="col-2"></div>
 
             <div class="col-5">
 
-                <b-col class="col-12 service-overview">
+                <div class="row">
 
-                    <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-                    <p class="service-text-blue">{{ service1.name }}</p>
-                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+                    <b-col class="col-2">
 
-                </b-col>
+                    </b-col>
+
+                    <b-col class="col-6 service-overview">
+
+                        <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+
+                    </b-col>
+
+                    <b-col class="col-4 service-overview">
+
+                        <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                    </b-col>
+
+
+                </div>
 
             </div>
 
             <div class="col-5">
 
-                <b-col class="col-12 service-overview">
+                <div class="row">
 
-                    <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-                    <p class="service-text-blue">{{ service2.name }}</p>
-                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+                    <b-col class="col-2">
 
-                </b-col>
+                    </b-col>
+
+                    <b-col class="col-6 service-overview">
+
+                        <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+
+                    </b-col>
+
+                    <b-col class="col-4 service-overview">
+
+                        <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                    </b-col>
+
+
+                </div>
 
             </div>
 
@@ -155,10 +181,8 @@
 
             function onScroll() {
                 if (window.pageYOffset > sticky) {
-                    header.parentNode.style["padding-top"] = header.clientHeight + "px";
                     header.classList.add("sticky");
                 } else {
-                    header.parentNode.style["padding-top"] = 0;
                     header.classList.remove("sticky");
                 }
             }
