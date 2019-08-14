@@ -317,7 +317,7 @@ def create_countries_timezones(apps, schema_editor):
         country.save()
 
         for timezone in timezones:
-            tz = Timezone(country=country, name=timezone)
+            tz = Timezone(name=timezone)
             tz.save()
 
 
@@ -327,7 +327,7 @@ def create_countries_timezones(apps, schema_editor):
 class Migration(migrations.Migration):
     atomic = False
     dependencies = [
-        ('cms', '0004_country_timezone'),
+        ('cms', '0001_initial'),
     ]
 
     operations = [
