@@ -1,5 +1,5 @@
 from django.db import migrations, models
-from cms.models import Country, Timezone
+from cms.models import Location, Timezone
 
 countries = [
     {'timezones': ['Europe/Andorra'], 'code': 'AD', 'continent': 'Europe', 'name': 'Andorra',
@@ -309,11 +309,11 @@ countries = [
 
 def create_countries_timezones(apps, schema_editor):
     Timezone.objects.all().delete()
-    Country.objects.all().delete()
+    Location.objects.all().delete()
 
     for country in countries:
         timezones = country.pop('timezones')
-        country = Country(**country)
+        country = Location(**country)
         country.save()
 
         for timezone in timezones:
@@ -325,6 +325,7 @@ def create_countries_timezones(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
+    atomic = False
     dependencies = [
         ('cms', '0004_country_timezone'),
     ]

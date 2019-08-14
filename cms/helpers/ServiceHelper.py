@@ -43,50 +43,73 @@ class LogoField(MultiField):
 class ServiceHelper(object):
     def __init__(self, service):
         self.fields = [
+            MultiField(service, 'status', 'cp', 'Status'),
+            Field(service, 'broker_name', 'cp', 'Broker Name', [BROKERS]),
             Field(service, 'founded', 'cp', 'Founded'),
-            Field(service, 'status', 'cp', 'Status'),
-            BooleanField(service, 'accept_us_clients', 'cp', 'Accepting US Clients', [BROKERS]),
-            BooleanField(service, 'accept_eu_clients', 'cp', 'Accepting EU Clients', [BROKERS]),
-            Field(service, 'broker_type', 'cp', 'Broker Type', [BROKERS]),
-            Field(service, 'regulation', 'cp', 'Regulation'),
-            Field(service, 'license', 'cp', 'License', [BROKERS]),
+            MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
+            MultiField(service, 'regulation', 'cp', 'Regulation'),
+            MultiField(service, 'license', 'cp', 'License'),
+            FlagField(service, 'location', 'cp', 'Location'),
+            FlagField(service, 'international_offices', 'cp', 'International offices', [BROKERS]),
+            BooleanField(service, 'accept_us_clients', 'cp', 'Accepting US clients', [BROKERS]),
+            BooleanField(service, 'accept_eu_clients', 'cp', 'Accepting EU clients', [BROKERS]),
 
-            FlagField(service, 'countries', 'cp', 'Location'),
-            FlagField(service, 'international_offices', 'cp', 'International Offices', [BROKERS]),
+            Field(service, 'name', 'cp', 'Name', [TRAINING, VPS, TRADING_SYSTEM, SIGNALS]),
 
             ##############
 
-            Field(service, 'timezone', 'ts', 'Timezone', [BROKERS]),
+            MultiField(service, 'timezone', 'ts', 'Timezone', [BROKERS]),
+            MultiField(service, 'trading_software', 'ts', 'Trading Software', [BROKERS]),
+            MultiField(service, 'platforms_supported', 'ts', 'Platforms Supported', [BROKERS]),
             BooleanField(service, 'ea_robots', 'ts', 'EA Robots', [BROKERS]),
             BooleanField(service, 'scalping', 'ts', 'Scalping', [BROKERS]),
             BooleanField(service, 'hedging', 'ts', 'Hedging', [BROKERS]),
 
-            MultiField(service, 'trading_software', 'ts', 'Trading Software', [BROKERS]),
-            MultiField(service, 'platforms_supported', 'ts', 'Platforms Supported', [BROKERS]),
 
             ##############
 
             Field(service, 'email', 'cs', 'Email', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
             Field(service, 'phone', 'cs', 'Phone', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
-            Field(service, 'office_address', 'ts', 'Office Address', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
-
             MultiField(service, 'chat', 'cs', 'Chat', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
             MultiField(service, 'support_languages', 'cs', 'Supported Languages', [BROKERS]),
+            Field(service, 'office_address', 'ts', 'Office Address', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
+
 
             ##############
 
-            Field(service, 'instructor', 'd', 'Instructor', [TRAINING]),
-            Field(service, 'frequency', 'd', 'Frequency', [SIGNALS]),
 
             MultiField(service, 'training_courses', 'd', 'Training Courses', [TRAINING]),
             MultiField(service, 'training_type', 'd', 'Training Type', [TRAINING]),
             MultiField(service, 'methodology', 'd', 'Methodology', [TRAINING]),
             MultiField(service, 'training_tools', 'd', 'Training Tools', [TRAINING]),
+            Field(service, 'instructor', 'd', 'Instructor', [TRAINING]),
+            MultiField(service, 'pricing_model', 'd', 'Pricing Model', [TRAINING, TRADING_SYSTEM, SIGNALS]),
+
             MultiField(service, 'system_type', 'd', 'System Type', [TRADING_SYSTEM]),
             MultiField(service, 'trading_type', 'd', 'Trading Type', [TRADING_SYSTEM, SIGNALS]),
             MultiField(service, 'required_software', 'd', 'Required Software', [TRADING_SYSTEM]),
             MultiField(service, 'signal_alerts', 'd', 'Signal Alerts', [SIGNALS]),
-            MultiField(service, 'pricing_model', 'd', 'Pricing Model', [TRAINING, TRADING_SYSTEM, SIGNALS]),
+
+            Field(service, 'frequency', 'd', 'Frequency', [SIGNALS]),
+
+
+            #################
+
+            MultiField(service, 'account_types', 'ta', 'Account Types', [BROKERS]),
+            MultiField(service, 'trading_instruments', 'ta', 'Trading Instruments', [BROKERS]),
+            MultiField(service, 'revenue_model', 'ta', 'Revenue Model', [BROKERS]),
+            MultiField(service, 'account_options', 'ta', 'Account Options', [BROKERS]),
+            MultiField(service, 'account_currency', 'ta', 'Account Currency', [BROKERS]),
+            MultiField(service, 'payment_method', 'ta', 'Payment Method', [BROKERS]),
+            Field(service, 'minimum_deposit', 'ta', 'Minimum deposit ($)', [BROKERS]),
+            Field(service, 'commission', 'ta', 'Commission ($)', [BROKERS]),
+            Field(service, 'leverage', 'ta', 'Leverage', [BROKERS]),
+            Field(service, 'spread', 'ta', 'Spread', [BROKERS]),
+            BooleanField(service, 'swap_free', 'ta', 'Swap Free', [BROKERS]),
+            BooleanField(service, 'islamic_accounts', 'ta', 'Islamic Accounts', [BROKERS]),
+            BooleanField(service, 'bonus_policy', 'ta', 'Bonus Policy', [BROKERS]),
+
+
 
         ]
 

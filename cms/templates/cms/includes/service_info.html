@@ -1,18 +1,36 @@
 <b-row class="service-main">
 
-    <div class="col-12 col-md-5 service-overview">
 
-        <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+    <div class="row">
 
-        <div class="flex-container">
-            <div class="star-value flexible">4.0</div>
-            <div class="rate-container flexible">
-                <rate :length="5" :value="4"/>
+        <div class="col-10 col-md-10 service-overview">
+
+            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+
+            <div class="flex-container">
+                <div class="star-value flexible">4.0</div>
+                <div class="rate-container flexible">
+                    <rate :length="5" :value="4"/>
+                </div>
+
             </div>
+
+            <p class="service-text-blue">150 reviews</p>
+            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
+
         </div>
 
-        <p class="service-text-blue">150 reviews</p>
-        <img src="/static/images/ic-markets-site.webp" class="img-fluid">
+        <div class="col-2 col-md-2 service-overview-icons">
+
+            <div>
+                <i class="fas fa-share-alt-square fa-3x fa-cog-share"></i>
+            </div>
+            <div>
+                <i class="fas fa-balance-scale fa-3x fa-cog-compare"></i>
+            </div>
+
+
+        </div>
 
 
     </div>
@@ -43,11 +61,18 @@
                     <td class="border border-light no-float" scope="row" width="55%">{{ field | safe }}</td>
                 </tr>
 
-
-
-
-
             {% endfor %}
+
+
+            <tr>
+                <td class="border border-light no-float" scope="row" width="45%">Extra:</td>
+                <td class="border border-light no-float" scope="row" width="55%">Field</td>
+            </tr>
+
+            <tr>
+                <td class="border border-light no-float" scope="row" width="45%">Extra:</td>
+                <td class="border border-light no-float" scope="row" width="55%">Field</td>
+            </tr>
 
 
             </tbody>
@@ -56,8 +81,14 @@
 
     </div>
 
+    <div class="right-button">
+
+        <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+    </div>
+
 
 </b-row>
 
-<button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
 

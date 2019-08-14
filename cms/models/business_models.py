@@ -46,20 +46,25 @@ class Service(ClusterableModel):
     slug = AutoSlugField(populate_from='name', editable=True)
 
     # Company profile
-    founded = models.IntegerField(default=1, null=False, blank=True)
     status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True, blank=True)
+    broker_name = models.CharField(max_length=50)
+    founded = models.IntegerField(default=1, null=False, blank=True)
     broker_type = models.ForeignKey("BrokerType", on_delete=models.CASCADE, null=True, blank=True)
     regulation = ParentalKey("Regulation", default=None, null=True, blank=True)
-    countries = ParentalManyToManyField("Country", related_name='countries', blank=True)
-    international_offices = ParentalManyToManyField("Country", related_name='offices', blank=True)
-    license = models.CharField(max_length=30, blank=True, default=None, null=True)
+    license = ParentalManyToManyField("License", related_name='license', blank=True)
+
+    location = ParentalManyToManyField("Location", related_name='location', blank=True)
+
+    international_offices = ParentalManyToManyField("Location", related_name='international_offices',
+                                                    blank=True)
+
     accept_us_clients = models.BooleanField(null=False, default=True)
     accept_eu_clients = models.BooleanField(null=False, default=True)
 
     # Trading setup
     timezone = models.ForeignKey("Timezone", on_delete=models.CASCADE, null=True, blank=True)
     trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
-    platforms_supported = ParentalManyToManyField("PlatformsSupported", blank=True)
+    platforms_supported = ParentalManyToManyField("PlatformSupported", blank=True)
     ea_robots = models.BooleanField(null=False, default=True)
     scalping = models.BooleanField(null=False, default=True)
     hedging = models.BooleanField(null=False, default=True)
@@ -67,15 +72,15 @@ class Service(ClusterableModel):
     # Customer support
     email = models.EmailField(blank=True, default=None, null=True)
     phone = models.CharField(max_length=500, blank=True, default=None, null=True)
-    office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
     chat = ParentalManyToManyField("Chat", default=None, blank=True)
-    support_languages = ParentalManyToManyField("Language", default=None, blank=True)
+    support_languages = ParentalManyToManyField("SupportedLanguage", default=None, blank=True)
+    office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
 
     # Details
     training_courses = ParentalManyToManyField("TrainingCourse", blank=True)
     training_type = ParentalManyToManyField("TrainingType", blank=True)
     methodology = ParentalManyToManyField("Methodology", blank=True)
-    training_tools = ParentalManyToManyField("TrainingTools", blank=True)
+    training_tools = ParentalManyToManyField("TrainingTool", blank=True)
     instructor = models.CharField(max_length=500, blank=True, default=None, null=True)
     pricing_model = ParentalManyToManyField("PricingModel", blank=True)
     system_type = ParentalManyToManyField("SystemType", blank=True)
@@ -83,6 +88,21 @@ class Service(ClusterableModel):
     required_software = ParentalManyToManyField("TradingSoftware", blank=True, related_name='required_software')
     signal_alerts = ParentalManyToManyField("SignalAlert", blank=True)
     frequency = models.CharField(max_length=500, blank=True, default=None, null=True)
+
+    # Trading account
+    account_types = ParentalManyToManyField("AccountType", blank=True)
+    trading_instruments = ParentalManyToManyField("TradingInstrument", blank=True)
+    revenue_model = ParentalManyToManyField("RevenueModel", blank=True)
+    account_options = ParentalManyToManyField("AccountOption", blank=True)
+    account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
+    payment_method = ParentalManyToManyField("PaymentMethod", blank=True)
+    minimum_deposit = models.CharField(max_length=20)
+    commission = models.CharField(max_length=20)
+    leverage = models.CharField(max_length=20)
+    spread = models.CharField(max_length=20)
+    swap_free = models.BooleanField(null=False, default=True)
+    islamic_accounts = models.BooleanField(null=False, default=True)
+    bonus_policy = models.BooleanField(null=False, default=True)
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
@@ -113,8 +133,8 @@ class Service(ClusterableModel):
                 FieldPanel('license', classname="col6"),
                 FieldPanel('accept_us_clients', classname="col12"),
                 FieldPanel('accept_eu_clients', classname="col12"),
-                AutocompletePanel("countries", target_model="cms.Country", is_single=False),
-                AutocompletePanel('international_offices', target_model="cms.Country", is_single=False),
+                AutocompletePanel("location", target_model="cms.Location", is_single=False),
+                AutocompletePanel('international_offices', target_model="cms.Location", is_single=False),
                 AutocompletePanel("regulation", target_model="cms.Regulation"),
             ],
             heading="Company Profile",

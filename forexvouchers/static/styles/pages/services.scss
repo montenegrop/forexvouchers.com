@@ -125,5 +125,25 @@
     float: none;
   }
 
+  .right-button {
+    text-align: right;
+    margin-right: 14%;
+  }
+
+  .fa-cog-share {
+    color: $share;
+  }
+
+  .fa-cog-compare {
+    color: $compare;
+  }
+
+  .service-overview-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
 }
 

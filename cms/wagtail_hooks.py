@@ -6,7 +6,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.html import format_html
 from django.conf import settings
 from .models import Category, Service, Attribute, Voucher, Affiliate, Product, Comment
-from .models import Regulation, Country
+from .models import Regulation, Location
 
 
 class CategoryAdmin(ModelAdmin):
@@ -56,9 +56,9 @@ class RegulationAdmin(ModelAdmin):
     menu_label = 'Regulations'
 
 
-class CountryAdmin(ModelAdmin):
-    model = Country
-    menu_label = 'Countries'
+class LocationAdmin(ModelAdmin):
+    model = Location
+    menu_label = 'Locations'
 
 
 #     fields_end
@@ -75,7 +75,7 @@ class FieldGroup(ModelAdminGroup):
     menu_label = 'Attributes'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 300  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (CountryAdmin, RegulationAdmin)
+    items = (LocationAdmin, RegulationAdmin)
 
 
 class CommentAdmin(ModelAdmin):

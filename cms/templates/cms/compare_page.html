@@ -12,7 +12,7 @@
     <div class="compare-page">
 
 
-        <div class="row col-12" id="compareHeader">
+        <div class="row col-12 stickee">
 
             <div class="col-2"></div>
 
@@ -169,26 +169,26 @@
 {% endblock %}
 
 
-{% block extra_js %}
-    <script>
-        window.addEventListener('load', function () {
-            window.onscroll = function () {
-                onScroll()
-            };
-
-            var header = document.getElementById("compareHeader");
-            var sticky = header.offsetTop;
-
-            function onScroll() {
-                if (window.pageYOffset > sticky) {
-                    header.classList.add("sticky");
-                } else {
-                    header.classList.remove("sticky");
-                }
-            }
-        });
-    </script>
-{% endblock %}
+{#{% block extra_js %}#}
+{#    <script>#}
+{#        window.addEventListener('load', function () {#}
+{#            window.onscroll = function () {#}
+{#                onScroll()#}
+{#            };#}
+{##}
+{#            var header = document.getElementById("compareHeader");#}
+{#            var sticky = header.offsetTop;#}
+{##}
+{#            function onScroll() {#}
+{#                if (window.pageYOffset > sticky) {#}
+{#                    header.classList.add("sticky");#}
+{#                } else {#}
+{#                    header.classList.remove("sticky");#}
+{#                }#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
 
 
 {## # Company profile#}

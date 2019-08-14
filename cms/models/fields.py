@@ -24,36 +24,81 @@ class BrokerType(AbstractField, models.Model):
     description = models.CharField(max_length=500)
 
 
-class AccountTypes(AbstractField, models.Model):
+##
+
+class Location(AbstractField, models.Model):
+    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=4)
+    continent = models.CharField(max_length=30)
+    capital = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+##
+
+
+class Regulation(AbstractField, ClusterableModel):
+    code = models.CharField(max_length=30)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    description = models.CharField(max_length=500)
+    link = models.URLField()
+
+    autocomplete_search_field = 'code'
+
+    def __str__(self):
+        return self.code
+
+    def autocomplete_label(self):
+        return self.code
+
+
+class License(AbstractField, models.Model):
     name = models.CharField(max_length=30)
 
+'''
+class InternationalOffice(AbstractField, models.Model):
+    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=4)
+    continent = models.CharField(max_length=30)
+    capital = models.CharField(max_length=50)
 
-class AccountOptions(AbstractField, models.Model):
+    def __str__(self):
+        return self.name
+'''
+
+
+#######################
+
+
+class Timezone(AbstractField, ClusterableModel):
     name = models.CharField(max_length=30)
 
-
-class AccountCurrency(AbstractField, models.Model):
-    name = models.CharField(max_length=10)
-
-
-class PaymentMethod(AbstractField, models.Model):
-    name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
 
 
 class TradingSoftware(AbstractField, models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=30)
 
 
-class PlatformsSupported(AbstractField, models.Model):
-    name = models.CharField(max_length=100)
+class PlatformSupported(AbstractField, models.Model):
+    name = models.CharField(max_length=30)
+
+
+########################
 
 
 class Chat(AbstractField, models.Model):
     name = models.CharField(max_length=100)
 
 
-class Language(AbstractField, models.Model):
+class SupportedLanguage(AbstractField, models.Model):
     name = models.CharField(max_length=100)
+
+
+########################
 
 
 class TrainingCourse(AbstractField, models.Model):
@@ -68,7 +113,7 @@ class Methodology(AbstractField, models.Model):
     name = models.CharField(max_length=100)
 
 
-class TrainingTools(AbstractField, models.Model):
+class TrainingTool(AbstractField, models.Model):
     name = models.CharField(max_length=100)
 
 
@@ -88,33 +133,30 @@ class SignalAlert(AbstractField, models.Model):
     name = models.CharField(max_length=100)
 
 
-class Country(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
-    code = models.CharField(max_length=4)
-    continent = models.CharField(max_length=30)
-    capital = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
+########################
 
 
-class Timezone(AbstractField, ClusterableModel):
+class AccountType(AbstractField, models.Model):
     name = models.CharField(max_length=30)
 
-    def __str__(self):
-        return self.name
+
+class TradingInstrument(AbstractField, models.Model):
+    name = models.CharField(max_length=30)
 
 
-class Regulation(AbstractField, ClusterableModel):
-    code = models.CharField(max_length=30)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    description = models.CharField(max_length=500)
-    link = models.URLField()
+class RevenueModel(AbstractField, models.Model):
+    name = models.CharField(max_length=30)
 
-    autocomplete_search_field = 'code'
 
-    def __str__(self):
-        return self.code
+class AccountOption(AbstractField, models.Model):
+    name = models.CharField(max_length=30)
 
-    def autocomplete_label(self):
-        return self.code
+
+class AccountCurrency(AbstractField, models.Model):
+    name = models.CharField(max_length=10)
+
+
+class PaymentMethod(AbstractField, models.Model):
+    name = models.CharField(max_length=50)
+
+########################
