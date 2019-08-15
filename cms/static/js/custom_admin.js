@@ -6,7 +6,6 @@ var SIGNALS = '5';
 
 
 const fields = {
-    "broker name": [BROKERS],
     "broker_type": [BROKERS],
     "international_offices": [BROKERS],
     "accept_us_clients": [BROKERS],
@@ -54,7 +53,8 @@ var headers = {
     'Trading Account': [BROKERS],
     'Details': [TRAINING, TRADING_SYSTEM, SIGNALS],
     'Trading setup': [BROKERS],
-    'Customer Support': [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]
+    'Customer Support': [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS],
+    'About': [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]
 }
 
 function service_fields(id) {
@@ -66,10 +66,10 @@ function service_fields(id) {
     });
 
     showFields.forEach(function (key) {
-        $('#id_' + key).closest('.li').show()
+        $('#id_' + key).closest('li').show()
     });
     hideFields.forEach(function (key) {
-        $('#id_' + key).closest('.li').hide()
+        $('#id_' + key).closest('li').hide()
     });
 
     $.each($('h2 label'), function () {

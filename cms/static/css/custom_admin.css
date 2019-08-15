@@ -1,3 +1,8 @@
 .autocomplete {
     padding-left: 15px;
 }
+
+
+.content-wrapper .halloeditor, .content-wrapper .tagit, .content-wrapper input, .content-wrapper select, .content-wrapper textarea {
+    border: 1px solid gray;
+}

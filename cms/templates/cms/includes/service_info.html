@@ -23,10 +23,22 @@
         <div class="col-2 col-md-2 service-overview-icons">
 
             <div>
+
+                <b-dropdown id="dropdown-1" class="">
+                    <template slot="button-content">
+                        <i class="fas fa-balance-scale fa-3x fa-cog-compare"></i>
+                    </template>
+
+
+                    <vue-bootstrap-typeahead
+                            v-model="query"
+                            :data="['Canada', 'USA', 'Mexico']"
+                    />
+                </b-dropdown>
+
                 <i class="fas fa-share-alt-square fa-3x fa-cog-share"></i>
             </div>
             <div>
-                <i class="fas fa-balance-scale fa-3x fa-cog-compare"></i>
             </div>
 
 

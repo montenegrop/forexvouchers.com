@@ -23,6 +23,9 @@ class BrokerType(AbstractField, models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.name
+
 
 ##
 
@@ -56,17 +59,6 @@ class Regulation(AbstractField, ClusterableModel):
 
 class License(AbstractField, models.Model):
     name = models.CharField(max_length=30)
-
-'''
-class InternationalOffice(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
-    code = models.CharField(max_length=4)
-    continent = models.CharField(max_length=30)
-    capital = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-'''
 
 
 #######################

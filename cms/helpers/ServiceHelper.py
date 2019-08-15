@@ -17,34 +17,43 @@ class Field(object):
         value = getattr(self.service, self.key)
         return str(value if value else '-')
 
+
+
 class BooleanField(Field):
     def __str__(self):
         return 'Yes' if getattr(self.service, self.key) else 'No'
 
+
 class MultiField(Field):
+    def get_all_values(self):
+        value = getattr(self.service, self.key)
+        if value is None:
+            raise Exception(self.key + " is None")
+        return value.all()
+
     def __str__(self):
-        return ', '.join([value.__str__() for value in getattr(self.service, self.key).all()])
+        return ', '.join([value.__str__() for value in self.get_all_values()])
 
 
 class FlagField(MultiField):
     def __str__(self):
         return ', '.join([
             f'<span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>{ value.name }'
-            for value in getattr(self.service, self.key).all()])
+            for value in  self.get_all_values()])
 
 
 class LogoField(MultiField):
     def __str__(self):
         return ', '.join([
             f'<span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>{ value.name }'
-            for value in getattr(self.service, self.key).all()])
+            for value in  self.get_all_values()])
 
 
 class ServiceHelper(object):
     def __init__(self, service):
         self.fields = [
-            MultiField(service, 'status', 'cp', 'Status'),
-            Field(service, 'broker_name', 'cp', 'Broker Name', [BROKERS]),
+            Field(service, 'status', 'cp', 'Status'),
+            Field(service, 'name', 'cp', 'Name'),
             Field(service, 'founded', 'cp', 'Founded'),
             MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
             MultiField(service, 'regulation', 'cp', 'Regulation'),
@@ -54,17 +63,14 @@ class ServiceHelper(object):
             BooleanField(service, 'accept_us_clients', 'cp', 'Accepting US clients', [BROKERS]),
             BooleanField(service, 'accept_eu_clients', 'cp', 'Accepting EU clients', [BROKERS]),
 
-            Field(service, 'name', 'cp', 'Name', [TRAINING, VPS, TRADING_SYSTEM, SIGNALS]),
-
             ##############
 
-            MultiField(service, 'timezone', 'ts', 'Timezone', [BROKERS]),
+            Field(service, 'timezone', 'ts', 'Timezone', [BROKERS]),
             MultiField(service, 'trading_software', 'ts', 'Trading Software', [BROKERS]),
             MultiField(service, 'platforms_supported', 'ts', 'Platforms Supported', [BROKERS]),
             BooleanField(service, 'ea_robots', 'ts', 'EA Robots', [BROKERS]),
             BooleanField(service, 'scalping', 'ts', 'Scalping', [BROKERS]),
             BooleanField(service, 'hedging', 'ts', 'Hedging', [BROKERS]),
-
 
             ##############
 
@@ -74,9 +80,7 @@ class ServiceHelper(object):
             MultiField(service, 'support_languages', 'cs', 'Supported Languages', [BROKERS]),
             Field(service, 'office_address', 'ts', 'Office Address', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
 
-
             ##############
-
 
             MultiField(service, 'training_courses', 'd', 'Training Courses', [TRAINING]),
             MultiField(service, 'training_type', 'd', 'Training Type', [TRAINING]),
@@ -91,7 +95,6 @@ class ServiceHelper(object):
             MultiField(service, 'signal_alerts', 'd', 'Signal Alerts', [SIGNALS]),
 
             Field(service, 'frequency', 'd', 'Frequency', [SIGNALS]),
-
 
             #################
 
@@ -109,8 +112,9 @@ class ServiceHelper(object):
             BooleanField(service, 'islamic_accounts', 'ta', 'Islamic Accounts', [BROKERS]),
             BooleanField(service, 'bonus_policy', 'ta', 'Bonus Policy', [BROKERS]),
 
+            #################
 
-
+            Field(service, 'about', 'a', 'About', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS])
         ]
 
         self.service = service

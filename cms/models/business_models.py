@@ -47,10 +47,9 @@ class Service(ClusterableModel):
 
     # Company profile
     status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True, blank=True)
-    broker_name = models.CharField(max_length=50)
-    founded = models.IntegerField(default=1, null=False, blank=True)
-    broker_type = models.ForeignKey("BrokerType", on_delete=models.CASCADE, null=True, blank=True)
-    regulation = ParentalKey("Regulation", default=None, null=True, blank=True)
+    founded = models.IntegerField(null=False, blank=True)
+    broker_type = ParentalManyToManyField("BrokerType", related_name='broker_type', blank=True)
+    regulation = ParentalManyToManyField("Regulation", related_name='regulation', blank=True)
     license = ParentalManyToManyField("License", related_name='license', blank=True)
 
     location = ParentalManyToManyField("Location", related_name='location', blank=True)
@@ -96,13 +95,16 @@ class Service(ClusterableModel):
     account_options = ParentalManyToManyField("AccountOption", blank=True)
     account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
     payment_method = ParentalManyToManyField("PaymentMethod", blank=True)
-    minimum_deposit = models.CharField(max_length=20)
-    commission = models.CharField(max_length=20)
-    leverage = models.CharField(max_length=20)
-    spread = models.CharField(max_length=20)
+    minimum_deposit = models.CharField(max_length=20, null=True)
+    commission = models.CharField(max_length=20, null=True)
+    leverage = models.CharField(max_length=20, null=True)
+    spread = models.CharField(max_length=20, null=True)
     swap_free = models.BooleanField(null=False, default=True)
     islamic_accounts = models.BooleanField(null=False, default=True)
     bonus_policy = models.BooleanField(null=False, default=True)
+
+    # About
+    about = RichTextField(max_length=2500, blank=True, default=None, null=True)
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
@@ -119,23 +121,22 @@ class Service(ClusterableModel):
         MultiFieldPanel(
             [
                 FieldPanel("category"),
-                FieldPanel("name"),
-                FieldPanel("premium"),
-                FieldPanel("slug")
+                FieldPanel("premium")
             ],
-            heading="service",
+            heading="Select Category First",
         ),
         MultiFieldPanel(
             [
+                FieldPanel('name', classname="col6"),
                 FieldPanel('status', classname="col6"),
-                FieldPanel('founded', classname="col6"),
-                FieldPanel('broker_type', classname="col6"),
-                FieldPanel('license', classname="col6"),
+                FieldPanel('founded', classname="col12"),
+                AutocompletePanel('broker_type', target_model="cms.BrokerType", is_single=False),
+                AutocompletePanel('license', target_model="cms.License", is_single=False),
                 FieldPanel('accept_us_clients', classname="col12"),
                 FieldPanel('accept_eu_clients', classname="col12"),
                 AutocompletePanel("location", target_model="cms.Location", is_single=False),
                 AutocompletePanel('international_offices', target_model="cms.Location", is_single=False),
-                AutocompletePanel("regulation", target_model="cms.Regulation"),
+                AutocompletePanel("regulation", target_model="cms.Regulation", is_single=False),
             ],
             heading="Company Profile",
         ),
@@ -180,11 +181,30 @@ class Service(ClusterableModel):
         ),
         MultiFieldPanel(
             [
-                InlinePanel("attSer", label="attributes")
+                FieldPanel("minimum_deposit", classname="col12"),
+                FieldPanel("commission", classname="col12"),
+                FieldPanel("leverage", classname="col12"),
+                FieldPanel("spread", classname="col12"),
+                FieldPanel("office_address", classname="col12"),
+                FieldPanel("swap_free", classname="col12"),
+                FieldPanel("islamic_accounts", classname="col12"),
+                FieldPanel("bonus_policy", classname="col12"),
+                AutocompletePanel("account_types", target_model="cms.AccountType", is_single=False),
+                AutocompletePanel("trading_instruments", target_model="cms.TradingInstrument", is_single=False),
+                AutocompletePanel("revenue_model", target_model="cms.RevenueModel", is_single=False),
+                AutocompletePanel("account_options", target_model="cms.AccountOption", is_single=False),
+                AutocompletePanel("account_currency", target_model="cms.AccountCurrency", is_single=False),
+                AutocompletePanel("payment_method", target_model="cms.PaymentMethod", is_single=False),
+
             ],
-            heading="values",
-            classname="collapsible"
-        )
+            heading="Trading Account",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("about"),
+            ],
+            heading="About",
+        ),
     ]
 
 

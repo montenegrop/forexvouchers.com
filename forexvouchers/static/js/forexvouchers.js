@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 import rate from 'vue-rate'
 import components from './components'
 
 Vue.use(BootstrapVue)
 Vue.use(rate)
+Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 Vue.config.devtools = true
 
 const app = new Vue({
