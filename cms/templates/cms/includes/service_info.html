@@ -1,59 +1,53 @@
 <b-row class="service-main">
 
 
-    <div class="row">
+    <div class="col-12 col-md-5 company-overview-wrapper">
+        <div class="row service-overview">
+            <div class="col-10 col-md-10 service-overview-images">
 
-        <div class="col-10 col-md-10 service-overview">
+                <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
 
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+                <div class="flex-container">
+                    <div class="star-value flexible">4.0</div>
+                    <div class="rate-container flexible">
+                        <rate :length="5" :value="4"/>
+                    </div>
 
-            <div class="flex-container">
-                <div class="star-value flexible">4.0</div>
-                <div class="rate-container flexible">
-                    <rate :length="5" :value="4"/>
                 </div>
 
+                <p class="service-text-blue">150 reviews</p>
+                <img src="/static/images/ic-markets-site.webp" class="img-fluid">
+
             </div>
-
-            <p class="service-text-blue">150 reviews</p>
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-
-        </div>
-
-        <div class="col-2 col-md-2 service-overview-icons">
-
-            <div>
+            <div class="col-2 col-md-2 service-overview-icons">
 
                 <b-dropdown id="dropdown-1" class="">
                     <template slot="button-content">
-                        <i class="fas fa-balance-scale fa-3x fa-cog-compare"></i>
+                        <i class="fas fa-balance-scale fa-1x fa-cog-compare"></i>
                     </template>
 
 
                     <vue-bootstrap-typeahead
-                            v-model="query"
                             :data="['Canada', 'USA', 'Mexico']"
                     />
                 </b-dropdown>
 
                 <i class="fas fa-share-alt-square fa-3x fa-cog-share"></i>
-            </div>
-            <div>
-            </div>
+                <div>
+                </div>
 
 
+            </div>
         </div>
-
-
+        <div class="right-button">
+            <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+        </div>
     </div>
 
 
-    <div class="col-12 col-md-7">
-
+    <div class="col-12 col-md-7 company-profile-wrapper">
         <table class="table table-sm text-dark table-bordered">
             <tbody>
-
-
             {% for field in service_helper.company_profile %}
 
                 {% if forloop.counter == 1 %}
@@ -90,12 +84,6 @@
             </tbody>
         </table>
 
-
-    </div>
-
-    <div class="right-button">
-
-        <button type="button" class="btn btn-success font-weight-bold h4">website</button>
 
     </div>
 

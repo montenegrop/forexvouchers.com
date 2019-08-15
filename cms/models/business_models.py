@@ -18,6 +18,11 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
 )
 
+### images ####
+
+from wagtail.images.models import Image
+from wagtail.images.edit_handlers import ImageChooserPanel
+
 
 # from wagtail.core.blocks import ChoiceBlock
 
@@ -95,16 +100,27 @@ class Service(ClusterableModel):
     account_options = ParentalManyToManyField("AccountOption", blank=True)
     account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
     payment_method = ParentalManyToManyField("PaymentMethod", blank=True)
-    minimum_deposit = models.CharField(max_length=20, null=True)
-    commission = models.CharField(max_length=20, null=True)
-    leverage = models.CharField(max_length=20, null=True)
-    spread = models.CharField(max_length=20, null=True)
+    minimum_deposit = models.CharField(max_length=20, blank=True)
+    commission = models.CharField(max_length=20, blank=True)
+    leverage = models.CharField(max_length=20, blank=True)
+    spread = models.CharField(max_length=20, blank=True)
     swap_free = models.BooleanField(null=False, default=True)
     islamic_accounts = models.BooleanField(null=False, default=True)
     bonus_policy = models.BooleanField(null=False, default=True)
 
     # About
     about = RichTextField(max_length=2500, blank=True, default=None, null=True)
+
+    # Images
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
@@ -202,6 +218,7 @@ class Service(ClusterableModel):
         MultiFieldPanel(
             [
                 FieldPanel("about"),
+                ImageChooserPanel("logo")
             ],
             heading="About",
         ),
@@ -351,3 +368,7 @@ class Comment(models.Model):
                 'active': self.active,
                 'country_code': self.country_code
                 }
+
+
+##################################### images ############################
+

@@ -284,6 +284,13 @@ class PaymentMethodAdmin(ModelAdmin):
 
 #     fields_end
 
+#     images begin
+
+
+
+#     images end
+
+
 
 class FieldGroup(ModelAdminGroup):
     menu_label = 'List Manager'

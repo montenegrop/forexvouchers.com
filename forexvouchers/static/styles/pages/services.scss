@@ -1,8 +1,16 @@
 .service-page {
 
+  .company-profile-wrapper {
+    margin-top: 60px;
+  }
+
   @include media-breakpoint-up(md) {
     .service-main {
       flex-direction: row-reverse;
+    }
+
+    .company-profile-wrapper {
+      margin-top: 0;
     }
   }
 
@@ -51,6 +59,10 @@
     }
 
     .service-overview {
+      height: 100%;
+    }
+
+    .service-overview-images {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -126,8 +138,8 @@
   }
 
   .right-button {
-    text-align: right;
-    margin-right: 14%;
+    display: flex;
+    justify-content: center;
   }
 
   .fa-cog-share {
@@ -142,7 +154,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+  }
+
+  .service-overview {
+    height: 100%;
   }
 
 }
