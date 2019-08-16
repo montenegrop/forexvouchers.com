@@ -14,6 +14,7 @@ def get_service_context(service):
     data['name'] = service.name
     data['slug'] = service.slug
     data['category'] = service.category
+    data['logo'] = service.logo
     return data
 
 

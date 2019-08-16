@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
 {# Load CSS and JavaScript #}
 
 <!---->
@@ -26,7 +28,7 @@
 
                     <b-col class="col-6 compare-overview">
 
-                        <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+                        {% image service1.logo max-112x70 %}
 
                     </b-col>
 
@@ -51,7 +53,7 @@
 
                     <b-col class="col-6 service-overview">
 
-                        <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+                        {% image service2.logo max-112x70 %}
 
                     </b-col>
 

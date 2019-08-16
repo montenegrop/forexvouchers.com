@@ -120,6 +120,14 @@ class Service(ClusterableModel):
         related_name='+'
     )
 
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
 
 
     def getAttributes(self):
@@ -218,7 +226,8 @@ class Service(ClusterableModel):
         MultiFieldPanel(
             [
                 FieldPanel("about"),
-                ImageChooserPanel("logo")
+                ImageChooserPanel("logo"),
+                ImageChooserPanel("preview")
             ],
             heading="About",
         ),

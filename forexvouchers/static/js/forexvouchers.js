@@ -3,11 +3,14 @@ import BootstrapVue from 'bootstrap-vue'
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 import rate from 'vue-rate'
 import components from './components'
+import SocialSharing from 'vue-social-sharing'
 
 Vue.use(BootstrapVue)
 Vue.use(rate)
+Vue.use(SocialSharing)
 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 Vue.config.devtools = true
+
 
 const app = new Vue({
     delimiters: ['[[', ']]'],

@@ -161,5 +161,18 @@
     height: 100%;
   }
 
+  .caret {
+    border: none;
+  }
+
+  .caret:before {
+    font-family: FontAwesome;
+    content: "\f019";
+    position: relative;
+    top: -9px;
+  }
+
 }
+
+
 

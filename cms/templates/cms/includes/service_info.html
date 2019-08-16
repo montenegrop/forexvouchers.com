@@ -1,3 +1,6 @@
+{% load wagtailimages_tags %}
+
+
 <b-row class="service-main">
 
 
@@ -5,7 +8,7 @@
         <div class="row service-overview">
             <div class="col-10 col-md-10 service-overview-images">
 
-                <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
+                {% image service.logo max-220x136 %}
 
                 <div class="flex-container">
                     <div class="star-value flexible">4.0</div>
@@ -16,14 +19,17 @@
                 </div>
 
                 <p class="service-text-blue">150 reviews</p>
-                <img src="/static/images/ic-markets-site.webp" class="img-fluid">
+                {% image service.preview max-258x160 %}
 
             </div>
             <div class="col-2 col-md-2 service-overview-icons">
 
-                <b-dropdown id="dropdown-1" class="">
+
+                <b-dropdown id="dropdown-1" variant="warning" no-caret>
+
+
                     <template slot="button-content">
-                        <i class="fas fa-balance-scale fa-1x fa-cog-compare"></i>
+                        <i class="fas fa-balance-scale fa-2x fa-cog-compare"></i>
                     </template>
 
 
@@ -32,7 +38,8 @@
                     />
                 </b-dropdown>
 
-                <i class="fas fa-share-alt-square fa-3x fa-cog-share"></i>
+
+                <i class="fas fa-share-alt-square fa-4x fa-cog-share"></i>
                 <div>
                 </div>
 
@@ -90,5 +97,18 @@
 
 </b-row>
 
+
+<div class="dropdown">
+    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+        Dropdown button
+        <i class="fa fa-heart"></i>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+</div>
 
 
