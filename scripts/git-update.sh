@@ -5,6 +5,7 @@ git fetch origin master
 git checkout --force master
 git reset --hard origin/master
 
+
 pip install -r requirements.txt
 npm install
 npm run build:static

@@ -5,6 +5,8 @@ ALLOWED_HOSTS = ['*']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEBUG = False
 
+MEDIA_ROOT = '/var/www/media'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
