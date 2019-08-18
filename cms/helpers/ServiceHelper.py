@@ -1,3 +1,6 @@
+from django.db import models
+
+
 BROKERS = 1
 TRAINING = 2
 VPS = 3
@@ -17,7 +20,8 @@ class Field(object):
         value = getattr(self.service, self.key)
         return str(value if value else '-')
 
-
+    def to_csv(self):
+        return self.__str__()
 
 class BooleanField(Field):
     def __str__(self):
@@ -31,6 +35,9 @@ class MultiField(Field):
             raise Exception(self.key + " is None")
         return value.all()
 
+    def to_csv(self):
+        return ','.join([value.slug if hasattr(value, 'slug') else value.name for value in getattr(self.service, self.key).all()])
+
     def __str__(self):
         return ', '.join([value.__str__() for value in self.get_all_values()])
 
@@ -40,6 +47,12 @@ class FlagField(MultiField):
         return ', '.join([
             f'<span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>{ value.name }'
             for value in  self.get_all_values()])
+
+
+
+    def to_csv(self):
+        return ','.join([value.code for value in getattr(self.service, self.key).all()])
+
 
 
 class LogoField(MultiField):
@@ -147,3 +160,12 @@ class ServiceHelper(object):
         for field in self.fields:
             if field.key == name:
                 return field
+
+    def get_csv_value(self, name):
+        for field in self.fields:
+            if field.key == name:
+                return field.to_csv()
+
+        value = getattr(self.service, name)
+        return value.slug if isinstance(value, models.Model) else str(value)
+

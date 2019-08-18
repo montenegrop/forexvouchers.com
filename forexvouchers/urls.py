@@ -10,10 +10,14 @@ from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_url
 
 from search import views as search_views
 from .views import savecomments
+from cms.admin.views import import_services, export_services
+
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
     url(r'^admin/autocomplete/', include(autocomplete_admin_urls)),
+    url(r'^admin/import_service/', import_services),
+    url(r'^admin/export_services/', export_services),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 

@@ -26,6 +26,8 @@ class CategoryAdmin(ModelAdmin):
 
 
 class ServiceAdmin(ModelAdmin):
+    index_template_name = 'admin/service_index.html'
+    index_view_extra_js = ['js/service_index.js']
     model = Service
     menu_label = 'Service'  # ditch this to use verbose_name_plural from model
     menu_icon = 'pilcrow'  # change as required
