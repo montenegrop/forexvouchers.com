@@ -111,7 +111,7 @@ def export_services(request):
     worksheet.title = 'Services'
 
     # define available columns
-    columns = ['name', 'slug', 'category']
+    columns = ['slug', 'category']
     rows = []
     for field in helper.fields:
         if cat in field.categories:
