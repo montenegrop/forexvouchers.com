@@ -8,6 +8,15 @@
             </div>
             <p id="message"></p>
             <div class="modal-body">
+                <h5>Template .xls files by category:</h5>
+                <ul>
+                    <li><a href="/admin/export_services/?category=1">Brokers</a></li>
+                    <li><a href="/admin/export_services/?category=2">Training</a></li>
+                    <li><a href="/admin/export_services/?category=3">VPS</a></li>
+                    <li><a href="/admin/export_services/?category=4">Trading System</a></li>
+                    <li><a href="/admin/export_services/?category=5">Signal</a></li>
+                </ul>
+
                 <form id="form_upload" method="post" enctype="multipart/form-data">
                     <input type="file" name="file" id="file">
                 </form>
@@ -58,12 +67,24 @@
 </script>
 
 <style>
+    #upload_modal .modal-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    #upload_modal .modal-content .close {
+        width: 25px;
+        height: 25px;
+    }
+
     .text-success {
         color: green;
     }
+
     .text-danger {
         color: red;
     }
+
     .uploading {
         color: blue;
     }
