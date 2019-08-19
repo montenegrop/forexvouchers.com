@@ -21,7 +21,8 @@ class Field(object):
         return str(value if value else '-')
 
     def to_csv(self):
-        return self.__str__()
+        value = self.__str__()
+        return value if value != '-' else ''
 
 class BooleanField(Field):
     def __str__(self):
@@ -47,8 +48,6 @@ class FlagField(MultiField):
         return ', '.join([
             f'<span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>{ value.name }'
             for value in  self.get_all_values()])
-
-
 
     def to_csv(self):
         return ','.join([value.code for value in getattr(self.service, self.key).all()])

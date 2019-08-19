@@ -1,15 +1,94 @@
-from django.http import HttpResponse
+from io import BytesIO
+
+from django.db.models.fields import BooleanField, IntegerField
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 
-from cms.helpers.ServiceHelper import ServiceHelper, Field
+from cms.forms.UploadFileForm import UploadFileForm
+from cms.helpers.ServiceHelper import ServiceHelper
 from cms.models import Service
+from django.db.models.fields.related import ManyToManyField, ForeignKey
+
+
+
+def getForeignObject(ForeignModel, value):
+    try:
+        if hasattr(ForeignModel, 'slug'):
+            return ForeignModel.objects.get(slug=value)
+        if hasattr(ForeignModel, 'name'):
+            return ForeignModel.objects.get(name=value)
+    except ForeignModel.DoesNotExist:
+        return None
+
+
+def row_to_object(Model, headers, data):
+    slug = None
+    for i, header in enumerate(headers):
+        slug = data[i] if header == 'slug' else slug
+
+    if slug is None:
+        object = Model()
+    elif Model.objects.filter(slug=slug).exists():
+        object = Model.objects.get(slug=slug)
+    else:
+        object = Model(slug=slug)
+
+    for n, attr_name in enumerate(headers):
+        column_type = object._meta.get_field(attr_name)
+        value = data[n]
+
+        if isinstance(column_type, ForeignKey) and value:
+            model = getForeignObject(column_type.related_model, value)
+            if model:
+                object.__setattr__(attr_name + '_id', model.id)
+        elif isinstance(column_type, ManyToManyField):
+            pass
+        elif isinstance(column_type, IntegerField):
+            object.__setattr__(attr_name, int(value))
+        elif isinstance(column_type, BooleanField):
+            object.__setattr__(attr_name, True if value.lower() == 'yes' else False)
+        else:
+            object.__setattr__(attr_name, value)
+
+    object.save()
+    for n, attr_name in enumerate(headers):
+        column_type = object._meta.get_field(attr_name)
+        value = data[n]
+
+        if isinstance(column_type, ManyToManyField) and value:
+            for item in value.split(','):
+                model = getForeignObject(column_type.related_model, item)
+                if model:
+                    getattr(object, attr_name).add(model)
 
 
 @csrf_exempt
 def import_services(request):
-    return HttpResponse('x')
+    form = UploadFileForm(request.POST, request.FILES)
+    if form.is_valid() == False:
+        return HttpResponseBadRequest('The file you uploaded is invalid')
+
+    file_in_memory = request.FILES['file'].read()
+    wb = load_workbook(filename=BytesIO(file_in_memory))
+    ws = wb.active
+
+    headers = []
+    for n, row in enumerate(ws.iter_rows()):
+        data = []
+        for cell in row:
+            headers.append(cell.value) if n == 0 else data.append(cell.value)
+
+        if len(data):
+            model = row_to_object(Service, headers, data)
+        try:
+            pass
+        except Exception as e:
+            raise e
+            return HttpResponseBadRequest(str(e))
+
+    return HttpResponse('File imported successfully')
 
 
 def export_services(request):
@@ -37,8 +116,6 @@ def export_services(request):
     for field in helper.fields:
         if cat in field.categories:
             columns.append(field.key)
-
-
 
     services = Service.objects.filter(category=cat)
     for service in services:
