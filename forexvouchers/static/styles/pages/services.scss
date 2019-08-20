@@ -45,6 +45,8 @@
 
   .service-main {
 
+    display: flex;
+
     margin-bottom: 45px;
 
     .btn-success {
@@ -142,12 +144,34 @@
     justify-content: center;
   }
 
-  .fa-cog-share {
-    color: $share;
+  .btn-warning.dropdown-toggle {
+    clip-path: circle(43% at center);
   }
 
+  .circle-clip-compare {
+    clip-path: circle(43% at center);
+  }
+
+  .circle-clip-share {
+    background: none;
+    .btn {
+      border: none;
+    }
+  }
+
+  .btn-light.dropdown-toggle {
+    background: none;
+  }
   .fa-cog-compare {
     color: $compare;
+  }
+
+  .fa-cog-share {
+    color: $share;
+    clip-path: circle(47% at center);
+  }
+
+  .btn-group {
   }
 
   .service-overview-icons {
@@ -172,7 +196,45 @@
     top: -9px;
   }
 
+  .circle-icon {
+    background: #ffc0c0;
+    padding: 30px;
+    border-radius: 50%;
+  }
+
+  .left-info-inactive {
+    float: left;
+    position: relative;
+  }
+
+  .right-info-inactive {
+    float: right;
+    position: relative;
+  }
+
+  .facebook-share {
+    .dropdown-item {
+      color: #3B5998;
+    }
+  }
+
+  .linkedin-share {
+    .dropdown-item {
+      color: #0077B5;
+    }
+  }
+
+  .list-group-item-action {
+      color: $primary;
+  }
+
+  .list-group-item.active {
+    color: darkred;
+  }
+
 }
+
+
 
 
 

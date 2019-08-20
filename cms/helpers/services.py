@@ -35,11 +35,16 @@ def get_services_by_category(service):
     return services
 
 
+def get_other_services_names(service):
+    services = []
+    for ser in Service.objects.filter(category=service.category).exclude(name=service.name).order_by('name'):
+        services.append(ser.name)
+    return services
 
 
 def toBoolean(value):
     return 'Yes' if value else 'No'
 
+
 def toMultiple(values):
     pass
-

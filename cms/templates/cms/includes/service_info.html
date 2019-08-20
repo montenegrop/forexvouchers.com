@@ -24,23 +24,42 @@
             </div>
             <div class="col-2 col-md-2 service-overview-icons">
 
-
-                <b-dropdown id="dropdown-1" variant="warning" no-caret>
-
-
-                    <template slot="button-content">
-                        <i class="fas fa-balance-scale fa-2x fa-cog-compare"></i>
-                    </template>
-
-
-                    <vue-bootstrap-typeahead
-                            :data="['Canada', 'USA', 'Mexico']"
-                    />
-                </b-dropdown>
-
-
-                <i class="fas fa-share-alt-square fa-4x fa-cog-share"></i>
                 <div>
+
+                    <b-dropdown id="dropdown-1" variant="warning" no-caret>
+
+                        <template slot="button-content">
+
+                            <i class="fas fa-balance-scale fa-2x fa-cog-compare"></i>
+
+                        </template>
+
+
+                        <vue-bootstrap-typeahead
+                                :data="{{ compare }}"
+                        />
+
+
+                    </b-dropdown>
+
+
+                </div>
+
+                <div class="circle-clip-share">
+
+                    <b-dropdown id="dropdown-1" variant="light" no-caret>
+
+                        <template slot="button-content">
+
+                            <i class="fas fa-share-alt-square fa-4x fa-cog-share"></i>
+
+                        </template>
+
+                        {% include "includes/media_share.html" %}
+
+
+                    </b-dropdown>
+
                 </div>
 
 
@@ -77,15 +96,6 @@
             {% endfor %}
 
 
-            <tr>
-                <td class="border border-light no-float" scope="row" width="45%">Extra:</td>
-                <td class="border border-light no-float" scope="row" width="55%">Field</td>
-            </tr>
-
-            <tr>
-                <td class="border border-light no-float" scope="row" width="45%">Extra:</td>
-                <td class="border border-light no-float" scope="row" width="55%">Field</td>
-            </tr>
 
 
             </tbody>
@@ -97,18 +107,5 @@
 
 </b-row>
 
-
-<div class="dropdown">
-    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-        Dropdown button
-        <i class="fa fa-heart"></i>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-</div>
 
 

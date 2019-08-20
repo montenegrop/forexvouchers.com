@@ -52,7 +52,7 @@ class Service(ClusterableModel):
 
     # Company profile
     status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True, blank=True)
-    founded = models.IntegerField(null=False, blank=True)
+    founded = models.IntegerField(null=True, blank=True)
     broker_type = ParentalManyToManyField("BrokerType", related_name='broker_type', blank=True)
     regulation = ParentalManyToManyField("Regulation", related_name='regulation', blank=True)
     license = ParentalManyToManyField("License", related_name='license', blank=True)
