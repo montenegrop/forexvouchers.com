@@ -28,30 +28,13 @@
 </form>
 
 
+<fv-comments-list/>
 
 
-<b-container class="comment-wrapper no-shadow">
-    <b-row class="text-dark">
-        <b-col cols="8">
-            <h5>Reviews:</h5>
-        </b-col>
-        <b-col cols="2" class="border-left">
-            <i class="fa fa-sort"></i>
-            Sort: <strong>Relevance</strong>
-        </b-col>
-        <b-col cols="2" class="border-left border-right">
-            <i class="fas fa-filter"></i>
-            Filter: <strong>All star</strong>
-        </b-col>
-    </b-row>
-    <hr/>
-        <fv-comment title="YYY" name="Matias" stars="3" country_code="ar" country_name="Argentina" created_at="1985-04-12T23:20:50.52Z" />
+        <hr/>
+
 
     <ul>
-
-
-
-
         {% for comment in comments %}
             {% if forloop.counter < 4 %}
 
@@ -79,4 +62,3 @@
             </ul>
         {% endfor %}
     </ul>
-</b-container>

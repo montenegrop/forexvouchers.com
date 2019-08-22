@@ -1,22 +1,20 @@
 <template>
-    <li class="margin-comment">
-        <b-row class="infoAndImage">
-            <b-col cols="8" class="text-left">
-                <div class="rate-container">
-                    <rate :length="5" :value="stars" readonly/>
-                </div>
-                <p>by {{ name }}</p>
-                <p class="text-primary">{{title}}</p>
-            </b-col>
-            <b-col cols="4" class="text-right text-dark">
-                <p class="text-with-flag">
-                    <timeago :datetime="created_at"></timeago>
-                </p>
-                <span :class="['flag flag-icon flag-icon-squared rounded-circle border border-secondary', 'flag-icon-' + country_code]"></span>
-                <div class="text-with-flag"><strong> {{ country_name }} </strong></div>
-            </b-col>
-        </b-row>
-    </li>
+    <b-row class="infoAndImage">
+        <b-col cols="8" class="text-left">
+            <div class="rate-container">
+                <rate :length="5" :value="stars" readonly/>
+            </div>
+            <p>by {{ name }}</p>
+            <p class="text-primary">{{title}}</p>
+        </b-col>
+        <b-col cols="4" class="text-right text-dark">
+            <p class="text-with-flag">
+                <timeago :datetime="created_at"></timeago>
+            </p>
+            <span :class="['flag flag-icon flag-icon-squared rounded-circle border border-secondary', 'flag-icon-' + country_code]"></span>
+            <div class="text-with-flag"><strong> {{ country_name }} </strong></div>
+        </b-col>
+    </b-row>
 </template>
 
 <script>
@@ -25,8 +23,8 @@
         name: "fv-comment",
         props: ['title', 'name', 'country_name', 'country_code', 'stars', 'created_at'],
         data() {
-            return {
-            }
+            console.log('x')
+            return {}
         }
     };
 </script>
