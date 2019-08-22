@@ -1,4 +1,4 @@
-import Comment from './Comment.vue';
+import Comment from './Comments/Comment.vue';
 
 export default {
     'fv-comment': Comment,

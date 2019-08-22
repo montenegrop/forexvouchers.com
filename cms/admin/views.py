@@ -63,6 +63,8 @@ def row_to_object(Model, headers, data):
                 if model:
                     getattr(object, attr_name).add(model)
 
+    object.save()
+
 
 @csrf_exempt
 def import_services(request):
