@@ -370,9 +370,8 @@ class Comment(models.Model):
                 'country': self.country,
                 'review': self.review,
                 'stars': self.stars,
-                'comment': self.parent_comment,
-                'created_at': self.created_at,
-                'updated_at': self.updated_at,
+                'created_at': self.created_at.isoformat() if self.created_at else None,
+                'updated_at': self.updated_at.isoformat() if self.updated_at else None,
                 'ip': self.ip,
                 'active': self.active,
                 'country_code': self.country_code

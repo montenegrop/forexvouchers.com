@@ -9,7 +9,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
 
 from search import views as search_views
-from .views import savecomments
+from .views import CommentsView
 from cms.admin.views import import_services, export_services
 
 
@@ -20,10 +20,8 @@ urlpatterns = [
     url(r'^admin/export_services/', export_services),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
     url(r'^search/$', search_views.search, name='search'),
-
-    url(r'^savecomment', savecomments),
+    url(r'^api/comments', CommentsView.as_view()),
 
 
     # For anything not caught by a more specific rule above, hand over to

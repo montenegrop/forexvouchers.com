@@ -4,6 +4,7 @@ import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 import rate from 'vue-rate'
 import components from './components'
 import SocialSharing from 'vue-social-sharing'
+import VueTimeago from 'vue-timeago'
 
 Vue.use(BootstrapVue)
 Vue.use(rate)
@@ -11,6 +12,11 @@ Vue.use(SocialSharing)
 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 Vue.config.devtools = true
 
+
+Vue.use(VueTimeago, {
+  name: 'Timeago',
+  locale: 'en',
+})
 
 const app = new Vue({
     delimiters: ['[[', ']]'],
