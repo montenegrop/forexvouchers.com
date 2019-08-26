@@ -23,7 +23,7 @@ class CommentsView(View):
         if serviceId is None:
             raise Exception('serviceId not given in the url')
 
-        comments = Comment.objects.filter(service_id=serviceId).order_by('-created_at')
+        comments = Comment.objects.filter(service_id=serviceId, active=True).order_by('-created_at')
         parents = list(filter(lambda comment: comment.parent_comment is None, comments))
         slicedParents = parents[page * limit: page * limit + limit]
         response['total'] = len(parents)
@@ -34,7 +34,7 @@ class CommentsView(View):
             item['children'] = [child.toDict() for child in children]
             response['data'].append(item)
 
-        return HttpResponse(json.dumps(response))
+        return HttpResponse(json.dumps(response), content_type="application/json")
 
     def post(self, request):
         comment = Comment(service=Service.objects.get(slug=request.POST['slug']),
@@ -60,4 +60,5 @@ class CommentsView(View):
         finally:
             comment.save()
 
-        return HttpResponseRedirect('/services/' + request.POST['slug'])
+        response = { 'data': comment.toDict() }
+        return HttpResponse(json.dumps(response), content_type="application/json")

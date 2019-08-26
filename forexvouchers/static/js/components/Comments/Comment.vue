@@ -5,7 +5,7 @@
                 <rate :length="5" :value="stars" readonly/>
             </div>
             <p>by {{ name }}</p>
-            <p class="text-primary">{{title}}</p>
+            <p class="text-primary">{{text}}</p>
         </b-col>
         <b-col cols="4" class="text-right text-dark">
             <p class="text-with-flag">
@@ -21,9 +21,8 @@
 
     export default {
         name: "fv-comment",
-        props: ['title', 'name', 'country_name', 'country_code', 'stars', 'created_at'],
+        props: ['text', 'name', 'country_name', 'country_code', 'stars', 'created_at'],
         data() {
-            console.log('x')
             return {}
         }
     };

@@ -43,7 +43,9 @@
     "payment-icons": "^1.2.1",
     "vue": "^2.6.10",
     "vue-bootstrap-typeahead": "^0.2.6",
+    "vue-cookies": "^1.5.13",
     "vue-rate": "^2.2.0",
+    "vue-resource": "^1.5.1",
     "vue-social-sharing": "^2.4.6",
     "vue-timeago": "^5.1.2"
   },
