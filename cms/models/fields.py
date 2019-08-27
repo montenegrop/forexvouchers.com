@@ -65,7 +65,7 @@ class License(AbstractField, models.Model):
 
 
 class Timezone(AbstractField, ClusterableModel):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
