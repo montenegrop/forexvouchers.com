@@ -6,3 +6,10 @@
 .content-wrapper .halloeditor, .content-wrapper .tagit, .content-wrapper input, .content-wrapper select, .content-wrapper textarea {
     border: 1px solid gray;
 }
+
+.content-wrapper .Draftail-Editor {
+    border: 1px solid gray;
+    max-width: 800px;
+    padding: 5px;
+    border-radius: 5px;
+}

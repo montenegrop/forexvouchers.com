@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponseRedirect, HttpResponse
 from geoip2.errors import AddressNotFoundError
 import logging
-from cms.models.business_models import Comment, Service
+from cms.models.business_models import Comment, Service, Affiliate
 from django.contrib.gis.geoip2 import GeoIP2
 from django.views import View
 
@@ -61,3 +61,9 @@ class CommentsView(View):
             comment.save()
 
         return HttpResponseRedirect('/services/' + request.POST['slug'])
+
+
+def cloakedlinks(request, slug):
+    affiliate = Affiliate.objects.get(slug=slug)
+    return HttpResponseRedirect(affiliate.cloakedLink)
+
