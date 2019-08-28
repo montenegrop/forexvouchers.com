@@ -1,0 +1,15 @@
+version: '2'
+services:
+  database:
+    image: mysql:5.7
+    volumes:
+      - "./.mysql-data/db2:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      MYSQL_ROOT_PASSWORD: Coot123X5
+      MYSQL_DATABASE: fxvouchers
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Coot123X5
