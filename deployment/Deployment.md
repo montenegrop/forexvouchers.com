@@ -2,7 +2,7 @@
 # Provisioning
 sudo apt-get update
 #sudo apt upgrade -y
-sudo apt-get install supervisor python3.7 nginx python3-pip npm libgdal-dev
+sudo apt-get install supervisor python3.7 nginx python3-pip npm libgdal-dev python3.7-dev 
 sudo pip3 install virtualenvwrapper
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 mkvirtualenv fxvouchers --python=/usr/bin/python3.7
