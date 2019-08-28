@@ -12,7 +12,6 @@ from django.shortcuts import render
 
 
 class HomePage(RoutablePageMixin, Page):
-    max_count = 1
     body = RichTextField(blank=True)
 
     def get_context(self, request):

@@ -30,10 +30,10 @@ class BrokerType(AbstractField, models.Model):
 ##
 
 class Location(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
     code = models.CharField(max_length=4)
-    continent = models.CharField(max_length=30)
-    capital = models.CharField(max_length=50)
+    continent = models.CharField(max_length=100)
+    capital = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
