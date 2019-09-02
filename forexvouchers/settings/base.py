@@ -107,11 +107,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
+    # Create a local.py in this directory to set the right values
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fxvouchers',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'fxvouchers',
+        'PASSWORD': '*******',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

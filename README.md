@@ -22,3 +22,7 @@
 |----------|----------|
 | admin    | admin    |
 
+
+### 
+For deployment checkout our deployment steps on deployment directory
+

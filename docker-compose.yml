@@ -9,7 +9,7 @@ services:
       - 3306:3306
       - 33060:33060
     environment:
-      MYSQL_ROOT_PASSWORD: Coot123X5
+      MYSQL_ROOT_PASSWORD: C1ot123X5*
       MYSQL_DATABASE: fxvouchers
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Coot123X5
+      MYSQL_USER: fsxvouchers
+      MYSQL_PASSWORD: Coot123X6*

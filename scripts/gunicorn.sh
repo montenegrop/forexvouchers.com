@@ -28,4 +28,4 @@ exec /home/ubuntu/.virtualenvs/fxvouchers/bin/gunicorn ${DJANGO_WSGI_MODULE}:app
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
   --log-level=debug \
-  --log-file=-
+  --log-file=-y
