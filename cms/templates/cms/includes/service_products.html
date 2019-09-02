@@ -1,87 +1,28 @@
-<div class="row">
+{% load wagtailimages_tags %}
 
-    <div class="col-md-3 col-6">
+<div class="products row">
 
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
+    {% for prod in products %}
+
+        <div class="col-md-3 col-6">
+
+            <div class="product">
+                <div class="product-image-wrapper"> {% image prod.logo fill-165x98 class="product-image" %} </div>
+                <div class="product-info">
+                    <h5 title="{{ prod.name }}"> {{ prod.name }} </h5>
+                </div>
+                <div class="product-link text-center">
+                    <a href="{{ prod.affiliate.getLink }}">
+                        <button type="button" class="btn btn-info btn-lg product-link-button">
+                            Info
+                        </button>
+                    </a>
+                </div>
+            </div>
+
         </div>
 
-    </div>
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
+    {% endfor %}
 
 </div>
 
-<div class="row">
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
-
-    <div class="col-md-3 col-6">
-
-        <div class="product">
-            <img src="/static/images/ic-markets-site.webp" class="img-fluid">
-            <img src="/static/images/ic-markets-logo-1.jpg" class="img-fluid service-logo">
-            <p class="service-text-blue">{{ service.name }}</p>
-        </div>
-
-    </div>
-
-</div>

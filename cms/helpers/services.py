@@ -1,4 +1,4 @@
-from cms.models.business_models import Service, Comment, AttributeService, Voucher
+from cms.models.business_models import Service, Comment, AttributeService, Voucher, Product
 
 
 def get_service_context(service):
@@ -47,6 +47,12 @@ def get_vouchers_by_service(service):
     for voucher in Voucher.objects.filter(service=service):
         vouchers.append(voucher)
     return vouchers
+
+def get_products_by_service(service):
+    products = []
+    for product in Product.objects.filter(service=service):
+        products.append(product)
+    return products
 
 
 def toBoolean(value):

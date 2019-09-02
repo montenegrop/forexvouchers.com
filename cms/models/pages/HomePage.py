@@ -3,7 +3,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from cms.models.business_models import Service
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
-    get_other_services_names, get_vouchers_by_service
+    get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -43,6 +43,8 @@ class HomePage(RoutablePageMixin, Page):
         context['compare'] = get_other_services_names(service)
         context['affiliate'] = service.affiliate
         context['vouchers'] = get_vouchers_by_service(service)
+        context['products'] = get_products_by_service(service)
+
 
         return render(request, "../templates/cms/service_page.html", context)
 

@@ -143,8 +143,8 @@ class Service(ClusterableModel):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("category"),
-                FieldPanel("premium"),
+                FieldPanel("category", classname="col12"),
+                FieldPanel("premium", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate")
             ],
             heading="Select Category First",
@@ -336,10 +336,34 @@ class Affiliate(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    body = RichTextField(max_length=500)
+    body = RichTextField(max_length=500, verbose_name='Description')
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
     affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
-    slug = AutoSlugField(populate_from='name', editable=True)
+    slug = AutoSlugField(populate_from='name', editable=True, null=True)
+
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Image'
+    )
+
+    def __str__(self):
+        return self.name
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("service", classname="col6"),
+                FieldPanel("name", classname="col6"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate", classname="col12",),
+                FieldPanel("body", classname="col12"),
+                ImageChooserPanel("logo", classname="col12"),
+            ], heading="Products",
+        )
+    ]
 
 
 class Voucher(models.Model):
@@ -349,19 +373,29 @@ class Voucher(models.Model):
     slug = AutoSlugField(populate_from='name', editable=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
     affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
+    discount = models.IntegerField(verbose_name='Discount (%)', null=True)
 
     def __str__(self):
         return self.name
 
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Image'
+    )
+
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("type"),
+                FieldPanel("service", classname="col6"),
+                FieldPanel("discount", classname="col6"),
                 FieldPanel("name"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description"),
-                FieldPanel("slug"),
-                FieldPanel("service"),
-                AutocompletePanel("affiliate", target_model="cms.Affiliate")
+                ImageChooserPanel("logo")
             ], heading="Vouchers",
         )
     ]
