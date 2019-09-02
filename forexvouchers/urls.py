@@ -12,8 +12,12 @@ from search import views as search_views
 from .views import CommentsView, cloakedlinks
 from cms.admin.views import import_services, export_services
 
-
 urlpatterns = [
+
+    url(r'^out/(.+)/$', cloakedlinks),
+    url(r'^visit/(.+)/$', cloakedlinks),
+    url(r'^go/(.+)/$', cloakedlinks),
+
     url(r'^django-admin/', admin.site.urls),
     url(r'^admin/autocomplete/', include(autocomplete_admin_urls)),
     url(r'^admin/import_service/', import_services),
@@ -23,10 +27,6 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
     url(r'^api/comments', CommentsView.as_view()),
-
-    url(r'^ser/out/(.+)/$', cloakedlinks),
-    url(r'^ser/visit/(.+)/$', cloakedlinks),
-    url(r'^ser/go/(.+)/$', cloakedlinks),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

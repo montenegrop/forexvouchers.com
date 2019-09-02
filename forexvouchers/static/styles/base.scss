@@ -42,6 +42,7 @@
 
 @import "theme/bootswatch";
 @import "./fontawesome";
+@import "theme/products";
 
 
 // bootstrap vue
@@ -57,5 +58,8 @@ $flag-icon-css-path: '../../../node_modules/flag-icon-css/flags';
 @import './pages/compare';
 
 @import './pay_methods';
+
+@import "./fonts";
+
 
 

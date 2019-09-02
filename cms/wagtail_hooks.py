@@ -309,7 +309,7 @@ class ProductsGroup(ModelAdminGroup):
     menu_label = 'Manage services'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (ServiceAdmin, VoucherAdmin)
+    items = (ServiceAdmin, VoucherAdmin, ProductAdmin)
 
 
 class CommentAdmin(ModelAdmin):
