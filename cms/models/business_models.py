@@ -333,12 +333,11 @@ class Affiliate(models.Model):
         )
     ]
 
-
 class Product(models.Model):
     name = models.CharField(max_length=100)
     body = RichTextField(max_length=500, verbose_name='Description')
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
-    affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
+    affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True, related_name='+')
     slug = AutoSlugField(populate_from='name', editable=True, null=True)
 
     logo = models.ForeignKey(
@@ -358,9 +357,10 @@ class Product(models.Model):
             [
                 FieldPanel("service", classname="col6"),
                 FieldPanel("name", classname="col6"),
-                AutocompletePanel("affiliate", target_model="cms.Affiliate", classname="col12",),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("body", classname="col12"),
                 ImageChooserPanel("logo", classname="col12"),
+                FieldPanel("slug")
             ], heading="Products",
         )
     ]
