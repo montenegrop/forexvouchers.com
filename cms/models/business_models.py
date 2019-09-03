@@ -344,7 +344,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     body = RichTextField(max_length=500, verbose_name='Description')
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
-    affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True)
     slug = AutoSlugField(populate_from='name', editable=True, null=True)
 
     logo = models.ForeignKey(
@@ -378,8 +378,8 @@ class Voucher(models.Model):
     description = RichTextField(max_length=2500, blank=True, default=None, null=True)
     slug = AutoSlugField(populate_from='name', editable=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
-    affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
-    discount = models.IntegerField(verbose_name='Discount (%)', null=True)
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True)
+    discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
 
     def __str__(self):
         return self.name
