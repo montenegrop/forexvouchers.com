@@ -5,11 +5,10 @@ git fetch origin master
 git checkout --force master
 git reset --hard origin/master
 FILE=/home/ubuntu/env && test -f $FILE && source $FILE
-echo "test $MYSQL_DATABASE_NAME"
 
 
 pip install -r requirements.txt
 npm install
 npm run build:static
-python manage.py migrate
+MYSQL_USER=$MYSQL_USER  MYSQL_PASSWORD=$MYSQL_PASSWORD  MYSQL_DATABASE_NAME=$MYSQL_DATABASE_NAME python manage.py migrate
 sudo supervisorctl restart all
