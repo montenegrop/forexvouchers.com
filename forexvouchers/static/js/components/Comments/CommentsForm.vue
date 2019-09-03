@@ -1,5 +1,6 @@
 <template>
-    <form action="/savecomment" method="post" @submit="checkForm">
+    <b-alert v-if="showMessage" show variant="success">Thanks your message has been posted successfully!</b-alert>
+    <form v-else="showMessage" action="/savecomment" method="post" @submit="checkForm">
 
         <div class="panel-body">
             <b-form-group
@@ -48,15 +49,14 @@
 
             <button type="submit" class="btn btn-info pull-right">Post</button>
             <div class="clearfix"></div>
-            <hr/>
         </div>
     </form>
 </template>
 
 <script>
     export default {
-        name: "fv-comments-list",
-        props: ['service_id'],
+        name: "fv-comments-form",
+        props: ['service_id', 'showMessage'],
         data() {
             return {
                 errors: {},
@@ -69,9 +69,10 @@
         },
         methods: {
             checkForm: function (e) {
-                const csrftoken = this.$cookies.get('csrftoken');
                 this.errors = {};
                 this.submitted = true;
+
+
                 e.preventDefault();
 
                 if (!this.name) {
@@ -94,6 +95,10 @@
                 }
 
                 if (Object.keys(this.errors).length === 0) {
+                    const {email, review, name, rate} = this;
+                    this.$emit('post', {
+                        email, review, name, rate
+                    });
 
                 }
                 return false;

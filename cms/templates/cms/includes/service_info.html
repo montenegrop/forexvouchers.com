@@ -9,16 +9,16 @@
             <div class="col-10 col-md-10 service-overview-images">
 
 
-                <a href="/ser/{{ affiliate.type }}/{{ affiliate.slug }}">
+                <a href="{{ affiliate.getLink }}">
 
                     {% image service.logo max-220x136 %}
 
                 </a>
 
                 <div class="flex-container">
-                    <div class="star-value flexible">4.0</div>
+                    <div class="star-value flexible">{{ service.get_avg_rate|floatformat:0 }}</div>
                     <div class="rate-container flexible">
-                        <rate :length="5" :value="4"/>
+                        <rate :length="5" :value="{{ service.get_avg_rate }}" readonly/>
                     </div>
 
                 </div>
