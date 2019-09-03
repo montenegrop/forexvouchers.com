@@ -10,5 +10,5 @@ FILE=/home/ubuntu/env && test -f $FILE && source $FILE
 pip install -r requirements.txt
 npm install
 npm run build:static
-MYSQL_USER=$MYSQL_USER  MYSQL_PASSWORD=$MYSQL_PASSWORD  MYSQL_DATABASE_NAME=$MYSQL_DATABASE_NAME python manage.py migrate
+DJANGO_SETTINGS_MODULE=forexvouchers.settings.production python manage.py migrate
 sudo supervisorctl restart all
