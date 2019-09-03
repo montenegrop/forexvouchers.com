@@ -8,3 +8,4 @@ node_modules
 forexvouchers/static/dist/
 forexvouchers/settings/local.py
 /media
+.mysql-data
