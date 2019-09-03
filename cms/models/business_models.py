@@ -360,7 +360,6 @@ class Product(models.Model):
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("body", classname="col12"),
                 ImageChooserPanel("logo", classname="col12"),
-                FieldPanel("slug")
             ], heading="Products",
         )
     ]
@@ -392,10 +391,10 @@ class Voucher(models.Model):
             [
                 FieldPanel("service", classname="col6"),
                 FieldPanel("discount", classname="col6"),
-                FieldPanel("name"),
+                FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
-                FieldPanel("description"),
-                ImageChooserPanel("logo")
+                FieldPanel("description", classname="col12"),
+                ImageChooserPanel("logo", classname="col12")
             ], heading="Vouchers",
         )
     ]

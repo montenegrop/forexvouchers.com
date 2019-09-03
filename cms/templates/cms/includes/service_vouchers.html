@@ -1,0 +1,27 @@
+{% load wagtailimages_tags %}
+
+<div class="products row">
+
+    {% for vouch in vouchers %}
+
+        <div class="col-md-3 col-6">
+
+            <div class="product">
+                <div class="product-image-wrapper"> {% image vouch.logo min-165x98 fill-165x98 class="product-image" %} </div>
+                <div class="product-info">
+                    <h5 title="{{ vouch.name }}"> {{ vouch.name }} </h5>
+                </div>
+                <div class="product-link text-center">
+                    <a href="{{ vouch.affiliate.getLink }}">
+                        <button type="button" class="btn btn-info btn-lg product-link-button">
+                            Info
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
