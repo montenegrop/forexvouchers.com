@@ -44,14 +44,15 @@ class Category(models.Model):
 
 
 class Service(ClusterableModel):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100)
     premium = models.BooleanField(null=False, default=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
+    affiliate = models.ForeignKey("Affiliate", on_delete=models.SET_NULL, null=True)
 
     # Company profile
-    status = models.ForeignKey("Status", on_delete=models.CASCADE, null=True, blank=True)
+    status = models.ForeignKey("Status", on_delete=models.SET_NULL, null=True, blank=True)
     founded = models.IntegerField(null=True, blank=True)
     broker_type = ParentalManyToManyField("BrokerType", related_name='broker_type', blank=True)
     regulation = ParentalManyToManyField("Regulation", related_name='regulation', blank=True)
@@ -66,7 +67,7 @@ class Service(ClusterableModel):
     accept_eu_clients = models.BooleanField(null=False, default=True)
 
     # Trading setup
-    timezone = models.ForeignKey("Timezone", on_delete=models.CASCADE, null=True, blank=True)
+    timezone = models.ForeignKey("Timezone", on_delete=models.SET_NULL, null=True, blank=True)
     trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
     platforms_supported = ParentalManyToManyField("PlatformSupported", blank=True)
     ea_robots = models.BooleanField(null=False, default=True)
@@ -128,8 +129,6 @@ class Service(ClusterableModel):
         related_name='+'
     )
 
-
-
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
         attributes = {attributeService.attribute.getKey(): {
@@ -144,8 +143,9 @@ class Service(ClusterableModel):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("category"),
-                FieldPanel("premium")
+                FieldPanel("category", classname="col12"),
+                FieldPanel("premium", classname="col12"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate")
             ],
             heading="Select Category First",
         ),
@@ -275,7 +275,7 @@ class Attribute(ClusterableModel):
 
 
 class AttributeService(Orderable, ClusterableModel):
-    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE)
+    attribute = models.ForeignKey(Attribute, on_delete=models.SET_NULL, null=True)
     service = ParentalKey("Service", related_name="attSer")
 
     def __str__(self):
@@ -292,7 +292,7 @@ class AttributeService(Orderable, ClusterableModel):
 class AttributeServiceValue(Orderable):
     attributeService = ParentalKey("AttributeService", related_name="attSerVal")
     value = models.CharField(max_length=50, blank=True)
-    option = models.ForeignKey(Option, on_delete=models.CASCADE, blank=True, default='', null=True)
+    option = models.ForeignKey(Option, on_delete=models.SET_NULL, blank=True, default='', null=True)
 
     panels = [
         FieldPanel("value"),
@@ -304,6 +304,7 @@ class AttributeServiceValue(Orderable):
 
 
 class Affiliate(models.Model):
+    autocomplete_search_field = 'slug'
     linkTypes = [('out', 'out'), ('visit', 'visit'), ('go', 'go')]
     type = models.CharField(
         max_length=10,
@@ -313,38 +314,100 @@ class Affiliate(models.Model):
     cloakedLink = models.URLField(max_length=500)
     slug = models.CharField(max_length=200, unique=True, null=False)
 
+    def autocomplete_label(self):
+        return self.getLink()
+
     def getLink(self):
         return f"/{self.type}/{self.slug}"
 
     def __str__(self):
         return self.getLink()
 
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("type"),
+                FieldPanel("cloakedLink"),
+                FieldPanel("slug"),
+            ], heading="Affiliates",
+        )
+    ]
+
 
 class Product(models.Model):
-    name = models.CharField(max_length=50)
-    body = RichTextField(max_length=500)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    link = models.OneToOneField(Affiliate, on_delete=models.CASCADE, primary_key=True)
-    slug = AutoSlugField(populate_from='name', editable=True)
+    name = models.CharField(max_length=100)
+    body = RichTextField(max_length=500, verbose_name='Description')
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
+    affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
+    slug = AutoSlugField(populate_from='name', editable=True, null=True)
 
-
-class Voucher(models.Model):
-    type = models.CharField(max_length=30)
-    name = models.CharField(max_length=50)
-    description = models.TextField()
-    slug = AutoSlugField(populate_from='name', editable=True)
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Image'
+    )
 
     def __str__(self):
         return self.name
 
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("service", classname="col6"),
+                FieldPanel("name", classname="col6"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate", classname="col12",),
+                FieldPanel("body", classname="col12"),
+                ImageChooserPanel("logo", classname="col12"),
+            ], heading="Products",
+        )
+    ]
+
+
+class Voucher(models.Model):
+    type = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    description = RichTextField(max_length=2500, blank=True, default=None, null=True)
+    slug = AutoSlugField(populate_from='name', editable=True)
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
+    affiliate = models.OneToOneField(Affiliate, on_delete=models.SET_NULL, null=True)
+    discount = models.IntegerField(verbose_name='Discount (%)', null=True)
+
+    def __str__(self):
+        return self.name
+
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Image'
+    )
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("service", classname="col6"),
+                FieldPanel("discount", classname="col6"),
+                FieldPanel("name"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate"),
+                FieldPanel("description"),
+                ImageChooserPanel("logo")
+            ], heading="Vouchers",
+        )
+    ]
+
 
 class Comment(models.Model):
-    service = models.ForeignKey(Service, on_delete=models.CASCADE, default=None)
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, default=None, null=True)
     stars = models.IntegerField(choices=((1, 1), (2, 2), (3, 3), (4, 4), (5, 5)), blank=True, null=True)
     name = models.CharField(max_length=100)
-    country = models.CharField(max_length=50)
+    country = models.CharField(max_length=100)
     review = models.CharField(max_length=500)
-    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    parent_comment = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     ip = models.CharField(max_length=20, null=True)
@@ -377,6 +440,4 @@ class Comment(models.Model):
                 'country_code': self.country_code
                 }
 
-
-##################################### images ############################
-
+##################################### images #####################################

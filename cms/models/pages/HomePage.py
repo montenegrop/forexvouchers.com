@@ -2,7 +2,8 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from cms.models.business_models import Service
-from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, get_other_services_names
+from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
+    get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -11,7 +12,6 @@ from django.shortcuts import render
 
 
 class HomePage(RoutablePageMixin, Page):
-    max_count = 1
     body = RichTextField(blank=True)
 
     def get_context(self, request):
@@ -41,6 +41,10 @@ class HomePage(RoutablePageMixin, Page):
         context['comments'] = get_comments_by_service(service)
         context['services'] = get_services_by_category(service)
         context['compare'] = get_other_services_names(service)
+        context['affiliate'] = service.affiliate
+        context['vouchers'] = get_vouchers_by_service(service)
+        context['products'] = get_products_by_service(service)
+
 
         return render(request, "../templates/cms/service_page.html", context)
 
@@ -56,5 +60,8 @@ class HomePage(RoutablePageMixin, Page):
 
         context['service_helper1'] = ServiceHelper(service1)
         context['service_helper2'] = ServiceHelper(service2)
+
+        context['affiliate1'] = service1.affiliate
+        context['affiliate2'] = service2.affiliate
 
         return render(request, "../templates/cms/compare_page.html", context)

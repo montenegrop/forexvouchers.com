@@ -1,8 +1,19 @@
-.autocomplete {
+.model_multiple_choice_field .autocomplete {
     padding-left: 15px;
 }
 
+.model_choice_field .autocomplete {
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
 
 .content-wrapper .halloeditor, .content-wrapper .tagit, .content-wrapper input, .content-wrapper select, .content-wrapper textarea {
     border: 1px solid gray;
+}
+
+.content-wrapper .Draftail-Editor {
+    border: 1px solid gray;
+    max-width: 800px;
+    padding: 5px;
+    border-radius: 5px;
 }
