@@ -5,7 +5,7 @@ git fetch origin master
 git checkout --force master
 git reset --hard origin/master
 FILE=/home/ubuntu/env && test -f $FILE && source $FILE
-
+echo "test $MYSQL_DATABASE_NAME"
 
 
 pip install -r requirements.txt
