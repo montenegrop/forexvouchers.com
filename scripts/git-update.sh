@@ -4,6 +4,8 @@ cd /var/www/fxvouchers
 git fetch origin master
 git checkout --force master
 git reset --hard origin/master
+FILE=/home/ubuntu/env && test -f $FILE && source $FILE
+
 
 
 pip install -r requirements.txt
