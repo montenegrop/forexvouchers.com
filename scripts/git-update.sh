@@ -3,4 +3,4 @@ git fetch origin master
 git checkout --force master
 git reset --hard origin/master
 
-source ./django-update.sh
+source /var/www/fxvouchers/scripts/django-update.sh
