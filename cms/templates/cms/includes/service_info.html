@@ -31,7 +31,7 @@
 
                 <div>
 
-                    <b-dropdown id="dropdown-1" variant="warning" no-caret>
+                    <b-dropdown class="compare-dropdown" variant="warning" no-caret>
 
                         <template slot="button-content">
 
@@ -40,9 +40,15 @@
                         </template>
 
 
-                        <vue-bootstrap-typeahead
-                                :data="{{ compare }}"
-                        />
+        <fv-compare-typeahead :options="[
+            {% for sers in services %}
+                {% if sers != service %}
+                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
+                {% endif %}
+            {% endfor %}
+        ]" v-model="selected">
+        </fv-compare-typeahead>
+
 
 
                     </b-dropdown>
@@ -52,7 +58,7 @@
 
                 <div class="circle-clip-share">
 
-                    <b-dropdown id="dropdown-1" variant="light" no-caret>
+                    <b-dropdown variant="light" no-caret>
 
                         <template slot="button-content">
 
@@ -121,6 +127,7 @@
 
 
 </b-row>
+
 
 
 

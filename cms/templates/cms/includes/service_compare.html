@@ -1,19 +1,12 @@
-<ul class="list-group list-group-item-danger">
+    <div class="compare-tab">
 
-    {% for sers in services %}
-
-        {% if sers != service %}
-
-            <li class="list-group-item active">
-                <a class="text-primary"
-                   href="/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}">
-                    {{ sers.name }}
-                </a>
-            </li>
-
-        {% endif %}
+        <fv-compare-typeahead :options="[
+            {% for sers in services %}
+                {% if sers != service %}
+                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
+                {% endif %}
+            {% endfor %}
+        ]" v-model="selected"></fv-compare-typeahead>
 
 
-    {% endfor %}
-
-</ul>
+    </div>
