@@ -30,7 +30,8 @@ const app = new Vue({
     data: {
         message: 'Hello Vue!',
         tabIndex: 0,
-        ...window.data
+        ...window.data,
+        selected: null,
     },
     methods: {
         linkClass(idx) {

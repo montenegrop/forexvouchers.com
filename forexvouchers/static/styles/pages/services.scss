@@ -220,7 +220,20 @@
     vertical-align: middle;
   }
 
+  .compare-dropdown {
+    .typeahead__link {
+      color: $gray-900;
+    }
+    .dropdown-menu {
+      border: 0;
+    }
+  }
 
+  .compare-tab {
+    .typeahead__link {
+      color: $gray-900;
+    }
+  }
 
 }
 
