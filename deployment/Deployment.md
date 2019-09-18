@@ -18,7 +18,7 @@ sudo mysql:
     SET FOREIGN_KEY_CHECKS=0;
      import dump.sql
      SET FOREIGN_KEY_CHECKS=1;
-    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON fxvouchers.* TO 'fxvouchers'@'localhost';
+    GRANT ALL PRIVILEGES ON fxvouchers.* TO 'fxvouchers'@'localhost';
     SET FOREIGN_KEY_CHECKS=1;
     
 mysql -ufxvouchers -p < dump.sql
@@ -28,9 +28,14 @@ mysql -ufxvouchers -p < dump.sql
 2. scp ssh-staging-dir.tar.gz fv
 3. tar xvzf ssh-staging-dir.tar.gz
 
+# Prepare log files
+1. sudo touch /var/log/forexvouchers-debug.log
+2. sudo chmod ugo+rw /var/log/forexvouchers-debug.log
 
+# Clone repository and install dependencies
 sudo mkdir -p /var/www
 sudo chown ubuntu:ubuntu -R /var/www/
+
 cd /var/www
 git clone git@github.com:ahmerkhanz/fxvouchers.git
 
@@ -46,6 +51,7 @@ gunicorn forexvouchers.wsgi
 2. scp deployment/nginx-config.conf fv:/home/ubuntu
 3. sudo cp supervisor.conf /etc/supervisor/conf.d/forexvouchers.conf
 4. sudo cp nginx-config.conf /etc/nginx/sites-enabled/forexvouchers.conf
+5. Update /etc/nginx/sites-enabled/forexvouchers.conf with the actual hostname
 5. sudo supervisorctl restart all
 6. sudo service nginx restart
 
