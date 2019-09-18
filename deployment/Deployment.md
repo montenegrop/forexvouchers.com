@@ -1,3 +1,7 @@
+# Creating users
+adduser ubuntu
+usermod -aG sudo ubuntu
+
 # Provisioning
 sudo apt-get update
 #sudo apt upgrade -y
@@ -19,16 +23,32 @@ sudo mysql:
     
 mysql -ufxvouchers -p < dump.sql
     
-sudo mkdir -p /var/www
+# Download ssh keys
+1. Download public keys
+2. scp ssh-staging-dir.tar.gz fv
+3. tar xvzf ssh-staging-dir.tar.gz
 
+
+sudo mkdir -p /var/www
 sudo chown ubuntu:ubuntu -R /var/www/
 cd /var/www
 git clone git@github.com:ahmerkhanz/fxvouchers.git
 
+cd /var/www/fxvouchers
 pip install -r requirements.txt
 npm install
 npm run build:static
 gunicorn forexvouchers.wsgi
+
+
+# Nginx and supervisor
+1. scp deployment/supervisor.conf fv:/home/ubuntu
+2. scp deployment/nginx-config.conf fv:/home/ubuntu
+3. sudo cp supervisor.conf /etc/supervisor/conf.d/forexvouchers.conf
+4. sudo cp nginx-config.conf /etc/nginx/sites-enabled/forexvouchers.conf
+5. sudo supervisorctl restart all
+6. sudo service nginx restart
+
 
 
 # Updating existing repository
