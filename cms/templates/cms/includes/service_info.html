@@ -24,7 +24,7 @@
                 </div>
 
                 <p class="service-text-blue">150 reviews</p>
-                {% image service.preview max-258x160 %}
+                {% image service.preview max-400x249 %}
 
             </div>
             <div class="col-2 col-md-2 service-overview-icons">
@@ -35,20 +35,19 @@
 
                         <template slot="button-content">
 
-                            <i class="fas fa-balance-scale fa-2x fa-cog-compare"></i>
+                            <i class="fas fa-balance-scale fa-3x fa-cog-compare"></i>
 
                         </template>
 
 
-        <fv-compare-typeahead :options="[
+                        <fv-compare-typeahead :options="[
             {% for sers in services %}
                 {% if sers != service %}
                     {id: {{ forloop.counter }}, text: '{{ sers.name }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
                 {% endif %}
             {% endfor %}
         ]" v-model="selected">
-        </fv-compare-typeahead>
-
+                        </fv-compare-typeahead>
 
 
                     </b-dropdown>
@@ -56,13 +55,13 @@
 
                 </div>
 
-                <div class="circle-clip-share">
+                <div>
 
-                    <b-dropdown variant="light" no-caret>
+                    <b-dropdown class="compare-dropdown" variant="warning" no-caret>
 
                         <template slot="button-content">
 
-                            <i class="fas fa-share-alt-square fa-4x fa-cog-share"></i>
+                            <i class="fas fa-share-alt-square fa-3x fa-cog-share"></i>
 
                         </template>
 
@@ -75,22 +74,24 @@
 
 
             </div>
+
+            <div class="right-button">
+
+                <a href="{{ affiliate.getLink }}">
+
+                    <button type="button" class="btn btn-success font-weight-bold h4">
+
+                        website
+
+                    </button>
+
+                </a>
+
+            </div>
+
+
         </div>
-        <div class="right-button">
 
-
-            <a href="{{ affiliate.getLink }}">
-
-                <button type="button" class="btn btn-success font-weight-bold h4">
-
-                    website
-
-                </button>
-
-            </a>
-
-
-        </div>
     </div>
 
 

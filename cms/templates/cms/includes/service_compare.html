@@ -1,12 +1,25 @@
-    <div class="compare-tab">
+{% load wagtailimages_tags %}
 
-        <fv-compare-typeahead :options="[
+<div class="compare-tab">
+
+    <h1>Compare with another service</h1>
+
+    <button type="button" class="btn btn-success font-weight-bold h4">
+
+        Letter S
+
+    </button>
+
+
+    <fv-compare-typeahead :options="[
             {% for sers in services %}
                 {% if sers != service %}
-                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
+                    {% image sers.logo max-60x37 as logo %}
+
+                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', logo: '{{ logo.url }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
                 {% endif %}
             {% endfor %}
         ]" v-model="selected"></fv-compare-typeahead>
 
 
-    </div>
+</div>
