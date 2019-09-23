@@ -1,22 +1,32 @@
 # Creating users
-adduser ubuntu
-usermod -aG sudo ubuntu
+1. adduser ubuntu
+2. usermod -aG sudo ubuntu
+3. sudo visudo
+    ```
+        %sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+
+    ```
 
 # Provisioning
-sudo apt-get update
-#sudo apt upgrade -y
-sudo apt-get install supervisor python3.7 nginx python3-pip npm libgdal-dev python3.7-dev mysql-server 
-sudo pip3 install virtualenvwrapper
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 mkvirtualenv fxvouchers --python=/usr/bin/python3.7
 
-sudo mysql_secure_installation
-sudo mysql:
+
+1. `sudo apt-get update`
+3. Install ubuntu dependencies`sudo apt-get install supervisor python3.7 nginx python3-pip npm libgdal-dev python3.7-dev mysql-server` 
+4. Install virtualenvwrapper `sudo pip3 install virtualenvwrapper`
+5. Setup virtualenv wrapper `VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh`
+6. Create virtualenv `VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 mkvirtualenv fxvouchers --python=/usr/bin/python3.7`
+
+# Setup mysql
+1. Setup mysql `sudo mysql_secure_installation`
+
+2. sudo mysql:
+
+
     CREATE DATABASE fxvouchers CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
     CREATE USER 'fxvouchers'@'localhost' IDENTIFIED BY 'password!*';
     USE fxvouchers;
     SET FOREIGN_KEY_CHECKS=0;
-     import dump.sql
+     import dump.sql # You can get this from the migrations folder
      SET FOREIGN_KEY_CHECKS=1;
     GRANT ALL PRIVILEGES ON fxvouchers.* TO 'fxvouchers'@'localhost';
     SET FOREIGN_KEY_CHECKS=1;
@@ -29,21 +39,20 @@ mysql -ufxvouchers -p < dump.sql
 3. tar xvzf ssh-staging-dir.tar.gz
 
 # Prepare log files
-1. sudo touch /var/log/forexvouchers-debug.log
-2. sudo chmod ugo+rw /var/log/forexvouchers-debug.log
+1. `sudo touch /var/log/forexvouchers-debug.log`
+2. `sudo chmod ugo+rw /var/log/forexvouchers-debug.log`
 
 # Clone repository and install dependencies
-sudo mkdir -p /var/www
-sudo chown ubuntu:ubuntu -R /var/www/
+1. `sudo mkdir -p /var/www`
+2. `sudo chown ubuntu:ubuntu -R /var/www/`
+3. `cd /var/www`
+4. `git clone git@github.com:ahmerkhanz/fxvouchers.git`
 
-cd /var/www
-git clone git@github.com:ahmerkhanz/fxvouchers.git
-
-cd /var/www/fxvouchers
-pip install -r requirements.txt
-npm install
-npm run build:static
-gunicorn forexvouchers.wsgi
+5. `cd /var/www/fxvouchers`
+6. `pip install -r requirements.txt`
+7. `npm install`
+8. `npm run build:static`
+9. `gunicorn forexvouchers.wsgi`  And check the logs to see if there are any errors
 
 
 # Nginx and supervisor
@@ -55,20 +64,8 @@ gunicorn forexvouchers.wsgi
 5. sudo supervisorctl restart all
 6. sudo service nginx restart
 
-
-
 # Updating existing repository
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 workon fxvouchers
-cd /var/www/fxvouchers
-git fetch origin master
-git checkout --force master
-git reset --hard origin/master
 
-pip install -r requirements.txt
-npm install
-npm run build:static
-
-gunicorn forexvouchers.wsgi
-
-
+There's an script in `scripts/django-update.sh` 
+That's the script we use to get the latest changes when we deploy. 
+You should configure your CI server to run this script everytime you want to deploy.
