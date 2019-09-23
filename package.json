@@ -4,7 +4,7 @@
   "description": "user admin pass admin",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build:styles:prod; npm build:js:prod;",
+    "build": "npm run build:styles:prod; npm run build:js:prod;",
     "build:styles:prod": "parcel build forexvouchers/static/styles/base.scss --public-url '/static/dist/styles' -d forexvouchers/static/dist/styles",
     "build:styles": "parcel build forexvouchers/static/styles/base.scss --public-url '/static/dist/styles' --no-minify -d forexvouchers/static/dist/styles",
     "build:js": "parcel build forexvouchers/static/js/forexvouchers.js --no-minify -d forexvouchers/static/dist/js",
