@@ -1,6 +1,8 @@
 <template>
     <div>
-        <li v-for="letter in letters">{{letter}}</li>
+        <b-button-group>
+            <b-button variant="outline-info" @click="$emit('clickLetter', {letter: letter})" v-for="letter in letters">{{letter}}</b-button>
+        </b-button-group>
     </div>
 </template>
 

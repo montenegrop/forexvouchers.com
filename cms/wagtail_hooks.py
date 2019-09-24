@@ -47,6 +47,9 @@ class AttributeAdmin(ModelAdmin):
 class VoucherAdmin(ModelAdmin):
     model = Voucher
 
+class PromoCodeAdmin(ModelAdmin):
+    menu_label = 'Promo Codes'
+    model = Voucher
 
 class AffiliateAdmin(ModelAdmin):
     model = Affiliate
@@ -312,6 +315,15 @@ class ProductsGroup(ModelAdminGroup):
     items = (ServiceAdmin, VoucherAdmin, ProductAdmin)
 
 
+class ProductsGroup(ModelAdminGroup):
+    menu_label = 'Vouchers'
+    menu_icon = 'folder-open-inverse'  # change as required
+    menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
+    items = (PromoCodeAdmin,)
+
+
+
+
 class CommentAdmin(ModelAdmin):
     model = Comment
 
@@ -323,6 +335,7 @@ modeladmin_register(ProductsGroup)
 modeladmin_register(AffiliateAdmin)
 modeladmin_register(CommentAdmin)
 modeladmin_register(FieldGroup)
+
 
 
 @hooks.register("insert_global_admin_js", order=100)

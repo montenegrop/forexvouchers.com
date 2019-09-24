@@ -1,5 +1,7 @@
 from django.db import models
 # from cms.models.fields import *
+from wagtail.contrib.modeladmin.helpers import AdminURLHelper
+
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
@@ -319,6 +321,7 @@ class Affiliate(models.Model):
     )
     cloakedLink = models.URLField(max_length=500)
     slug = models.CharField(max_length=200, unique=True, null=False)
+    clicks = models.IntegerField(default=0)
 
     def autocomplete_label(self):
         return self.getLink()
@@ -373,16 +376,14 @@ class Product(models.Model):
 
 
 class Voucher(models.Model):
-    type = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    description = RichTextField(max_length=2500, blank=True, default=None, null=True)
     slug = AutoSlugField(populate_from='name', editable=True)
-    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100)
     affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True)
-    discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
+    description = RichTextField(max_length=2500, blank=True, default=None, null=True)
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return self.name
+    expires = models.DateField(auto_now=False, blank=True)
+    never_expires = models.BooleanField(default=True)
 
     logo = models.ForeignKey(
         'wagtailimages.Image',
@@ -393,18 +394,35 @@ class Voucher(models.Model):
         verbose_name='Image'
     )
 
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
     panels = [
         MultiFieldPanel(
             [
                 FieldPanel("service", classname="col6"),
-                FieldPanel("discount", classname="col6"),
                 FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
-                ImageChooserPanel("logo", classname="col12")
-            ], heading="Vouchers",
+                ImageChooserPanel("logo", classname="col12"),
+            ], heading="Voucher",
         )
     ]
+
+class PromoCode(Voucher):
+    code = models.CharField(max_length=200)
+    # discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
+    #expires = models.DateField(auto_now=False, blank=True)
+    #never_expires = models.BooleanField(default=True)
+
+class Disccount(Voucher):
+    discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
+
 
 
 class Comment(models.Model):

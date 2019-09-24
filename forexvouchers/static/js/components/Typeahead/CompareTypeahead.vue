@@ -1,6 +1,6 @@
 <template>
     <div>
-        <FvLetterFilter :options="options">
+        <FvLetterFilter :options="options" v-on:clickLetter="onLetterFilter($event)">
 
 
         </FvLetterFilter>
@@ -56,6 +56,7 @@
                 open: false,
                 selectIndex: 0,
                 displayText: '',
+                startingLetter: '',
                 search: ''
             }
         },
@@ -67,10 +68,13 @@
                 const exp = new RegExp(this.search, 'i')
                 return this.options.filter((option) => {
                     return (exp.test(option.id) || exp.test(option.text))
-                })
+                }).filter(option => !this.startingLetter || option.text.charAt(0).toLocaleUpperCase() === this.startingLetter)
             }
         },
         methods: {
+            onLetterFilter($event) {
+                this.startingLetter = $event.letter;
+            },
             onDownKey() {
                 if (this.filteredOptions.length - 1 > this.selectIndex) {
                     this.selectIndex++
