@@ -382,7 +382,7 @@ class Voucher(models.Model):
     description = RichTextField(max_length=2500, blank=True, default=None, null=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
 
-    expires = models.DateField(auto_now=False, blank=True)
+    expires = models.DateField(auto_now=True, blank=True)
     never_expires = models.BooleanField(default=True)
 
     logo = models.ForeignKey(
@@ -394,9 +394,6 @@ class Voucher(models.Model):
         verbose_name='Image'
     )
 
-
-    class Meta:
-        abstract = True
 
     def __str__(self):
         return self.name
@@ -420,8 +417,8 @@ class PromoCode(Voucher):
     #expires = models.DateField(auto_now=False, blank=True)
     #never_expires = models.BooleanField(default=True)
 
-class Disccount(Voucher):
-    discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
+class Discount(Voucher):
+    discount_percent = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
 
 
 
