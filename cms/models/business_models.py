@@ -2,7 +2,6 @@ from django.db import models
 # from cms.models.fields import *
 from wagtail.contrib.modeladmin.helpers import AdminURLHelper
 
-
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
@@ -394,10 +393,15 @@ class Voucher(models.Model):
         verbose_name='Image'
     )
 
-
     def __str__(self):
         return self.name
 
+
+class PromoCode(Voucher):
+    code = models.CharField(max_length=200)
+    # discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
+    # expires = models.DateField(auto_now=False, blank=True)
+    # never_expires = models.BooleanField(default=True)
 
     panels = [
         MultiFieldPanel(
@@ -406,20 +410,42 @@ class Voucher(models.Model):
                 FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
+                FieldPanel("code", classname="col12"),
                 ImageChooserPanel("logo", classname="col12"),
-            ], heading="Voucher",
+            ], heading="PromoCode",
         )
     ]
 
-class PromoCode(Voucher):
-    code = models.CharField(max_length=200)
-    # discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
-    #expires = models.DateField(auto_now=False, blank=True)
-    #never_expires = models.BooleanField(default=True)
 
 class Discount(Voucher):
     discount_percent = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
 
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("service", classname="col6"),
+                FieldPanel("name", classname="col12"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate"),
+                FieldPanel("description", classname="col12"),
+                FieldPanel("discount_percent", classname="col12"),
+                ImageChooserPanel("logo", classname="col12"),
+            ], heading="Discount",
+        )
+    ]
+
+
+class Offer(Voucher):
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("service", classname="col6"),
+                FieldPanel("name", classname="col12"),
+                AutocompletePanel("affiliate", target_model="cms.Affiliate"),
+                FieldPanel("description", classname="col12"),
+                ImageChooserPanel("logo", classname="col12"),
+            ], heading="Offers",
+        )
+    ]
 
 
 class Comment(models.Model):
