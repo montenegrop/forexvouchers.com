@@ -1,4 +1,5 @@
 {% load wagtailimages_tags %}
+{# Load CSS and JavaScript #}
 
 <div class="products row">
 
@@ -8,15 +9,50 @@
 
             <div class="product">
                 <div class="product-image-wrapper"> {% image vouch.logo min-165x98 fill-165x98 class="product-image" %} </div>
+
+
+                <div class="product-discount"> {{ vouch.discount }}% OFF</div>
+
                 <div class="product-info">
                     <h5 title="{{ vouch.name }}"> {{ vouch.name }} </h5>
                 </div>
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-7 product-service"> By <a class="product-service-link"
+                                                                href="{{ vouch.service.affiliate.getKink }}">{{ vouch.service.name }} </a>
+                        </div>
+
+                        <div class="col-5 product-stars rate-container flexible">
+                            <rate :length="5" :value="{{ service.get_avg_rate }}" readonly/>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
                 <div class="product-link text-center">
                     <a href="{{ vouch.affiliate.getLink }}">
                         <button type="button" class="btn btn-info btn-lg product-link-button">
-                            Info
+                            Get Discount
                         </button>
                     </a>
+                    <div class="product-clicks">
+                        {{ vouch.affiliate.clicks }} clicks
+                    </div>
+                    <div class="product-expires">
+
+                        {% if vouch.never_expires %}
+                            Never expires
+                        {% else %}
+                            Expires {{ vouch.expires }}
+                        {% endif %}
+
+                    </div>
                 </div>
             </div>
 

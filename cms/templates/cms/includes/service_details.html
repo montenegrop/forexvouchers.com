@@ -43,6 +43,18 @@
         </tr>
     {% endfor %}
 
+    {% for field in service_helper.about %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                    colspan="2">{{ 'Details' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" colspan="2">{{ field | safe }}</td>
+        </tr>
+    {% endfor %}
+
 
     </tbody>
 </table>

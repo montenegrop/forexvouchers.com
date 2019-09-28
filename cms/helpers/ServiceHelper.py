@@ -1,6 +1,5 @@
 from django.db import models
 
-
 BROKERS = 1
 TRAINING = 2
 VPS = 3
@@ -24,6 +23,7 @@ class Field(object):
         value = self.__str__()
         return value if value != '-' else ''
 
+
 class BooleanField(Field):
     def __str__(self):
         return 'Yes' if getattr(self.service, self.key) else 'No'
@@ -37,7 +37,8 @@ class MultiField(Field):
         return value.all()
 
     def to_csv(self):
-        return ','.join([value.slug if hasattr(value, 'slug') else value.name for value in getattr(self.service, self.key).all()])
+        return ','.join(
+            [value.slug if hasattr(value, 'slug') else value.name for value in getattr(self.service, self.key).all()])
 
     def __str__(self):
         return ', '.join([value.__str__() for value in self.get_all_values()])
@@ -47,18 +48,17 @@ class FlagField(MultiField):
     def __str__(self):
         return ', '.join([
             f'<span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>{ value.name }'
-            for value in  self.get_all_values()])
+            for value in self.get_all_values()])
 
     def to_csv(self):
         return ','.join([value.code for value in getattr(self.service, self.key).all()])
-
 
 
 class LogoField(MultiField):
     def __str__(self):
         return ', '.join([
             f'<span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>{ value.name }'
-            for value in  self.get_all_values()])
+            for value in self.get_all_values()])
 
 
 class ServiceHelper(object):
@@ -130,7 +130,6 @@ class ServiceHelper(object):
 
             #################
 
-
         ]
 
         self.service = service
@@ -155,6 +154,11 @@ class ServiceHelper(object):
             if field.section == 'd' and self.service.category.id in field.categories:
                 yield field
 
+    def about(self):
+        for field in self.fields:
+            if field.section == 'a' and self.service.category.id in field.categories:
+                yield field
+
     def __getattr__(self, name):
         for field in self.fields:
             if field.key == name:
@@ -167,4 +171,3 @@ class ServiceHelper(object):
 
         value = getattr(self.service, name)
         return value.slug if isinstance(value, models.Model) else str(value)
-

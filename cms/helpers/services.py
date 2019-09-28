@@ -48,6 +48,7 @@ def get_vouchers_by_service(service):
         vouchers.append(voucher)
     return vouchers
 
+
 def get_products_by_service(service):
     products = []
     for product in Product.objects.filter(service=service):

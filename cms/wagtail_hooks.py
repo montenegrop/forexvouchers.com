@@ -5,7 +5,7 @@ from wagtail.core import hooks
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.html import format_html
 from django.conf import settings
-from .models import Category, Service, Attribute, Voucher, Affiliate, Product, Comment
+from .models import Category, Service, Attribute, Voucher, Affiliate, Product, Comment, PromoCode, Discount, Offer
 from .models import Status, BrokerType, Location, Regulation, License
 from .models import Timezone, TradingSoftware, PlatformSupported
 from .models import Chat, SupportedLanguage
@@ -46,6 +46,18 @@ class AttributeAdmin(ModelAdmin):
 
 class VoucherAdmin(ModelAdmin):
     model = Voucher
+
+class PromoCodeAdmin(ModelAdmin):
+    menu_label = 'Promo Codes'
+    model = PromoCode
+
+class DiscountAdmin(ModelAdmin):
+    menu_label = 'Discounts'
+    model = Discount
+
+class OfferAdmin(ModelAdmin):
+    menu_label = 'Offers'
+    model = Offer
 
 
 class AffiliateAdmin(ModelAdmin):
@@ -312,6 +324,15 @@ class ProductsGroup(ModelAdminGroup):
     items = (ServiceAdmin, VoucherAdmin, ProductAdmin)
 
 
+class ProductsGroup(ModelAdminGroup):
+    menu_label = 'Vouchers'
+    menu_icon = 'folder-open-inverse'  # change as required
+    menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
+    items = (PromoCodeAdmin, DiscountAdmin, OfferAdmin)
+
+
+
+
 class CommentAdmin(ModelAdmin):
     model = Comment
 
@@ -323,6 +344,7 @@ modeladmin_register(ProductsGroup)
 modeladmin_register(AffiliateAdmin)
 modeladmin_register(CommentAdmin)
 modeladmin_register(FieldGroup)
+
 
 
 @hooks.register("insert_global_admin_js", order=100)
