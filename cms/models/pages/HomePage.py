@@ -1,6 +1,7 @@
 from wagtail.core.models import Page
+from django.db import models
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from cms.models.business_models import Service
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
@@ -12,7 +13,19 @@ from django.shortcuts import render
 
 
 class HomePage(RoutablePageMixin, Page):
-    body = RichTextField(blank=True)
+    banner_title = models.CharField(max_length=100, default='')
+    banner_body = RichTextField(blank=True, default='')
+
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("banner_title", classname="col12"),
+                FieldPanel("banner_body", classname="col12"),
+            ],
+            heading="Banner",
+        )
+    ]
 
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
@@ -23,10 +36,6 @@ class HomePage(RoutablePageMixin, Page):
             attrs['slug'] = service.slug
             context['table_rows'].append(attrs)
         return context
-
-    content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
-    ]
 
     @route(r'^services/(.+)/$')
     def get_service_context(self, request, *args, **kwargs):

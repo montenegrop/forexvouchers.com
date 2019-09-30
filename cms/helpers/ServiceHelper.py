@@ -23,10 +23,21 @@ class Field(object):
         value = self.__str__()
         return value if value != '-' else ''
 
+    def to_dict(self):
+        value = getattr(self.service, self.key)
+        if hasattr(value, 'to_dict'):
+            return value.to_dict()
+        elif None == value:
+            return value
+        else:
+            return value.__str__()
 
 class BooleanField(Field):
     def __str__(self):
         return 'Yes' if getattr(self.service, self.key) else 'No'
+
+    def to_dict(self):
+        return True if getattr(self.service, self.key) else False
 
 
 class MultiField(Field):
@@ -42,6 +53,21 @@ class MultiField(Field):
 
     def __str__(self):
         return ', '.join([value.__str__() for value in self.get_all_values()])
+
+    def to_dict(self):
+        elements = []
+        for value in getattr(self.service, self.key).all():
+            if hasattr(value, 'to_dict'):
+                elements.append(value.to_dict())
+            elif hasattr(value, 'slug'):
+                elements.append(value.slug)
+            elif hasattr(value, 'name'):
+                elements.append(value.name)
+            elif hasattr(value, 'description'):
+                elements.append(value.description)
+
+        return elements
+
 
 
 class FlagField(MultiField):
@@ -171,3 +197,11 @@ class ServiceHelper(object):
 
         value = getattr(self.service, name)
         return value.slug if isinstance(value, models.Model) else str(value)
+
+    def to_dict(self):
+        obj = {}
+        for field in self.fields:
+            if self.service.category_id in field.categories:
+                obj[field.key] = field.to_dict()
+
+        return obj

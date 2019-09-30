@@ -324,7 +324,7 @@ class ProductsGroup(ModelAdminGroup):
     items = (ServiceAdmin, VoucherAdmin, ProductAdmin)
 
 
-class ProductsGroup(ModelAdminGroup):
+class VouchersGroup(ModelAdminGroup):
     menu_label = 'Vouchers'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
@@ -339,7 +339,7 @@ class CommentAdmin(ModelAdmin):
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
 # modeladmin_register(CategoryAdmin)
-# modeladmin_register(ServiceAdmin)
+modeladmin_register(VouchersGroup)
 modeladmin_register(ProductsGroup)
 modeladmin_register(AffiliateAdmin)
 modeladmin_register(CommentAdmin)

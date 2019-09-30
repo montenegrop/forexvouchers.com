@@ -1,4 +1,19 @@
 .banner {
   background-image: url("../images/cool-background.png");
-  height: 100px;
+  background-repeat: no-repeat;
+  min-height: 200px;
+  color: $banner-text-color;
+  margin: 2em 0;
+
+  .banner-title {
+    padding: 2em 2em 0 2em;
+    text-align: center;
+
+  }
+
+  .banner-body {
+    padding: 0 2em 2em 2em;
+    text-align: center;
+  }
 }
+

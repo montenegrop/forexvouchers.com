@@ -38,6 +38,12 @@ class Location(AbstractField, models.Model):
     def __str__(self):
         return self.name
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "code": self.code
+        }
+
 
 ##
 
