@@ -384,6 +384,9 @@ class Voucher(models.Model):
     expires = models.DateField(auto_now=True, blank=True)
     never_expires = models.BooleanField(default=True)
 
+    def get_type(self):
+        return self.__class__.__name__
+
     logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -399,9 +402,12 @@ class Voucher(models.Model):
 
 class PromoCode(Voucher):
     code = models.CharField(max_length=200)
-    # discount = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
-    # expires = models.DateField(auto_now=False, blank=True)
-    # never_expires = models.BooleanField(default=True)
+
+    def toDict(self):
+        return {'name': self.name,
+                'service': self.service.name,
+                'code': self.code,
+                }
 
     panels = [
         MultiFieldPanel(
@@ -487,4 +493,17 @@ class Comment(models.Model):
                 'country_code': self.country_code
                 }
 
-##################################### images #####################################
+
+class Compare(models.Model):
+    service1 = models.ForeignKey(Service, on_delete=models.SET_NULL, default=None, null=True,
+                                 related_name='compare_service1')
+    service2 = models.ForeignKey(Service, on_delete=models.SET_NULL, default=None, null=True,
+                                 related_name='compare_service2')
+    count = models.IntegerField(default=0)
+
+    def getCount(self):
+        complement = Compare.objects.get(service1=self.service2, service2=self.service1)
+        if complement:
+            return sum(self.count + complement.count)
+        else:
+            return self.count

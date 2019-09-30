@@ -1,11 +1,18 @@
 import Comment from './Comments/Comment.vue';
 import CommentsList from './Comments/CommentsList.vue';
 import Typeahead from './Typeahead/Typeahead.vue';
-import CompareTypeahead from './Typeahead/CompareTypeahead.vue'
+import CompareTypeahead from './Typeahead/CompareTypeahead.vue';
+import Promocodes from './PeelReveal/Promocodes.vue';
+import VouchersIndex from './Vouchers/VouchersIndex.vue';
+import VouchersLoadAll from './Vouchers/VouchersLoadAll.vue';
+
 
 export default {
     'fv-comment': Comment,
     'fv-comments-list': CommentsList,
     'fv-typeahead': Typeahead,
     'fv-compare-typeahead': CompareTypeahead,
+    'fv-promocodes': Promocodes,
+    'fv-vouchers-index': VouchersIndex,
+    'fv-vouchers-load-all': VouchersLoadAll,
 }

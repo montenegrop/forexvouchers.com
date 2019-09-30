@@ -1,9 +1,6 @@
 @import "variables";
 @import "theme/variables";
-
-
 @import "bootstrap/scss/functions";
-
 @import "bootstrap/scss/variables";
 // bootstrap
 @import "bootstrap/scss/mixins";
@@ -39,12 +36,10 @@
 @import "bootstrap/scss/carousel";
 @import "bootstrap/scss/utilities";
 @import "bootstrap/scss/print";
-
 @import "theme/bootswatch";
 @import "./fontawesome";
 @import "theme/products";
-
-
+@import "theme/promocodes";
 // bootstrap vue
 @import 'bootstrap-vue/src/index.scss';
 // flags

@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponseRedirect, HttpResponse
 from geoip2.errors import AddressNotFoundError
 import logging
-from cms.models.business_models import Comment, Service, Affiliate, Voucher
+from cms.models.business_models import Comment, Service, Affiliate, Discount, PromoCode, Offer
 from django.contrib.gis.geoip2 import GeoIP2
 from django.views import View
 
@@ -19,8 +19,7 @@ class CommentsView(View):
         for comment in comments:
             sum += comment.stars
 
-        return sum/len(comments) if sum else 0
-
+        return sum / len(comments) if sum else 0
 
     def get(self, request):
         serviceId = int(request.GET.get('service_id'))
@@ -94,4 +93,12 @@ def cloakedlinks(request, slug):
     return HttpResponseRedirect(affiliate.cloakedLink)
 
 
+class VouchersView(View):
+    response = {'data': []}
 
+    def get(self, request):
+        response = {'data': []}
+        vouchers = PromoCode.objects.all()
+        [response['data'].append(vouch.toDict()) for vouch in vouchers]
+
+        return HttpResponse(json.dumps(response), content_type="application/json")

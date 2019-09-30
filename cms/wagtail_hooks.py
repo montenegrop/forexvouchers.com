@@ -341,6 +341,7 @@ class CommentAdmin(ModelAdmin):
 # modeladmin_register(CategoryAdmin)
 modeladmin_register(VouchersGroup)
 modeladmin_register(ProductsGroup)
+modeladmin_register(VouchersGroup)
 modeladmin_register(AffiliateAdmin)
 modeladmin_register(CommentAdmin)
 modeladmin_register(FieldGroup)
