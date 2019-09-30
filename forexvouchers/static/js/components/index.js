@@ -5,6 +5,7 @@ import CompareTypeahead from './Typeahead/CompareTypeahead.vue';
 import Promocodes from './PeelReveal/Promocodes.vue';
 import VouchersIndex from './Vouchers/VouchersIndex.vue';
 import VouchersLoadAll from './Vouchers/VouchersLoadAll.vue';
+import ServicesTable from './HomePage/ServicesTable'
 
 
 export default {
@@ -15,4 +16,5 @@ export default {
     'fv-promocodes': Promocodes,
     'fv-vouchers-index': VouchersIndex,
     'fv-vouchers-load-all': VouchersLoadAll,
+    'fv-services-table': ServicesTable,
 }

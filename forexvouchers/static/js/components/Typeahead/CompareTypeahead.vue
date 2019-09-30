@@ -35,7 +35,7 @@
 </template>
 <script type="text/javascript">
 
-    import LetterFilter from '../LetterFilter'
+    import LetterFilter from '../LetterFilter/index'
 
     export default {
         components: { FvLetterFilter: LetterFilter },
