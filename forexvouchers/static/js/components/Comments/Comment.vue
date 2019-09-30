@@ -13,7 +13,7 @@
             </p>
             <span v-if="country_code" :class="['flag flag-icon flag-icon-squared rounded-circle border border-secondary', 'flag-icon-' + country_code.toLowerCase()]"></span>
             <i v-else="country_code" class="fas fa-4x fa-globe-americas"></i>
-            <div class="text-with-flag"><strong> {{ country_name }} </strong></div>
+            <div class="text-with-flag"><strong> {{ country_name || 'Unknown' }} </strong></div>
         </b-col>
     </b-row>
 </template>

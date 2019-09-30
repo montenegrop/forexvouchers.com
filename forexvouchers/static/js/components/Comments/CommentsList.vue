@@ -117,7 +117,7 @@
                 this.getData();
             },
             async getData() {
-                if (this.currentPage) {
+                if (!this.currentPage) {
                     return
                 }
                 const url = `/api/comments?sort_by=&service_id=${this.service_id}&stars=${this.stars}&page=${this.currentPage - 1}&limit=${this.perPage}`;
