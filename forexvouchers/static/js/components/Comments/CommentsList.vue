@@ -123,6 +123,7 @@
                 const url = `/api/comments?sort_by=&service_id=${this.service_id}&stars=${this.stars}&page=${this.currentPage - 1}&limit=${this.perPage}`;
                 let response;
                 if (cache.hasOwnProperty(url)) {
+
                     response = cache[url];
                 } else {
                     response = (await
@@ -138,7 +139,7 @@
                 this.stars3 = response.stars3;
                 this.stars4 = response.stars4;
                 this.stars5 = response.stars5;
-                return data;
+                return response
             },
             filterChange(stars) {
                 this.stars = stars;

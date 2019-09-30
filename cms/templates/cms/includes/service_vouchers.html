@@ -5,58 +5,23 @@
 
     {% for vouch in vouchers %}
 
-        <div class="col-md-3 col-6">
+        {% if vouch.get_type == 'Discount' %}
 
-            <div class="product">
-                <div class="product-image-wrapper"> {% image vouch.logo min-165x98 fill-165x98 class="product-image" %} </div>
+            {% include "includes/vouchers/discounts.html" %}
 
+        {% endif %}
 
-                <div class="product-discount"> {{ vouch.discount }}% OFF</div>
+        {% if vouch.get_type == 'PromoCode' %}
 
-                <div class="product-info">
-                    <h5 title="{{ vouch.name }}"> {{ vouch.name }} </h5>
-                </div>
+            {% include "includes/vouchers/promocodes.html" %}
 
-                <div class="container">
+        {% endif %}
 
-                    <div class="row">
+        {% if vouch.get_type == 'Offer' %}
 
-                        <div class="col-7 product-service"> By <a class="product-service-link"
-                                                                href="{{ vouch.service.affiliate.getKink }}">{{ vouch.service.name }} </a>
-                        </div>
+            {% include "includes/vouchers/offers.html" %}
 
-                        <div class="col-5 product-stars rate-container flexible">
-                            <rate :length="5" :value="{{ service.get_avg_rate }}" readonly/>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="product-link text-center">
-                    <a href="{{ vouch.affiliate.getLink }}">
-                        <button type="button" class="btn btn-info btn-lg product-link-button">
-                            Get Discount
-                        </button>
-                    </a>
-                    <div class="product-clicks">
-                        {{ vouch.affiliate.clicks }} clicks
-                    </div>
-                    <div class="product-expires">
-
-                        {% if vouch.never_expires %}
-                            Never expires
-                        {% else %}
-                            Expires {{ vouch.expires }}
-                        {% endif %}
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        {% endif %}
 
     {% endfor %}
 

@@ -12,6 +12,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  .btn-lg {
+    font-size: 0.95rem;
+  }
 }
 
 .product-discount {
@@ -105,7 +109,6 @@
   color: $success;
   font-weight: 600;
   white-space: nowrap;
-
 }
 
 .product-link {

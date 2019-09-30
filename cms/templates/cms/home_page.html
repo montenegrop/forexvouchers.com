@@ -6,62 +6,72 @@
 
 
 {% block content %}
-<script type="text/javascript">
-assign('homepage_table', { 
-    fields: [
-      { key: 'broker_logo', label: 'Broker + Logo', sortable: true },
-      { key: 'country', label: 'Country + Regulation', sortable: true },
-      { key: 'broker_type', label: 'Broker Type', sortable: true },
-      { key: 'minimum_deposit', label: 'Minimum Deposit', sortable: true },
-      { key: 'leverage', label: 'Leverage', sortable: true },
-      { key: 'spread', label: 'Spread', sortable: true },
-      { key: 'fee', label: 'Commission Fee', sortable: true },
-      { key: 'rating', label: 'Rating & Reviews', sortable: true },
-    ],
-    items: {{ table_rows|jsonify }}
-});
-</script>
+    <script type="text/javascript">
+        assign('homepage_table', {
+            fields: [
+                {key: 'broker_logo', label: 'Broker + Logo', sortable: true},
+                {key: 'country', label: 'Country + Regulation', sortable: true},
+                {key: 'broker_type', label: 'Broker Type', sortable: true},
+                {key: 'minimum_deposit', label: 'Minimum Deposit', sortable: true},
+                {key: 'leverage', label: 'Leverage', sortable: true},
+                {key: 'spread', label: 'Spread', sortable: true},
+                {key: 'fee', label: 'Commission Fee', sortable: true},
+                {key: 'rating', label: 'Rating & Reviews', sortable: true},
+            ],
+            items: {{ table_rows|jsonify }}
+        });
+    </script>
 
-<b-table 
-  dark 
-  bordered 
-  striped 
-  hover 
-  class="table_home"
-  :fields="homepage_table.fields"
-  :items="homepage_table.items">
-    <template slot="broker_logo" slot-scope="data">
+    <b-table
+            dark
+            bordered
+            striped
+            hover
+            class="table_home"
+            :fields="homepage_table.fields"
+            :items="homepage_table.items">
+        <template slot="broker_logo" slot-scope="data">
             <a :href="[[ '/services/' + data.item.slug ]]">[[ data.item.name ]]</a>
-    </template>
+        </template>
 
-    <template slot="country" slot-scope="data">
-        [[ data.item.country && data.item.country.value ]]
-    </template>
+        <template slot="country" slot-scope="data">
+            [[ data.item.country && data.item.country.value ]]
+        </template>
 
-    <template slot="broker_type" slot-scope="data">
-        [[ data.item.broker_type && data.item.broker_type.value ]]
-    </template>
+        <template slot="broker_type" slot-scope="data">
+            [[ data.item.broker_type && data.item.broker_type.value ]]
+        </template>
 
-    <template slot="minimum_deposit" slot-scope="data">
-        [[ data.item.minimum_deposit && data.item.minimum_deposit.value ]]
-    </template>
+        <template slot="minimum_deposit" slot-scope="data">
+            [[ data.item.minimum_deposit && data.item.minimum_deposit.value ]]
+        </template>
 
-    <template slot="leverage" slot-scope="data">
-        [[ data.item.leverage && data.item.leverage.value ]]
-    </template>
+        <template slot="leverage" slot-scope="data">
+            [[ data.item.leverage && data.item.leverage.value ]]
+        </template>
 
-    <template slot="spread" slot-scope="data">
-        [[ data.item.spread && data.item.spread.value ]]
-    </template>
+        <template slot="spread" slot-scope="data">
+            [[ data.item.spread && data.item.spread.value ]]
+        </template>
 
-    <template slot="fee" slot-scope="data">
-        [[ data.item.comission_fee && data.item.comission_fee.value ]]
-    </template>
+        <template slot="fee" slot-scope="data">
+            [[ data.item.comission_fee && data.item.comission_fee.value ]]
+        </template>
 
-    <template slot="rating" slot-scope="data">
-         4.7 Stars
-    </template>
-</b-table>
+        <template slot="rating" slot-scope="data">
+            4.7 Stars
+        </template>
+    </b-table>
 
     {{ page.body | richtext }}
+
+
+
+
+
+
+
+
+
 {% endblock %}
+

@@ -1,7 +1,7 @@
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
-from cms.models.business_models import Service
+from cms.models.business_models import Service, Compare
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper
@@ -45,7 +45,6 @@ class HomePage(RoutablePageMixin, Page):
         context['vouchers'] = get_vouchers_by_service(service)
         context['products'] = get_products_by_service(service)
 
-
         return render(request, "../templates/cms/service_page.html", context)
 
     @route(r'^f./compare/(.+)/$')
@@ -64,4 +63,14 @@ class HomePage(RoutablePageMixin, Page):
         context['affiliate1'] = service1.affiliate
         context['affiliate2'] = service2.affiliate
 
+        compare, _ = Compare.objects.get_or_create(service1=service1, service2=service2)
+        compare.count += 1
+        compare.save()
+
+
         return render(request, "../templates/cms/compare_page.html", context)
+
+    @route(r'^vouchers/$')
+    def get_vouchers_context(self, request, *args, **kwargs):
+        context = super(HomePage, self).get_context(request)
+        return render(request, "../templates/cms/vouchers_page.html", context)

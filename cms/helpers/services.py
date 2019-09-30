@@ -1,4 +1,4 @@
-from cms.models.business_models import Service, Comment, AttributeService, Voucher, Product
+from cms.models.business_models import Service, Comment, AttributeService, Product, Discount, PromoCode, Offer
 
 
 def get_service_context(service):
@@ -44,8 +44,16 @@ def get_other_services_names(service):
 
 def get_vouchers_by_service(service):
     vouchers = []
-    for voucher in Voucher.objects.filter(service=service):
+
+    for voucher in Discount.objects.filter(service=service):
         vouchers.append(voucher)
+
+    for voucher in PromoCode.objects.filter(service=service):
+        vouchers.append(voucher)
+
+    for voucher in Offer.objects.filter(service=service):
+        vouchers.append(voucher)
+
     return vouchers
 
 
