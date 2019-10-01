@@ -15,5 +15,29 @@
     padding: 0 2em 2em 2em;
     text-align: center;
   }
+
 }
+
+.services-table {
+  .country-regulation {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .reviews-count {
+    text-align: center;
+  }
+
+  .rate-container {
+    width: 132px;
+    margin-bottom: 4px;
+    f
+    .Rate__star .icon {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+  }
+
+}
+
 

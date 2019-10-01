@@ -123,6 +123,7 @@ class Service(ClusterableModel):
     )
 
     avg_rate = models.IntegerField(null=True, blank=True)
+    count_rate = models.IntegerField(null=True, blank=True)
 
     preview = models.ForeignKey(
         'wagtailimages.Image',
@@ -135,6 +136,10 @@ class Service(ClusterableModel):
     @property
     def get_avg_rate(self):
         return self.avg_rate if self.avg_rate else 0
+
+    @property
+    def get_count_rate(self):
+        return self.count_rate if self.count_rate else 0
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)

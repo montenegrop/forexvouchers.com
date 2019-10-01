@@ -16,10 +16,12 @@ class CommentsView(View):
         comments = Comment.objects.filter(service_id=serviceId, active=True)
 
         sum = 0
+        count = 0
         for comment in comments:
+            count += 1
             sum += comment.stars
 
-        return sum / len(comments) if sum else 0
+        return (count, sum / len(comments) if sum else 0,)
 
     def get(self, request):
         serviceId = int(request.GET.get('service_id'))
@@ -65,7 +67,9 @@ class CommentsView(View):
 
         g = GeoIP2()
         try:
-            service.avg_rate = self.calc_service_rate(serviceId=data['service_id'])
+            count, avg_rate = self.calc_service_rate(serviceId=data['service_id'])
+            service.avg_rate = avg_rate
+            service.count_rate = count
             ip = request.META.get('HTTP_X_FORWARDED_FOR') if request.META.get(
                 'HTTP_X_FORWARDED_FOR') else request.META.get('REMOTE_ADDR')
 

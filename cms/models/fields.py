@@ -62,6 +62,13 @@ class Regulation(AbstractField, ClusterableModel):
     def autocomplete_label(self):
         return self.code
 
+    def to_dict(self):
+        return {
+            'code': self.code,
+            'description': self.description,
+            'location': self.location.to_dict() if self.location else None
+        }
+
 
 class License(AbstractField, models.Model):
     name = models.CharField(max_length=30)
