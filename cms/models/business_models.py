@@ -386,7 +386,7 @@ class Voucher(models.Model):
     description = RichTextField(max_length=2500, blank=True, default=None, null=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
 
-    expires = models.DateField(auto_now=True, blank=True)
+    expires = models.DateField(blank=True)
     never_expires = models.BooleanField(default=True)
 
     def get_type(self):
@@ -422,6 +422,8 @@ class PromoCode(Voucher):
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
                 FieldPanel("code", classname="col12"),
+                FieldPanel("expires", classname="col6"),
+                FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="PromoCode",
         )
@@ -439,6 +441,8 @@ class Discount(Voucher):
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
                 FieldPanel("discount_percent", classname="col12"),
+                FieldPanel("expires", classname="col6"),
+                FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Discount",
         )
@@ -453,6 +457,8 @@ class Offer(Voucher):
                 FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
+                FieldPanel("expires", classname="col6"),
+                FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Offers",
         )
@@ -505,8 +511,6 @@ class Compare(models.Model):
     service2 = models.ForeignKey(Service, on_delete=models.SET_NULL, default=None, null=True,
                                  related_name='compare_service2')
     count = models.IntegerField(default=0)
-
-
 
 # def getCount(self):
 #     complement = Compare.objects.get(service1=self.service2, service2=self.service1)
