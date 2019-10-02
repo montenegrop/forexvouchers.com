@@ -57,9 +57,17 @@
   justify-content: flex-end;
 }
 
-.recent-comments {
-  .list-group-item-primary:hover {
-    background-color: #c8c9cb;
-
+.homepage-column {
+  border: 1px solid $secondary;
+  .homepage-header {
+    text-align: -webkit-center;
+    border: none;
+    background-color: $secondary;
+    border-color: $table-dark-border-color;
+    vertical-align: bottom;
+    border-bottom: (2 * $table-border-width) solid $table-border-color;
+    padding: 0.3rem;
+    font-weight: bold;
+    color: #fff;
   }
 }

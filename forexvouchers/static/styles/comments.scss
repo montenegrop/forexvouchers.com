@@ -5,24 +5,25 @@
     border: 0;
     border-top: 2px solid rgba(46, 49, 49, 1);
   }
-
-  .comment-list {
-    padding-left: 0;
-
-    li {
-      list-style-type: none;
-      background-color: white;
-      padding: 1em;
-      &:nth-child(odd) {
-        background-color: $light;
-      }
-    }
-
-  }
   .flag.flag-icon {
     font-size: 50px;
     background-size: cover;
   }
+
+}
+
+.comment-list {
+  padding-left: 0;
+
+  li {
+    list-style-type: none;
+    background-color: white;
+    padding: 1em;
+    &:nth-child(odd) {
+      background-color: $light;
+    }
+  }
+
 }
 
 .stars-filter-total {
