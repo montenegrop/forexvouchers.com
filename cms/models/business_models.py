@@ -141,6 +141,10 @@ class Service(ClusterableModel):
     def get_count_rate(self):
         return self.count_rate if self.count_rate else 0
 
+    @property
+    def url(self):
+        return '/services/' + self.slug
+
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
         attributes = {attributeService.attribute.getKey(): {
@@ -501,7 +505,8 @@ class Comment(models.Model):
                 'updated_at': self.updated_at.isoformat() if self.updated_at else None,
                 'ip': self.ip,
                 'active': self.active,
-                'country_code': self.country_code
+                'country_code': self.country_code,
+                'url': self.service.url + '#comments'
                 }
 
 

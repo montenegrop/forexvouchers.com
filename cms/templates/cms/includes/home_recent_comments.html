@@ -1,22 +1,16 @@
-<div>
-
-
-    <ul class="list-group recent-comments recent-comments">
+<div class="homepage-column">
+    <div class="homepage-header">Recent comments</div>
+    <ul class="comment-list ">
 
         {% for comment in comments %}
-
-            <li class="list-group-item list-group-item-primary ">
-
+            <li class="margin-comment" onclick="location.href='{{ comment.url }}'">
                 <fv-comment text="{{ comment.review }}"
                             name="{{ comment.name }}"
                             stars="{{ comment.stars }}"
                             country_code="{{ comment.country_code }}"
                             country_name="{{ comment.country }}"
                             created_at="{{ comment.created_at }}"/>
-
             </li>
-
-
         {% endfor %}
 
 
