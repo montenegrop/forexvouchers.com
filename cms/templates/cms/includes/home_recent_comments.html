@@ -1,0 +1,26 @@
+<div>
+
+
+    <ul class="list-group recent-comments recent-comments">
+
+        {% for comment in comments %}
+
+            <li class="list-group-item list-group-item-primary ">
+
+                <fv-comment text="{{ comment.review }}"
+                            name="{{ comment.name }}"
+                            stars="{{ comment.stars }}"
+                            country_code="{{ comment.country_code }}"
+                            country_name="{{ comment.country }}"
+                            created_at="{{ comment.created_at }}"/>
+
+            </li>
+
+
+        {% endfor %}
+
+
+    </ul>
+
+
+</div>

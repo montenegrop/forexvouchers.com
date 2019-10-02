@@ -2,10 +2,11 @@ from wagtail.core.models import Page
 from django.db import models
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
-from cms.models.business_models import Service, Compare
+from cms.models.business_models import Service, Compare, Comment
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper
+from operator import itemgetter
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -15,7 +16,6 @@ from django.shortcuts import render
 class HomePage(RoutablePageMixin, Page):
     banner_title = models.CharField(max_length=100, default='')
     banner_body = RichTextField(blank=True, default='')
-
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -35,6 +35,10 @@ class HomePage(RoutablePageMixin, Page):
             attrs['name'] = service.name
             attrs['slug'] = service.slug
             context['table_rows'].append(attrs)
+        context['recent_comments'] = []
+        context['comments'] = [comment.toDict() for comment in Comment.objects.all().order_by('-created_at')[:5]]
+        context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
+
         return context
 
     @route(r'^services/(.+)/$')
@@ -54,7 +58,6 @@ class HomePage(RoutablePageMixin, Page):
         context['vouchers'] = get_vouchers_by_service(service)
         context['products'] = get_products_by_service(service)
 
-
         return render(request, "../templates/cms/service_page.html", context)
 
     @route(r'^f./compare/(.+)/$')
@@ -73,10 +76,11 @@ class HomePage(RoutablePageMixin, Page):
         context['affiliate1'] = service1.affiliate
         context['affiliate2'] = service2.affiliate
 
-        compare, _ = Compare.objects.get_or_create(service1=service1, service2=service2)
+        sortedServices = sorted([service1, service2], key=lambda service: service.id)
+
+        compare, _ = Compare.objects.get_or_create(service1=sortedServices[0], service2=sortedServices[1])
         compare.count += 1
         compare.save()
-
 
         return render(request, "../templates/cms/compare_page.html", context)
 

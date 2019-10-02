@@ -40,4 +40,26 @@
 
 }
 
+.most-compared-main {
+  td {
+    border: none;
+  }
+}
 
+.most-compared-header {
+  text-align: -webkit-center;
+  border: none;
+}
+
+.most-compared-div {
+  padding: 0px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.recent-comments {
+  .list-group-item-primary:hover {
+    background-color: #c8c9cb;
+
+  }
+}

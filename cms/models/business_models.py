@@ -506,9 +506,11 @@ class Compare(models.Model):
                                  related_name='compare_service2')
     count = models.IntegerField(default=0)
 
-    def getCount(self):
-        complement = Compare.objects.get(service1=self.service2, service2=self.service1)
-        if complement:
-            return sum(self.count + complement.count)
-        else:
-            return self.count
+
+
+# def getCount(self):
+#     complement = Compare.objects.get(service1=self.service2, service2=self.service1)
+#     if complement:
+#         return sum(self.count + complement.count)
+#     else:
+#         return self.count
