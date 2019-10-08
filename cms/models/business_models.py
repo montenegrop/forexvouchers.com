@@ -5,6 +5,10 @@ from wagtail.contrib.modeladmin.helpers import AdminURLHelper
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+import datetime
+
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable
 from wagtail.core.fields import RichTextField
@@ -340,6 +344,11 @@ class Affiliate(models.Model):
     def __str__(self):
         return self.getLink()
 
+    def toDict(self):
+        return {
+            'url': self.getLink()
+        }
+
     panels = [
         MultiFieldPanel(
             [
@@ -393,6 +402,18 @@ class Voucher(models.Model):
     expires = models.DateField(blank=True)
     never_expires = models.BooleanField(default=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_subobject(self):
+        try:
+            return self.discount
+        except Voucher.discount.RelatedObjectDoesNotExist:
+            pass
+        try:
+            return self.promocode
+        except Voucher.promocode.RelatedObjectDoesNotExist:
+            return self.offer
+
     def get_type(self):
         return self.__class__.__name__
 
@@ -408,15 +429,28 @@ class Voucher(models.Model):
     def __str__(self):
         return self.name
 
+    def toDict(self):
+        return {
+                'name': self.name,
+                'affiliate': self.affiliate.toDict(),
+                'expires': self.expires.isoformat(),
+                'never_expires': self.never_expires,
+                'type': self.get_type(),
+                'logo': self.logo.get_rendition('height-100').url if self.logo else None,
+                'service_name': self.service.name,
+                'service_logo': self.service.logo.get_rendition('height-75').url if self.service.logo else None,
+                'service_category': self.service.category.name,
+                'service_affiliate': self.service.affiliate.toDict()
+                }
+
 
 class PromoCode(Voucher):
     code = models.CharField(max_length=200)
 
     def toDict(self):
-        return {'name': self.name,
-                'service': self.service.name,
-                'code': self.code,
-                }
+        data = super(PromoCode, self).toDict()
+        data['code'] = self.code
+        return data
 
     panels = [
         MultiFieldPanel(
@@ -436,6 +470,11 @@ class PromoCode(Voucher):
 
 class Discount(Voucher):
     discount_percent = models.IntegerField(verbose_name='Discount (%)', null=True, blank=True)
+
+    def toDict(self):
+        data = super(Discount, self).toDict()
+        data['discount_percent'] = self.discount_percent
+        return data
 
     panels = [
         MultiFieldPanel(

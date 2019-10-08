@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        voucher index
+        vouchers
     </div>
 
 </template>

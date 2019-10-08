@@ -14,7 +14,7 @@ export default {
     'fv-typeahead': Typeahead,
     'fv-compare-typeahead': CompareTypeahead,
     'fv-promocodes': Promocodes,
-    'fv-vouchers-index': VouchersIndex,
+    'fv-vouchers': VouchersIndex,
     'fv-vouchers-load-all': VouchersLoadAll,
     'fv-services-table': ServicesTable,
 }

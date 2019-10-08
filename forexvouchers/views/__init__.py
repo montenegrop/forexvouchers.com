@@ -97,12 +97,3 @@ def cloakedlinks(request, slug):
     return HttpResponseRedirect(affiliate.cloakedLink)
 
 
-class VouchersView(View):
-    response = {'data': []}
-
-    def get(self, request):
-        response = {'data': []}
-        vouchers = PromoCode.objects.all()
-        [response['data'].append(vouch.toDict()) for vouch in vouchers]
-
-        return HttpResponse(json.dumps(response), content_type="application/json")
