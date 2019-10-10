@@ -9,7 +9,8 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
 
 from search import views as search_views
-from .views import CommentsView, cloakedlinks, VouchersView
+from forexvouchers.views import CommentsView, cloakedlinks
+from forexvouchers.views.api.Vouchers import VouchersView
 from cms.admin.views import import_services, export_services
 from forexvouchers.views.api import Services as ApiServices
 
