@@ -11,13 +11,18 @@ class VouchersView(View):
     response = {'data': []}
 
     def get(self, request):
-        voucherTypes = request.GET.get('voucher_types', 'discount,promocode,offer').split(',')
+        voucherTypes = request.GET.get('voucher_types', '')
+        if voucherTypes == '':
+            voucherTypes = ['discount', 'promocode', 'offer']
+        else:
+            voucherTypes = voucherTypes.split(',')
         limit = int(request.GET.get('limit', 10))
         response = {'data': []}
 
         conditions = None
         for type in voucherTypes:
-            conditions = Q(**{type + '__isnull': False}) if conditions is None else conditions | Q(**{type + '__isnull': False})
+            conditions = Q(**{type + '__isnull': False}) if conditions is None else conditions | Q(
+                **{type + '__isnull': False})
 
         vouchers = Voucher.objects.filter(conditions)
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
