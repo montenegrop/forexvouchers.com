@@ -1,23 +1,24 @@
 .banner {
-  background-image: url("../images/cool-background.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 200px;
   color: $banner-text-color;
   margin-bottom: 2em;
-  width: 100%;
-  margin-right: -15px;
-  margin-left: -15px;
+  display: flex;
+  justify-content: center;
 
   .banner-title {
     padding: 2em 2em 0 2em;
     text-align: center;
+    font-size: 2rem;
 
   }
 
   .banner-body {
     padding: 0 2em 2em 2em;
     text-align: center;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+    font-size: 1.3rem;
   }
 
 }

@@ -1,4 +1,10 @@
-<div class="banner">
+{% load wagtailimages_tags %}
+{% load staticfiles %}
+
+
+{% image page.banner_image width-1024 as banner_photo %}
+
+<div class="row banner" style='background-image: url("{% if banner_photo.url %}{{ banner_photo.url }}{% else %}{% static "images/cool-background.png" %}{% endif %}")'>
 
     <h3 class="banner-title">{{ self.banner_title }}</h3>
     <div class="banner-body">
