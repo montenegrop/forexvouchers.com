@@ -11,7 +11,7 @@
 
 
 1. `sudo apt-get update`
-3. Install ubuntu dependencies`sudo apt-get install supervisor python3.7 nginx python3-pip npm libgdal-dev python3.7-dev mysql-server` 
+3. Install ubuntu dependencies`sudo apt-get install supervisor python3.7 nginx python3-pip npm libgdal-dev python3.7-dev mysql-server memcached` 
 4. Install virtualenvwrapper `sudo pip3 install virtualenvwrapper`
 5. Setup virtualenv wrapper `VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh`
 6. Create virtualenv `VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 mkvirtualenv fxvouchers --python=/usr/bin/python3.7`
