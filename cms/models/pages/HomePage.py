@@ -4,7 +4,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-from cms.models.business_models import Service, Compare, Comment
+from cms.models.business_models import Service, Compare, Comment, Category
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper
@@ -48,6 +48,7 @@ class HomePage(RoutablePageMixin, Page):
             attrs['slug'] = service.slug
             context['table_rows'].append(attrs)
         context['recent_comments'] = []
+        context['categories'] = Category.objects.all().order_by('name')
         context['comments'] = [comment.toDict() for comment in Comment.objects.all().order_by('-created_at')[:5]]
         context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
 
