@@ -1,6 +1,8 @@
 <template>
     <div>
 
+        
+
         <fv-filter-type :selected="types" :onChange="onTypeChange"></fv-filter-type>
         <fv-list :vouchers="vouchers"/>
 
@@ -22,20 +24,15 @@
                 vouchers: [],
             }
         },
-
         watch: {
             type: function () {
                 this.getData();
             },
         },
-
-
         mounted() {
             this.getData()
         },
         methods: {
-
-
             async getData() {
                 const url = `/api/vouchers?voucher_types=${this.type}`;
                 let response = await this.$http.get(url);

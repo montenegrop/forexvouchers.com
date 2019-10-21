@@ -9,15 +9,13 @@
                     name="flavour-1"
             ></b-form-checkbox-group>
         </b-form-group>
-
-
-        <div>Selected: <strong>{{ selected }}</strong ></div>
+        <div>Selected: <strong>{{ selected }}</strong></div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ["selected","onChange"],
+        props: ["selected", "onChange"],
 
         data() {
             return {
@@ -28,6 +26,5 @@
                 ]
             }
         },
-
     }
 </script>
