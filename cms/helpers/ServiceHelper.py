@@ -32,6 +32,7 @@ class Field(object):
         else:
             return value.__str__()
 
+
 class BooleanField(Field):
     def __str__(self):
         return 'Yes' if getattr(self.service, self.key) else 'No'
@@ -67,7 +68,6 @@ class MultiField(Field):
                 elements.append(value.description)
 
         return elements
-
 
 
 class FlagField(MultiField):
@@ -207,5 +207,4 @@ class ServiceHelper(object):
                 obj['avg_rate'] = self.service.get_avg_rate
                 obj['count_rate'] = self.service.get_count_rate
                 obj['slug'] = self.service.slug
-
         return obj

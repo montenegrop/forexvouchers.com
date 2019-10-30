@@ -32,6 +32,11 @@
   color: black;
 }
 
+.discount-discount {
+  font-family: ralewayextrabold_italic;
+  color: black;
+}
+
 .product:hover {
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.52);
   transition: all .85s ease;
@@ -59,6 +64,15 @@
     text-overflow: ellipsis;
     color: black;
     white-space: nowrap;
+  }
+  &-discount {
+    overflow: inherit;
+    text-overflow: inherit;
+    white-space: inherit;
+    word-break: break-all;
+    color: $gray-900;
+    text-shadow: none;
+    font-family: ralewayextrabold;
   }
 
 }
@@ -113,6 +127,9 @@
 
 .product-link {
   padding-bottom: 15px;
+  &-discount {
+    padding-bottom: 0px;
+  }
 }
 
 .product-link-button {
@@ -138,3 +155,20 @@
 //.product-link-button:hover {
 //  color: red;
 //}
+
+.voucher-discount {
+  margin-top: 30px;
+}
+
+.voucher-discount-row {
+  border-top: 1px groove $gray-400;
+  border-right: 1px groove $gray-400;
+  border-left: 1px groove $gray-400;
+  border-bottom: 1px groove $gray-400;
+}
+
+.logo-discount {
+  max-width: 60px;
+  min-width: 60px;
+}
+
