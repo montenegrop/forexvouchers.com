@@ -1,13 +1,18 @@
 <template>
     <div>
+        <b-row></b-row>
         <b-row>
-            <b-col cols="4" class="vouchers-menu">
+            <b-col cols="3" class="vouchers-menu vouchers-menu-margin-top">
                 <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
-                <fv-filter-type :selected="type" :onChange="onTypeChange"></fv-filter-type>
+                <fv-filter-type :tipos="filterTypes" :onChange="onTypeChange"></fv-filter-type>
                 <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
             </b-col>
-            <b-col cols="8">
-                <fv-list :vouchers="vouchers"/>
+            <b-col cols="9">
+                <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
+                <div><FvLetterFilter :options="vouchers.map(voucher => ({text: voucher.name}))"
+                                v-on:clickLetter="onLetterFilter($event)"/></div>
+
+                <div><FvList :vouchers="vouchers.filter(voucher => (voucher.name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/></div>
             </b-col>
         </b-row>
     </div>
@@ -19,19 +24,23 @@
     import FvFilterType from './VouchersFilterType'
     import FvFilterService from './VouchersFilterService'
     import FvFilterCategory from './VouchersFilterCategory'
+    import LetterFilter from '../LetterFilter/index'
+
 
     export default {
         name: "fv-vouchers-view",
-        components: {FvList, FvFilterType, FvFilterService, FvFilterCategory},
+        components: {FvList, FvFilterType, FvFilterService, FvFilterCategory, FvLetterFilter: LetterFilter},
         props: [],
         data() {
             return {
+                filterTypes: {},
                 type: 'discount,promocode,offer',
                 filterServices: [],
                 services: '',
                 filterCategories: [],
                 categories: '',
                 vouchers: [],
+                startingLetter: '',
             }
         },
         watch: {
@@ -55,6 +64,7 @@
                 this.vouchers = response.body.data;
                 this.filterServices = response.body.services;
                 this.filterCategories = response.body.categories;
+                this.filterTypes = response.body.types;
             },
 
             onTypeChange(value) {
@@ -65,6 +75,9 @@
             },
             onCategoryChange(value) {
                 this.categories = value.join(',')
+            },
+            onLetterFilter($event) {
+                this.startingLetter = $event.letter;
             },
         },
     }

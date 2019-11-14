@@ -6,24 +6,24 @@
 
             <b-col cols="3" align-self="center">
 
-                <img :src="discount.logo" class="product-image">
+                <img :src="voucher.logo" class="product-image">
             </b-col>
 
             <b-col cols="5" align-self="center" class="product-info-discount">
 
-                <p> {{ discount.name }} </p>
+                <p> {{ voucher.name }} </p>
             </b-col>
 
             <b-col cols="1" align-self="center">
 
-                <div class="discount-discount">20% OFF</div>
+                <div class="discount-discount">{{ voucher.discount_percent }}% OFF</div>
             </b-col>
 
             <b-col cols="3" align-self="center">
 
                 <div class="product-link-discount">
 
-                    <a :href="discount.affiliate.url">
+                    <a :href="voucher.affiliate.url">
 
                         <button type="button" class="btn btn-info btn-lg product-link-button">
 
@@ -33,6 +33,35 @@
                 </div>
             </b-col>
         </b-row>
+
+
+        <b-row class="voucher-info">
+            <b-col class="col-auto product-service voucher-info-service">
+
+                By
+                <a class="product-service-link"
+                   :href="voucher.service_affiliate.url">
+                    {{voucher.service_name }} </a>
+            </b-col>
+
+            <b-col class="col-auto product-stars rate-container flexible voucher-info-service">
+
+                <rate :length="5" :value="voucher.service_rate" readonly/>
+
+            </b-col>
+
+
+            <b-col class="product-expires voucher-info-service-expiration-never" v-if="voucher.never_expires">
+
+                Never Expires
+            </b-col>
+
+            <b-col class="product-expires voucher-info-service-expiration" v-else>
+
+                Expires <timeago :datetime="voucher.expires"></timeago>
+            </b-col>
+        </b-row>
+
     </b-container>
 
 </template>
@@ -42,7 +71,7 @@
 
     export default {
         name: "fv-vouchers-discount",
-        props: ['discount'],
+        props: ['voucher'],
         data() {
             return {}
         }

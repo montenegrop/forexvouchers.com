@@ -5,6 +5,7 @@ from cms.models import Discount, PromoCode, Offer, Voucher, Category, Service
 from django.views import View
 from django.http import HttpResponse
 from django.db.models import Q, Count
+import datetime
 
 
 class VouchersView(View):
@@ -13,6 +14,7 @@ class VouchersView(View):
     def getCategoryCounts(self):
 
         category_counts = Voucher.objects.select_related('service', 'service__category') \
+            .filter(expires__gte=datetime.date.today()) \
             .values('service__category__name', 'service__category_id') \
             .annotate(total=Count('service__category_id'))
 
@@ -25,6 +27,7 @@ class VouchersView(View):
     def getServiceCounts(self):
 
         service_counts = Voucher.objects.select_related('service') \
+            .filter(expires__gte=datetime.date.today()) \
             .values('service__name', 'service_id') \
             .annotate(total=Count('service_id'))
 
@@ -35,9 +38,9 @@ class VouchersView(View):
                 service_counts))
 
     def getTypeCounts(self):
-        discount_counts = Discount.objects.all().count()
-        promocodes_counts = PromoCode.objects.all().count()
-        offers_counts = Offer.objects.all().count()
+        discount_counts = Discount.objects.filter(expires__gte=datetime.date.today()).count()
+        promocodes_counts = PromoCode.objects.filter(expires__gte=datetime.date.today()).count()
+        offers_counts = Offer.objects.filter(expires__gte=datetime.date.today()).count()
 
         return {'discount': discount_counts, 'promocode': promocodes_counts, 'offer': offers_counts}
 
@@ -64,8 +67,11 @@ class VouchersView(View):
         serviceConditions = Q(service_id__in=services) if len(services) else Q()
         categoryConditions = Q(service__category_id__in=categories) if len(categories) else Q()
 
+        vouchers = Voucher.objects.filter(typeConditions,
+                                          serviceConditions,
+                                          categoryConditions,
+                                          expires__gte=datetime.date.today())
 
-        vouchers = Voucher.objects.filter(typeConditions, serviceConditions, categoryConditions)
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
 
         [response['data'].append(vouch.toDict()) for vouch in vouchers]

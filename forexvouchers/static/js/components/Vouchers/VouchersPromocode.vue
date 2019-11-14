@@ -1,71 +1,78 @@
 <template>
 
-    <div class="col voucher-promocode">
+    <b-container class="product voucher-discount">
 
-        <div class="product">
+        <b-row class="voucher-discount-row">
 
-            <img :src="discount.logo" class="product-image">
+            <b-col cols="3" align-self="center">
 
-            <div class="product-discount"> 20% OFF</div>
+                <img :src="voucher.logo" class="product-image">
+            </b-col>
 
-            <div class="product-info">
-                <h5 :title="discount.name"> {{ discount.name }} </h5>
-            </div>
+            <b-col cols="5" align-self="center" class="product-info-discount">
 
-            <div class="container">
+                <p> {{ voucher.name }} </p>
+            </b-col>
 
-                <div class="row">
+            <b-col cols="1" align-self="center">
 
-                    <div class="col-7 product-service"> By <a class="product-service-link"
-                                                              :href="discount.service_affiliate.url">{{
-                        discount.service_name }} </a>
-                    </div>
+                <div class="discount-discount">20% OFF</div>
+            </b-col>
 
-                    <div class="col-5 product-stars rate-container flexible">
-                        <rate :length="5" :value="3" readonly/>
-                    </div>
+            <b-col cols="3" align-self="center">
 
+                <div class="product-link-discount">
+
+                    <a :href="voucher.affiliate.url">
+
+                        <button type="button" class="btn btn-info btn-lg product-link-button">
+
+                            Show Code
+                        </button>
+                    </a>
                 </div>
+            </b-col>
+        </b-row>
 
-            </div>
+        <b-row class="voucher-info">
+            <b-col class="col-auto product-service voucher-info-service">
 
+                By
+                <a class="product-service-link"
+                   :href="voucher.service_affiliate.url">
+                    {{voucher.service_name }} </a>
+            </b-col>
 
-            <div class="product-link text-center">
-                <a :href="discount.affiliate.url">
-                    <button type="button" class="btn btn-info btn-lg product-link-button">
-                        Get Discount
-                    </button>
-                </a>
-                <div class="product-clicks">
-                    <!--{{ discount.clicks }} clicks-->
-                </div>
-                <div class="product-expires">
+            <b-col class="col-auto product-stars rate-container flexible voucher-info-service">
 
+                <rate :length="5" :value="3" readonly/>
+            </b-col>
 
-                    <!--Never expires-->
-                    <!--{% else %}-->
-                    <!--Expires {{ vouch.expires }}-->
-                    <!--{% endif %}-->
+            <b-col class="product-expires voucher-info-service-expiration-never" v-if="voucher.never_expires">
 
-                </div>
-            </div>
-        </div>
+                Never Expires
+            </b-col>
 
+            <b-col class="product-expires voucher-info-service-expiration" v-else>
 
-    </div>
+               Expires <timeago :datetime="voucher.expires"></timeago>
+            </b-col>
 
+        </b-row>
+    </b-container>
 
 </template>
 
-
 <script>
 
+    import FvPromocodeButton from './VoucherPromocodeButton'
+
     export default {
-        name: "fv-vouchers-discount",
-        props: ['discount'],
+        name: "fv-vouchers-promocode",
+        components: {FvPromocodeButton},
+        props: ['voucher'],
         data() {
             return {}
         }
     }
-
 </script>

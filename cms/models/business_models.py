@@ -438,9 +438,10 @@ class Voucher(models.Model):
                 'type': self.get_type(),
                 'logo': self.logo.get_rendition('height-100').url if self.logo else None,
                 'service_name': self.service.name,
-                'service_logo': self.service.logo.get_rendition('height-75').url if self.service.logo else None,
+                'service_logo': self.service.logo.get_rendition('height-15').url if self.service.logo else None,
                 'service_category': self.service.category.name,
-                'service_affiliate': self.service.affiliate.toDict()
+                'service_affiliate': self.service.affiliate.toDict(),
+                'service_rate': self.service.avg_rate
                 }
 
 
@@ -460,7 +461,7 @@ class PromoCode(Voucher):
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
                 FieldPanel("code", classname="col12"),
-                FieldPanel("expires", classname="col6"),
+                FieldPanel("expires", classname="col6", ),
                 FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="PromoCode",
