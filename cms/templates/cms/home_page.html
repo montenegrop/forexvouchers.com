@@ -4,9 +4,12 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
+{% block banner %}
+    {% include "includes/home_banner.html" %}
+{% endblock %}
 
 {% block content %}
-    {% include "includes/home_banner.html" %}
+
     <div>
         <fv-services-table/>
     </div>
