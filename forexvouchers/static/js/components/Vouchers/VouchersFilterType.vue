@@ -1,12 +1,13 @@
 <template>
     <div>
-        <h5 class="filter-titles">Type Filter</h5>
+        <h5 class="filter-titles">Type</h5>
 
         <b-row>
             <b-col cols="9">
                 <b-form-group>
                     <b-form-checkbox-group
                             id="checkbox-group-1"
+                            class="filter-content option-filter"
                             :value="selected"
                             v-on:input="onChange($event)"
                             :options="types"

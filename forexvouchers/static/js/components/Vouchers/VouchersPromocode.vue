@@ -12,11 +12,12 @@
             <b-col cols="5" align-self="center" class="product-info-discount">
 
                 <p> {{ voucher.name }} </p>
+                <div class="vouchers-description" v-html="voucher.description"/>
             </b-col>
 
             <b-col cols="1" align-self="center">
 
-                <div class="discount-discount">20% OFF</div>
+                <div></div>
             </b-col>
 
             <b-col cols="3" align-self="center">
@@ -55,7 +56,8 @@
 
             <b-col class="product-expires voucher-info-service-expiration" v-else>
 
-               Expires <timeago :datetime="voucher.expires"></timeago>
+                Expires
+                <timeago :datetime="voucher.expires"></timeago>
             </b-col>
 
         </b-row>

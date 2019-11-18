@@ -1,6 +1,5 @@
 <template>
     <div>
-        <b-row></b-row>
         <b-row>
             <b-col cols="3" class="vouchers-menu vouchers-menu-margin-top">
                 <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
@@ -9,10 +8,19 @@
             </b-col>
             <b-col cols="9">
                 <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
-                <div><FvLetterFilter :options="vouchers.map(voucher => ({text: voucher.name}))"
-                                v-on:clickLetter="onLetterFilter($event)"/></div>
+                <div>
+                    <FvLetterFilter :options="vouchers.map(voucher => ({text: voucher.name}))"
+                                    v-on:clickLetter="onLetterFilter($event)" :selected="startingLetter"/>
+                </div>
 
-                <div><FvList :vouchers="vouchers.filter(voucher => (voucher.name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/></div>
+                <div>
+                    <div>
+                        <FvList :vouchers="vouchers.filter(voucher => (voucher.service_name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/>
+                    </div>
+                    <div class="show-more">
+                        <a href="#" @click.stop.prevent="limit += 1">show more</a>
+                    </div>
+                </div>
             </b-col>
         </b-row>
     </div>
@@ -41,6 +49,7 @@
                 categories: '',
                 vouchers: [],
                 startingLetter: '',
+                limit: '10',
             }
         },
         watch: {
@@ -53,18 +62,22 @@
             categories: function () {
                 this.getData();
             },
+            limit: function () {
+                this.getData()
+            }
         },
         mounted() {
             this.getData()
         },
         methods: {
             async getData() {
-                const url = `/api/vouchers?voucher_types=${this.type}&services=${this.services}&categories=${this.categories}`;
+                const url = `/api/vouchers?voucher_types=${this.type}&services=${this.services}&categories=${this.categories}&limit=${this.limit}`;
                 let response = await this.$http.get(url);
                 this.vouchers = response.body.data;
                 this.filterServices = response.body.services;
                 this.filterCategories = response.body.categories;
                 this.filterTypes = response.body.types;
+                this.limit = response.body.limit;
             },
 
             onTypeChange(value) {

@@ -14,7 +14,7 @@ class VouchersView(View):
     def getCategoryCounts(self):
 
         category_counts = Voucher.objects.select_related('service', 'service__category') \
-            .filter(expires__gte=datetime.date.today()) \
+            .filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)) \
             .values('service__category__name', 'service__category_id') \
             .annotate(total=Count('service__category_id'))
 
@@ -27,7 +27,7 @@ class VouchersView(View):
     def getServiceCounts(self):
 
         service_counts = Voucher.objects.select_related('service') \
-            .filter(expires__gte=datetime.date.today()) \
+            .filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)) \
             .values('service__name', 'service_id') \
             .annotate(total=Count('service_id'))
 
@@ -38,9 +38,10 @@ class VouchersView(View):
                 service_counts))
 
     def getTypeCounts(self):
-        discount_counts = Discount.objects.filter(expires__gte=datetime.date.today()).count()
-        promocodes_counts = PromoCode.objects.filter(expires__gte=datetime.date.today()).count()
-        offers_counts = Offer.objects.filter(expires__gte=datetime.date.today()).count()
+        discount_counts = Discount.objects.filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+        promocodes_counts = PromoCode.objects.filter(
+            Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+        offers_counts = Offer.objects.filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
 
         return {'discount': discount_counts, 'promocode': promocodes_counts, 'offer': offers_counts}
 
@@ -58,7 +59,8 @@ class VouchersView(View):
         response = {'data': [],
                     'categories': self.getCategoryCounts(),
                     'services': self.getServiceCounts(),
-                    'types': self.getTypeCounts()}
+                    'types': self.getTypeCounts(),
+                    'limit': limit}
 
         typeConditions = None
         for type in voucherTypes:
@@ -70,9 +72,12 @@ class VouchersView(View):
         vouchers = Voucher.objects.filter(typeConditions,
                                           serviceConditions,
                                           categoryConditions,
-                                          expires__gte=datetime.date.today())
+                                          Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).order_by(
+            'expires')[:limit]
 
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
+
+        print(voucher.expires for voucher in vouchers)
 
         [response['data'].append(vouch.toDict()) for vouch in vouchers]
 

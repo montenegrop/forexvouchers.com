@@ -12,6 +12,9 @@
 
 .option-filter {
   width: 100%;
+  .custom-checkbox .custom-control-label::before {
+    border-radius: 0;
+  }
 }
 
 .discount-filter-1 {
@@ -49,13 +52,32 @@
 }
 
 .filter-titles {
-  text-align: center;
-  padding-left: 10px;
+  text-align: left;
   padding-right: 10px;
-  font-family: ralewaybold;
+  padding-left: 2px;
+  font-family: ralewayextrabold_italic;
   text-shadow: none;
   color: black;
   &-main {
     margin-bottom: 25px;
   }
 }
+
+.filter-content {
+  font-family: ralewaybold;
+  text-shadow: none;
+  color: $gray-900;
+}
+
+.filter-starting-letter {
+  text-shadow: none;
+  padding: 0.25rem 0.85rem;
+  &:focus {
+    box-shadow: none;
+  }
+  &-active {
+    background-color: $info;
+    color: $light;
+  }
+}
+

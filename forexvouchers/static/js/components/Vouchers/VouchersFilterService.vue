@@ -1,6 +1,6 @@
 <template>
     <div class="discount-filter-1">
-        <h5 class="filter-titles">Service Filter</h5>
+        <h5 class="filter-titles">Service</h5>
 
 
         <b-input-group size="sm">
@@ -14,6 +14,7 @@
 
                 <b-form-group>
                     <b-form-checkbox-group id="checkbox-group-21"
+                                           class="filter-content option-filter"
                                            :value="selected"
                                            v-on:input="onChange($event)"
                                            :options="getOptions1()"
@@ -28,7 +29,7 @@
 
                 <b-form-group>
                     <b-form-checkbox-group id="checkbox-group-22"
-                                           class="counter-filter d-none d-md-block"
+                                           class="counter-filter d-none d-md-block "
                                            :value="selected"
                                            v-on:input="onChange($event)"
                                            :options="getOptions2()"
