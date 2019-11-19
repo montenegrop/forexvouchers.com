@@ -14,6 +14,7 @@ MYSQL_USER = os.environ.get('MYSQL_USER', 'fxvouchers')
 MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'password')
 MYSQL_HOST = os.environ.get('MYSQL_HOST', '127.0.0.1')
 MYSQL_PORT = os.environ.get('MYSQL_PORT', '3306')
+MEMCACHED_LOCATION = os.environ.get('MYSQL_PORT', '127.0.0.1:11211')
 
 DATABASES = {
     'default': {
@@ -88,6 +89,13 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': MEMCACHED_LOCATION,
     }
 }
 

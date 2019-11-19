@@ -1,3 +1,9 @@
+.products {
+  .product {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
 
 .product {
   flex: 0 0 25%;
@@ -6,8 +12,6 @@
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.12);
   margin: 15px 0;
   transition: all .85s ease;
-  margin-left: 2%;
-  margin-right: 2%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -28,6 +32,11 @@
   font-weight: 700;
   padding: 0 10px;
   border: 1px solid #d4d4d4;
+  font-family: ralewayextrabold_italic;
+  color: black;
+}
+
+.discount-discount {
   font-family: ralewayextrabold_italic;
   color: black;
 }
@@ -59,6 +68,15 @@
     text-overflow: ellipsis;
     color: black;
     white-space: nowrap;
+  }
+  &-discount {
+    overflow: inherit;
+    text-overflow: inherit;
+    white-space: inherit;
+    word-break: break-all;
+    color: $gray-900;
+    text-shadow: none;
+    font-family: ralewayextrabold;
   }
 
 }
@@ -113,6 +131,9 @@
 
 .product-link {
   padding-bottom: 15px;
+  &-discount {
+    padding-bottom: 0px;
+  }
 }
 
 .product-link-button {

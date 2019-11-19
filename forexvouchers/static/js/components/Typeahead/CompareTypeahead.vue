@@ -1,9 +1,7 @@
 <template>
     <div>
-        <FvLetterFilter :options="options" v-on:clickLetter="onLetterFilter($event)">
+        <FvLetterFilter :options="options" v-on:clickLetter="onLetterFilter($event)"/>
 
-
-        </FvLetterFilter>
 
         <div :class="typeaheadState">
             <div class="typeahead__toggle" ref="toggle" @mousedown.prevent="toggle">
@@ -31,14 +29,14 @@
             </ul>
         </div>
     </div>
-
 </template>
+
 <script type="text/javascript">
 
     import LetterFilter from '../LetterFilter/index'
 
     export default {
-        components: { FvLetterFilter: LetterFilter },
+        components: {FvLetterFilter: LetterFilter},
         props: {
             options: {
                 type: Array,
