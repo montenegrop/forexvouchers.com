@@ -20,7 +20,6 @@
 
 <script>
 
-
     export default {
         name: "fv-comment",
         props: ['text', 'name', 'country_name', 'country_code', 'stars', 'created_at'],

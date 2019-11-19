@@ -77,8 +77,6 @@ class VouchersView(View):
 
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
 
-        print(voucher.expires for voucher in vouchers)
-
         [response['data'].append(vouch.toDict()) for vouch in vouchers]
 
         return HttpResponse(json.dumps(response), content_type="application/json")

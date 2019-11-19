@@ -32,7 +32,6 @@ class Field(object):
         else:
             return value.__str__()
 
-
 class BooleanField(Field):
     def __str__(self):
         return 'Yes' if getattr(self.service, self.key) else 'No'

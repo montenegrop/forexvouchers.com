@@ -462,7 +462,7 @@ class PromoCode(Voucher):
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
                 FieldPanel("code", classname="col12"),
-                FieldPanel("expires", classname="col6", ),
+                FieldPanel("expires", classname="col6"),
                 FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="PromoCode",
