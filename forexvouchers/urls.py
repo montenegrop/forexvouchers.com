@@ -13,6 +13,7 @@ from forexvouchers.views import CommentsView, cloakedlinks
 from forexvouchers.views.api.Vouchers import VouchersView
 from cms.admin.views import import_services, export_services
 from forexvouchers.views.api import Services as ApiServices
+from forexvouchers.views.api.Services_search import ServicesView
 
 urlpatterns = [
 
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^search/$', search_views.search, name='search'),
     url(r'^api/comments', CommentsView.as_view()),
     url(r'^api/vouchers', VouchersView.as_view()),
+    url(r'^api/services_search', ServicesView.as_view()),
     url(r'^api/services', ApiServices.get_services),
 
     # For anything not caught by a more specific rule above, hand over to
