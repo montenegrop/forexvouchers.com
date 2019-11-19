@@ -51,7 +51,7 @@
             ></b-pagination>
         </b-container>
 
-        <hr />
+        <hr/>
         <div class="goto-submit-form">
             <fv-form v-on:post="post($event)" :show-message="showMessage"/>
         </div>

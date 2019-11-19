@@ -52,6 +52,7 @@ $flag-icon-css-path: '../../../node_modules/flag-icon-css/flags';
 @import './pages/home';
 @import './pages/services';
 @import './pages/compare';
+@import './pages/vouchers';
 
 @import './pay_methods';
 
@@ -59,6 +60,8 @@ $flag-icon-css-path: '../../../node_modules/flag-icon-css/flags';
 
 //vue
 @import "./typeahead";
+@import "./filters";
+
 
 
 
