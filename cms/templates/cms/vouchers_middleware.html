@@ -1,0 +1,25 @@
+{% load wagtailimages_tags %}
+{# Load CSS and JavaScript #}
+
+<div class="products row">
+
+        {% if vouch.get_type == 'Discount' %}
+
+            {% include "includes/vouchers/middleware/discounts.html" %}
+
+        {% endif %}
+
+        {% if vouch.get_type == 'PromoCode' %}
+
+            {% include "includes/vouchers/middleware/promocodes.html" %}
+
+        {% endif %}
+
+        {% if vouch.get_type == 'Offer' %}
+
+            {% include "includes/vouchers/middleware/offers.html" %}
+
+        {% endif %}
+
+</div>
+

@@ -2,7 +2,7 @@ from wagtail.core.models import Page
 from django.db import models
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
-from cms.models.business_models import Service, Compare, Comment
+from cms.models.business_models import Service, Compare, Comment, Voucher
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper
@@ -88,3 +88,25 @@ class HomePage(RoutablePageMixin, Page):
     def get_vouchers_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request)
         return render(request, "../templates/cms/vouchers_page.html", context)
+
+    @route(r'^(discounts|promocodes|offers)/(.+)/$')
+    def get_vouchers_context(self, request, *args, **kwargs):
+        context = super(HomePage, self).get_context(request)
+        slug = args[1]
+        voucher = Voucher.objects.get(slug=slug)
+
+        context['type'] = voucher.get_type()
+        context['name'] = voucher.name
+        context['description'] = voucher.description
+        context['expires'] = voucher.expires
+        context['never_expires'] = voucher.never_expires
+        context['affiliate'] = voucher.affiliate
+        context['service_name'] = voucher.service.name
+        context['service_logo'] = voucher.service.logo.get_rendition('height-15').url if self.service.logo else None
+        context['service_category'] = voucher.service.category.name
+        context['service_affiliate'] = voucher.service.affiliate
+        context['service_slug'] = voucher.service.slug
+
+
+        return render(request, "../templates/cms/vouchers_page.html", context)
+
