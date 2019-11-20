@@ -8,8 +8,11 @@ import SocialSharing from 'vue-social-sharing'
 import VueTimeago from 'vue-timeago'
 import VueCookies from 'vue-cookies'
 import VueCarousel from 'vue-carousel'
+import ReadMore from 'vue-read-more'
 
 
+
+Vue.use(ReadMore);
 Vue.use(BootstrapVue)
 Vue.use(VueResource)
 Vue.use(VueCookies)

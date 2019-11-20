@@ -12,6 +12,7 @@
             <b-col cols="5" align-self="center" class="product-info-discount">
 
                 <p> {{ voucher.name }} </p>
+                <div class="vouchers-description" v-html="voucher.description"/>
             </b-col>
 
             <b-col cols="1" align-self="center">
