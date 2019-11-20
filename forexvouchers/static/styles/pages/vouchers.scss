@@ -73,4 +73,22 @@
     padding: 1em;
     text-align: center;
   }
+  &-services {
+    margin-bottom: 10px;
+    margin-left: 35%;
+    a {
+      border-radius: 4px;
+      color: $info;
+      padding: 0.3em;
+      border: 2px solid $info;
+      text-align: center;
+    }
+  }
+}
+
+.limit-char-2500 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
