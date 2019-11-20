@@ -2,11 +2,12 @@ from wagtail.core.models import Page
 from django.db import models
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
-from cms.models.business_models import Service, Compare, Comment
+from wagtail.images.edit_handlers import ImageChooserPanel
+
+from cms.models.business_models import Service, Compare, Comment, Category
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
-from cms.helpers.ServiceHelper import ServiceHelper
-from operator import itemgetter
+from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -16,12 +17,23 @@ from django.shortcuts import render
 class HomePage(RoutablePageMixin, Page):
     banner_title = models.CharField(max_length=100, default='')
     banner_body = RichTextField(blank=True, default='')
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Background'
+    )
+
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
                 FieldPanel("banner_title", classname="col12"),
                 FieldPanel("banner_body", classname="col12"),
+                ImageChooserPanel("banner_image", classname="col12"),
+
             ],
             heading="Banner",
         )
@@ -29,15 +41,14 @@ class HomePage(RoutablePageMixin, Page):
 
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
-        context['table_rows'] = []
-        for service in Service.objects.all():
-            attrs = service.getAttributes()
-            attrs['name'] = service.name
-            attrs['slug'] = service.slug
-            context['table_rows'].append(attrs)
+        services = Service.objects.filter(category=BROKERS, premium=True).order_by('name')[0:10].filter()
+
         context['recent_comments'] = []
+        context['categories'] = Category.objects.all().order_by('name')
         context['comments'] = [comment.toDict() for comment in Comment.objects.all().order_by('-created_at')[:5]]
         context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
+        context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
+        context['vouchers'] = [ServiceHelper(service).to_dict() for service in services]
 
         return context
 

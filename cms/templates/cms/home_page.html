@@ -5,22 +5,29 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block banner %}
-    {% include "includes/home_banner.html" %}
+    {% include "includes/home/home_banner.html" %}
+    {% include "includes/home/home_filters.html" %}
+
 {% endblock %}
 
 {% block content %}
+
+    {% include "includes/home/home_carousel.html" %}
 
     <div>
         <fv-services-table/>
     </div>
 
+        {% include "includes/home/home_vouchers.html" %}
+
+
     <div class="container">
         <div class="row">
             <div class="col">
-                {% include "includes/home_recent_compares.html" %}
+                {% include "includes/home/home_recent_compares.html" %}
             </div>
             <div class="col">
-                {% include "includes/home_recent_comments.html" %}
+                {% include "includes/home/home_recent_comments.html" %}
             </div>
         </div>
     </div>

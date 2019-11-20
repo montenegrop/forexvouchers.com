@@ -1,8 +1,9 @@
 <template>
     <div>
-        <table class="table table-dark services-table">
+        <table class="table table-light services-table">
             <thead>
             <tr>
+
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Country + Regulation</th>

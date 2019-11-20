@@ -346,7 +346,8 @@ class Affiliate(models.Model):
 
     def toDict(self):
         return {
-            'url': self.getLink()
+            'url': self.getLink(),
+            'clicks': self.clicks
         }
 
     panels = [

@@ -11,9 +11,9 @@
 </template>
 
 <script>
-    import FvDiscount from './VouchersDiscount'
-    import FvPromocode from './VouchersPromocode'
-    import FvOffer from './VouchersOffer'
+    import FvDiscount from './VoucherDiscount'
+    import FvPromocode from './VoucherPromocode'
+    import FvOffer from './VoucherOffer'
 
     export default {
         name: "fv-voucher",
@@ -23,4 +23,5 @@
             return {}
         }
     }
+
 </script>
