@@ -1,6 +1,10 @@
+{% load static wagtailuserbar %}
+
 <b-navbar toggleable="lg" type="dark" variant="info" class="bg-dark vue-init">
     <a href="/">
-        <b-navbar-brand>FV</b-navbar-brand>
+        <b-navbar-brand>
+            <img class="logo-img" src="{% static 'images/forexvouchers-logo.jpg' %}" alt="FV">
+        </b-navbar-brand>
     </a>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

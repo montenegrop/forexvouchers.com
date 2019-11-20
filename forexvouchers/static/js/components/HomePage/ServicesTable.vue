@@ -1,3 +1,4 @@
+<!-- deprecated-->
 <template>
     <div>
         <table class="table table-light services-table">

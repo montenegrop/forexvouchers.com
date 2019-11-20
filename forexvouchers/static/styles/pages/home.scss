@@ -22,6 +22,7 @@
 
 }
 
+
 .home-filters {
   background-color: #5A5C5B;
   margin-bottom: 2em;
@@ -71,6 +72,10 @@
 
 }
 
+.show-more {
+  margin-top: 0.5rem;
+}
+
 .most-compared-main {
   td {
     border: none;
@@ -90,6 +95,7 @@
 
 .homepage-column {
   border: 1px solid $secondary;
+  margin: 1rem 0;
   .homepage-header {
     text-align: -webkit-center;
     border: none;
@@ -100,5 +106,9 @@
     padding: 0.3rem;
     font-weight: bold;
     color: #fff;
+  }
+
+  table {
+    margin-bottom: 0;
   }
 }
