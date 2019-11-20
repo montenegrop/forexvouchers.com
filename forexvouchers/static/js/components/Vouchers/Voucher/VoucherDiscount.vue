@@ -25,7 +25,7 @@
 
                 <div class="product-link-discount">
 
-                    <a :href="voucher.affiliate.url">
+                    <a :href="voucher.middleware_url">
 
                         <button type="button" class="btn btn-info btn-lg product-link-button">
 
@@ -39,10 +39,9 @@
 
         <b-row class="voucher-info">
             <b-col class="col-auto product-service voucher-info-service">
-
                 By
                 <a class="product-service-link"
-                   :href="voucher.service_affiliate.url">
+                   :href="voucher.service_url">
                     {{voucher.service_name }} </a>
             </b-col>
 

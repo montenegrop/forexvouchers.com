@@ -451,6 +451,7 @@ class Voucher(models.Model):
             'service_affiliate': self.service.affiliate.toDict(),
             'service_rate': self.service.avg_rate,
             'service_url': self.service.url,
+            'middleware_url': '/'+self.get_type().lower()+'s/'+self.slug
         }
 
 
