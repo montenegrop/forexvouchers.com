@@ -1,6 +1,6 @@
 <template>
 
-    <b-container class="product voucher-discount">
+    <b-container class="product">
 
         <b-row class="voucher-discount-row">
 
@@ -68,7 +68,7 @@
 <script>
 
     export default {
-        name: "fv-vouchers-discount",
+        name: "fv-vouchers-offer",
         props: ['voucher'],
         data() {
             return {}
