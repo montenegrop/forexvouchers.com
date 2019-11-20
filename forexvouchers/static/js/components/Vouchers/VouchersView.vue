@@ -1,13 +1,13 @@
 <template>
     <div>
+        <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
         <b-row>
-            <b-col cols="3" class="vouchers-menu vouchers-menu-margin-top">
+            <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
                 <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
                 <fv-filter-type :tipos="filterTypes" :onChange="onTypeChange"></fv-filter-type>
                 <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
             </b-col>
-            <b-col cols="9">
-                <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
+            <b-col md="9">
                 <div>
                     <FvLetterFilter :options="vouchers.map(voucher => ({text: voucher.name}))"
                                     v-on:clickLetter="onLetterFilter($event)" :selected="startingLetter"/>
@@ -15,7 +15,7 @@
 
                 <div>
                     <div>
-                        <FvList :vouchers="vouchers.filter(voucher => (voucher.service_name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/>
+                        <FvList :vouchers="vouchers.filter(voucher => (voucher.name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/>
                     </div>
                     <div class="show-more">
                         <a href="#" @click.stop.prevent="limit += 10">show more</a>

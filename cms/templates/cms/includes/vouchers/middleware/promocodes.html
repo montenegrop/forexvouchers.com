@@ -1,0 +1,65 @@
+{% load wagtailimages_tags %}
+
+<div class="container middleware-main">
+
+    <h2 class="title"> {{ voucher.type }} information </h2>
+
+    <div class="row border border-light no-float ">
+
+        <div class="col-auto image">
+            <img src="{{ voucher.service_logo_medium }}" class="product-image">
+        </div>
+        <div class="col information">
+            <div class="row  product-info-discount name">
+                <h3>{{ voucher.name }}</h3>
+            </div>
+            <div class="row  description"> {{ voucher.description|safe }} </div>
+            <div class="row  icons">
+                {% if voucher.never_expires %}
+                    <col class="product-expires voucher-info-service-expiration-never">
+                    <p class="icons">
+                        <i class="fas fa-hourglass-half"></i> Never Expires
+                    </p>
+                    </col>
+                {% else %}
+                    <col class="product-expires voucher-info-service-expiration">
+
+                    <p class="icons"><i class="fas fa-hourglass-half"></i>
+                        Expires in:&nbsp;
+                        <timeago datetime="{{ voucher.expires }}"></timeago>
+                    </p>
+
+                    </col>
+                {% endif %}
+            </div>
+            <div class="row button button-container">
+                <div>
+                    <fv-promocodes label='Click to Reveal !' code='{{ vouch.code }}'></fv-promocodes>
+                </div>
+                <div>
+                    <a href="{{ voucher.affiliate.getLink }}">
+                        <button type="button" class="btn btn-info btn-sm">
+                            Get Code
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row product-service">
+                <p>
+                    <i class="fas fa-external-link-alt"></i>
+                    Go <a class="product-service-link"
+                          href="{{ voucher.service_url }}">{{ voucher.service_name }} </a> in-site page
+                </p>
+            </div>
+
+
+            <div class="row product-service">
+                <p><i class="fas fa-external-link-square-alt"></i>
+                    External <a class="product-service-link"
+                                href="{{ voucher.service_affiliate.url }}">{{ voucher.service_name }} </a> website
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

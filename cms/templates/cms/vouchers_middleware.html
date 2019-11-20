@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+{# Load CSS and JavaScript #}
+
+{% block content %}
+
+<div class="products row">
+
+        {% if voucher.type == 'Discount' %}
+
+            {% include "includes/vouchers/middleware/discounts.html" %}
+
+        {% endif %}
+
+        {% if voucher.type == 'PromoCode' %}
+
+            {% include "includes/vouchers/middleware/promocodes.html" %}
+
+        {% endif %}
+
+        {% if voucher.type == 'Offer' %}
+
+            {% include "includes/vouchers/middleware/offers.html" %}
+
+        {% endif %}
+
+</div>
+
+{% endblock %}

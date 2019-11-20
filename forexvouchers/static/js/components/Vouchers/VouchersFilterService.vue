@@ -74,11 +74,11 @@
 
             getCounts() {
                 return this.options
-                    .filter(option => option.name.match(new RegExp(this.search, "i")))
                     .map(option => ({
                         text: '('.concat(option.total).concat(')'),
                         value: option.id
                     }))
+                    .filter((option, index) => (index < this.limit) && option.text.match(new RegExp(this.search, "i")))
             },
 
         },
