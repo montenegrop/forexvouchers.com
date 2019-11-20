@@ -26,7 +26,6 @@ class HomePage(RoutablePageMixin, Page):
         verbose_name='Background'
     )
 
-
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -101,23 +100,12 @@ class HomePage(RoutablePageMixin, Page):
         return render(request, "../templates/cms/vouchers_page.html", context)
 
     @route(r'^(discounts|promocodes|offers)/(.+)/$')
-    def get_vouchers_context(self, request, *args, **kwargs):
+    def get_middleware_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request)
         slug = args[1]
-        voucher = Voucher.objects.get(slug=slug)
+        voucher = Voucher.objects.get(slug=slug).get_subobject()
 
-        context['type'] = voucher.get_type()
-        context['name'] = voucher.name
-        context['description'] = voucher.description
-        context['expires'] = voucher.expires
-        context['never_expires'] = voucher.never_expires
-        context['affiliate'] = voucher.affiliate
-        context['service_name'] = voucher.service.name
-        context['service_logo'] = voucher.service.logo.get_rendition('height-15').url if self.service.logo else None
-        context['service_category'] = voucher.service.category.name
-        context['service_affiliate'] = voucher.service.affiliate
-        context['service_slug'] = voucher.service.slug
+        context['voucher'] = voucher.toDict()
 
 
-        return render(request, "../templates/cms/vouchers_page.html", context)
-
+        return render(request, "../templates/cms/vouchers_middleware.html", context)

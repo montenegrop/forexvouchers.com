@@ -246,11 +246,16 @@ class Service(ClusterableModel):
         MultiFieldPanel(
             [
                 FieldPanel("about"),
-                ImageChooserPanel("logo"),
-                ImageChooserPanel("preview")
             ],
             heading="About",
         ),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel("logo"),
+                ImageChooserPanel("preview"),
+            ],
+            heading="Media",
+        )
     ]
 
 
@@ -441,9 +446,11 @@ class Voucher(models.Model):
             'logo': self.logo.get_rendition('height-100').url if self.logo else None,
             'service_name': self.service.name,
             'service_logo': self.service.logo.get_rendition('height-15').url if self.service.logo else None,
+            'service_logo_medium': self.service.logo.get_rendition('height-80').url if self.service.logo else None,
             'service_category': self.service.category.name,
             'service_affiliate': self.service.affiliate.toDict(),
-            'service_rate': self.service.avg_rate
+            'service_rate': self.service.avg_rate,
+            'service_url': self.service.url,
         }
 
 

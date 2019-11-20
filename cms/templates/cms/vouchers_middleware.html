@@ -1,21 +1,24 @@
+{% extends "base.html" %}
 {% load wagtailimages_tags %}
 {# Load CSS and JavaScript #}
 
+{% block content %}
+
 <div class="products row">
 
-        {% if vouch.get_type == 'Discount' %}
+        {% if voucher.type == 'Discount' %}
 
             {% include "includes/vouchers/middleware/discounts.html" %}
 
         {% endif %}
 
-        {% if vouch.get_type == 'PromoCode' %}
+        {% if voucher.type == 'PromoCode' %}
 
             {% include "includes/vouchers/middleware/promocodes.html" %}
 
         {% endif %}
 
-        {% if vouch.get_type == 'Offer' %}
+        {% if voucher.type == 'Offer' %}
 
             {% include "includes/vouchers/middleware/offers.html" %}
 
@@ -23,3 +26,4 @@
 
 </div>
 
+{% endblock %}
