@@ -5,6 +5,7 @@
   color: $banner-text-color;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 
   .banner-title {
     padding: 2em 2em 0 2em;
