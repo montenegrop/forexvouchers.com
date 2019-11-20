@@ -5,26 +5,19 @@
 <!---->
 {% block body_class %}template-homepage{% endblock %}
 
-
 {% block content %}
 
-
     <div class="service-page">
-
 
         <h2 class="service-title text-center no-shadow text-dark">
             {{ service.name }} review
         </h2>
 
-
         {% include "includes/service_info.html" %}
-
-
         {% include "includes/service_tabs.html" %}
-
+        {% include "seo/servicePageSEO.html" %}
 
     </div>
-
 
 {% endblock %}
 

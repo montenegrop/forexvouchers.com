@@ -169,6 +169,11 @@ class ServiceHelper(object):
             if field.section == 'ts' and self.service.category.id in field.categories:
                 yield field
 
+    def trading_account(self):
+        for field in self.fields:
+            if field.section == 'ta' and self.service.category.id in field.categories:
+                yield field
+
     def customer_support(self):
         for field in self.fields:
             if field.section == 'cs' and self.service.category.id in field.categories:

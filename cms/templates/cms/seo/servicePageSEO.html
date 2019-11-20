@@ -1,0 +1,30 @@
+{% load wagtailimages_tags %}
+
+<script type="application/ld+json">
+ { "@context": "https://schema.org",
+ "@type": "{{ service.category }}",
+ "name": "{{ service.name }}",
+ "url": "{{ affiliate.getLink }}",
+ "logo": "http://cdn.elite-strategies.com/wp-content/uploads/2013/04/elitestrategies.png",
+ "foundingDate": "{{ service.founded }}",
+ "address": {
+ "@type": "PostalAddress",
+ "streetAddress": "{{ service.office_address }}",
+ "addressLocality": "Delray Beach",
+ "addressRegion": "FL",
+ "postalCode": "33444",
+ "addressCountry": "{{ service.location }}"
+ "feesAndCommissionsSpecification": ""
+ },
+ "sameAs": [
+ "http://www.freebase.com/m/0_h96pq",
+ "http://www.facebook.com/elitestrategies",
+ "http://www.twitter.com/delraybeachseo",
+ "http://pinterest.com/elitestrategies/",
+ "http://elitestrategies.tumblr.com/",
+ "http://www.linkedin.com/company/elite-strategies",
+ "https://plus.google.com/106661773120082093538"
+ ]}
+</script>
+
+{{ service.founded }}
