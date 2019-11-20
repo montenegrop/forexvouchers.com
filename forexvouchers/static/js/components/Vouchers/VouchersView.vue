@@ -18,7 +18,7 @@
                         <FvList :vouchers="vouchers.filter(voucher => (voucher.service_name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/>
                     </div>
                     <div class="show-more">
-                        <a href="#" @click.stop.prevent="limit += 1">show more</a>
+                        <a href="#" @click.stop.prevent="limit += 10">show more</a>
                     </div>
                 </div>
             </b-col>

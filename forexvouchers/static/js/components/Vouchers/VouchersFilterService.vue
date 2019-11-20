@@ -17,11 +17,14 @@
                                            class="filter-content option-filter"
                                            :value="selected"
                                            v-on:input="onChange($event)"
-                                           :options="getOptions1()"
+                                           :options="getNames()"
                                            name="flavour-2"
                                            stacked
                     ></b-form-checkbox-group>
                 </b-form-group>
+                <div class="show more show-more-services" v-if="options.length > limit">
+                    <a href="#" @click.stop.prevent="limit += 10">more services</a>
+                </div>
 
             </b-col>
 
@@ -32,7 +35,7 @@
                                            class="counter-filter d-none d-md-block "
                                            :value="selected"
                                            v-on:input="onChange($event)"
-                                           :options="getOptions2()"
+                                           :options="getCounts()"
                                            name="flavour-2"
                                            stacked
                     ></b-form-checkbox-group>
@@ -55,20 +58,21 @@
             return {
                 startingLetter: '',
                 search: '',
+                limit: 15,
             }
         },
 
         methods: {
-            getOptions1() {
+            getNames() {
                 return this.options
                     .map(option => ({
                         text: option.name,
                         value: option.id
                     }))
-                    .filter(option => option.text.match(new RegExp(this.search, "i")))
+                    .filter((option, index) => (index < this.limit) && option.text.match(new RegExp(this.search, "i")))
             },
 
-            getOptions2() {
+            getCounts() {
                 return this.options
                     .filter(option => option.name.match(new RegExp(this.search, "i")))
                     .map(option => ({

@@ -1,6 +1,6 @@
 <template>
 
-    <b-container class="product voucher-discount">
+    <b-container class="product">
 
         <b-row class="voucher-discount-row">
 
@@ -28,7 +28,7 @@
 
                         <button type="button" class="btn btn-info btn-lg product-link-button">
 
-                            Show Code
+                            View Offer
                         </button>
                     </a>
                 </div>
@@ -65,16 +65,15 @@
 
 </template>
 
+
 <script>
 
-    import FvPromocodeButton from './VoucherPromocodeButton'
-
     export default {
-        name: "fv-vouchers-promocode",
-        components: {FvPromocodeButton},
+        name: "fv-vouchers-offer",
         props: ['voucher'],
         data() {
             return {}
         }
     }
+
 </script>
