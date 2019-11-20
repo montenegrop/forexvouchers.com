@@ -7,7 +7,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
 from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
-from cms.helpers.ServiceHelper import ServiceHelper
+from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -41,16 +41,14 @@ class HomePage(RoutablePageMixin, Page):
 
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
-        context['table_rows'] = []
-        for service in Service.objects.all():
-            attrs = service.getAttributes()
-            attrs['name'] = service.name
-            attrs['slug'] = service.slug
-            context['table_rows'].append(attrs)
+        services = Service.objects.filter(category=BROKERS, premium=True).order_by('name')[0:10].filter()
+
         context['recent_comments'] = []
         context['categories'] = Category.objects.all().order_by('name')
         context['comments'] = [comment.toDict() for comment in Comment.objects.all().order_by('-created_at')[:5]]
         context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
+        context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
+        context['vouchers'] = [ServiceHelper(service).to_dict() for service in services]
 
         return context
 

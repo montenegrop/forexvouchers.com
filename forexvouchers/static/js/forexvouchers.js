@@ -7,14 +7,16 @@ import components from './components'
 import SocialSharing from 'vue-social-sharing'
 import VueTimeago from 'vue-timeago'
 import VueCookies from 'vue-cookies'
+import VueCarousel from 'vue-carousel'
 
 
 Vue.use(BootstrapVue)
-Vue.use(VueResource);
-Vue.use(VueCookies);
+Vue.use(VueResource)
+Vue.use(VueCookies)
 Vue.use(rate)
 Vue.use(SocialSharing)
 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+Vue.use(VueCarousel)
 Vue.config.devtools = true
 
 
