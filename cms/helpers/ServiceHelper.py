@@ -69,7 +69,6 @@ class MultiField(Field):
         return elements
 
 
-
 class FlagField(MultiField):
     def __str__(self):
         return ', '.join([
@@ -208,5 +207,4 @@ class ServiceHelper(object):
                 obj['avg_rate'] = self.service.get_avg_rate
                 obj['count_rate'] = self.service.get_count_rate
                 obj['slug'] = self.service.slug
-
         return obj

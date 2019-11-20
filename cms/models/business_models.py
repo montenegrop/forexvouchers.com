@@ -399,7 +399,7 @@ class Voucher(models.Model):
     description = RichTextField(max_length=2500, blank=True, default=None, null=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
 
-    expires = models.DateField(blank=True)
+    expires = models.DateField(blank=True, null=True)
     never_expires = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -431,17 +431,19 @@ class Voucher(models.Model):
 
     def toDict(self):
         return {
-                'name': self.name,
-                'affiliate': self.affiliate.toDict(),
-                'expires': self.expires.isoformat(),
-                'never_expires': self.never_expires,
-                'type': self.get_type(),
-                'logo': self.logo.get_rendition('height-100').url if self.logo else None,
-                'service_name': self.service.name,
-                'service_logo': self.service.logo.get_rendition('height-75').url if self.service.logo else None,
-                'service_category': self.service.category.name,
-                'service_affiliate': self.service.affiliate.toDict()
-                }
+            'name': self.name,
+            'affiliate': self.affiliate.toDict(),
+            'expires': self.expires.isoformat() if self.expires else None,
+            'never_expires': self.never_expires,
+            'type': self.get_type(),
+            'description': self.description.__str__(),
+            'logo': self.logo.get_rendition('height-100').url if self.logo else None,
+            'service_name': self.service.name,
+            'service_logo': self.service.logo.get_rendition('height-15').url if self.service.logo else None,
+            'service_category': self.service.category.name,
+            'service_affiliate': self.service.affiliate.toDict(),
+            'service_rate': self.service.avg_rate
+        }
 
 
 class PromoCode(Voucher):
