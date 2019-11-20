@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
-{# Load CSS and JavaScript #}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -14,25 +13,27 @@
 
     {% include "includes/home/home_carousel.html" %}
 
+    <h2 style="text-align: center">Most Popular Forex Brokers</h2>
     <div>
-        <fv-services-table/>
+        <fv-home-services/>
+
+    </div>
+    <div class="show-more right">
+        <a href="#">Show More</a>
     </div>
 
-        {% include "includes/home/home_vouchers.html" %}
+    {% include "includes/home/home_vouchers.html" %}
 
     <div class="row">
-        <div class="col">
+        <div class="col-md-4">
             {% include "includes/home/home_recent_compares.html" %}
         </div>
-        <div class="col">
+        <div class="col-md-4">
             {% include "includes/home/home_news.html" %}
         </div>
-        <div class="col">
+        <div class="col-md-4">
             {% include "includes/home/home_recent_comments.html" %}
         </div>
     </div>
-
-
-
 
 {% endblock %}
