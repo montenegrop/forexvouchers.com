@@ -4,7 +4,7 @@ from cms.models import Discount, PromoCode, Offer, Voucher, Category, Service
 
 from django.views import View
 from django.http import HttpResponse
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Case, When
 import datetime
 
 
@@ -45,11 +45,22 @@ class VouchersView(View):
 
         return {'discount': discount_counts, 'promocode': promocodes_counts, 'offer': offers_counts}
 
+    def getSorting(self, sort):
+        if sort == 'premium':
+            return Case(When(Q(service__premium=True), then=0), default=1), 'created_at'
+        elif sort == 'mostviewed':
+            return 'service__affiliate__clicks', 'created_at'
+        elif sort == 'toprated':
+            return 'service__', 'created_at'
+        else:
+            return 'created_at',
+
     def get(self, request):
         voucherTypes = request.GET.get('voucher_types', '')
         services = list(filter(lambda item: item, request.GET.get('services', '').split(',')))
         categories = list(filter(lambda item: item, request.GET.get('categories', '').split(',')))
         limit = int(request.GET.get('limit', 10))
+        sort = request.GET.get('sort', 'newest')
 
         if voucherTypes == '':
             voucherTypes = ['discount', 'promocode', 'offer']
@@ -73,7 +84,7 @@ class VouchersView(View):
                                           serviceConditions,
                                           categoryConditions,
                                           Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).order_by(
-            'expires')[:limit]
+            *self.getSorting(sort))[:limit]
 
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
 
