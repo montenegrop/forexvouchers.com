@@ -127,7 +127,7 @@ class Service(ClusterableModel):
         verbose_name='Logo (More width than height recommended)'
     )
 
-    avg_rate = models.IntegerField(null=True, blank=True)
+    avg_rate = models.FloatField(null=True, blank=True)
     count_rate = models.IntegerField(null=True, blank=True)
 
     preview = models.ForeignKey(
@@ -141,7 +141,7 @@ class Service(ClusterableModel):
 
     @property
     def get_avg_rate(self):
-        return self.avg_rate if self.avg_rate else 0
+        return round(self.avg_rate) if self.avg_rate else 0
 
     @property
     def get_count_rate(self):

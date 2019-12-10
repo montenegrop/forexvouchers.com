@@ -51,7 +51,7 @@ class VouchersView(View):
         elif sort == 'mostviewed':
             return 'service__affiliate__clicks', 'created_at'
         elif sort == 'toprated':
-            return 'service__', 'created_at'
+            return '-service__avg_rate',
         else:
             return 'created_at',
 
