@@ -32,7 +32,6 @@ class Field(object):
         else:
             return value.__str__()
 
-
 class BooleanField(Field):
     def __str__(self):
         return 'Yes' if getattr(self.service, self.key) else 'No'
@@ -203,7 +202,8 @@ class ServiceHelper(object):
         for field in self.fields:
             if self.service.category_id in field.categories:
                 obj[field.key] = field.to_dict()
-                obj['logo_url'] = self.service.logo.get_rendition('height-100').url if self.service.logo else None
+                obj['logo_url'] = self.service.logo.get_rendition('width-100').url if self.service.logo else None
+                obj['url'] = '/services/' + self.service.slug
                 obj['avg_rate'] = self.service.get_avg_rate
                 obj['count_rate'] = self.service.get_count_rate
                 obj['slug'] = self.service.slug

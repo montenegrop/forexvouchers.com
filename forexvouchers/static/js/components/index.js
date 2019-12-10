@@ -4,7 +4,9 @@ import Typeahead from './Typeahead/Typeahead.vue';
 import CompareTypeahead from './Typeahead/CompareTypeahead.vue';
 import Promocodes from './PeelReveal/Promocodes.vue';
 import VouchersView from './Vouchers/VouchersView.vue';
-import ServicesTable from './HomePage/ServicesTable'
+import VouchersHome from './Vouchers/VouchersHome.vue';
+import ServicesTable from './HomePage/ServicesTable';
+import HomeServices from './HomePage/HomeServices';
 
 
 export default {
@@ -14,5 +16,7 @@ export default {
     'fv-compare-typeahead': CompareTypeahead,
     'fv-promocodes': Promocodes,
     'fv-vouchers-view': VouchersView,
-    'fv-services-table': ServicesTable,
+    'fv-vouchers-home': VouchersHome,
+    'fv-services-table': ServicesTable, // deprecated
+    'fv-home-services': HomeServices,
 }

@@ -1,25 +1,54 @@
 .banner {
-  background-image: url("../images/cool-background.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 200px;
   color: $banner-text-color;
-  margin-bottom: 2em;
-  width: 100%;
-  margin-right: -15px;
-  margin-left: -15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
   .banner-title {
     padding: 2em 2em 0 2em;
     text-align: center;
+    font-size: 2rem;
 
   }
 
   .banner-body {
     padding: 0 2em 2em 2em;
     text-align: center;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+    font-size: 1.3rem;
   }
 
+}
+
+
+.home-filters {
+  background-color: #5A5C5B;
+  margin-bottom: 2em;
+
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dropdown-item:focus, .dropdown-item:focus {
+    color: black;
+  }
+
+
+  .col-form-label-lg {
+    color: white;
+  }
 }
 
 .services-table {
@@ -44,6 +73,10 @@
 
 }
 
+.show-more {
+  margin-top: 0.5rem;
+}
+
 .most-compared-main {
   td {
     border: none;
@@ -63,6 +96,7 @@
 
 .homepage-column {
   border: 1px solid $secondary;
+  margin: 1rem 0;
   .homepage-header {
     text-align: -webkit-center;
     border: none;
@@ -73,5 +107,9 @@
     padding: 0.3rem;
     font-weight: bold;
     color: #fff;
+  }
+
+  table {
+    margin-bottom: 0;
   }
 }

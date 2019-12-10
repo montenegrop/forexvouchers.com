@@ -49,9 +49,13 @@ $flag-icon-css-path: '../../../node_modules/flag-icon-css/flags';
 // cms
 @import './layout';
 @import './comments';
+@import './carousel';
+@import './service_summary';
 @import './pages/home';
 @import './pages/services';
 @import './pages/compare';
+@import './pages/middleware';
+
 @import 'pages/vouchers_search';
 @import 'pages/services_search';
 

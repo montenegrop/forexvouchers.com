@@ -1,33 +1,34 @@
 <template>
 
-    <b-container class="product voucher-discount">
+    <b-container class="product">
 
         <b-row class="voucher-discount-row">
 
-            <b-col cols="3" align-self="center">
+            <b-col md="3" align-self="center">
 
                 <img :src="voucher.logo" class="product-image">
             </b-col>
 
-            <b-col cols="5" align-self="center" class="product-info-discount">
+            <b-col md="5" align-self="center" class="product-info-discount">
 
                 <p> {{ voucher.name }} </p>
+                <div class="vouchers-description" v-html="voucher.description"/>
             </b-col>
 
-            <b-col cols="1" align-self="center">
+            <b-col md="1" align-self="center">
 
                 <div></div>
             </b-col>
 
-            <b-col cols="3" align-self="center">
+            <b-col md="3" align-self="center">
 
                 <div class="product-link-discount">
 
-                    <a :href="voucher.affiliate.url">
+                    <a :href="voucher.middleware_url">
 
                         <button type="button" class="btn btn-info btn-lg product-link-button">
 
-                            View Offer
+                            Show Code
                         </button>
                     </a>
                 </div>
@@ -39,7 +40,7 @@
 
                 By
                 <a class="product-service-link"
-                   :href="voucher.service_affiliate.url">
+                   :href="voucher.service_url">
                     {{voucher.service_name }} </a>
             </b-col>
 
@@ -64,15 +65,16 @@
 
 </template>
 
-
 <script>
 
+    import FvPromocodeButton from '../VoucherPromocodeButton'
+
     export default {
-        name: "fv-vouchers-discount",
+        name: "fv-vouchers-promocode",
+        components: {FvPromocodeButton},
         props: ['voucher'],
         data() {
             return {}
         }
     }
-
 </script>

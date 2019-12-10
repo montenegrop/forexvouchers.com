@@ -1,0 +1,40 @@
+<div class="row home-filters">
+    <div class="container form-container">
+        <div class="form-item">
+            <b-form-group label-size="lg" label="Category" label-for="input-lg">
+                <b-dropdown id="dropdown-1" class="m-md-2" text="Category">
+                    {% for category in categories %}
+                        <b-dropdown-item>{{ category.name }}</b-dropdown-item>
+                    {% endfor %}
+                </b-dropdown>
+            </b-form-group>
+        </div>
+        <div class="form-item">
+
+            <b-form-group label-size="lg" label="Type" label-for="input-lg">
+                <b-dropdown id="dropdown-1" class="m-md-2" text="Type">
+                    <b-dropdown-item>1 star</b-dropdown-item>
+                    <b-dropdown-item>2 stars</b-dropdown-item>
+                    <b-dropdown-item>3 stars</b-dropdown-item>
+                    <b-dropdown-item>4 stars</b-dropdown-item>
+                    <b-dropdown-item>5 stars</b-dropdown-item>
+                </b-dropdown>
+            </b-form-group>
+
+        </div>
+        <div class="form-item">
+            <b-form-group label-size="lg" label="Popularity" label-for="input-lg">
+                <b-dropdown id="dropdown-1" class="m-md-2" text="Popularity">
+                        <b-dropdown-item>Premium</b-dropdown-item>
+                        <b-dropdown-item>Any</b-dropdown-item>
+                </b-dropdown>
+            </b-form-group>
+        </div>
+
+        <div class="form-item">
+            <button type="submit" class="btn btn-info pull-right">SUBMIT</button>
+        </div>
+    </div>
+
+
+</div>

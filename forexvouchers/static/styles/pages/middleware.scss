@@ -1,0 +1,55 @@
+.middleware-main {
+  margin-top: 35px;
+
+  .information {
+    padding: 30px;
+  }
+
+  .image {
+    margin-top: 45px;
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 150px;
+    }
+  }
+  .name {
+    display: flex;
+    justify-content: space-between;
+  }
+  .description {
+    font-family: ralewayextrabold_italic;
+    color: $gray-800;
+  }
+  .icons {
+    margin-top: 0.3rem;
+    color: $black;
+  }
+  .button-container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    border: none;
+    width: 85%;
+    text-shadow: none;
+  }
+
+  .discount {
+    font-family: ralewayextrabold;
+    color: black;
+    margin-top: 3px;
+  }
+
+  .title {
+    text-shadow: none;
+    color: $info;
+    text-align: center;
+  }
+
+}
