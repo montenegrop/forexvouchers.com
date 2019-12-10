@@ -123,7 +123,8 @@ class Service(ClusterableModel):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='+',
+        verbose_name='Logo (More width than height recommended)'
     )
 
     avg_rate = models.IntegerField(null=True, blank=True)
@@ -134,7 +135,8 @@ class Service(ClusterableModel):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='+',
+        verbose_name='Preview (More width than height recommended)'
     )
 
     @property
@@ -379,7 +381,7 @@ class Product(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name='Image'
+        verbose_name='Image (More width than height recommended)'
     )
 
     def __str__(self):
@@ -429,7 +431,7 @@ class Voucher(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name='Image'
+        verbose_name='Logo (More width than height recommended)'
     )
 
     def __str__(self):
@@ -443,15 +445,15 @@ class Voucher(models.Model):
             'never_expires': self.never_expires,
             'type': self.get_type(),
             'description': self.description.__str__(),
-            'logo': self.logo.get_rendition('height-100').url if self.logo else None,
+            'logo': self.logo.get_rendition('width-100').url if self.logo else None,
             'service_name': self.service.name,
-            'service_logo': self.service.logo.get_rendition('height-15').url if self.service.logo else None,
-            'service_logo_medium': self.service.logo.get_rendition('height-80').url if self.service.logo else None,
+            'service_logo': self.service.logo.get_rendition('width-15').url if self.service.logo else None,
+            'service_logo_medium': self.service.logo.get_rendition('width-80').url if self.service.logo else None,
             'service_category': self.service.category.name,
             'service_affiliate': self.service.affiliate.toDict(),
             'service_rate': self.service.avg_rate,
             'service_url': self.service.url,
-            'middleware_url': '/'+self.get_type().lower()+'s/'+self.slug
+            'middleware_url': '/' + self.get_type().lower() + 's/' + self.slug
         }
 
 
