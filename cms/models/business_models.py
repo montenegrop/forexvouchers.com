@@ -35,6 +35,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 class Category(models.Model):
     name = models.CharField(max_length=30)
     attributes = models.ManyToManyField('Attribute', blank=True)
+    services = models.ManyToManyField('Service', blank=True, related_name='service_category')
     slug = AutoSlugField(populate_from='name', editable=True)
 
     panels = [
@@ -49,12 +50,14 @@ class Category(models.Model):
 
 
 class Service(ClusterableModel):
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = ParentalManyToManyField('Category', through=Category.services.through, blank=False)
     name = models.CharField(max_length=100)
     premium = models.BooleanField(null=False, default=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
     affiliate = models.ForeignKey("Affiliate", on_delete=models.SET_NULL, null=True)
+
+
 
     # Company profile
     status = models.ForeignKey("Status", on_delete=models.SET_NULL, null=True, blank=True)

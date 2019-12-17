@@ -348,12 +348,12 @@ modeladmin_register(FieldGroup)
 
 
 
-@hooks.register("insert_global_admin_js", order=100)
-def global_admin_js():
-    """Add /static/css/custom.js to the admin."""
-    return format_html(
-        '<script src="' + settings.STATIC_URL + 'js/custom_admin.js"></script>'
-    )
+# @hooks.register("insert_global_admin_js", order=100)
+# def global_admin_js():
+#     """Add /static/css/custom.js to the admin."""
+#     return format_html(
+#         '<script src="' + settings.STATIC_URL + 'js/custom_admin.js"></script>'
+#     )
 
 
 @hooks.register("insert_global_admin_css", order=100)

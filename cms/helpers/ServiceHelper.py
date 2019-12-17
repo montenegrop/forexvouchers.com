@@ -5,10 +5,12 @@ TRAINING = 2
 VPS = 3
 TRADING_SYSTEM = 4
 SIGNALS = 5
+TOOLS = 6
 
 
 class Field(object):
-    def __init__(self, service, key, section, label, categories=[BROKERS, TRAINING, VPS, TRADING_SYSTEM, SIGNALS]):
+    def __init__(self, service, key, section, label,
+                 categories=[BROKERS, TRAINING, VPS, TRADING_SYSTEM, SIGNALS, TOOLS]):
         self.key = key
         self.service = service
         self.section = section
@@ -31,6 +33,7 @@ class Field(object):
             return value
         else:
             return value.__str__()
+
 
 class BooleanField(Field):
     def __str__(self):
