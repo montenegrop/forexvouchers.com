@@ -34,6 +34,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 
 
 class Category(models.Model):
+    autocomplete_search_field = 'name'
     name = models.CharField(max_length=30)
     attributes = models.ManyToManyField('Attribute', blank=True)
     services = models.ManyToManyField('Service', blank=True, related_name='service_category')
@@ -49,6 +50,9 @@ class Category(models.Model):
     ]
 
     def __str__(self):
+        return self.name
+
+    def autocomplete_label(self):
         return self.name
 
 
@@ -163,7 +167,7 @@ class Service(ClusterableModel):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("category"),
+                AutocompletePanel("category", target_model="cms.Category", is_single=False),
                 FieldPanel("premium", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate")
             ],
