@@ -142,26 +142,34 @@ class SignalAlert(AbstractField, models.Model):
 
 
 class AccountType(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=150)
 
 
 class TradingInstrument(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=150)
 
 
 class RevenueModel(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=150)
 
 
 class AccountOption(AbstractField, models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=150)
 
 
 class AccountCurrency(AbstractField, models.Model):
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=150)
 
 
 class PaymentMethod(AbstractField, models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
+
 
 ########################
+# new fields:
+class TradingTool(AbstractField, models.Model):
+    name = models.CharField(max_length=150)
+
+
+class SecurityOfFunds(AbstractField, models.Model):
+    name = models.CharField(max_length=150)

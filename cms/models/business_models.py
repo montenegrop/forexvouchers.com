@@ -1,9 +1,10 @@
 from django.db import models
-# from cms.models.fields import *
+from cms.models.fields import *
 from wagtail.contrib.modeladmin.helpers import AdminURLHelper
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
+
 
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -38,6 +39,8 @@ class Category(models.Model):
     services = models.ManyToManyField('Service', blank=True, related_name='service_category')
     slug = AutoSlugField(populate_from='name', editable=True)
 
+
+
     panels = [
         MultiFieldPanel([
             FieldPanel('name'),
@@ -51,28 +54,25 @@ class Category(models.Model):
 
 class Service(ClusterableModel):
     category = ParentalManyToManyField('Category', through=Category.services.through, blank=False)
-    name = models.CharField(max_length=100)
     premium = models.BooleanField(null=False, default=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
     affiliate = models.ForeignKey("Affiliate", on_delete=models.SET_NULL, null=True)
 
-
-
-    # Company profile
-    status = models.ForeignKey("Status", on_delete=models.SET_NULL, null=True, blank=True)
+    # Company profile:
+    name = models.CharField(max_length=100)
     founded = models.IntegerField(null=True, blank=True)
-    broker_type = ParentalManyToManyField("BrokerType", related_name='broker_type', blank=True)
     regulation = ParentalManyToManyField("Regulation", related_name='regulation', blank=True)
     license = ParentalManyToManyField("License", related_name='license', blank=True)
-
     location = ParentalManyToManyField("Location", related_name='location', blank=True)
 
+    # # brokers only:
+    status = models.ForeignKey("Status", on_delete=models.SET_NULL, null=True, blank=True)
+    broker_type = ParentalManyToManyField("BrokerType", related_name='broker_type', blank=True)
     international_offices = ParentalManyToManyField("Location", related_name='international_offices',
                                                     blank=True)
-
-    accept_us_clients = models.BooleanField(null=False, default=True)
-    accept_eu_clients = models.BooleanField(null=False, default=True)
+    restrictions = ParentalManyToManyField("Location", related_name='restrictions',
+                                           blank=True)
 
     # Trading setup
     timezone = models.ForeignKey("Timezone", on_delete=models.SET_NULL, null=True, blank=True)
@@ -81,6 +81,7 @@ class Service(ClusterableModel):
     ea_robots = models.BooleanField(null=False, default=True)
     scalping = models.BooleanField(null=False, default=True)
     hedging = models.BooleanField(null=False, default=True)
+    news_trading = models.BooleanField(null=False, default=True)
 
     # Customer support
     email = models.EmailField(blank=True, default=None, null=True)
@@ -90,17 +91,11 @@ class Service(ClusterableModel):
     office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
 
     # Details
-    training_courses = ParentalManyToManyField("TrainingCourse", blank=True)
-    training_type = ParentalManyToManyField("TrainingType", blank=True)
-    methodology = ParentalManyToManyField("Methodology", blank=True)
-    training_tools = ParentalManyToManyField("TrainingTool", blank=True)
-    instructor = models.CharField(max_length=500, blank=True, default=None, null=True)
     pricing_model = ParentalManyToManyField("PricingModel", blank=True)
     system_type = ParentalManyToManyField("SystemType", blank=True)
     trading_type = ParentalManyToManyField("TradingType", blank=True)
-    required_software = ParentalManyToManyField("TradingSoftware", blank=True, related_name='required_software')
-    signal_alerts = ParentalManyToManyField("SignalAlert", blank=True)
-    frequency = models.CharField(max_length=500, blank=True, default=None, null=True)
+    trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
+    trading_tools = ParentalManyToManyField("TradingTool", blank=True)
 
     # Trading account
     account_types = ParentalManyToManyField("AccountType", blank=True)
@@ -108,14 +103,14 @@ class Service(ClusterableModel):
     revenue_model = ParentalManyToManyField("RevenueModel", blank=True)
     account_options = ParentalManyToManyField("AccountOption", blank=True)
     account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
-    payment_method = ParentalManyToManyField("PaymentMethod", blank=True)
     minimum_deposit = models.CharField(max_length=20, blank=True)
     commission = models.CharField(max_length=20, blank=True)
     leverage = models.CharField(max_length=20, blank=True)
     spread = models.CharField(max_length=20, blank=True)
-    swap_free = models.BooleanField(null=False, default=True)
-    islamic_accounts = models.BooleanField(null=False, default=True)
-    bonus_policy = models.BooleanField(null=False, default=True)
+    min_lot_size = models.CharField(max_length=20, blank=True)
+    security_of_funds = ParentalManyToManyField("SecurityOfFunds", blank=True)
+    deposit_method = ParentalManyToManyField("PaymentMethod", related_name='deposit_method', blank=True)
+    withdraw_method = ParentalManyToManyField("PaymentMethod", related_name='withdraw_method', blank=True)
 
     # About
     about = RichTextField(max_length=2500, blank=True, default=None, null=True)
@@ -168,7 +163,7 @@ class Service(ClusterableModel):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("category", classname="col12"),
+                FieldPanel("category"),
                 FieldPanel("premium", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate")
             ],
@@ -181,28 +176,20 @@ class Service(ClusterableModel):
                 FieldPanel('founded', classname="col12"),
                 AutocompletePanel('broker_type', target_model="cms.BrokerType", is_single=False),
                 AutocompletePanel('license', target_model="cms.License", is_single=False),
-                FieldPanel('accept_us_clients', classname="col12"),
-                FieldPanel('accept_eu_clients', classname="col12"),
-                AutocompletePanel("location", target_model="cms.Location", is_single=False),
+                AutocompletePanel("location", target_model="cms.Location", is_single=False, ),
                 AutocompletePanel('international_offices', target_model="cms.Location", is_single=False),
                 AutocompletePanel("regulation", target_model="cms.Regulation", is_single=False),
+                AutocompletePanel("restrictions", target_model="cms.Location", is_single=False),
             ],
             heading="Company Profile",
         ),
         MultiFieldPanel(
             [
-                FieldPanel('instructor', classname="col12"),
-                FieldPanel('frequency', classname="col12"),
-                AutocompletePanel("training_courses", target_model="cms.TrainingCourse", is_single=False),
-                AutocompletePanel("training_type", target_model="cms.TrainingType", is_single=False),
-                AutocompletePanel("methodology", target_model="cms.Methodology", is_single=False),
-                AutocompletePanel("training_tools", target_model="cms.TrainingTool", is_single=False),
-                AutocompletePanel("pricing_model", target_model="cms.PricingModel", is_single=False),
-                AutocompletePanel("system_type", target_model="cms.SystemType", is_single=False),
                 AutocompletePanel("trading_type", target_model="cms.TradingType", is_single=False),
-                AutocompletePanel("required_software", target_model="cms.TradingSoftware", is_single=False),
-                AutocompletePanel("signal_alerts", target_model="cms.SignalAlert", is_single=False),
-
+                AutocompletePanel("trading_software", target_model="cms.TradingSoftware", is_single=False),
+                AutocompletePanel("trading_tools", target_model="cms.TradingTool", is_single=False),
+                AutocompletePanel("system_type", target_model="cms.SystemType", is_single=False),
+                AutocompletePanel("pricing_model", target_model="cms.PricingModel", is_single=False),
             ],
             heading="Details",
         ),
@@ -212,9 +199,10 @@ class Service(ClusterableModel):
                 FieldPanel("scalping", classname="col4"),
                 FieldPanel("hedging", classname="col4"),
                 FieldPanel("timezone", classname="col12"),
-
+                FieldPanel("news_trading", classname="col12"),
                 AutocompletePanel("trading_software", target_model="cms.TradingSoftware", is_single=False),
                 AutocompletePanel("platforms_supported", target_model="cms.PlatformSupported", is_single=False),
+
             ],
             heading="Trading setup",
         ),
@@ -234,17 +222,15 @@ class Service(ClusterableModel):
                 FieldPanel("commission", classname="col12"),
                 FieldPanel("leverage", classname="col12"),
                 FieldPanel("spread", classname="col12"),
-                FieldPanel("office_address", classname="col12"),
-                FieldPanel("swap_free", classname="col12"),
-                FieldPanel("islamic_accounts", classname="col12"),
-                FieldPanel("bonus_policy", classname="col12"),
+                FieldPanel("min_lot_size", classname="col12"),
                 AutocompletePanel("account_types", target_model="cms.AccountType", is_single=False),
                 AutocompletePanel("trading_instruments", target_model="cms.TradingInstrument", is_single=False),
                 AutocompletePanel("revenue_model", target_model="cms.RevenueModel", is_single=False),
                 AutocompletePanel("account_options", target_model="cms.AccountOption", is_single=False),
                 AutocompletePanel("account_currency", target_model="cms.AccountCurrency", is_single=False),
-                AutocompletePanel("payment_method", target_model="cms.PaymentMethod", is_single=False),
-
+                AutocompletePanel("deposit_method", target_model="cms.PaymentMethod", is_single=False),
+                AutocompletePanel("withdraw_method", target_model="cms.PaymentMethod", is_single=False),
+                AutocompletePanel("security_of_funds", is_single=False),
             ],
             heading="Trading Account",
         ),
