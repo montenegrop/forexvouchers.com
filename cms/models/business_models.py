@@ -5,7 +5,6 @@ from wagtail.contrib.modeladmin.helpers import AdminURLHelper
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
-
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 import datetime
@@ -34,13 +33,11 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 
 
 class Category(models.Model):
-    autocomplete_search_field = 'name'
     name = models.CharField(max_length=30)
+    autocomplete_search_field = 'name'
     attributes = models.ManyToManyField('Attribute', blank=True)
     services = models.ManyToManyField('Service', blank=True, related_name='service_category')
     slug = AutoSlugField(populate_from='name', editable=True)
-
-
 
     panels = [
         MultiFieldPanel([
@@ -81,7 +78,7 @@ class Service(ClusterableModel):
     # Trading setup
     timezone = models.ForeignKey("Timezone", on_delete=models.SET_NULL, null=True, blank=True)
     trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
-    platforms_supported = ParentalManyToManyField("PlatformSupported", blank=True)
+    operating_system = ParentalManyToManyField("PlatformSupported", blank=True)
     ea_robots = models.BooleanField(null=False, default=True)
     scalping = models.BooleanField(null=False, default=True)
     hedging = models.BooleanField(null=False, default=True)
@@ -163,6 +160,14 @@ class Service(ClusterableModel):
 
     def __str__(self):
         return self.name
+
+    def getCategoriesIDs(self):
+        return [cat.id for cat in self.category.all()]
+
+    def belongsToCategories(self, categories):
+        return bool(list(set(self.getCategoriesIDs()) & set(categories)))
+
+
 
     panels = [
         MultiFieldPanel(

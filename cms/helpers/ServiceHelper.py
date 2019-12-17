@@ -187,7 +187,7 @@ class ServiceHelper(object):
     def to_dict(self):
         obj = {}
         for field in self.fields:
-            if self.service.category_id in field.categories:
+            if self.service.belongsToCategories(field.categories):
                 obj[field.key] = field.to_dict()
                 obj['logo_url'] = self.service.logo.get_rendition('width-100').url if self.service.logo else None
                 obj['url'] = '/services/' + self.service.slug

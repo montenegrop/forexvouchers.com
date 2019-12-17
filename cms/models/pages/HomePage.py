@@ -9,6 +9,8 @@ from cms.helpers.services import get_service_context, get_comments_by_service, g
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
 
+from django.db.models import Q
+
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 from django.shortcuts import render
@@ -40,7 +42,9 @@ class HomePage(RoutablePageMixin, Page):
 
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
-        services = Service.objects.filter(category=BROKERS, premium=True).order_by('name')[0:10].filter()
+        services = Service.objects.filter(category__in=[BROKERS], premium=True).order_by('name')[0:10]
+
+        print([ser.category.all()[0].name for ser in services])
 
         context['recent_comments'] = []
         context['categories'] = Category.objects.all().order_by('name')
@@ -106,6 +110,5 @@ class HomePage(RoutablePageMixin, Page):
         voucher = Voucher.objects.get(slug=slug).get_subobject()
 
         context['voucher'] = voucher.toDict()
-
 
         return render(request, "../templates/cms/vouchers_middleware.html", context)
