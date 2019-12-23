@@ -28,14 +28,21 @@ def get_comments_by_service(service):
     return comments
 
 
-def get_services_by_category(service):
-    services = []
-    for service in Service.objects.filter(category=service.category).order_by('name'):
-        services.append(service)
-    return services
+def get_comparable_services(service, category):
+    if service.belongsToCategories(category):
+        return Service.objects.filter(category__in=category).order_by('name')
+    else:
+        return Service.objects.exclude(category__in=category).order_by('name')
 
 
-def get_other_services_names(service):
+def get_other_services_names(service, category):
+    if service.belongsToCategories(category):
+        return [ser.name for ser in
+                Service.objects.filter(category__in=category).exclude(name=service.name).order_by('name')]
+    else:
+        return [ser.name for ser in
+                Service.objects.exclude(category__in=category).exclude(name=service.name).order_by('name')]
+
     services = []
     for ser in Service.objects.filter(category=service.category).exclude(name=service.name).order_by('name'):
         services.append(ser.name)

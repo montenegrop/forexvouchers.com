@@ -15,12 +15,12 @@ class VouchersView(View):
 
         category_counts = Voucher.objects.select_related('service', 'service__category') \
             .filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)) \
-            .values('service__category__name', 'service__category_id') \
-            .annotate(total=Count('service__category_id'))
+            .values('service__category__name', 'service__category') \
+            .annotate(total=Count('service__category'))
 
         return list(
             map(lambda x: {'name': x['service__category__name'],
-                           'id': x['service__category_id'],
+                           'id': x['service__category'],
                            'total': x['total']},
                 category_counts))
 
@@ -78,7 +78,7 @@ class VouchersView(View):
             typeConditions = Q(**{type + '__isnull': False}) if typeConditions is None else typeConditions | Q(
                 **{type + '__isnull': False})
         serviceConditions = Q(service_id__in=services) if len(services) else Q()
-        categoryConditions = Q(service__category_id__in=categories) if len(categories) else Q()
+        categoryConditions = Q(service__category__in=categories) if len(categories) else Q()
 
         vouchers = Voucher.objects.filter(typeConditions,
                                           serviceConditions,

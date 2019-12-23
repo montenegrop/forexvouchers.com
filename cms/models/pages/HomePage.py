@@ -5,9 +5,11 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from cms.models.business_models import Service, Compare, Comment, Voucher
 from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
-from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
+from cms.helpers.services import get_service_context, get_comments_by_service, get_comparable_services, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
+
+from django.db.models import Q
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
@@ -40,7 +42,9 @@ class HomePage(RoutablePageMixin, Page):
 
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
-        services = Service.objects.filter(category=BROKERS, premium=True).order_by('name')[0:10].filter()
+        services = Service.objects.filter(category__in=[BROKERS], premium=True).order_by('name')[0:10]
+
+        print([ser.category.all()[0].name for ser in services])
 
         context['recent_comments'] = []
         context['categories'] = Category.objects.all().order_by('name')
@@ -62,8 +66,8 @@ class HomePage(RoutablePageMixin, Page):
 
         context['service'] = service
         context['comments'] = get_comments_by_service(service)
-        context['services'] = get_services_by_category(service)
-        context['compare'] = get_other_services_names(service)
+        context['services'] = get_comparable_services(service, [BROKERS])
+        context['compare'] = get_other_services_names(service, [BROKERS])
         context['affiliate'] = service.affiliate
         context['vouchers'] = get_vouchers_by_service(service)
         context['products'] = get_products_by_service(service)
@@ -106,6 +110,5 @@ class HomePage(RoutablePageMixin, Page):
         voucher = Voucher.objects.get(slug=slug).get_subobject()
 
         context['voucher'] = voucher.toDict()
-
 
         return render(request, "../templates/cms/vouchers_middleware.html", context)

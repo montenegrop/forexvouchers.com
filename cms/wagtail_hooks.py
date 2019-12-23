@@ -34,7 +34,7 @@ class ServiceAdmin(ModelAdmin):
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('name', 'category', 'premium')
+    list_display = ('name', 'getCategoriesLabels', 'premium')
     list_filter = ('premium',)
     search_fields = ('name',)
 
@@ -348,12 +348,12 @@ modeladmin_register(FieldGroup)
 
 
 
-@hooks.register("insert_global_admin_js", order=100)
-def global_admin_js():
-    """Add /static/css/custom.js to the admin."""
-    return format_html(
-        '<script src="' + settings.STATIC_URL + 'js/custom_admin.js"></script>'
-    )
+# @hooks.register("insert_global_admin_js", order=100)
+# def global_admin_js():
+#     """Add /static/css/custom.js to the admin."""
+#     return format_html(
+#         '<script src="' + settings.STATIC_URL + 'js/custom_admin.js"></script>'
+#     )
 
 
 @hooks.register("insert_global_admin_css", order=100)

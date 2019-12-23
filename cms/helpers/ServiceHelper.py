@@ -5,10 +5,12 @@ TRAINING = 2
 VPS = 3
 TRADING_SYSTEM = 4
 SIGNALS = 5
+TOOLS = 6
 
 
 class Field(object):
-    def __init__(self, service, key, section, label, categories=[BROKERS, TRAINING, VPS, TRADING_SYSTEM, SIGNALS]):
+    def __init__(self, service, key, section, label,
+                 categories=[BROKERS, TRAINING, VPS, TRADING_SYSTEM, SIGNALS, TOOLS]):
         self.key = key
         self.service = service
         self.section = section
@@ -31,6 +33,7 @@ class Field(object):
             return value
         else:
             return value.__str__()
+
 
 class BooleanField(Field):
     def __str__(self):
@@ -89,71 +92,55 @@ class LogoField(MultiField):
 class ServiceHelper(object):
     def __init__(self, service):
         self.fields = [
-            Field(service, 'status', 'cp', 'Status'),
-            Field(service, 'name', 'cp', 'Name'),
+
+            # common fields for all:
             Field(service, 'founded', 'cp', 'Founded'),
-            MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
             MultiField(service, 'regulation', 'cp', 'Regulation'),
             MultiField(service, 'license', 'cp', 'License'),
             FlagField(service, 'location', 'cp', 'Location'),
+            # #
+            Field(service, 'email', 'cs', 'Email'),
+            Field(service, 'phone', 'cs', 'Phone'),
+            MultiField(service, 'chat', 'cs', 'Chat'),
+            Field(service, 'office_address', 'ts', 'Office Address'),
+            # #
+            Field(service, 'about', 'a', 'About'),  #
+            # only for services:
+            Field(service, 'name', 'cp', 'Name'),
+            MultiField(service, 'trading_type', 'd', 'Trading Type', [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),
+            MultiField(service, 'trading_software', 'd', 'Trading Software',
+                       [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),  #
+            MultiField(service, 'system_type', 'd', 'System Type', [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),
+            MultiField(service, 'trading_tools', 'd', 'Trading Tools', [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),
+            #
+            MultiField(service, 'pricing_model', 'd', 'Pricing Model', [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),
+            # only for brokers:
             FlagField(service, 'international_offices', 'cp', 'International offices', [BROKERS]),
-            BooleanField(service, 'accept_us_clients', 'cp', 'Accepting US clients', [BROKERS]),
-            BooleanField(service, 'accept_eu_clients', 'cp', 'Accepting EU clients', [BROKERS]),
-
-            ##############
-
-            Field(service, 'timezone', 'ts', 'Timezone', [BROKERS]),
-            MultiField(service, 'trading_software', 'ts', 'Trading Software', [BROKERS]),
-            MultiField(service, 'platforms_supported', 'ts', 'Platforms Supported', [BROKERS]),
-            BooleanField(service, 'ea_robots', 'ts', 'EA Robots', [BROKERS]),
-            BooleanField(service, 'scalping', 'ts', 'Scalping', [BROKERS]),
-            BooleanField(service, 'hedging', 'ts', 'Hedging', [BROKERS]),
-
-            ##############
-
-            Field(service, 'email', 'cs', 'Email', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
-            Field(service, 'phone', 'cs', 'Phone', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
-            MultiField(service, 'chat', 'cs', 'Chat', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
-            MultiField(service, 'support_languages', 'cs', 'Supported Languages', [BROKERS]),
-            Field(service, 'office_address', 'ts', 'Office Address', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS]),
-
-            ##############
-
-            MultiField(service, 'training_courses', 'd', 'Training Courses', [TRAINING]),
-            MultiField(service, 'training_type', 'd', 'Training Type', [TRAINING]),
-            MultiField(service, 'methodology', 'd', 'Methodology', [TRAINING]),
-            MultiField(service, 'training_tools', 'd', 'Training Tools', [TRAINING]),
-            Field(service, 'instructor', 'd', 'Instructor', [TRAINING]),
-            MultiField(service, 'pricing_model', 'd', 'Pricing Model', [TRAINING, TRADING_SYSTEM, SIGNALS]),
-
-            MultiField(service, 'system_type', 'd', 'System Type', [TRADING_SYSTEM]),
-            MultiField(service, 'trading_type', 'd', 'Trading Type', [TRADING_SYSTEM, SIGNALS]),
-            MultiField(service, 'required_software', 'd', 'Required Software', [TRADING_SYSTEM]),
-            MultiField(service, 'signal_alerts', 'd', 'Signal Alerts', [SIGNALS]),
-
-            Field(service, 'frequency', 'd', 'Frequency', [SIGNALS]),
-
-            #################
-
+            FlagField(service, 'restrictions', 'cp', 'Restrictions', [BROKERS]),  #
+            # #
             MultiField(service, 'account_types', 'ta', 'Account Types', [BROKERS]),
             MultiField(service, 'trading_instruments', 'ta', 'Trading Instruments', [BROKERS]),
             MultiField(service, 'revenue_model', 'ta', 'Revenue Model', [BROKERS]),
             MultiField(service, 'account_options', 'ta', 'Account Options', [BROKERS]),
             MultiField(service, 'account_currency', 'ta', 'Account Currency', [BROKERS]),
-            MultiField(service, 'payment_method', 'ta', 'Payment Method', [BROKERS]),
+            MultiField(service, 'deposit_method', 'ta', 'Deposit Method', [BROKERS]),  #
+            MultiField(service, 'withdraw_method', 'ta', 'Withdraw Method', [BROKERS]),  #
             Field(service, 'minimum_deposit', 'ta', 'Minimum deposit ($)', [BROKERS]),
             Field(service, 'commission', 'ta', 'Commission ($)', [BROKERS]),
             Field(service, 'leverage', 'ta', 'Leverage', [BROKERS]),
             Field(service, 'spread', 'ta', 'Spread', [BROKERS]),
-            BooleanField(service, 'swap_free', 'ta', 'Swap Free', [BROKERS]),
-            BooleanField(service, 'islamic_accounts', 'ta', 'Islamic Accounts', [BROKERS]),
-            BooleanField(service, 'bonus_policy', 'ta', 'Bonus Policy', [BROKERS]),
-
-            #################
-
-            Field(service, 'about', 'a', 'About', [BROKERS, TRAINING, TRADING_SYSTEM, SIGNALS])
-
-            #################
+            Field(service, 'min_lot_size', 'ta', 'Min lot size', [BROKERS]),  #
+            MultiField(service, 'security_of_funds', 'ta', 'Security of Funds', [BROKERS]),  #
+            # #
+            Field(service, 'timezone', 'ts', 'Timezone', [BROKERS]),
+            MultiField(service, 'trading_software', 'ts', 'Trading Software', [BROKERS]),
+            MultiField(service, 'operating_system', 'ts', 'Operating System', [BROKERS]),  #
+            BooleanField(service, 'ea_robots', 'ts', 'EA Robots', [BROKERS]),
+            BooleanField(service, 'scalping', 'ts', 'Scalping', [BROKERS]),
+            BooleanField(service, 'hedging', 'ts', 'Hedging', [BROKERS]),
+            BooleanField(service, 'news_trading', 'ts', 'News Trading', [BROKERS]),  #
+            # #
+            MultiField(service, 'support_languages', 'cs', 'Supported Languages', [BROKERS]),
 
         ]
 
@@ -161,27 +148,27 @@ class ServiceHelper(object):
 
     def company_profile(self):
         for field in self.fields:
-            if field.section == 'cp' and self.service.category.id in field.categories:
+            if field.section == 'cp' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def trading_setup(self):
         for field in self.fields:
-            if field.section == 'ts' and self.service.category.id in field.categories:
+            if field.section == 'ts' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def customer_support(self):
         for field in self.fields:
-            if field.section == 'cs' and self.service.category.id in field.categories:
+            if field.section == 'cs' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def details(self):
         for field in self.fields:
-            if field.section == 'd' and self.service.category.id in field.categories:
+            if field.section == 'd' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def about(self):
         for field in self.fields:
-            if field.section == 'a' and self.service.category.id in field.categories:
+            if field.section == 'a' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def __getattr__(self, name):
@@ -200,7 +187,7 @@ class ServiceHelper(object):
     def to_dict(self):
         obj = {}
         for field in self.fields:
-            if self.service.category_id in field.categories:
+            if self.service.belongsToCategories(field.categories):
                 obj[field.key] = field.to_dict()
                 obj['logo_url'] = self.service.logo.get_rendition('width-100').url if self.service.logo else None
                 obj['url'] = '/services/' + self.service.slug
