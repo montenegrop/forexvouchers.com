@@ -24,12 +24,27 @@ class ForexServicesView(View):
 
     def get(self, request):
         limit = int(request.GET.get('limit', 10))
-        category = int(request.GET.get('category', BROKERS))
+
+        categories = list(filter(lambda item: item, request.GET.get('categories', '').split(',')))
+        trading_types = list(filter(lambda item: item, request.GET.get('trading_types', '').split(',')))
+        trading_softwares = list(filter(lambda item: item, request.GET.get('trading_softwares', '').split(',')))
+        system_types = list(filter(lambda item: item, request.GET.get('system_types', '').split(',')))
+        trading_tools = list(filter(lambda item: item, request.GET.get('trading_tools', '').split(',')))
+        pricings = list(filter(lambda item: item, request.GET.get('pricings', '').split(',')))
+
+        categoryConditions = Q(category__in=categories) if len(categories) else Q()
+        tradingTypeConditions = Q(trading_type__in=trading_types) if len(trading_types) else Q()
+        tradingSoftwareConditions = Q(trading_software__in=trading_softwares) if len(trading_softwares) else Q()
+        systemTypeConditions = Q(system_type__in=system_types) if len(system_types) else Q()
+        tradingToolsConditions = Q(trading_tools__in=trading_tools) if len(trading_tools) else Q()
+        pricingModelConditions = Q(pricing_model__in=pricings) if len(pricings) else Q()
+
+        services = Service.objects.filter(categoryConditions, tradingTypeConditions, tradingSoftwareConditions,
+                                          systemTypeConditions, tradingToolsConditions, pricingModelConditions)
 
         response = {'data': [],
                     'categories': self.getCategoryCounts()}
 
-        # services = Service.objects.filter(category=category).order_by('name')[0:limit].filter()
-        # response['data'] = [ServiceHelper(service).to_dict() for service in services]
+        [response['data'].append(ser.toDict()) for ser in services]
 
         return HttpResponse(json.dumps(response), content_type="application/json")

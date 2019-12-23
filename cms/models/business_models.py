@@ -92,11 +92,12 @@ class Service(ClusterableModel):
     office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
 
     # Details
-    pricing_model = ParentalManyToManyField("PricingModel", blank=True)
     system_type = ParentalManyToManyField("SystemType", blank=True)
     trading_type = ParentalManyToManyField("TradingType", blank=True)
     trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
     trading_tools = ParentalManyToManyField("TradingTool", blank=True)
+    pricing_model = ParentalManyToManyField("PricingModel", blank=True)
+
 
     # Trading account
     account_types = ParentalManyToManyField("AccountType", blank=True)
@@ -168,10 +169,33 @@ class Service(ClusterableModel):
         return bool(list(set(self.getCategoriesIDs()) & set(categories)))
 
     def getCategoriesLabels(self):
-        return [cat.name for cat in self.category.all()]
+        return [(cat.name, cat.id) for cat in self.category.all()]
 
+    def getTradingTypes(self):
+        return [(ttype.name, ttype.id) for ttype in self.trading_type.all()]
 
+    def getTradingsoftwares(self):
+        return [(soft.name, soft.id) for soft in self.trading_software.all()]
 
+    def getSystemTypes(self):
+        return [(stype.name, stype.id) for stype in self.system_type.all()]
+
+    def getTradingTools(self):
+        return [(ttool.name, ttool.id) for ttool in self.trading_tools.all()]
+
+    def getPricingModels(self):
+        return [(price.name, price.id) for price in self.pricing_model.all()]
+
+    def toDict(self):
+        return {
+            'name': self.name,
+            'categories': self.getCategoriesIDs(),
+            'trading_types': self.getTradingTypes(),
+            'trading_softwares': self.getTradingsoftwares(),
+            'system_types': self.getSystemTypes(),
+            'trading_tools': self.getTradingTools(),
+            'pricings': self.getPricingModels(),
+        }
 
     panels = [
         MultiFieldPanel(
