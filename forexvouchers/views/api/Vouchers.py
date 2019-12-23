@@ -17,7 +17,6 @@ class VouchersView(View):
             .filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)) \
             .values('service__category__name', 'service__category') \
             .annotate(total=Count('service__category'))
-
         return list(
             map(lambda x: {'name': x['service__category__name'],
                            'id': x['service__category'],

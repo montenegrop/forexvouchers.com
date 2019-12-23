@@ -98,7 +98,6 @@ class Service(ClusterableModel):
     trading_tools = ParentalManyToManyField("TradingTool", blank=True)
     pricing_model = ParentalManyToManyField("PricingModel", blank=True)
 
-
     # Trading account
     account_types = ParentalManyToManyField("AccountType", blank=True)
     trading_instruments = ParentalManyToManyField("TradingInstrument", blank=True)
@@ -195,6 +194,11 @@ class Service(ClusterableModel):
             'system_types': self.getSystemTypes(),
             'trading_tools': self.getTradingTools(),
             'pricings': self.getPricingModels(),
+            'logo_url': self.logo.get_rendition('width-100').url if self.logo else None,
+            'url': '/services/' + self.slug,
+            'avg_rate': self.get_avg_rate,
+            'count_rate': self.get_count_rate,
+            'slug': self.slug,
         }
 
     panels = [
