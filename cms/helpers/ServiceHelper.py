@@ -95,8 +95,8 @@ class ServiceHelper(object):
 
             # common fields for all:
             Field(service, 'founded', 'cp', 'Founded'),
-            Field(service, 'regulation', 'cp', 'Regulation'),
-            Field(service, 'license', 'cp', 'License'),
+            MultiField(service, 'regulation', 'cp', 'Regulation'),
+            MultiField(service, 'license', 'cp', 'License'),
             FlagField(service, 'location', 'cp', 'Location'),
             # #
             Field(service, 'email', 'cs', 'Email'),
@@ -104,7 +104,7 @@ class ServiceHelper(object):
             MultiField(service, 'chat', 'cs', 'Chat'),
             Field(service, 'office_address', 'ts', 'Office Address'),
             # #
-            Field(service, 'about', 'a', 'About'), #
+            Field(service, 'about', 'a', 'About'),  #
             # only for services:
             Field(service, 'name', 'cp', 'Name'),
             MultiField(service, 'trading_type', 'd', 'Trading Type', [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),
@@ -148,27 +148,27 @@ class ServiceHelper(object):
 
     def company_profile(self):
         for field in self.fields:
-            if field.section == 'cp' and self.service.category.id in field.categories:
+            if field.section == 'cp' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def trading_setup(self):
         for field in self.fields:
-            if field.section == 'ts' and self.service.category.id in field.categories:
+            if field.section == 'ts' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def customer_support(self):
         for field in self.fields:
-            if field.section == 'cs' and self.service.category.id in field.categories:
+            if field.section == 'cs' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def details(self):
         for field in self.fields:
-            if field.section == 'd' and self.service.category.id in field.categories:
+            if field.section == 'd' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def about(self):
         for field in self.fields:
-            if field.section == 'a' and self.service.category.id in field.categories:
+            if field.section == 'a' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def __getattr__(self, name):

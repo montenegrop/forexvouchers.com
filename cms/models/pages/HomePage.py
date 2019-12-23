@@ -5,7 +5,7 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from cms.models.business_models import Service, Compare, Comment, Voucher
 from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
-from cms.helpers.services import get_service_context, get_comments_by_service, get_services_by_category, \
+from cms.helpers.services import get_service_context, get_comments_by_service, get_comparable_services, \
     get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
 
@@ -66,8 +66,8 @@ class HomePage(RoutablePageMixin, Page):
 
         context['service'] = service
         context['comments'] = get_comments_by_service(service)
-        context['services'] = get_services_by_category(service)
-        context['compare'] = get_other_services_names(service)
+        context['services'] = get_comparable_services(service, [BROKERS])
+        context['compare'] = get_other_services_names(service, [BROKERS])
         context['affiliate'] = service.affiliate
         context['vouchers'] = get_vouchers_by_service(service)
         context['products'] = get_products_by_service(service)

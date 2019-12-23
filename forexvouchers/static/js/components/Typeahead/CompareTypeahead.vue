@@ -1,7 +1,8 @@
 <template>
     <div>
-        <FvLetterFilter :options="options" v-on:clickLetter="onLetterFilter($event)"/>
-
+        <div>
+            <FvLetterFilter :options="options" v-on:clickLetter="onLetterFilter($event)"/>
+        </div>
 
         <div :class="typeaheadState">
             <div class="typeahead__toggle" ref="toggle" @mousedown.prevent="toggle">

@@ -167,6 +167,10 @@ class Service(ClusterableModel):
     def belongsToCategories(self, categories):
         return bool(list(set(self.getCategoriesIDs()) & set(categories)))
 
+    def getCategoriesLabels(self):
+        return [cat.name for cat in self.category.all()]
+
+
 
 
     panels = [
@@ -210,7 +214,7 @@ class Service(ClusterableModel):
                 FieldPanel("timezone", classname="col12"),
                 FieldPanel("news_trading", classname="col12"),
                 AutocompletePanel("trading_software", target_model="cms.TradingSoftware", is_single=False),
-                AutocompletePanel("platforms_supported", target_model="cms.PlatformSupported", is_single=False),
+                AutocompletePanel("operating_system", target_model="cms.PlatformSupported", is_single=False),
 
             ],
             heading="Trading setup",
