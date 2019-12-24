@@ -2,7 +2,11 @@ from wagtail.core.models import Page
 from django.db import models
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
-from cms.models.business_models import Service, Compare, Comment, Voucher
+from wagtailschemaorg.models import PageLDMixin
+from wagtailschemaorg.utils import extend, image_ld
+
+
+from cms.models.business_models import Voucher
 from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
 from cms.helpers.services import get_service_context, get_comments_by_service, get_comparable_services, \
@@ -16,7 +20,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from django.shortcuts import render
 
 
-class HomePage(RoutablePageMixin, Page):
+class HomePage(RoutablePageMixin, PageLDMixin, Page):
     banner_title = models.CharField(max_length=100, default='')
     banner_body = RichTextField(blank=True, default='')
     banner_image = models.ForeignKey(
@@ -50,6 +54,7 @@ class HomePage(RoutablePageMixin, Page):
         context['categories'] = Category.objects.all().order_by('name')
         context['comments'] = [comment.toDict() for comment in Comment.objects.all().order_by('-created_at')[:5]]
         context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
+        context['premium_services_models'] = services
         context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
         context['vouchers'] = [ServiceHelper(service).to_dict() for service in services]
 
@@ -115,5 +120,13 @@ class HomePage(RoutablePageMixin, Page):
         voucher = Voucher.objects.get(slug=slug).get_subobject()
 
         context['voucher'] = voucher.toDict()
+        context['voucher_model'] = voucher
+
 
         return render(request, "../templates/cms/vouchers_middleware.html", context)
+
+    def ld_entity(self):
+        return extend(super().ld_entity(), {
+            '@type': 'Organization',
+            'name': 'Forex Vouchers',
+        })

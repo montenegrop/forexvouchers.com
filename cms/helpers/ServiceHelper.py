@@ -95,6 +95,7 @@ class ServiceHelper(object):
 
             # common fields for all:
             Field(service, 'founded', 'cp', 'Founded'),
+            MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
             MultiField(service, 'regulation', 'cp', 'Regulation'),
             MultiField(service, 'license', 'cp', 'License'),
             FlagField(service, 'location', 'cp', 'Location'),
@@ -154,6 +155,11 @@ class ServiceHelper(object):
     def trading_setup(self):
         for field in self.fields:
             if field.section == 'ts' and self.service.belongsToCategories(field.categories):
+                yield field
+
+    def trading_account(self):
+        for field in self.fields:
+            if field.section == 'ta' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def customer_support(self):

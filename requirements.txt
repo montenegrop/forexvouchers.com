@@ -1,5 +1,5 @@
 Django>=2.2,<2.3
-wagtail>=2.5,<2.6
+wagtail>=2.5,<2.8
 django-debug-toolbar==2.0
 django-extensions==2.1.5
 gunicorn==19.9
@@ -10,3 +10,4 @@ XlsxWriter==1.1.8
 openpyxl==2.6.2
 mysqlclient==1.4.4
 python-memcached==1.59
+wagtail-schema.org==2.0.0

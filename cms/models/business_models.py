@@ -30,6 +30,8 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 
 
 # from wagtail.core.blocks import ChoiceBlock
+from cms.json_ld.ServiceLD import ServiceLD
+from cms.json_ld.VoucherLD import VoucherLD
 
 
 class Category(models.Model):
@@ -290,6 +292,10 @@ class Service(ClusterableModel):
         )
     ]
 
+    @property
+    def json_ld(self):
+        return ServiceLD(self)
+
 
 class Option(models.Model):
     name = models.CharField(max_length=50)
@@ -485,6 +491,10 @@ class Voucher(models.Model):
             'service_url': self.service.url,
             'middleware_url': '/' + self.get_type().lower() + 's/' + self.slug
         }
+
+    @property
+    def json_ld(self):
+        return VoucherLD(self)
 
 
 class PromoCode(Voucher):
