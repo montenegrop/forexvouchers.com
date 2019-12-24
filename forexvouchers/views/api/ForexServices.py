@@ -115,6 +115,7 @@ class ForexServicesView(View):
                     'system_types': self.getSystemTypes(),
                     'trading_tools': self.getTradingTools(),
                     'pricing_models': self.getPricingModels(),
+                    'limit': limit
                     }
 
         [response['data'].append(ser.toDict()) for ser in services]

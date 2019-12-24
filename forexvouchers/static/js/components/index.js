@@ -7,6 +7,7 @@ import VouchersView from './Vouchers/VouchersView.vue';
 import VouchersHome from './Vouchers/VouchersHome.vue';
 import ServicesTable from './HomePage/ServicesTable';
 import HomeServices from './HomePage/HomeServices';
+import ServicesFilterView from './ServiceFilter/ServicesFilterView';
 
 
 export default {
@@ -19,4 +20,5 @@ export default {
     'fv-vouchers-home': VouchersHome,
     'fv-services-table': ServicesTable, // deprecated
     'fv-home-services': HomeServices,
+    'fv-services-filter-view': ServicesFilterView,
 }

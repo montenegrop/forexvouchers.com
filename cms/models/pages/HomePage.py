@@ -99,14 +99,14 @@ class HomePage(RoutablePageMixin, Page):
         return render(request, "../templates/cms/compare_page.html", context)
 
     @route(r'^forex-services/$')
-    def get_vouchers_context(self, request, *args, **kwargs):
+    def get_servicesfilters_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request)
-        return render(request, "../templates/cms/vouchers_page.html", context)
+        return render(request, "../templates/cms/services_filter_page.html", context)
 
-    @route(r'^vouchers/$')
-    def get_vouchers_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        return render(request, "../templates/cms/vouchers_page.html", context)
+    # @route(r'^vouchers/$')
+    # def get_vouchers_context(self, request, *args, **kwargs):
+    #     context = super(HomePage, self).get_context(request)
+    #     return render(request, "../templates/cms/vouchers_page.html", context)
 
     @route(r'^(discounts|promocodes|offers)/(.+)/$')
     def get_middleware_context(self, request, *args, **kwargs):
