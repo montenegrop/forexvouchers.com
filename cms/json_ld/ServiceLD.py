@@ -18,7 +18,7 @@ class ServiceLD(ThingLD):
     def ld_entity(self):
         service = ServiceHelper(self.service).to_dict()
         return extend(super().ld_entity(), {
-                                            "@type": "FinancialProduct",
+                                            "@type": "FinancialService",
                                             "name": service['name'],
                                             "description": f"{ service['name'] } { service['broker_type'] }",
                                             "logo": f"{BASE_URL}{ service['logo_url'] }",
