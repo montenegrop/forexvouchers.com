@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load wagtailimages_tags %}
+{% load wagtailschemaorg_tags %}
+
 {# Load CSS and JavaScript #}
 
 {% block content %}
@@ -25,5 +27,6 @@
         {% endif %}
 
 </div>
+{% ld_for_object voucher_model.json_ld  %}
 
 {% endblock %}

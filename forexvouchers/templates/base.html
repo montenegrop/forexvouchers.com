@@ -1,4 +1,5 @@
 {% load static wagtailuserbar %}
+{% load wagtailschemaorg_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -74,5 +75,6 @@
 {% block extra_js %}
     {# Override this in templates to add extra javascript #}
 {% endblock %}
+{% ld_for_object page %}
 </body>
 </html>

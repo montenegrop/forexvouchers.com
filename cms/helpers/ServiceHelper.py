@@ -158,7 +158,7 @@ class ServiceHelper(object):
 
     def trading_account(self):
         for field in self.fields:
-            if field.section == 'ta' and self.service.category.id in field.categories:
+            if field.section == 'ta' and self.service.belongsToCategories(field.categories):
                 yield field
 
     def customer_support(self):

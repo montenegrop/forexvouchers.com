@@ -7,6 +7,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEBUG = False
 
 MEDIA_ROOT = '/var/www/media'
+BASE_URL = os.environ.get('BASE_URL', 'http://forexvouchers.com')
 
 
 MYSQL_DATABASE_NAME = os.environ.get('MYSQL_DATABASE_NAME', 'fxvouchers')
