@@ -1,6 +1,7 @@
 from wagtailschemaorg.jsonld import ThingLD
 from wagtailschemaorg.utils import extend
 from django.conf import settings
+import re
 
 
 from cms.helpers.ServiceHelper import ServiceHelper
@@ -17,9 +18,10 @@ class ServiceLD(ThingLD):
 
     def ld_entity(self):
         service = ServiceHelper(self.service).to_dict()
+        about = re.sub('<[^<]+?>', '', service['about'])
         return extend(super().ld_entity(), {
                                             "@type": "FinancialService",
                                             "name": service['name'],
-                                            "description": f"{ service['name'] } { service['broker_type'] }",
+                                            "description": about,
                                             "logo": f"{BASE_URL}{ service['logo_url'] }",
                                           })

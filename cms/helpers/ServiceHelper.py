@@ -95,6 +95,7 @@ class ServiceHelper(object):
 
             # common fields for all:
             Field(service, 'founded', 'cp', 'Founded'),
+            MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
             MultiField(service, 'regulation', 'cp', 'Regulation'),
             MultiField(service, 'license', 'cp', 'License'),
             FlagField(service, 'location', 'cp', 'Location'),
@@ -194,9 +195,9 @@ class ServiceHelper(object):
         for field in self.fields:
             if self.service.belongsToCategories(field.categories):
                 obj[field.key] = field.to_dict()
-                obj['logo_url'] = self.service.logo.get_rendition('width-100').url if self.service.logo else None
-                obj['url'] = '/services/' + self.service.slug
-                obj['avg_rate'] = self.service.get_avg_rate
-                obj['count_rate'] = self.service.get_count_rate
-                obj['slug'] = self.service.slug
+        obj['logo_url'] = self.service.logo.get_rendition('width-100').url if self.service.logo else None
+        obj['url'] = '/services/' + self.service.slug
+        obj['avg_rate'] = self.service.get_avg_rate
+        obj['count_rate'] = self.service.get_count_rate
+        obj['slug'] = self.service.slug
         return obj
