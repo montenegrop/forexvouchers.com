@@ -78,7 +78,6 @@
 <script>
     const cache = {};
     export default {
-        props: ['options'],
         data() {
             return {
                 rows: [],

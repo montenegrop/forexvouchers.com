@@ -29,7 +29,6 @@
     export default {
         name: "fv-vouchers-home",
         components: {FvVoucher},
-        props: [],
         data() {
             return {
                 type: 'discount,promocode,offer',

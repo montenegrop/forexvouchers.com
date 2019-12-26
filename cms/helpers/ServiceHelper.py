@@ -95,7 +95,6 @@ class ServiceHelper(object):
 
             # common fields for all:
             Field(service, 'founded', 'cp', 'Founded'),
-            MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
             MultiField(service, 'regulation', 'cp', 'Regulation'),
             MultiField(service, 'license', 'cp', 'License'),
             FlagField(service, 'location', 'cp', 'Location'),
@@ -116,6 +115,7 @@ class ServiceHelper(object):
             #
             MultiField(service, 'pricing_model', 'd', 'Pricing Model', [TRAINING, TRADING_SYSTEM, SIGNALS, VPS, TOOLS]),
             # only for brokers:
+            MultiField(service, 'broker_type', 'cp', 'Broker type', [BROKERS]),
             FlagField(service, 'international_offices', 'cp', 'International offices', [BROKERS]),
             FlagField(service, 'restrictions', 'cp', 'Restrictions', [BROKERS]),  #
             # #

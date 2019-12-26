@@ -28,7 +28,6 @@ from wagtail.admin.edit_handlers import (
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-
 # from wagtail.core.blocks import ChoiceBlock
 from cms.json_ld.ServiceLD import ServiceLD
 from cms.json_ld.VoucherLD import VoucherLD
@@ -201,6 +200,8 @@ class Service(ClusterableModel):
             'avg_rate': self.get_avg_rate,
             'count_rate': self.get_count_rate,
             'slug': self.slug,
+            'avg_rate': self.get_avg_rate,
+            'count_rate': self.get_count_rate,
         }
 
     panels = [

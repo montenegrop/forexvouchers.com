@@ -118,6 +118,9 @@ class ForexServicesView(View):
                     'limit': limit
                     }
 
+        print(response['trading_types'])
+        print(response['categories'])
+
         [response['data'].append(ser.toDict()) for ser in services]
 
         return HttpResponse(json.dumps(response), content_type="application/json")

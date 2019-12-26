@@ -44,7 +44,6 @@
     export default {
         name: "fv-vouchers-view",
         components: {FvList, FvFilterType, FvFilterService, FvFilterCategory, FvLetterFilter: LetterFilter, FvSort},
-        props: [],
         data() {
             return {
                 filterTypes: {},

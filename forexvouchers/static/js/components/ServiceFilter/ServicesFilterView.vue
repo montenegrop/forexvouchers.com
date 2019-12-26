@@ -4,26 +4,35 @@
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
                 <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
-                <!--<fv-filter-type :tipos="filterTypes" :onChange="onTypeChange"></fv-filter-type>-->
+                <fv-filter-trading-type :options="filterTradingTypes"
+                                        :onChange="onTradingTypeChange"></fv-filter-trading-type>
+                <fv-filter-trading-software :options="filterTradingSoftwares"
+                                            :onChange="onTradingSoftwareChange"></fv-filter-trading-software>
+                <fv-filter-system-type :options="filterSystemTypes"
+                                       :onChange="onSystemTypeChange"></fv-filter-system-type>
+                <fv-filter-trading-tool :options="filterTradingTools"
+                                        :onChange="onTradingToolChange"></fv-filter-trading-tool>
+                <fv-filter-pricing-model :options="filterPricingModels"
+                                         :onChange="onPricingModelChange"></fv-filter-pricing-model>
             </b-col>
             <b-col md="9">
-                <div>
-                    <!--<div style="float: left;">-->
-                        <!--<FvLetterFilter :options="vouchers.map(voucher => ({text: voucher.name}))"-->
-                                        <!--v-on:clickLetter="onLetterFilter($event)" :selected="startingLetter"/>-->
-                    <!--</div>-->
-                    <div style="float: right;">
-                        <!--<FvSort v-on:sortedBy="onSortChange($event)"/>-->
+                <div class="separator">
+                    <div>
+                        <FvLetterFilter :options="services.map(service => ({text: service.name}))"
+                                        v-on:clickLetter="onLetterFilter($event)" :selected="startingLetter"/>
+                    </div>
+                    <div>
+                        <FvSort v-on:sortedBy="onSortChange($event)"/>
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <!--<FvList :vouchers="vouchers.filter(voucher => (voucher.name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/>-->
+                        <fv-filter-service :services="services"/>
                     </div>
-                    <div class="show-more">
-                        <a href="#" @click.stop.prevent="limit += 10">show more</a>
-                    </div>
+                    <!--<div class="show-more">-->
+                    <!--<a href="#" @click.stop.prevent="limit += 10">show more</a>-->
+                    <!--</div>-->
                 </div>
             </b-col>
         </b-row>
@@ -32,44 +41,74 @@
 
 <script>
 
-    import FvFilterCategory from './fv-filter-category'
-
-
-    // import FvList from '../Vouchers/VouchersList'
-    // import FvFilterType from './VouchersFilterType'
-    // import FvFilterService from './VouchersFilterService'
+    import FvFilterCategory from './ServicesFilterCategory'
+    import FvFilterTradingType from './ServicesFilterTradingType'
+    import FvFilterTradingSoftware from './ServicesFilterTradingSoftware'
+    import FvFilterSystemType from './ServicesFilterSystemType'
+    import FvFilterTradingTool from './ServicesFilterTradingTool'
+    import FvFilterPricingModel from './ServicesFilterPricingModel'
+    import FvFilterService from './Service/FilterService'
     import LetterFilter from '../LetterFilter/index'
-    // import FvSort from './VoucherSorting'
+    import FvSort from './ServicesFilterSorting'
 
 
     export default {
         name: "fv-services-filter-view",
-        components: {FvFilterCategory, FvLetterFilter: LetterFilter},
-        props: [],
+        components: {
+            FvFilterCategory,
+            FvFilterTradingType,
+            FvFilterTradingSoftware,
+            FvFilterSystemType,
+            FvFilterTradingTool,
+            FvFilterPricingModel,
+            FvFilterService,
+            FvLetterFilter: LetterFilter,
+            FvSort,
+
+        },
         data() {
             return {
-                filterTypes: {},
-                type: 'discount,promocode,offer',
-                filterServices: [],
-                services: '',
-                filterCategories: [],
+                services: [],
+
                 categories: '',
-                // services: [],
+                filterCategories: [],
+                tradingTypes: '',
+                filterTradingTypes: [],
+                tradingSoftwares: '',
+                filterTradingSoftwares: [],
+                systemTypes: '',
+                filterSystemTypes: [],
+                tradingTools: '',
+                filterTradingTools: [],
+                pricingModels: '',
+                filterPricingModels: [],
+
                 startingLetter: '',
                 limit: '10',
                 sort: ''
             }
         },
         watch: {
-            type: function () {
-                this.getData();
-            },
-            services: function () {
-                this.getData();
-            },
             categories: function () {
                 this.getData();
             },
+            tradingTypes: function () {
+                this.getData();
+            },
+            tradingSoftwares: function () {
+                this.getData();
+            },
+            systemTypes: function () {
+                this.getData();
+            },
+            tradingTools: function () {
+                this.getData();
+            },
+            pricingModels: function () {
+                this.getData();
+            },
+
+
             limit: function () {
                 this.getData()
             },
@@ -78,33 +117,51 @@
             }
         },
         mounted() {
-            this.getData()
+            this.getData();
         },
         methods: {
             async getData() {
-                const url = `/api/forex-services?categories=${this.categories}&limit=${this.limit}`;
+                const url = `/api/forex-services?categories=${this.categories}&trading_types=${this.tradingTypes}&limit=${this.limit}`;
                 let response = await this.$http.get(url);
                 this.services = response.body.data;
                 this.filterCategories = response.body.categories;
-                // this.filterTypes = response.body.types;
+                this.filterTradingTypes = response.body.trading_types;
+                this.filterTradingSoftwares = response.body.trading_softwares;
+                this.filterSystemTypes = response.body.system_types;
+                this.filterTradingTools = response.body.trading_tools;
+                this.filterPricingModels = response.body.pricing_models;
                 this.limit = response.body.limit;
             },
 
-            // onTypeChange(value) {
-            //     this.type = value.join(',')
-            // },
-            // onServiceChange(value) {
-            //     this.services = value.join(',')
-            // },
+
             onCategoryChange(value) {
                 this.categories = value.join(',')
             },
-            onLetterFilter($event) {
-                this.startingLetter = $event.letter;
+            onTradingTypeChange(value) {
+                this.tradingTypes = value.join(',')
             },
+            onTradingSoftwareChange(value) {
+                this.tradingSoftwares = value.join(',')
+            },
+            onSystemTypeChange(value) {
+                this.systemTypes = value.join(',')
+            },
+            onTradingToolChange(value) {
+                this.tradingTools = value.join(',')
+            },
+            onPricingModelChange(value) {
+                this.pricingModels = value.join(',')
+            },
+
+
             // onSortChange($event) {
             //     this.sort = $event.sort;
             // }
+
+            onLetterFilter($event) {
+                this.startingLetter = $event.letter;
+            },
+
         },
     }
 </script>
