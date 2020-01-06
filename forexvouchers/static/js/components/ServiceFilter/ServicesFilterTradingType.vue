@@ -6,12 +6,12 @@
 
                     <b-form-group>
                         <b-form-checkbox-group
-                                id="checkbox-group-3"
+                                id="trading-type-filter"
                                 class="filter-content option-filter"
                                 :value="selected"
                                 v-on:input="onChange($event)"
                                 :options="options.map(option=> ({text: option.name, value: option.id}))"
-                                name="flavour-1"
+                                name="trading-type-filter"
                                 stacked
                         ></b-form-checkbox-group>
                     </b-form-group>

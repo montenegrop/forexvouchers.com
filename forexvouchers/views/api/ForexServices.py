@@ -87,8 +87,6 @@ class ForexServicesView(View):
     #     else:
     #         return 'created_at',
 
-
-
     def get(self, request):
         limit = int(request.GET.get('limit', 10))
         categories = list(filter(lambda item: item, request.GET.get('categories', '').split(',')))
@@ -117,9 +115,6 @@ class ForexServicesView(View):
                     'pricing_models': self.getPricingModels(),
                     'limit': limit
                     }
-
-        print(response['trading_types'])
-        print(response['categories'])
 
         [response['data'].append(ser.toDict()) for ser in services]
 

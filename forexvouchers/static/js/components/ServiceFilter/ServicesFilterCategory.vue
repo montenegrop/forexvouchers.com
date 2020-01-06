@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator title="Pricing">
+    <fv-filter-decorator title="Services">
         <div>
             <b-row>
                 <b-col cols="9">
@@ -12,7 +12,7 @@
                                 :options="options.map(option=> ({text: option.name, value: option.id}))"
                                 name="flavour-1"
                                 stacked
-                        ></b-form-checkbox-group>
+                        />
                     </b-form-group>
                 </b-col>
 
@@ -25,7 +25,7 @@
                                                :options="options.map(option=> ({text: '(' + option.total + ')', value: option.id}))"
                                                name="flavour-2"
                                                stacked
-                        ></b-form-checkbox-group>
+                        />
                     </b-form-group>
                 </b-col>
             </b-row>
