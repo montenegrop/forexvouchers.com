@@ -5,7 +5,7 @@
                 <b-col cols="9">
                     <b-form-group>
                         <b-form-checkbox-group
-                                id="checkbox-group-3"
+                                id="checkbox-group-category-names"
                                 class="filter-content option-filter"
                                 :value="selected"
                                 v-on:input="onChange($event)"
@@ -18,7 +18,7 @@
 
                 <b-col cols="3">
                     <b-form-group>
-                        <b-form-checkbox-group id="checkbox-group-22"
+                        <b-form-checkbox-group id="checkbox-group-category-numbers"
                                                class="counter-filter d-none d-md-block"
                                                :value="selected"
                                                v-on:input="onChange($event)"

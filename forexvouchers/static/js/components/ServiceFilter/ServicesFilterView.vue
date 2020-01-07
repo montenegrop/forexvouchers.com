@@ -17,22 +17,19 @@
             </b-col>
             <b-col md="9">
                 <div class="separator">
-                    <div>
-                        <FvLetterFilter :options="services.map(service => ({text: service.name}))"
-                                        v-on:clickLetter="onLetterFilter($event)" :selected="startingLetter"/>
-                    </div>
-                    <div>
-                        <FvSort v-on:sortedBy="onSortChange($event)"/>
-                    </div>
+                    <FvLetterFilter :options="services.map(service => ({text: service.name}))"
+                                    v-on:clickLetter="onLetterFilter($event)"
+                                    :selected="startingLetter"></FvLetterFilter>
+                    <fv-sort v-on:sortedBy="onSortChange($event)"></fv-sort>
+                    <b-button :disabled="2" size="lg" variant="primary">Disabled</b-button>
                 </div>
 
                 <div>
-                    <div>
-                        <fv-filter-service :services="services"/>
+                    <fv-filter-service :services="services"
+                                       v-on:serviceSelected="checkForCompare($event)"></fv-filter-service>
+                    <div class="show-more">
+                        <a href="#" @click.stop.prevent="limit += 10">show more</a>
                     </div>
-                    <!--<div class="show-more">-->
-                    <!--<a href="#" @click.stop.prevent="limit += 10">show more</a>-->
-                    <!--</div>-->
                 </div>
             </b-col>
         </b-row>
@@ -64,12 +61,13 @@
             FvFilterService,
             FvLetterFilter: LetterFilter,
             FvSort,
-
         },
         data() {
-            return {
-                services: [],
+            const isBrokerPage = document.location.href.indexOf('broker') !== -1;
 
+            return {
+                isBrokerPage,
+                services: [],
                 categories: '',
                 filterCategories: [],
                 tradingTypes: '',
@@ -85,7 +83,10 @@
 
                 startingLetter: '',
                 limit: '10',
-                sort: ''
+                sort: '',
+
+                slug1: '',
+                slug2: '',
             }
         },
         watch: {
@@ -107,8 +108,6 @@
             pricingModels: function () {
                 this.getData();
             },
-
-
             limit: function () {
                 this.getData()
             },
@@ -121,7 +120,15 @@
         },
         methods: {
             async getData() {
-                const url = `/api/forex-services?categories=${this.categories}&trading_types=${this.tradingTypes}&limit=${this.limit}`;
+                const url = `/api/forex-services?categories=${
+                    this.categories}&trading_types=${
+                    this.tradingTypes}&trading_softwares=${
+                    this.tradingSoftwares}&system_types=${
+                    this.systemTypes}&trading_tools=${
+                    this.tradingTools}&pricings=${
+                    this.pricingModels}&limit=${
+                    this.limit}&sort=${
+                    this.sort}`;
                 let response = await this.$http.get(url);
                 this.services = response.body.data;
                 this.filterCategories = response.body.categories;
@@ -132,7 +139,6 @@
                 this.filterPricingModels = response.body.pricing_models;
                 this.limit = response.body.limit;
             },
-
 
             onCategoryChange(value) {
                 this.categories = value.join(',')
@@ -152,16 +158,17 @@
             onPricingModelChange(value) {
                 this.pricingModels = value.join(',')
             },
-
-
-            // onSortChange($event) {
-            //     this.sort = $event.sort;
-            // }
-
+            onSortChange($event) {
+                this.sort = $event.sort;
+            },
             onLetterFilter($event) {
                 this.startingLetter = $event.letter;
             },
-
+            checkForCompare($event) {
+                this.count += 1;
+                this.slug2 = this.slug1;
+                this.slug1 = $event.ser_slug
+            }
         },
     }
 </script>

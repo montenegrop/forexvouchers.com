@@ -82,7 +82,8 @@ class VouchersView(View):
         vouchers = Voucher.objects.filter(typeConditions,
                                           serviceConditions,
                                           categoryConditions,
-                                          Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).order_by(
+                                          Q(expires__gte=datetime.date.today()) | Q(
+                                              never_expires=True)).distinct().order_by(
             *self.getSorting(sort))[:limit]
 
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))

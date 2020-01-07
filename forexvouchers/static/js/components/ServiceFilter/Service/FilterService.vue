@@ -3,7 +3,8 @@
         <div class="service-summary col-md-6" v-for="service in services">
             <div class="product">
                 <div class="row">
-                    <div class="col-3 col">
+                    <div class="col-3 col mt-4">
+                        <fv-check :slug="service.slug" v-on:serviceSelected="checkForCompare($event)"/>
                     </div>
                     <div class="col-6 col">
                         <div>
@@ -29,7 +30,6 @@
                             </div>
                             Vouchers
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -39,8 +39,18 @@
 
 
 <script>
+
+    import FvCheck from './FilterCheck'
+
     export default {
+        components: {FvCheck},
         props: ['services'],
+
+        methods: {
+            checkForCompare($event) {
+                this.$emit('serviceSelected', {ser_slug: $event.ser_slug})
+            },
+        },
     }
 </script>
 
