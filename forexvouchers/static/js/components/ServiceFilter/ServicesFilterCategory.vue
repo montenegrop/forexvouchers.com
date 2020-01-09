@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator title="Services">
+    <fv-filter-decorator v-if="!brokerness" title="Services">
         <div>
             <b-row>
                 <b-col cols="9">
@@ -39,7 +39,7 @@
 
 
     export default {
-        props: ["options", "onChange"],
+        props: ["brokerness", "options", "onChange"],
         components: {FvFilterDecorator},
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator title="System Type">
+    <fv-filter-decorator v-if="!brokerness" title="System Type">
         <div>
             <b-row>
                 <b-col cols="9">
@@ -26,7 +26,7 @@
     import FvFilterDecorator from '../FilterDecorator'
 
     export default {
-        props: ["options", "onChange"],
+        props: ["brokerness", "options", "onChange"],
         components: {FvFilterDecorator},
     }
 </script>

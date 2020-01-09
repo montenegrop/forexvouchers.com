@@ -3,9 +3,25 @@
         <div class="service-summary col-md-6" v-for="service in services">
             <div class="product">
                 <div class="row">
-                    <div class="col-3 col mt-4">
-                        <fv-check :slug="service.slug" v-on:serviceSelected="checkForCompare($event)"/>
+                    <div v-if="selected.includes(service.slug)" class="col-3 col mt-4 d-flex justify-content-center">
+
+                        <fv-check :status="service.slug" :slug="service.slug"
+                                  v-on:serviceSelected="checkForCompare($event)"/>
+
+<!--                        <div v-if="selected[0] === service.slug">-->
+<!--                            <b-button :href="'/fb/compare/' +  selected[0]  + '-vs-' +  selected[1] "-->
+<!--                                      :disabled="selected.length < 2" size="lg" variant="primary">{{ selected[0] }} vs-->
+<!--                                {{-->
+<!--                                selected[1] }}-->
+<!--                            </b-button>-->
+<!--                        </div>-->
                     </div>
+
+                    <div v-else class="col-3 col mt-4 d-flex justify-content-center">
+                        <fv-check :status="'not-selected'" :slug="service.slug"
+                                  v-on:serviceSelected="checkForCompare($event)"/>
+                    </div>
+
                     <div class="col-6 col">
                         <div>
                             <img class="logo-img" :src="service.logo_url"/>
@@ -44,11 +60,11 @@
 
     export default {
         components: {FvCheck},
-        props: ['services'],
+        props: ['services', 'selected'],
 
         methods: {
             checkForCompare($event) {
-                this.$emit('serviceSelected', {ser_slug: $event.ser_slug})
+                this.$emit('serviceSelected', {ser_slug: $event.ser_slug, count: $event.count})
             },
         },
     }

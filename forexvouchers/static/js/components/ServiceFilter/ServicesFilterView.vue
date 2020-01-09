@@ -3,16 +3,16 @@
         <h2 class="filter-titles filter-titles-main">Search for Services:</h2>
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
-                <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
-                <fv-filter-trading-type :options="filterTradingTypes"
+                <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
+                <fv-filter-trading-type :brokerness="isBrokerPage" :options="filterTradingTypes"
                                         :onChange="onTradingTypeChange"></fv-filter-trading-type>
-                <fv-filter-trading-software :options="filterTradingSoftwares"
+                <fv-filter-trading-software :brokerness="isBrokerPage" :options="filterTradingSoftwares"
                                             :onChange="onTradingSoftwareChange"></fv-filter-trading-software>
-                <fv-filter-system-type :options="filterSystemTypes"
+                <fv-filter-system-type :brokerness="isBrokerPage" :options="filterSystemTypes"
                                        :onChange="onSystemTypeChange"></fv-filter-system-type>
-                <fv-filter-trading-tool :options="filterTradingTools"
+                <fv-filter-trading-tool :brokerness="isBrokerPage" :options="filterTradingTools"
                                         :onChange="onTradingToolChange"></fv-filter-trading-tool>
-                <fv-filter-pricing-model :options="filterPricingModels"
+                <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
                                          :onChange="onPricingModelChange"></fv-filter-pricing-model>
             </b-col>
             <b-col md="9">
@@ -21,11 +21,12 @@
                                     v-on:clickLetter="onLetterFilter($event)"
                                     :selected="startingLetter"></FvLetterFilter>
                     <fv-sort v-on:sortedBy="onSortChange($event)"></fv-sort>
-                    <b-button :disabled="2" size="lg" variant="primary">Disabled</b-button>
+                    <b-button :href="'/fb/compare/' +  selected[0]  + '-vs-' +  selected[1] " :disabled="selected.length < 2" size="lg" variant="primary">{{ selected[0] }} vs {{ selected[1] }}
+                    </b-button>
                 </div>
 
                 <div>
-                    <fv-filter-service :services="services"
+                    <fv-filter-service :services="services" :selected="selected"
                                        v-on:serviceSelected="checkForCompare($event)"></fv-filter-service>
                     <div class="show-more">
                         <a href="#" @click.stop.prevent="limit += 10">show more</a>
@@ -84,6 +85,8 @@
                 startingLetter: '',
                 limit: '10',
                 sort: '',
+
+                selected: [],
 
                 slug1: '',
                 slug2: '',
@@ -165,10 +168,19 @@
                 this.startingLetter = $event.letter;
             },
             checkForCompare($event) {
-                this.count += 1;
+                if (this.selected.includes($event.ser_slug)) {
+                    this.selected = this.selected.filter(slug => slug !== $event.ser_slug)
+                } else {
+                    const selected = [$event.ser_slug ,...this.selected]
+                    if (selected.length > 2) {
+                        selected.pop()
+                    }
+                    this.selected = selected
+                }
+                console.log(this.selected)
                 this.slug2 = this.slug1;
-                this.slug1 = $event.ser_slug
-            }
+                this.slug1 = this.selected[0];
+            },
         },
     }
 </script>
