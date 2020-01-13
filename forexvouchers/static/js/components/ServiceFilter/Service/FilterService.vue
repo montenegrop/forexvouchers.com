@@ -6,15 +6,12 @@
                     <div v-if="selected.includes(service.slug)" class="col-3 col mt-4 d-flex justify-content-center">
 
                         <fv-check :status="service.slug" :slug="service.slug"
-                                  v-on:serviceSelected="checkForCompare($event)"/>
+                                  v-on:serviceSelected="checkForCompare($event)">
+                        </fv-check>
 
-<!--                        <div v-if="selected[0] === service.slug">-->
-<!--                            <b-button :href="'/fb/compare/' +  selected[0]  + '-vs-' +  selected[1] "-->
-<!--                                      :disabled="selected.length < 2" size="lg" variant="primary">{{ selected[0] }} vs-->
-<!--                                {{-->
-<!--                                selected[1] }}-->
-<!--                            </b-button>-->
-<!--                        </div>-->
+                        <fv-button-compare :show="selected[0] === service.slug && selected.length === 2"
+                                           :comparing="selected"></fv-button-compare>
+
                     </div>
 
                     <div v-else class="col-3 col mt-4 d-flex justify-content-center">
@@ -57,9 +54,11 @@
 <script>
 
     import FvCheck from './FilterCheck'
+    import FvButtonCompare from './ButtonCompare'
+
 
     export default {
-        components: {FvCheck},
+        components: {FvCheck, FvButtonCompare},
         props: ['services', 'selected'],
 
         methods: {

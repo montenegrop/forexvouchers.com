@@ -3,7 +3,8 @@
         <h2 class="filter-titles filter-titles-main">Search for Services:</h2>
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
-                <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
+                <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories"
+                                    :onChange="onCategoryChange"></fv-filter-category>
                 <fv-filter-trading-type :brokerness="isBrokerPage" :options="filterTradingTypes"
                                         :onChange="onTradingTypeChange"></fv-filter-trading-type>
                 <fv-filter-trading-software :brokerness="isBrokerPage" :options="filterTradingSoftwares"
@@ -14,6 +15,8 @@
                                         :onChange="onTradingToolChange"></fv-filter-trading-tool>
                 <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
                                          :onChange="onPricingModelChange"></fv-filter-pricing-model>
+
+
             </b-col>
             <b-col md="9">
                 <div class="separator">
@@ -21,7 +24,9 @@
                                     v-on:clickLetter="onLetterFilter($event)"
                                     :selected="startingLetter"></FvLetterFilter>
                     <fv-sort v-on:sortedBy="onSortChange($event)"></fv-sort>
-                    <b-button :href="'/fb/compare/' +  selected[0]  + '-vs-' +  selected[1] " :disabled="selected.length < 2" size="lg" variant="primary">{{ selected[0] }} vs {{ selected[1] }}
+                    <b-button :href="'/fb/compare/' +  selected[0]  + '-vs-' +  selected[1] "
+                              :disabled="selected.length < 2" size="lg" variant="primary">{{ selected[0] }} vs {{
+                        selected[1] }}
                     </b-button>
                 </div>
 
@@ -69,6 +74,8 @@
             return {
                 isBrokerPage,
                 services: [],
+
+                // for forex-services:
                 categories: '',
                 filterCategories: [],
                 tradingTypes: '',
@@ -82,14 +89,28 @@
                 pricingModels: '',
                 filterPricingModels: [],
 
+                // for brokers:
+                regulations: '',
+                filterRegulations: [],
+                brokerTypes: '',
+                filterBrokerTypes: [],
+                // features
+                tradingInstruments: '',
+                filterTradingInstruments: [],
+                depositMethods: '',
+                filterDepositMethods: [],
+                withdrawMethods: '',
+                filterWithdrawMethods: [],
+                // tradingSoftware: '',
+                // filterTradingSoftware: [],
+                operatingSystems: '',
+                filterOperatingSystems: [],
+
                 startingLetter: '',
                 limit: '10',
                 sort: '',
 
                 selected: [],
-
-                slug1: '',
-                slug2: '',
             }
         },
         watch: {
@@ -123,24 +144,38 @@
         },
         methods: {
             async getData() {
-                const url = `/api/forex-services?categories=${
-                    this.categories}&trading_types=${
-                    this.tradingTypes}&trading_softwares=${
-                    this.tradingSoftwares}&system_types=${
-                    this.systemTypes}&trading_tools=${
-                    this.tradingTools}&pricings=${
-                    this.pricingModels}&limit=${
-                    this.limit}&sort=${
-                    this.sort}`;
-                let response = await this.$http.get(url);
-                this.services = response.body.data;
-                this.filterCategories = response.body.categories;
-                this.filterTradingTypes = response.body.trading_types;
-                this.filterTradingSoftwares = response.body.trading_softwares;
-                this.filterSystemTypes = response.body.system_types;
-                this.filterTradingTools = response.body.trading_tools;
-                this.filterPricingModels = response.body.pricing_models;
-                this.limit = response.body.limit;
+                if (!this.isBrokerPage) {
+                    const url = `/api/forex-services?categories=${
+                        this.categories}&trading_types=${
+                        this.tradingTypes}&trading_softwares=${
+                        this.tradingSoftwares}&system_types=${
+                        this.systemTypes}&trading_tools=${
+                        this.tradingTools}&pricings=${
+                        this.pricingModels}&limit=${
+                        this.limit}&sort=${
+                        this.sort}`;
+                    let response = await this.$http.get(url);
+                    this.services = response.body.data;
+                    this.filterCategories = response.body.categories;
+                    this.filterTradingTypes = response.body.trading_types;
+                    this.filterTradingSoftwares = response.body.trading_softwares;
+                    this.filterSystemTypes = response.body.system_types;
+                    this.filterTradingTools = response.body.trading_tools;
+                    this.filterPricingModels = response.body.pricing_models;
+                    this.limit = response.body.limit;
+                } else {
+                    const url = `/api/forex-services?categories=${
+                        this.categories}&trading_types=${
+                        this.tradingTypes}&trading_softwares=${
+                        this.tradingSoftwares}&system_types=${
+                        this.systemTypes}&trading_tools=${
+                        this.tradingTools}&pricings=${
+                        this.pricingModels}&limit=${
+                        this.limit}&sort=${
+                        this.sort}`;
+                    let response = await this.$http.get(url);
+                    this.services = response.body.data;
+                }
             },
 
             onCategoryChange(value) {
@@ -168,18 +203,15 @@
                 this.startingLetter = $event.letter;
             },
             checkForCompare($event) {
-                if (this.selected.includes($event.ser_slug)) {
-                    this.selected = this.selected.filter(slug => slug !== $event.ser_slug)
+               const i = this.selected.indexOf($event.ser_slug)
+                if (i !== -1) {
+                    this.$delete(this.selected, i)
                 } else {
-                    const selected = [$event.ser_slug ,...this.selected]
-                    if (selected.length > 2) {
-                        selected.pop()
+                    this.selected.push($event.ser_slug);
+                    if (this.selected.length > 2) {
+                        this.selected.shift()
                     }
-                    this.selected = selected
                 }
-                console.log(this.selected)
-                this.slug2 = this.slug1;
-                this.slug1 = this.selected[0];
             },
         },
     }

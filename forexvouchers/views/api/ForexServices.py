@@ -87,26 +87,49 @@ class ForexServicesView(View):
 
     def get(self, request):
         limit = int(request.GET.get('limit', 10))
+        sort = request.GET.get('sort', '')
+
+        # Forex services filters
         categories = list(filter(lambda item: item, request.GET.get('categories', '').split(',')))
         trading_types = list(filter(lambda item: item, request.GET.get('trading_types', '').split(',')))
         trading_softwares = list(filter(lambda item: item, request.GET.get('trading_softwares', '').split(',')))
         system_types = list(filter(lambda item: item, request.GET.get('system_types', '').split(',')))
         trading_tools = list(filter(lambda item: item, request.GET.get('trading_tools', '').split(',')))
-        sort = request.GET.get('sort', '')
         pricings = list(filter(lambda item: item, request.GET.get('pricings', '').split(',')))
+
+        # Brokers filters
+
+        regulations = list(filter(lambda item: item, request.GET.get('regulations', '').split(',')))
+        broker_types = list(filter(lambda item: item, request.GET.get('broker_types', '').split(',')))
+        # features
+        trading_instruments = list(filter(lambda item: item, request.GET.get('trading_instruments', '').split(',')))
+        deposit_methods = list(filter(lambda item: item, request.GET.get('deposit_methods', '').split(',')))
+        withdraw_methods = list(filter(lambda item: item, request.GET.get('withdraw_methods', '').split(',')))
+        # trading_softwares
+        operating_systems = list(filter(lambda item: item, request.GET.get('operating_systems', '').split(',')))
+
 
         categoryConditions = Q(category__in=categories) if len(categories) else ~Q(category=BROKERS)
         tradingTypeConditions = Q(trading_type__in=trading_types) if len(trading_types) else Q()
         tradingSoftwareConditions = Q(trading_software__in=trading_softwares) if len(trading_softwares) else Q()
         systemTypeConditions = Q(system_type__in=system_types) if len(system_types) else Q()
-        tradingToolsConditions = Q(trading_tools__in=trading_tools) if len(trading_tools) else Q()
+        tradingToolConditions = Q(trading_tools__in=trading_tools) if len(trading_tools) else Q()
         pricingModelConditions = Q(pricing_model__in=pricings) if len(pricings) else Q()
+        regulationConditions = Q(regulation__in=regulations) if len(regulations) else Q()
+        brokerTypeConditions = Q(broker_type__in=broker_types) if len(broker_types) else Q()
+        # features
+        tradingInstrumentConditions = Q(trading_instrument__in=trading_instruments) if len(trading_instruments) else Q()
+        depositMethodConditions = Q(deposit_method__in=deposit_methods) if len(deposit_methods) else Q()
+        withdraw_method = Q(withdraw_method__in=withdraw_methods) if len(withdraw_methods) else Q()
+        # trading_softwares
+        operatingSystemConditions = Q(operating_system__in=operating_systems) if len(operating_systems) else Q()
+
 
         services = Service.objects.filter(categoryConditions,
                                           tradingTypeConditions,
                                           tradingSoftwareConditions,
                                           systemTypeConditions,
-                                          tradingToolsConditions,
+                                          tradingToolConditions,
                                           pricingModelConditions).distinct().order_by(
             *self.getSorting(sort))[:limit]
 
