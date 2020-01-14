@@ -3,20 +3,15 @@
         <div class="service-summary col-md-6" v-for="service in services">
             <div class="product">
                 <div class="row">
-                    <div v-if="selected.includes(service.slug)" class="col-3 col mt-4 d-flex justify-content-center">
+                    <div class="col-3 col mt-4 d-flex justify-content-center">
 
-                        <fv-check :status="service.slug" :slug="service.slug"
+                        <fv-check :status="status(service)" :slug="service.slug"
                                   v-on:serviceSelected="checkForCompare($event)">
                         </fv-check>
 
-                        <fv-button-compare :show="selected[0] === service.slug && selected.length === 2"
+                        <fv-button-compare class="compare-button" v-show="selected[1] === service.slug && selected.length === 2"
                                            :comparing="selected"></fv-button-compare>
 
-                    </div>
-
-                    <div v-else class="col-3 col mt-4 d-flex justify-content-center">
-                        <fv-check :status="'not-selected'" :slug="service.slug"
-                                  v-on:serviceSelected="checkForCompare($event)"/>
                     </div>
 
                     <div class="col-6 col">
@@ -56,7 +51,6 @@
     import FvCheck from './FilterCheck'
     import FvButtonCompare from './ButtonCompare'
 
-
     export default {
         components: {FvCheck, FvButtonCompare},
         props: ['services', 'selected'],
@@ -64,6 +58,9 @@
         methods: {
             checkForCompare($event) {
                 this.$emit('serviceSelected', {ser_slug: $event.ser_slug, count: $event.count})
+            },
+            status(service) {
+                return this.selected.includes(service.slug) ? service.slug : 'not-selected';
             },
         },
     }

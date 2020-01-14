@@ -1,10 +1,11 @@
 <template>
 
-    <div v-if="show">
+    <div>
         <b-button :href="'/fb/compare/' +  comparing[0]  + '-vs-' +  comparing[1] "
-                  :disabled="comparing.length < 2" size="lg" variant="primary">{{ comparing[0] }} vs
-            {{
-            comparing[1] }}
+                  :disabled="comparing.length < 2" size="md" variant="primary"><p
+                class="font-weight-bold text-warning -underline m-0">Compare:</p> {{ comparing[0] }} <p
+                class="font-weight-bold text-warning -underline m-0">-vs-</p>
+            {{ comparing[1] }}
         </b-button>
     </div>
 
@@ -12,7 +13,7 @@
 
 <script>
     export default {
-        props: ['show', 'comparing'],
+        props: ['comparing'],
         data() {
         },
         methods: {},

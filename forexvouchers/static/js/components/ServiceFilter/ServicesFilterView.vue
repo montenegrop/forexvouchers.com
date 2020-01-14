@@ -24,10 +24,6 @@
                                     v-on:clickLetter="onLetterFilter($event)"
                                     :selected="startingLetter"></FvLetterFilter>
                     <fv-sort v-on:sortedBy="onSortChange($event)"></fv-sort>
-                    <b-button :href="'/fb/compare/' +  selected[0]  + '-vs-' +  selected[1] "
-                              :disabled="selected.length < 2" size="lg" variant="primary">{{ selected[0] }} vs {{
-                        selected[1] }}
-                    </b-button>
                 </div>
 
                 <div>
@@ -111,6 +107,7 @@
                 sort: '',
 
                 selected: [],
+                counter: 0,
             }
         },
         watch: {
@@ -203,13 +200,18 @@
                 this.startingLetter = $event.letter;
             },
             checkForCompare($event) {
-               const i = this.selected.indexOf($event.ser_slug)
+                const i = this.selected.indexOf($event.ser_slug);
                 if (i !== -1) {
-                    this.$delete(this.selected, i)
+                    var arr = this.selected.filter(slug => slug !== $event.ser_slug);
+                    this.selected = arr;
                 } else {
-                    this.selected.push($event.ser_slug);
-                    if (this.selected.length > 2) {
-                        this.selected.shift()
+                    var arr = this.selected;
+                    arr.push($event.ser_slug);
+                    if (arr.length > 2) {
+                        arr = this.selected.filter(slug => arr.indexOf(slug) != 0);
+                        this.selected = arr;
+                    } else {
+                        this.selected = arr;
                     }
                 }
             },
