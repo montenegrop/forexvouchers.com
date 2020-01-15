@@ -9,7 +9,8 @@
                                   v-on:serviceSelected="checkForCompare($event)">
                         </fv-check>
 
-                        <fv-button-compare class="compare-button" v-show="selected[1] === service.slug && selected.length === 2"
+                        <fv-button-compare class="compare-button"
+                                           v-show="selected[1] === service.slug && selected.length === 2"
                                            :comparing="selected"></fv-button-compare>
 
                     </div>

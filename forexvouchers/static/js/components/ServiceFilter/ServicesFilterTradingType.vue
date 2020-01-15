@@ -11,7 +11,7 @@
                                 :value="selected"
                                 v-on:input="onChange($event)"
                                 :options="options.map(option=> ({text: option.name, value: option.id}))"
-                                name="trading-type-filter"
+                                name="flavour-1"
                                 stacked
                         />
                     </b-form-group>

@@ -5,7 +5,6 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtailschemaorg.models import PageLDMixin
 from wagtailschemaorg.utils import extend, image_ld
 
-
 from cms.models.business_models import Voucher
 from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
@@ -48,7 +47,8 @@ class HomePage(RoutablePageMixin, PageLDMixin, Page):
         context = super(HomePage, self).get_context(request)
         services = Service.objects.filter(category__in=[BROKERS], premium=True).order_by('name')[0:10]
 
-        print([ser.category.all()[0].name for ser in services])
+        print('ababa')
+
 
         context['recent_comments'] = []
         context['categories'] = Category.objects.all().order_by('name')
@@ -103,6 +103,11 @@ class HomePage(RoutablePageMixin, PageLDMixin, Page):
 
         return render(request, "../templates/cms/compare_page.html", context)
 
+    @route(r'^forex-brokers/$')
+    def get_brokers_filters_context(self, request, *args, **kwargs):
+        context = super(HomePage, self).get_context(request)
+        return render(request, "../templates/cms/services_filter_page.html", context)
+
     @route(r'^forex-services/$')
     def get_services_filters_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request)
@@ -121,7 +126,6 @@ class HomePage(RoutablePageMixin, PageLDMixin, Page):
 
         context['voucher'] = voucher.toDict()
         context['voucher_model'] = voucher
-
 
         return render(request, "../templates/cms/vouchers_middleware.html", context)
 

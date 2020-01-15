@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator v-if="!brokerness" title="Broker Type">
+    <fv-filter-decorator v-if="brokerness" title="Broker Type">
         <div>
             <b-row>
                 <b-col cols="9">
