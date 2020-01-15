@@ -12,7 +12,7 @@
                                             class="broker-input-min-lot-size"
                                             size="sm"
                                             id="inline-form-input-commission"
-                                            :placeholder="fromMinimum"
+                                            placeholder= "From $0"
                                     ></b-form-input>
                                 </b-col>
                                 <b-col cols="5" class="m-0 p-0">
@@ -49,13 +49,10 @@
                 }
             }
         },
-        mounted() {
-            this.fromMinimum = 'From $'.concat(this.minimum);
-        },
         methods: {
             onSubmit(evt) {
-                evt.preventDefault()
-                this.onChange(JSON.stringify(this.form.commission))
+                evt.preventDefault();
+                this.onChange(JSON.stringify(this.form.commission));
             },
         },
     }

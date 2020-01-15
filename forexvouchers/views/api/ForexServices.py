@@ -155,7 +155,15 @@ class ForexServicesView(View):
                            'total': x['total']},
                 services))
 
-    def getSorting(self, sort):
+    def getServicesSorting(self, sort):
+        if sort == 'premium':
+            return Case(When(Q(premium=True), then=0), default=1), '-avg_rate',
+        elif sort == 'toprated':
+            return '-avg_rate',
+        else:
+            return '-avg_rate',
+
+    def getBrokersSorting(self, sort):
         if sort == 'premium':
             return Case(When(Q(premium=True), then=0), default=1), '-avg_rate',
         elif sort == 'toprated':
@@ -164,7 +172,7 @@ class ForexServicesView(View):
             return '-avg_rate',
 
     def get(self, request):
-        brokernes = request.GET.get('brokerness')
+        brokerness = request.GET.get('brokerness')
         limit = int(request.GET.get('limit', 10))
         sort = request.GET.get('sort', '')
 
@@ -196,9 +204,9 @@ class ForexServicesView(View):
         # # # Services Conditions:
         categoryConditions = Q(category__in=categories) if len(categories) else ~Q(category=BROKERS)
         tradingTypeConditions = Q(trading_type__in=trading_types) if len(trading_types) else Q()
-        tradingSoftwareConditions = Q(trading_software__in=trading_softwares) if len(trading_softwares) else Q()
         tradingToolConditions = Q(trading_tools__in=trading_tools) if len(trading_tools) else Q()
         pricingModelConditions = Q(pricing_model__in=pricings) if len(pricings) else Q()
+        systemTypeConditions = Q(system_type__in=system_types) if len(system_types) else Q()
 
         # # # Brokers Conditions:
         brokerCondition = Q(category=BROKERS)
@@ -219,17 +227,17 @@ class ForexServicesView(View):
         # trading_softwares
         operatingSystemConditions = Q(operating_system__in=operating_systems) if len(operating_systems) else Q()
 
-        # applies to both
-        systemTypeConditions = Q(system_type__in=system_types) if len(system_types) else Q()
+        # applies to both:
+        tradingSoftwareConditions = Q(trading_software__in=trading_softwares) if len(trading_softwares) else Q()
 
-        if brokernes == 'false':
+        if brokerness == 'false':
             services = Service.objects.filter(categoryConditions,
                                               tradingTypeConditions,
                                               tradingSoftwareConditions,
                                               systemTypeConditions,
                                               tradingToolConditions,
                                               pricingModelConditions).distinct().order_by(
-                *self.getSorting(sort))[:limit]
+                *self.getServicesSorting(sort))[:limit]
 
             response = {'data': [],
                         'categories': self.getCategoryCounts(),
@@ -258,7 +266,8 @@ class ForexServicesView(View):
                                               minLeverageConditions,
                                               maxLeverageConditions
                                               ).distinct().order_by(
-                *self.getSorting(sort))[:limit]
+                *self.getBrokersSorting(sort))[:limit]
+
             response = {'data': [],
                         'regulations': self.getRegulations(),
                         'broker_types': self.getBrokerTypes(),

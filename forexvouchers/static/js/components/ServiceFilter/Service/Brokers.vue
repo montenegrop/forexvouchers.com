@@ -64,10 +64,11 @@
                             <td class="right">Broker Type</td>
                             <td class="left">
                                 <div v-for="broker_type in service.broker_type">{{ broker_type }}</div>
-                                <!-- v-for="country in service.location">
-                                            <span :class="'flag flag-icon flag-icon-squared flag-icon-' + country.code.toLowerCase() + ''"></span>
-                                            {{ country.name }}
-                                        </-->
+
+<!--                               <div v-for="country in service.location">-->
+<!--                                   <span :class="'flag flag-icon flag-icon-squared flag-icon-' + country.code.toLowerCase() + ''"></span>-->
+<!--                                   {{ country.name }}-->
+<!--                               </div>-->
 
                             </td>
                         </tr>

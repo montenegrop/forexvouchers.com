@@ -19,6 +19,7 @@
                 <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
                                          :onChange="onPricingModelChange"></fv-filter-pricing-model>
 
+
                 <!--brokers-->
                 <fv-filter-regulation :brokerness="isBrokerPage" :options="filterRegulations"
                                       :onChange="onRegulationChange"></fv-filter-regulation>
@@ -160,11 +161,11 @@
                 brokerTypes: '',
                 filterBrokerTypes: [],
                 // features:
-                minLotSize: 0.1,
+                minLotSize: '',
                 minDeposit: '',
                 maxDeposit: '',
-                spread: 0.0,
-                commission: 0,
+                spread: '',
+                commission: '',
                 minLeverage: '',
                 maxLeverage: '',
 
