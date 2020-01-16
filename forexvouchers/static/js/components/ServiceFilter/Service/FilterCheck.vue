@@ -13,10 +13,7 @@
         name: "checkbox-for-compare",
         props: ["status", "slug"],
         data() {
-            return {
-                count: 0,
-                global: 0,
-            }
+            return {}
         },
         methods: {
             onChange: function ($event) {

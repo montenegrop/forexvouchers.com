@@ -72,8 +72,6 @@
     import FvAllFilters from './allFilters'
 
 
-
-
     export default {
         name: "fv-services-filter-view",
         components: {

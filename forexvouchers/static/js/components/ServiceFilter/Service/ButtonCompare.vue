@@ -1,11 +1,11 @@
 <template>
 
     <div>
-        <b-button :href="'/fb/compare/' +  comparing[0]  + '-vs-' +  comparing[1] "
-                  :disabled="comparing.length < 2" size="md" variant="primary"><p
-                class="font-weight-bold text-warning -underline m-0">Compare:</p> {{ comparing[0] }} <p
-                class="font-weight-bold text-warning -underline m-0">-vs-</p>
-            {{ comparing[1] }}
+        <b-button :href="'/fb/compare/' +  services[0].slug  + '-vs-' +  services[1].slug "
+                  :disabled="services.length < 2" size="md" variant="primary"><p
+                class="font-weight-bold text-warning -underline m-0">Compare:</p> {{ services[0].name }} <p
+                class="font-weight-bold text-warning -underline m-0">vs</p>
+            {{ services[1].name }}
         </b-button>
     </div>
 
@@ -13,8 +13,9 @@
 
 <script>
     export default {
-        props: ['comparing'],
+        props: ['services'],
         data() {
+            return {}
         },
         methods: {},
     }
