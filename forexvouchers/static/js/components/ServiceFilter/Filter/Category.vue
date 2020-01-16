@@ -1,12 +1,11 @@
 <template>
-    <fv-filter-decorator v-if="brokerness" title="Operating System">
+    <fv-filter-decorator v-if="!brokerness" title="Services">
         <div>
             <b-row>
                 <b-col cols="9">
-
                     <b-form-group>
                         <b-form-checkbox-group
-                                id="checkbox-group-operating-system"
+                                id="checkbox-group-category-names"
                                 class="filter-content option-filter"
                                 :value="selected"
                                 v-on:input="onChange($event)"
@@ -19,7 +18,7 @@
 
                 <b-col cols="3">
                     <b-form-group>
-                        <b-form-checkbox-group id="checkbox-group-operating-system-numbers"
+                        <b-form-checkbox-group id="checkbox-group-category-numbers"
                                                class="counter-filter d-none d-md-block"
                                                :value="selected"
                                                v-on:input="onChange($event)"
@@ -29,7 +28,6 @@
                         />
                     </b-form-group>
                 </b-col>
-
             </b-row>
         </div>
     </fv-filter-decorator>
@@ -37,7 +35,8 @@
 
 <script>
 
-    import FvFilterDecorator from '../FilterDecorator'
+    import FvFilterDecorator from '../../FilterDecorator/index'
+
 
     export default {
         props: ["brokerness", "options", "onChange"],

@@ -5,55 +5,36 @@
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
 
-                <!--services-->
-                <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories"
-                                    :onChange="onCategoryChange"></fv-filter-category>
-                <fv-filter-trading-type :brokerness="isBrokerPage" :options="filterTradingTypes"
-                                        :onChange="onTradingTypeChange"></fv-filter-trading-type>
-                <fv-filter-trading-software :brokerness="isBrokerPage" :options="filterTradingSoftwares"
-                                            :onChange="onTradingSoftwareChange"></fv-filter-trading-software>
-                <fv-filter-system-type :brokerness="isBrokerPage" :options="filterSystemTypes"
-                                       :onChange="onSystemTypeChange"></fv-filter-system-type>
-                <fv-filter-trading-tool :brokerness="isBrokerPage" :options="filterTradingTools"
-                                        :onChange="onTradingToolChange"></fv-filter-trading-tool>
-                <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
-                                         :onChange="onPricingModelChange"></fv-filter-pricing-model>
-
-
-                <!--brokers-->
-                <fv-filter-regulation :brokerness="isBrokerPage" :options="filterRegulations"
-                                      :onChange="onRegulationChange"></fv-filter-regulation>
-
-                <fv-filter-broker-type :brokerness="isBrokerPage" :options="filterBrokerTypes"
-                                       :onChange="onBrokerTypeChange"></fv-filter-broker-type>
-
-
-                <fv-filter-min-lot-size :brokerness="isBrokerPage" :minimum="minLotSize"
-                                        :onChange="onMinLotSizeChange"></fv-filter-min-lot-size>
-
-                <fv-filter-deposit :brokerness="isBrokerPage" :minDeposit="minDeposit" :maxDeposit="maxDeposit"
-                                   :onChange="onDepositChange"></fv-filter-deposit>
-
-                <fv-filter-spread :brokerness="isBrokerPage" :minimum="spread"
-                                        :onChange="onSpreadChange"></fv-filter-spread>
-
-                <fv-filter-commission :brokerness="isBrokerPage" :minimum="commission"
-                                        :onChange="onCommissionChange"></fv-filter-commission>
-                <fv-filter-leverage :brokerness="isBrokerPage" :minLeverage="minLeverage" :maxLeverage="maxLeverage"
-                                   :onChange="onLeverageChange"></fv-filter-leverage>
-
-
-                <fv-filter-trading-instrument :brokerness="isBrokerPage" :options="filterTradingInstruments"
-                                              :onChange="onTradingInstrumentChange"></fv-filter-trading-instrument>
-
-                <fv-filter-deposit-method :brokerness="isBrokerPage" :options="filterDepositMethods"
-                                          :onChange="onDepositMethodChange"></fv-filter-deposit-method>
-
-                <fv-filter-withdraw-method :brokerness="isBrokerPage" :options="filterWithdrawMethods"
-                                           :onChange="onWithdrawMethodChange"></fv-filter-withdraw-method>
-
-                <fv-filter-operating-system :brokerness="isBrokerPage" :options="filterOperatingSystems"
-                                            :onChange="onOperatingSystemChange"></fv-filter-operating-system>
+            <fv-all-filters :isBrokerPage="isBrokerPage"
+            :filterCategories="filterCategories"
+            :onCategoryChange="onCategoryChange"
+            :filterTradingTypes="filterTradingTypes"
+            :onTradingTypeChange="onTradingTypeChange"
+            :filterTradingSoftwares="filterTradingSoftwares"
+            :onTradingSoftwareChange="onTradingSoftwareChange"
+            :filterSystemTypes="filterSystemTypes"
+            :onSystemTypeChange="onSystemTypeChange"
+            :filterTradingTools="filterTradingTools"
+            :onTradingToolChange="onTradingToolChange"
+            :filterPricingModels="filterPricingModels"
+            :onPricingModelChange="onPricingModelChange"
+            :filterRegulations="filterRegulations"
+            :onRegulationChange="onRegulationChange"
+            :filterBrokerTypes="filterBrokerTypes"
+            :onBrokerTypeChange="onBrokerTypeChange"
+            :onMinLotSizeChange="onMinLotSizeChange"
+            :onDepositChange="onDepositChange"
+            :onSpreadChange="onSpreadChange"
+            :onCommissionChange="onCommissionChange"
+            :onLeverageChange="onLeverageChange"
+            :filterTradingInstruments="filterTradingInstruments"
+            :onTradingInstrumentChange="onTradingInstrumentChange"
+            :filterDepositMethods="filterDepositMethods"
+            :onDepositMethodChange="onDepositMethodChange"
+            :filterWithdrawMethods="filterWithdrawMethods"
+            :onWithdrawMethodChange="onWithdrawMethodChange"
+            :filterOperatingSystems="filterOperatingSystems"
+            :onOperatingSystemChange="onOperatingSystemChange" ></fv-all-filters>
 
             </b-col>
             <b-col md="9">
@@ -82,55 +63,25 @@
 
 <script>
 
-    import FvFilterCategory from './ServicesFilterCategory'
-    import FvFilterTradingType from './ServicesFilterTradingType'
-    import FvFilterSystemType from './ServicesFilterSystemType'
-    import FvFilterTradingTool from './ServicesFilterTradingTool'
-    import FvFilterPricingModel from './ServicesFilterPricingModel'
+
 
     import FvServices from './Service/Services'
     import FvBrokers from './Service/Brokers'
     import LetterFilter from '../LetterFilter/index'
-    import FvSort from './ServicesFilterSorting'
+    import FvSort from './Filter/Sorting'
+    import FvAllFilters from './allFilters'
 
-    import FvFilterRegulation from './ServicesFilterRegulation'
-    import FvFilterBrokerType from './ServicesFilterBrokerType'
-    import FvFilterTradingInstrument from './ServicesFilterTradingInstruments'
-    import FvFilterDepositMethod from './ServicesFilterDepositMethod'
-    import FvFilterWithdrawMethod from './ServiceFilterWithdrawMethod'
-    import FvFilterOperatingSystem from './ServicesFilterOperatingSystem'
-    import FvFilterTradingSoftware from './ServicesFilterTradingSoftware'
-    import FvFilterMinLotSize from './ServicesFilterMinLotSize'
-    import FvFilterDeposit from './ServicesFilterDeposit'
-    import FvFilterSpread from './ServicesFilterSpread'
-    import FvFilterCommission from './ServicesFilterComission'
-    import FvFilterLeverage from './ServicesFilterLeverage'
+
 
 
     export default {
         name: "fv-services-filter-view",
         components: {
-            FvFilterCategory,
-            FvFilterTradingType,
-            FvFilterTradingSoftware,
-            FvFilterSystemType,
-            FvFilterTradingTool,
-            FvFilterPricingModel,
             FvServices,
             FvBrokers,
             FvLetterFilter: LetterFilter,
             FvSort,
-            FvFilterRegulation,
-            FvFilterBrokerType,
-            FvFilterTradingInstrument,
-            FvFilterDepositMethod,
-            FvFilterWithdrawMethod,
-            FvFilterOperatingSystem,
-            FvFilterMinLotSize,
-            FvFilterDeposit,
-            FvFilterSpread,
-            FvFilterCommission,
-            FvFilterLeverage,
+            FvAllFilters,
         },
         data() {
             const isBrokerPage = document.location.href.indexOf('broker') !== -1;

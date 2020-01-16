@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator v-if="brokerness" title="Min Lot Size">
+    <fv-filter-decorator v-if="brokerness" title="Spread">
         <div>
             <b-row>
                 <b-col cols="9">
@@ -8,11 +8,11 @@
                             <b-row class="pl-3">
                                 <b-col class="m-0 p-0" cols="7">
                                     <b-form-input
-                                            v-model="form.minLotSize"
+                                            v-model="form.spread"
                                             class="broker-input-min-lot-size"
                                             size="sm"
-                                            id="inline-form-input-minLotSize"
-                                            :placeholder="minimum"
+                                            id="inline-form-input-spread"
+                                            :placeholder="fromMinimum"
                                     ></b-form-input>
                                 </b-col>
                                 <b-col cols="5" class="m-0 p-0">
@@ -34,7 +34,7 @@
 
 <script>
 
-    import FvFilterDecorator from '../FilterDecorator'
+    import FvFilterDecorator from '../../FilterDecorator/index'
 
 
     export default {
@@ -43,15 +43,19 @@
 
         data() {
             return {
+                fromMinimum: '',
                 form: {
-                    minLotSize: '',
+                    spread: '',
                 }
             }
+        },
+        mounted() {
+            this.fromMinimum = 'From'.concat(this.minimum);
         },
         methods: {
             onSubmit(evt) {
                 evt.preventDefault()
-                this.onChange(JSON.stringify(this.form.minLotSize))
+                this.onChange(JSON.stringify(this.form.spread))
             },
         },
     }

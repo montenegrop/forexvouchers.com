@@ -7,7 +7,7 @@ import VouchersView from './Vouchers/VouchersView.vue';
 import VouchersHome from './Vouchers/VouchersHome.vue';
 import ServicesTable from './HomePage/ServicesTable';
 import HomeServices from './HomePage/HomeServices';
-import ServicesFilterView from './ServiceFilter/ServicesFilterView';
+import ServicesFilterView from './ServiceFilter/View';
 
 
 export default {

@@ -1,12 +1,12 @@
 <template>
-    <fv-filter-decorator v-if="brokerness" title="Withdraw Method">
+    <fv-filter-decorator title="Trading Software">
         <div>
             <b-row>
                 <b-col cols="9">
 
                     <b-form-group>
                         <b-form-checkbox-group
-                                id="checkbox-group-withdraw-method"
+                                id="checkbox-group-trading-software"
                                 class="filter-content option-filter"
                                 :value="selected"
                                 v-on:input="onChange($event)"
@@ -17,10 +17,9 @@
                     </b-form-group>
                 </b-col>
 
-
-                <b-col cols="3">
+                <b-col v-show="brokerness" cols="3">
                     <b-form-group>
-                        <b-form-checkbox-group id="checkbox-group-withdraw-method-numbers"
+                        <b-form-checkbox-group id="checkbox-group-trading-software-numbers"
                                                class="counter-filter d-none d-md-block"
                                                :value="selected"
                                                v-on:input="onChange($event)"
@@ -31,6 +30,8 @@
                     </b-form-group>
                 </b-col>
 
+
+
             </b-row>
         </div>
     </fv-filter-decorator>
@@ -38,7 +39,7 @@
 
 <script>
 
-    import FvFilterDecorator from '../FilterDecorator'
+    import FvFilterDecorator from '../../FilterDecorator/index'
 
     export default {
         props: ["brokerness", "options", "onChange"],

@@ -1,12 +1,12 @@
 <template>
-    <fv-filter-decorator v-if="!brokerness" title="System Type">
+    <fv-filter-decorator v-if="!brokerness" title="Trading Type">
         <div>
             <b-row>
                 <b-col cols="9">
 
                     <b-form-group>
                         <b-form-checkbox-group
-                                id="checkbox-group-system-type"
+                                id="checkbox-group-trading-type"
                                 class="filter-content option-filter"
                                 :value="selected"
                                 v-on:input="onChange($event)"
@@ -23,7 +23,7 @@
 
 <script>
 
-    import FvFilterDecorator from '../FilterDecorator'
+    import FvFilterDecorator from '../../FilterDecorator/index'
 
     export default {
         props: ["brokerness", "options", "onChange"],

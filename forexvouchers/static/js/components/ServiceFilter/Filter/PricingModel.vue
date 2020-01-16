@@ -1,17 +1,17 @@
 <template>
-    <fv-filter-decorator v-if="!brokerness" title="Trading Tools">
+    <fv-filter-decorator v-if="!brokerness" title="Pricing">
         <div>
             <b-row>
                 <b-col cols="9">
 
                     <b-form-group>
                         <b-form-checkbox-group
-                                id="checkbox-group-trading-tool"
+                                id="checkbox-group-pricing-model"
                                 class="filter-content option-filter"
                                 :value="selected"
                                 v-on:input="onChange($event)"
                                 :options="options.map(option=> ({text: option.name, value: option.id}))"
-                                name="flavour-1"
+                                name="flavour-1-pricing-model"
                                 stacked
                         />
                     </b-form-group>
@@ -23,7 +23,7 @@
 
 <script>
 
-    import FvFilterDecorator from '../FilterDecorator'
+    import FvFilterDecorator from '../../FilterDecorator/index'
 
     export default {
         props: ["brokerness", "options", "onChange"],

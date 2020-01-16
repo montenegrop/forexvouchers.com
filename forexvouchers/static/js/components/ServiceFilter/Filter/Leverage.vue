@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator v-if="brokerness" title="Deposit $">
+    <fv-filter-decorator v-if="brokerness" title="Leverage">
         <div>
             <b-row>
                 <b-col cols="9">
@@ -11,7 +11,7 @@
                                             v-model="form.from"
                                             class="broker-input-min-lot-size"
                                             size="sm"
-                                            id="inline-form-input-deposit-from"
+                                            id="inline-form-input-leverage-from"
                                             placeholder="From"
                                     ></b-form-input>
                                 </b-col>
@@ -20,7 +20,7 @@
                                             v-model="form.to"
                                             class="broker-input-min-lot-size"
                                             size="sm"
-                                            id="inline-form-input-deposit-to"
+                                            id="inline-form-input-leverage-to"
                                             placeholder="To"
                                     ></b-form-input>
 
@@ -44,11 +44,11 @@
 
 <script>
 
-    import FvFilterDecorator from '../FilterDecorator'
+    import FvFilterDecorator from '../../FilterDecorator/index'
 
 
     export default {
-        props: ["brokerness", "minDeposit", "maxDeposit", "onChange"],
+        props: ["brokerness", "minLeverage", "maxLeverage", "onChange"],
         components: {FvFilterDecorator},
 
         data() {
