@@ -65,10 +65,10 @@
                             <td class="left">
                                 <div v-for="broker_type in service.broker_type">{{ broker_type }}</div>
 
-<!--                               <div v-for="country in service.location">-->
-<!--                                   <span :class="'flag flag-icon flag-icon-squared flag-icon-' + country.code.toLowerCase() + ''"></span>-->
-<!--                                   {{ country.name }}-->
-<!--                               </div>-->
+<!--                 <div v-for="country in service.location">-->
+<!--                 <span :class="'flag flag-icon flag-icon-squared flag-icon-' + country.code.toLowerCase() + ''"></span>-->
+<!--                 {{ country.name }}-->
+<!--                 </div>-->
 
                             </td>
                         </tr>
@@ -76,8 +76,11 @@
                             <td class="right">Regulation</td>
                             <td class="left">
 
-                                <div v-for="regulation in service.regulation">
-                                    {{ regulation.code }}
+                                <div>
+
+
+                                    <span v-for="regulation in service.regulation" :class="`m-1 flag flag-icon flag-icon-squared flag-icon-${regulation.location.code.toLowerCase()} rounded-circle border border-secondary`"></span>
+
                                 </div>
                             </td>
                         </tr>
