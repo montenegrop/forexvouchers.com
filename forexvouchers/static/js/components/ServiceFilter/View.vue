@@ -53,7 +53,7 @@
                                 v-on:serviceSelected="checkForCompare($event)"></fv-brokers>
 
                     <div class="show-more">
-                        <a href="#" @click.stop.prevent="limit += 10">show more</a>
+                        <a href="#" @click.stop.prevent="changeLimit">show more</a>
                     </div>
                 </div>
             </b-col>
@@ -172,11 +172,6 @@
             minLeverage: function () {
                 this.getData()
             },
-
-
-            limit: function () {
-                this.getData()
-            },
             sort: function () {
                 this.getData()
             }
@@ -235,6 +230,11 @@
                     this.filterOperatingSystems = response.body.operating_systems;
                     this.limit = response.body.limit;
                 }
+            },
+
+            changeLimit() {
+              this.limit += 10;
+              this.getData()
             },
 // services
             onCategoryChange(value) {

@@ -248,7 +248,7 @@ class ForexServicesView(View):
                         'pricing_models': self.getPricingModels(),
                         'limit': limit
                         }
-            [response['data'].append(ser.toDict()) for ser in services]
+            [response['data'].append(service.toDict()) for service in services]
         else:
             services = Service.objects.filter(brokerCondition,
                                               regulationConditions,
@@ -279,5 +279,4 @@ class ForexServicesView(View):
                         'limit': limit
                         }
             [response['data'].append(ServiceHelper(service).to_dict()) for service in services]
-
         return HttpResponse(json.dumps(response), content_type="application/json")
