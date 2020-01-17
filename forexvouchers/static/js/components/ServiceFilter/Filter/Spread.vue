@@ -12,7 +12,7 @@
                                             class="broker-input-min-lot-size"
                                             size="sm"
                                             id="inline-form-input-spread"
-                                            :placeholder="fromMinimum"
+                                            placeholder="0.0"
                                     ></b-form-input>
                                 </b-col>
                                 <b-col cols="5" class="m-0 p-0">
@@ -43,19 +43,15 @@
 
         data() {
             return {
-                fromMinimum: '',
                 form: {
                     spread: '',
                 }
             }
         },
-        mounted() {
-            this.fromMinimum = 'From'.concat(this.minimum);
-        },
         methods: {
             onSubmit(evt) {
                 evt.preventDefault()
-                this.onChange(JSON.stringify(this.form.spread))
+                this.onChange(this.form.spread)
             },
         },
     }

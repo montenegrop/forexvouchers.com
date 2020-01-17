@@ -101,7 +101,7 @@ class Service(ClusterableModel):
 
     # Trading account
     account_types = ParentalManyToManyField("AccountType", blank=True)
-    trading_instruments = ParentalManyToManyField("TradingInstrument", blank=True)
+    trading_instrument =     ParentalManyToManyField("TradingInstrument", blank=True)
     revenue_model = ParentalManyToManyField("RevenueModel", blank=True)
     account_options = ParentalManyToManyField("AccountOption", blank=True)
     account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
@@ -113,6 +113,8 @@ class Service(ClusterableModel):
     security_of_funds = ParentalManyToManyField("SecurityOfFunds", blank=True)
     deposit_method = ParentalManyToManyField("PaymentMethod", related_name='deposit_method', blank=True)
     withdraw_method = ParentalManyToManyField("PaymentMethod", related_name='withdraw_method', blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     # About
     about = RichTextField(max_length=2500, blank=True, default=None, null=True)
@@ -268,7 +270,7 @@ class Service(ClusterableModel):
                 FieldPanel("spread", classname="col12"),
                 FieldPanel("min_lot_size", classname="col12"),
                 AutocompletePanel("account_types", target_model="cms.AccountType", is_single=False),
-                AutocompletePanel("trading_instruments", target_model="cms.TradingInstrument", is_single=False),
+                AutocompletePanel("trading_instrument", target_model="cms.TradingInstrument", is_single=False),
                 AutocompletePanel("revenue_model", target_model="cms.RevenueModel", is_single=False),
                 AutocompletePanel("account_options", target_model="cms.AccountOption", is_single=False),
                 AutocompletePanel("account_currency", target_model="cms.AccountCurrency", is_single=False),

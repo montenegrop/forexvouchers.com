@@ -5,6 +5,8 @@ from django.views import View
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS, TRAINING, VPS, TRADING_SYSTEM, SIGNALS, TOOLS
 from django.db.models import Q, Count, Case, When
 from cms.models import Service
+from django.db.models.functions import Cast
+from django.db.models.fields import IntegerField
 
 
 class ForexServicesView(View):
@@ -24,6 +26,7 @@ class ForexServicesView(View):
 
     def getTradingTypes(self):
         services = Service.objects.filter(~Q(category=BROKERS)) \
+            .filter(trading_type__isnull=False) \
             .values('trading_type__name', 'trading_type') \
             .annotate(total=Count('trading_type'))
 
@@ -35,6 +38,7 @@ class ForexServicesView(View):
 
     def getTradingSoftwares(self):
         services = Service.objects.filter(~Q(category=BROKERS)) \
+            .filter(trading_software__isnull=False) \
             .values('trading_software__name', 'trading_software') \
             .annotate(total=Count('trading_software'))
 
@@ -46,6 +50,7 @@ class ForexServicesView(View):
 
     def getTradingSoftwaresBrokers(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
+            .filter(trading_software__isnull=False) \
             .values('trading_software__name', 'trading_software') \
             .annotate(total=Count('trading_software'))
 
@@ -57,6 +62,7 @@ class ForexServicesView(View):
 
     def getSystemTypes(self):
         services = Service.objects.filter(~Q(category=BROKERS)) \
+            .filter(system_type__isnull=False) \
             .values('system_type__name', 'system_type') \
             .annotate(total=Count('system_type'))
 
@@ -68,6 +74,7 @@ class ForexServicesView(View):
 
     def getTradingTools(self):
         services = Service.objects.filter(~Q(category=BROKERS)) \
+            .filter(trading_tools__isnull=False) \
             .values('trading_tools__name', 'trading_tools') \
             .annotate(total=Count('trading_tools'))
 
@@ -79,6 +86,7 @@ class ForexServicesView(View):
 
     def getPricingModels(self):
         services = Service.objects.filter(~Q(category=BROKERS)) \
+            .filter(pricing_model__isnull=False) \
             .values('pricing_model__name', 'pricing_model') \
             .annotate(total=Count('pricing_model'))
 
@@ -91,6 +99,7 @@ class ForexServicesView(View):
     # # # for Brokers:
     def getRegulations(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
+            .filter(regulation__isnull=False) \
             .values('regulation__code', 'regulation') \
             .annotate(total=Count('regulation'))
 
@@ -102,6 +111,7 @@ class ForexServicesView(View):
 
     def getBrokerTypes(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
+            .filter(broker_type__isnull=False) \
             .values('broker_type__name', 'broker_type') \
             .annotate(total=Count('broker_type'))
 
@@ -113,17 +123,19 @@ class ForexServicesView(View):
 
     def getTradingInstruments(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
-            .values('trading_instruments__name', 'trading_instruments') \
-            .annotate(total=Count('trading_instruments'))
+            .filter(trading_instrument__isnull=False) \
+            .values('trading_instrument__name', 'trading_instrument') \
+            .annotate(total=Count('trading_instrument'))
 
         return list(
-            map(lambda x: {'name': x['trading_instruments__name'],
-                           'id': x['trading_instruments'],
+            map(lambda x: {'name': x['trading_instrument__name'],
+                           'id': x['trading_instrument'],
                            'total': x['total']},
                 services))
 
     def getDepositMethods(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
+            .filter(deposit_method__isnull=False) \
             .values('deposit_method__name', 'deposit_method') \
             .annotate(total=Count('deposit_method'))
 
@@ -135,6 +147,7 @@ class ForexServicesView(View):
 
     def getWithdrawMethods(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
+            .filter(withdraw_method__isnull=False) \
             .values('withdraw_method__name', 'withdraw_method') \
             .annotate(total=Count('withdraw_method'))
 
@@ -146,6 +159,7 @@ class ForexServicesView(View):
 
     def getOperatingSystems(self):
         services = Service.objects.filter(Q(category=BROKERS)) \
+            .filter(operating_system__isnull=False) \
             .values('operating_system__name', 'operating_system') \
             .annotate(total=Count('operating_system'))
 
@@ -166,10 +180,12 @@ class ForexServicesView(View):
     def getBrokersSorting(self, sort):
         if sort == 'premium':
             return Case(When(Q(premium=True), then=0), default=1), '-avg_rate',
+        elif sort == 'mostviewed':
+            return '-affiliate__clicks', '-avg_rate',
         elif sort == 'toprated':
             return '-avg_rate',
         else:
-            return '-avg_rate',
+            return '-created_at', '-avg_rate',
 
     def get(self, request):
         brokerness = request.GET.get('brokerness')
@@ -214,12 +230,12 @@ class ForexServicesView(View):
         brokerTypeConditions = Q(broker_type__in=broker_types) if len(broker_types) else Q()
         # features:
         minLotSizeConditions = Q(min_lot_size__gte=min_lot_size) if len(min_lot_size) else Q()
-        minDepositConditions = Q(min_deposit__gte=min_deposit) if len(min_deposit) else Q()
-        maxDepositConditions = Q(max_deposit__lte=max_deposit) if len(max_deposit) else Q()
+        minDepositConditions = Q(minimum_deposit__gte=min_deposit) if len(min_deposit) else Q()
+        maxDepositConditions = Q(minimum_deposit__lte=max_deposit) if len(max_deposit) else Q()
         spreadConditions = Q(spread__gte=spread) if len(spread) else Q()
         commissionConditions = Q(commission__gte=commission) if len(commission) else Q()
-        minLeverageConditions = Q(min_leverage__gte=min_leverage) if len(min_leverage) else Q()
-        maxLeverageConditions = Q(max_leverage__lte=max_leverage) if len(max_leverage) else Q()
+        minLeverageConditions = Q(leverage__gte=min_leverage) if len(min_leverage) else Q()
+        maxLeverageConditions = Q(leverage__lte=max_leverage) if len(max_leverage) else Q()
 
         tradingInstrumentConditions = Q(trading_instrument__in=trading_instruments) if len(trading_instruments) else Q()
         depositMethodConditions = Q(deposit_method__in=deposit_methods) if len(deposit_methods) else Q()

@@ -12,7 +12,7 @@
                                             class="broker-input-min-lot-size"
                                             size="sm"
                                             id="inline-form-input-minLotSize"
-                                            :placeholder="minimum"
+                                            :placeholder="0.1"
                                     ></b-form-input>
                                 </b-col>
                                 <b-col cols="5" class="m-0 p-0">
@@ -51,7 +51,7 @@
         methods: {
             onSubmit(evt) {
                 evt.preventDefault()
-                this.onChange(JSON.stringify(this.form.minLotSize))
+                this.onChange(this.form.minLotSize)
             },
         },
     }

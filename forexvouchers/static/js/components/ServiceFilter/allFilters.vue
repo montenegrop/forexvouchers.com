@@ -44,7 +44,7 @@
         <fv-filter-withdraw-method :brokerness="isBrokerPage" :options="filterWithdrawMethods"
                                    :onChange="onWithdrawMethodChange"></fv-filter-withdraw-method>
 
-        <fv-filter-operating-system :brokerness="isBrokerPage" :options="filterOperatingSystems"
+        <fv-filter-operating-system v-if="filterOperatingSystems.length" :brokerness="isBrokerPage" :options="filterOperatingSystems"
                                     :onChange="onOperatingSystemChange"></fv-filter-operating-system>
     </div>
 </template>

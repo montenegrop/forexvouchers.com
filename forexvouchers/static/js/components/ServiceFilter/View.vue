@@ -5,36 +5,36 @@
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
 
-            <fv-all-filters :isBrokerPage="isBrokerPage"
-            :filterCategories="filterCategories"
-            :onCategoryChange="onCategoryChange"
-            :filterTradingTypes="filterTradingTypes"
-            :onTradingTypeChange="onTradingTypeChange"
-            :filterTradingSoftwares="filterTradingSoftwares"
-            :onTradingSoftwareChange="onTradingSoftwareChange"
-            :filterSystemTypes="filterSystemTypes"
-            :onSystemTypeChange="onSystemTypeChange"
-            :filterTradingTools="filterTradingTools"
-            :onTradingToolChange="onTradingToolChange"
-            :filterPricingModels="filterPricingModels"
-            :onPricingModelChange="onPricingModelChange"
-            :filterRegulations="filterRegulations"
-            :onRegulationChange="onRegulationChange"
-            :filterBrokerTypes="filterBrokerTypes"
-            :onBrokerTypeChange="onBrokerTypeChange"
-            :onMinLotSizeChange="onMinLotSizeChange"
-            :onDepositChange="onDepositChange"
-            :onSpreadChange="onSpreadChange"
-            :onCommissionChange="onCommissionChange"
-            :onLeverageChange="onLeverageChange"
-            :filterTradingInstruments="filterTradingInstruments"
-            :onTradingInstrumentChange="onTradingInstrumentChange"
-            :filterDepositMethods="filterDepositMethods"
-            :onDepositMethodChange="onDepositMethodChange"
-            :filterWithdrawMethods="filterWithdrawMethods"
-            :onWithdrawMethodChange="onWithdrawMethodChange"
-            :filterOperatingSystems="filterOperatingSystems"
-            :onOperatingSystemChange="onOperatingSystemChange" ></fv-all-filters>
+                <fv-all-filters :isBrokerPage="isBrokerPage"
+                                :filterCategories="filterCategories"
+                                :onCategoryChange="onCategoryChange"
+                                :filterTradingTypes="filterTradingTypes"
+                                :onTradingTypeChange="onTradingTypeChange"
+                                :filterTradingSoftwares="filterTradingSoftwares"
+                                :onTradingSoftwareChange="onTradingSoftwareChange"
+                                :filterSystemTypes="filterSystemTypes"
+                                :onSystemTypeChange="onSystemTypeChange"
+                                :filterTradingTools="filterTradingTools"
+                                :onTradingToolChange="onTradingToolChange"
+                                :filterPricingModels="filterPricingModels"
+                                :onPricingModelChange="onPricingModelChange"
+                                :filterRegulations="filterRegulations"
+                                :onRegulationChange="onRegulationChange"
+                                :filterBrokerTypes="filterBrokerTypes"
+                                :onBrokerTypeChange="onBrokerTypeChange"
+                                :onMinLotSizeChange="onMinLotSizeChange"
+                                :onDepositChange="onDepositChange"
+                                :onSpreadChange="onSpreadChange"
+                                :onCommissionChange="onCommissionChange"
+                                :onLeverageChange="onLeverageChange"
+                                :filterTradingInstruments="filterTradingInstruments"
+                                :onTradingInstrumentChange="onTradingInstrumentChange"
+                                :filterDepositMethods="filterDepositMethods"
+                                :onDepositMethodChange="onDepositMethodChange"
+                                :filterWithdrawMethods="filterWithdrawMethods"
+                                :onWithdrawMethodChange="onWithdrawMethodChange"
+                                :filterOperatingSystems="filterOperatingSystems"
+                                :onOperatingSystemChange="onOperatingSystemChange"></fv-all-filters>
 
             </b-col>
             <b-col md="9">
@@ -42,7 +42,7 @@
                     <FvLetterFilter :options="services.map(service => ({text: service.name}))"
                                     v-on:clickLetter="onLetterFilter($event)"
                                     :selected="startingLetter"></FvLetterFilter>
-                    <fv-sort v-on:sortedBy="onSortChange($event)"></fv-sort>
+                    <fv-sort :brokerness="isBrokerPage" v-on:sortedBy="onSortChange($event)"></fv-sort>
                 </div>
 
                 <div>
@@ -62,7 +62,6 @@
 </template>
 
 <script>
-
 
 
     import FvServices from './Service/Services'
@@ -113,7 +112,7 @@
                 minLotSize: '',
                 minDeposit: '',
                 maxDeposit: '',
-                spread: '',
+                spread: -1,
                 commission: '',
                 minLeverage: '',
                 maxLeverage: '',
@@ -153,6 +152,26 @@
                 this.getData();
             },
             pricingModels: function () {
+                this.getData();
+            },
+
+            // Brokers:
+            regulations: function () {
+                this.getData();
+            },
+            brokerTypes: function () {
+                this.getData();
+            },
+            tradingInstruments: function () {
+                this.getData();
+            },
+            depositMethods: function () {
+                this.getData();
+            },
+            withdrawMethods: function () {
+                this.getData();
+            },
+            operatingSystems: function () {
                 this.getData();
             },
 
@@ -203,7 +222,8 @@
                     this.limit = response.body.limit;
                 } else {
                     const url = `/api/forex-services?brokerness=${
-                        this.isBrokerPage}&regulations=${
+                        this.isBrokerPage}&trading_softwares=${
+                        this.tradingSoftwares}&regulations=${
                         this.regulations}&broker_types=${
                         this.brokerTypes}&trading_instruments=${
                         this.tradingInstruments}&deposit_methods=${
@@ -233,8 +253,8 @@
             },
 
             changeLimit() {
-              this.limit += 10;
-              this.getData()
+                this.limit += 10;
+                this.getData()
             },
 // services
             onCategoryChange(value) {
@@ -260,7 +280,7 @@
                 this.regulations = value.join(',')
             },
             onBrokerTypeChange(value) {
-                this.broker_type = value.join(',')
+                this.brokerType = value.join(',')
             },
             onTradingInstrumentChange(value) {
                 this.tradingInstruments = value.join(',')

@@ -120,7 +120,7 @@ class ServiceHelper(object):
             FlagField(service, 'restrictions', 'cp', 'Restrictions', [BROKERS]),  #
             # #
             MultiField(service, 'account_types', 'ta', 'Account Types', [BROKERS]),
-            MultiField(service, 'trading_instruments', 'ta', 'Trading Instruments', [BROKERS]),
+            MultiField(service, 'trading_instrument', 'ta', 'Trading Instruments', [BROKERS]),
             MultiField(service, 'revenue_model', 'ta', 'Revenue Model', [BROKERS]),
             MultiField(service, 'account_options', 'ta', 'Account Options', [BROKERS]),
             MultiField(service, 'account_currency', 'ta', 'Account Currency', [BROKERS]),

@@ -62,7 +62,7 @@
         methods: {
             onSubmit(evt) {
                 evt.preventDefault();
-                this.onChange(JSON.stringify(this.form));
+                this.onChange(this.form);
             },
         },
     }
