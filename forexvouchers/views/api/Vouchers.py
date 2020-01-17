@@ -17,7 +17,6 @@ class VouchersView(View):
             .filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)) \
             .values('service__category__name', 'service__category') \
             .annotate(total=Count('service__category'))
-
         return list(
             map(lambda x: {'name': x['service__category__name'],
                            'id': x['service__category'],
@@ -83,7 +82,8 @@ class VouchersView(View):
         vouchers = Voucher.objects.filter(typeConditions,
                                           serviceConditions,
                                           categoryConditions,
-                                          Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).order_by(
+                                          Q(expires__gte=datetime.date.today()) | Q(
+                                              never_expires=True)).distinct().order_by(
             *self.getSorting(sort))[:limit]
 
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))

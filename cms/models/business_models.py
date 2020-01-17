@@ -28,7 +28,6 @@ from wagtail.admin.edit_handlers import (
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-
 # from wagtail.core.blocks import ChoiceBlock
 from cms.json_ld.ServiceLD import ServiceLD
 from cms.json_ld.VoucherLD import VoucherLD
@@ -94,15 +93,15 @@ class Service(ClusterableModel):
     office_address = models.CharField(max_length=500, blank=True, default=None, null=True)
 
     # Details
-    pricing_model = ParentalManyToManyField("PricingModel", blank=True)
     system_type = ParentalManyToManyField("SystemType", blank=True)
     trading_type = ParentalManyToManyField("TradingType", blank=True)
     trading_software = ParentalManyToManyField("TradingSoftware", blank=True)
     trading_tools = ParentalManyToManyField("TradingTool", blank=True)
+    pricing_model = ParentalManyToManyField("PricingModel", blank=True)
 
     # Trading account
     account_types = ParentalManyToManyField("AccountType", blank=True)
-    trading_instruments = ParentalManyToManyField("TradingInstrument", blank=True)
+    trading_instrument =     ParentalManyToManyField("TradingInstrument", blank=True)
     revenue_model = ParentalManyToManyField("RevenueModel", blank=True)
     account_options = ParentalManyToManyField("AccountOption", blank=True)
     account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
@@ -114,6 +113,8 @@ class Service(ClusterableModel):
     security_of_funds = ParentalManyToManyField("SecurityOfFunds", blank=True)
     deposit_method = ParentalManyToManyField("PaymentMethod", related_name='deposit_method', blank=True)
     withdraw_method = ParentalManyToManyField("PaymentMethod", related_name='withdraw_method', blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     # About
     about = RichTextField(max_length=2500, blank=True, default=None, null=True)
@@ -170,10 +171,40 @@ class Service(ClusterableModel):
         return bool(list(set(self.getCategoriesIDs()) & set(categories)))
 
     def getCategoriesLabels(self):
-        return [cat.name for cat in self.category.all()]
+        return [(cat.name, cat.id) for cat in self.category.all()]
 
+    def getTradingTypes(self):
+        return [(ttype.name, ttype.id) for ttype in self.trading_type.all()]
 
+    def getTradingsoftwares(self):
+        return [(soft.name, soft.id) for soft in self.trading_software.all()]
 
+    def getSystemTypes(self):
+        return [(stype.name, stype.id) for stype in self.system_type.all()]
+
+    def getTradingTools(self):
+        return [(ttool.name, ttool.id) for ttool in self.trading_tools.all()]
+
+    def getPricingModels(self):
+        return [(price.name, price.id) for price in self.pricing_model.all()]
+
+    def toDict(self):
+        return {
+            'name': self.name,
+            'categories': self.getCategoriesIDs(),
+            'trading_types': self.getTradingTypes(),
+            'trading_softwares': self.getTradingsoftwares(),
+            'system_types': self.getSystemTypes(),
+            'trading_tools': self.getTradingTools(),
+            'pricings': self.getPricingModels(),
+            'logo_url': self.logo.get_rendition('width-100').url if self.logo else None,
+            'url': '/services/' + self.slug,
+            'avg_rate': self.get_avg_rate,
+            'count_rate': self.get_count_rate,
+            'slug': self.slug,
+            'avg_rate': self.get_avg_rate,
+            'count_rate': self.get_count_rate,
+        }
 
     panels = [
         MultiFieldPanel(
@@ -239,7 +270,7 @@ class Service(ClusterableModel):
                 FieldPanel("spread", classname="col12"),
                 FieldPanel("min_lot_size", classname="col12"),
                 AutocompletePanel("account_types", target_model="cms.AccountType", is_single=False),
-                AutocompletePanel("trading_instruments", target_model="cms.TradingInstrument", is_single=False),
+                AutocompletePanel("trading_instrument", target_model="cms.TradingInstrument", is_single=False),
                 AutocompletePanel("revenue_model", target_model="cms.RevenueModel", is_single=False),
                 AutocompletePanel("account_options", target_model="cms.AccountOption", is_single=False),
                 AutocompletePanel("account_currency", target_model="cms.AccountCurrency", is_single=False),

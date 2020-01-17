@@ -33,7 +33,7 @@ const fields = {
     "signal_alerts": [SIGNALS],
     "frequency": [SIGNALS],
     "account_types": [BROKERS],
-    "trading_instruments": [BROKERS],
+    "trading_instrument": [BROKERS],
     "revenue_model": [BROKERS],
     "account_options": [BROKERS],
     "account_currency": [BROKERS],
