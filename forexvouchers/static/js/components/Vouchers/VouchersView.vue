@@ -4,7 +4,7 @@
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
                 <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
-                <fv-filter-type :tipos="filterTypes" :onChange="onTypeChange"></fv-filter-type>
+                <fv-filter-type :options="filterTypes" :onChange="onTypeChange"></fv-filter-type>
                 <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
             </b-col>
             <b-col md="9">

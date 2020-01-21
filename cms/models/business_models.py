@@ -35,6 +35,7 @@ from cms.json_ld.VoucherLD import VoucherLD
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
+    short_name = models.CharField(max_length=30)
     autocomplete_search_field = 'name'
     attributes = models.ManyToManyField('Attribute', blank=True)
     services = models.ManyToManyField('Service', blank=True, related_name='service_category')
@@ -43,7 +44,8 @@ class Category(models.Model):
     panels = [
         MultiFieldPanel([
             FieldPanel('name'),
-            FieldPanel('slug')
+            FieldPanel('slug'),
+            FieldPanel('short_name'),
         ], heading="Category")
     ]
 

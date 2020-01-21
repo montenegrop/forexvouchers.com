@@ -13,11 +13,11 @@
             <b-col cols="9">
 
                 <b-form-group>
-                    <b-form-checkbox-group id="checkbox-group-21"
+                    <b-form-checkbox-group id="these-have-SAME-ids"
                                            class="filter-content option-filter"
-                                           :value="selected"
+                                           value="selected"
                                            v-on:input="onChange($event)"
-                                           :options="getNames()"
+                                           :options="getNames"
                                            name="flavour-2"
                                            stacked
                     ></b-form-checkbox-group>
@@ -28,19 +28,12 @@
 
             </b-col>
 
-            <b-col cols="3">
-
-                <b-form-group>
-                    <b-form-checkbox-group id="checkbox-group-22"
-                                           class="counter-filter d-none d-md-block "
-                                           :value="selected"
-                                           v-on:input="onChange($event)"
-                                           :options="getCounts()"
-                                           name="flavour-2"
-                                           stacked
-                    ></b-form-checkbox-group>
-                </b-form-group>
-
+            <b-col cols="3" class="m-0 p-0 checkbox-amount">
+                <b-list-group>
+                    <b-list-group-item v-for="option in getNames" class="p-0 m-0 border-0 list-group-item"><p
+                            class="mt-0 mb-0"> ({{option.total}})</p>
+                    </b-list-group-item>
+                </b-list-group>
             </b-col>
 
 
@@ -62,25 +55,17 @@
             }
         },
 
-        methods: {
+
+        computed: {
             getNames() {
                 return this.options
                     .map(option => ({
                         text: option.name,
+                        total: option.total,
                         value: option.id
                     }))
                     .filter((option, index) => (index < this.limit) && option.text.match(new RegExp(this.search, "i")))
             },
-
-            getCounts() {
-                return this.options
-                    .map(option => ({
-                        text: '('.concat(option.total).concat(')'),
-                        value: option.id
-                    }))
-                    .filter((option, index) => (index < this.limit) && option.text.match(new RegExp(this.search, "i")))
-            },
-
         },
 
     }

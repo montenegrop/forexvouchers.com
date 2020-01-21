@@ -15,11 +15,12 @@ class ForexServicesView(View):
     def getCategoryCounts(self):
         category_counts = Service.objects.select_related('category') \
             .filter(~Q(category=BROKERS)) \
-            .values('category__name', 'category') \
+            .values('category__name', 'category__short_name', 'category') \
             .annotate(total=Count('category'))
 
         return list(
             map(lambda x: {'name': x['category__name'],
+                           'short_name': x['category__short_name'],
                            'id': x['category'],
                            'total': x['total']},
                 category_counts))

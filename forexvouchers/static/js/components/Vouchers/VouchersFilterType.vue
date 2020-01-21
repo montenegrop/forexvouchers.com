@@ -6,7 +6,7 @@
             <b-col cols="9">
                 <b-form-group>
                     <b-form-checkbox-group
-                            id="checkbox-group-1"
+                            id="checkbox-types-vouchers"
                             class="filter-content option-filter"
                             :value="selected"
                             v-on:input="onChange($event)"
@@ -17,27 +17,29 @@
                 </b-form-group>
             </b-col>
 
-            <b-col cols="3">
-                <b-form-group>
-                    <b-form-checkbox-group id="checkbox-group-2"
-                                           class="counter-filter d-none d-md-block"
-                                           :value="selected"
-                                           v-on:input="onChange($event)"
-                                           :options="[{text: '('.concat(tipos.discount).concat(')'), value: 1}
-                                           , {text: '('.concat(tipos.promocode).concat(')'), value: 2}
-                                           , {text: '('.concat(tipos.offer).concat(')'), value: 3}]"
-                                           name="flavour-2"
-                                           stacked
-                    ></b-form-checkbox-group>
-                </b-form-group>
+            <b-col cols="3" class="m-0 p-0 checkbox-amount">
+                <b-list-group>
+                    <b-list-group-item class="p-0 m-0 border-0 list-group-item"><p
+                            class="mt-0 mb-0"> ({{options.discount}})</p>
+                    </b-list-group-item>
+
+                    <b-list-group-item class="p-0 m-0 border-0 list-group-item"><p
+                            class="mt-0 mb-0"> ({{options.promocode}})</p>
+                    </b-list-group-item>
+
+                    <b-list-group-item class="p-0 m-0 border-0 list-group-item"><p
+                            class="mt-0 mb-0"> ({{options.offer}})</p>
+                    </b-list-group-item>
+                </b-list-group>
             </b-col>
-        </b-row>
+
+
     </div>
 </template>
 
 <script>
     export default {
-        props: ["tipos", "onChange"],
+        props: ["options", "onChange"],
 
         data() {
             return {

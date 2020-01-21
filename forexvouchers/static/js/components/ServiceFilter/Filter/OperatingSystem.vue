@@ -17,17 +17,12 @@
                     </b-form-group>
                 </b-col>
 
-                <b-col cols="3">
-                    <b-form-group>
-                        <b-form-checkbox-group id="checkbox-group-operating-system-numbers"
-                                               class="counter-filter d-none d-md-block"
-                                               :value="selected"
-                                               v-on:input="onChange($event)"
-                                               :options="options.map(option=> ({text: '(' + option.total + ')', value: option.id}))"
-                                               name="flavour-2"
-                                               stacked
-                        />
-                    </b-form-group>
+                <b-col v-show="brokerness" cols="3" class="m-0 p-0 checkbox-amount">
+                    <b-list-group>
+                        <b-list-group-item v-for="option in options" class="p-0 m-0 border-0 list-group-item"><p
+                                class="mt-0 mb-0"> ({{option.total}})</p>
+                        </b-list-group-item>
+                    </b-list-group>
                 </b-col>
 
             </b-row>
