@@ -5,14 +5,9 @@
                             :onChange="onCategoryChange"></fv-filter-category>
         <fv-filter-trading-type :brokerness="isBrokerPage" :options="filterTradingTypes"
                                 :onChange="onTradingTypeChange"></fv-filter-trading-type>
-        <fv-filter-trading-software :brokerness="isBrokerPage" :options="filterTradingSoftwares"
-                                    :onChange="onTradingSoftwareChange"></fv-filter-trading-software>
-        <fv-filter-system-type :brokerness="isBrokerPage" :options="filterSystemTypes"
-                               :onChange="onSystemTypeChange"></fv-filter-system-type>
-        <fv-filter-trading-tool :brokerness="isBrokerPage" :options="filterTradingTools"
-                                :onChange="onTradingToolChange"></fv-filter-trading-tool>
-        <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
-                                 :onChange="onPricingModelChange"></fv-filter-pricing-model>
+
+        <!--        trading software-->
+
 
         <!--brokers-->
         <fv-filter-regulation :brokerness="isBrokerPage" :options="filterRegulations"
@@ -44,7 +39,18 @@
         <fv-filter-withdraw-method :brokerness="isBrokerPage" :options="filterWithdrawMethods"
                                    :onChange="onWithdrawMethodChange"></fv-filter-withdraw-method>
 
-        <fv-filter-operating-system v-if="filterOperatingSystems.length" :brokerness="isBrokerPage" :options="filterOperatingSystems"
+<!--        this goes here to mantain order required-->
+        <fv-filter-trading-software :brokerness="isBrokerPage" :options="filterTradingSoftwares"
+                                    :onChange="onTradingSoftwareChange"></fv-filter-trading-software>
+        <fv-filter-system-type :brokerness="isBrokerPage" :options="filterSystemTypes"
+                               :onChange="onSystemTypeChange"></fv-filter-system-type>
+        <fv-filter-trading-tool :brokerness="isBrokerPage" :options="filterTradingTools"
+                                :onChange="onTradingToolChange"></fv-filter-trading-tool>
+        <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
+                                 :onChange="onPricingModelChange"></fv-filter-pricing-model>
+
+        <fv-filter-operating-system v-if="filterOperatingSystems.length" :brokerness="isBrokerPage"
+                                    :options="filterOperatingSystems"
                                     :onChange="onOperatingSystemChange"></fv-filter-operating-system>
     </div>
 </template>

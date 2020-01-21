@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h2 v-show="!isBrokerPage" class="filter-titles filter-titles-main">Forex Services:</h2>
-        <h2 v-show="isBrokerPage" class="filter-titles filter-titles-main">Forex Brokers:</h2>
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
 
