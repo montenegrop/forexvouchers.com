@@ -2,7 +2,7 @@
     <div>
         <!--services-->
         <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories"
-                            :onChange="onCategoryChange"></fv-filter-category>
+                            :onChange="onCategoryChange" :searchBarChange="onSearchBarChange"></fv-filter-category>
         <fv-filter-trading-type :brokerness="isBrokerPage" :options="filterTradingTypes"
                                 :onChange="onTradingTypeChange"></fv-filter-trading-type>
 
@@ -11,7 +11,7 @@
 
         <!--brokers-->
         <fv-filter-regulation :brokerness="isBrokerPage" :options="filterRegulations"
-                              :onChange="onRegulationChange"></fv-filter-regulation>
+                              :onChange="onRegulationChange" :searchBarChange="onSearchBarChange"></fv-filter-regulation>
 
         <fv-filter-broker-type :brokerness="isBrokerPage" :options="filterBrokerTypes"
                                :onChange="onBrokerTypeChange"></fv-filter-broker-type>
@@ -106,6 +106,7 @@
             "onWithdrawMethodChange",
             "filterOperatingSystems",
             "onOperatingSystemChange",
+            "onSearchBarChange"
         ],
         components: {
             FvFilterCategory,

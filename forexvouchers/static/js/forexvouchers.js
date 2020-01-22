@@ -12,6 +12,7 @@ import ReadMore from 'vue-read-more'
 
 
 
+
 Vue.use(ReadMore);
 Vue.use(BootstrapVue)
 Vue.use(VueResource)

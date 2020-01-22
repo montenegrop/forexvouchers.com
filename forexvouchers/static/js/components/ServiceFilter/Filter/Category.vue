@@ -1,24 +1,22 @@
 <template>
-
     <div v-if="!brokerness">
         <h2 class="filter-titles filter-titles-main mb-0 text-secondary">Forex Services:</h2>
 
-        <b-input-group size="sm">
+        <b-input-group size="sm" class="mb-4">
             <i class="fas fa-search filter-search-icon"></i>
-            <b-form-input class="filter-search-bar" placeholder="Search" v-model="search"></b-form-input>
+            <b-form-input class="filter-search-bar" placeholder="Search"
+                          v-model="searchBar" v-on:keyup="searchBarChange(searchBar)"></b-form-input>
         </b-input-group>
 
         <fv-filter-decorator title="Services">
             <div>
-
-
                 <b-row>
                     <b-col cols="9">
+
                         <b-form-group>
                             <b-form-checkbox-group
                                     id="checkbox-group-category-names"
                                     class="filter-content option-filter"
-                                    :value="selected"
                                     v-on:input="onChange($event)"
                                     :options="getNames"
                                     name="flavour-1"
@@ -48,17 +46,15 @@
 
 
     export default {
-        props: ["brokerness", "options", "onChange"],
+        props: ["brokerness", "options", "onChange", "searchBarChange"],
         components: {FvFilterDecorator},
 
         data() {
             return {
-                startingLetter: '',
-                search: '',
+                searchBar: '',
                 limit: 15,
             }
         },
-
         computed: {
             getNames() {
                 return this.options
@@ -67,7 +63,6 @@
                         total: option.total,
                         value: option.id
                     }))
-                    .filter((option, index) => (index < this.limit) && option.text.match(new RegExp(this.search, "i")))
             },
         },
     }

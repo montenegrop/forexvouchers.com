@@ -2,9 +2,10 @@
     <div v-if="brokerness">
         <h2 class="filter-titles filter-titles-main mb-0 text-secondary">Forex Brokers:</h2>
 
-        <b-input-group size="sm">
+        <b-input-group size="sm" class="mb-4">
             <i class="fas fa-search filter-search-icon"></i>
-            <b-form-input class="filter-search-bar" placeholder="Search" v-model="search"></b-form-input>
+            <b-form-input class="filter-search-bar" placeholder="Search" v-model="searchBar"
+                          v-on:keyup="searchBarChange(searchBar)"></b-form-input>
         </b-input-group>
 
         <fv-filter-decorator title="Regulation">
@@ -16,9 +17,8 @@
                             <b-form-checkbox-group
                                     id="checkbox-group-regulation"
                                     class="filter-content option-filter"
-                                    :value="selected"
                                     v-on:input="onChange($event)"
-                                    :options="options.map(option=> ({text: option.name, value: option.id}))"
+                                    :options="getNames"
                                     name="flavour-1"
                                     stacked
                             />
@@ -44,15 +44,24 @@
     import FvFilterDecorator from '../../FilterDecorator/index'
 
     export default {
-        props: ["brokerness", "options", "onChange"],
+        props: ["brokerness", "options", "onChange", "searchBarChange"],
         components: {FvFilterDecorator},
 
         data() {
             return {
-                startingLetter: '',
-                search: '',
+                searchBar: '',
                 limit: 15,
             }
+        },
+        computed: {
+            getNames() {
+                return this.options
+                    .map(option => ({
+                        text: option.name,
+                        total: option.total,
+                        value: option.id
+                    }))
+            },
         },
 
     }
