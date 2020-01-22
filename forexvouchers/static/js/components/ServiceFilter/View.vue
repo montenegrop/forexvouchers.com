@@ -52,7 +52,9 @@
                                 v-on:serviceSelected="checkForCompare($event)"></fv-brokers>
 
                     <div class="show-more">
-                        <a href="#" @click.stop.prevent="changeLimit">show more</a>
+                        <b-button variant="outline-info" :disabled="onLimit" href="#" @click.stop.prevent="getLimit">
+                            show more
+                        </b-button>
                     </div>
                 </div>
             </b-col>
@@ -129,7 +131,12 @@
                 filterOperatingSystems: [],
 
                 startingLetter: '',
-                limit: '10',
+
+                limit: 10,
+                limitIncrease: 10,
+                servicesCount: -this.limitIncrease,
+                onLimit: false,
+
                 sort: '',
                 typed: '',
 
@@ -222,7 +229,6 @@
                     this.filterSystemTypes = response.body.system_types;
                     this.filterTradingTools = response.body.trading_tools;
                     this.filterPricingModels = response.body.pricing_models;
-                    this.limit = response.body.limit;
                 } else {
                     const url = `/api/forex-services?brokerness=${
                         this.isBrokerPage}&typed=${
@@ -252,12 +258,15 @@
                     this.filterDepositMethods = response.body.deposit_methods;
                     this.filterWithdrawMethods = response.body.withdraw_methods;
                     this.filterOperatingSystems = response.body.operating_systems;
-                    this.limit = response.body.limit;
+                }
+                if (this.servicesCount + this.limitIncrease > this.services.length) {
+                    this.onLimit = true
                 }
             },
 
-            changeLimit() {
-                this.limit += 10;
+            getLimit() {
+                this.servicesCount = this.services.length;
+                this.limit += this.limitIncrease;
                 this.getData()
             },
 // services
