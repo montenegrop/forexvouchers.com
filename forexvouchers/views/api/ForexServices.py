@@ -194,6 +194,7 @@ class ForexServicesView(View):
         sort = request.GET.get('sort', '')
 
         # # # Services filters:
+        typed = request.GET.get('typed', '')
         categories = list(filter(lambda item: item, request.GET.get('categories', '').split(',')))
         trading_types = list(filter(lambda item: item, request.GET.get('trading_types', '').split(',')))
         trading_softwares = list(filter(lambda item: item, request.GET.get('trading_softwares', '').split(',')))
@@ -245,10 +246,12 @@ class ForexServicesView(View):
         operatingSystemConditions = Q(operating_system__in=operating_systems) if len(operating_systems) else Q()
 
         # applies to both:
+        typedConditions = Q(name__icontains=typed) if len(typed) else Q()
         tradingSoftwareConditions = Q(trading_software__in=trading_softwares) if len(trading_softwares) else Q()
 
         if brokerness == 'false':
-            services = Service.objects.filter(categoryConditions,
+            services = Service.objects.filter(typedConditions,
+                                              categoryConditions,
                                               tradingTypeConditions,
                                               tradingSoftwareConditions,
                                               systemTypeConditions,
@@ -267,7 +270,8 @@ class ForexServicesView(View):
                         }
             [response['data'].append(service.toDict()) for service in services]
         else:
-            services = Service.objects.filter(brokerCondition,
+            services = Service.objects.filter(typedConditions,
+                                              brokerCondition,
                                               regulationConditions,
                                               brokerTypeConditions,
                                               tradingInstrumentConditions,

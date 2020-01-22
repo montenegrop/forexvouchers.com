@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h2 v-show="!isBrokerPage" class="filter-titles filter-titles-main">Forex Services:</h2>
-        <h2 v-show="isBrokerPage" class="filter-titles filter-titles-main">Forex Brokers:</h2>
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
 
@@ -34,7 +32,8 @@
                                 :filterWithdrawMethods="filterWithdrawMethods"
                                 :onWithdrawMethodChange="onWithdrawMethodChange"
                                 :filterOperatingSystems="filterOperatingSystems"
-                                :onOperatingSystemChange="onOperatingSystemChange"></fv-all-filters>
+                                :onOperatingSystemChange="onOperatingSystemChange"
+                                :onSearchBarChange="filterServicesByName"></fv-all-filters>
 
             </b-col>
             <b-col md="9">
@@ -70,6 +69,8 @@
     import FvSort from './Filter/Sorting'
     import FvAllFilters from './allFilters'
 
+    import _ from 'lodash'
+    //import lodash, add to readMe
 
     export default {
         name: "fv-services-filter-view",
@@ -130,6 +131,7 @@
                 startingLetter: '',
                 limit: '10',
                 sort: '',
+                typed: '',
 
                 selected: [],
                 counter: 0,
@@ -202,7 +204,8 @@
             async getData() {
                 if (!this.isBrokerPage) {
                     const url = `/api/forex-services?brokerness=${
-                        this.isBrokerPage}&categories=${
+                        this.isBrokerPage}&typed=${
+                        this.typed}&categories=${
                         this.categories}&trading_types=${
                         this.tradingTypes}&trading_softwares=${
                         this.tradingSoftwares}&system_types=${
@@ -222,7 +225,8 @@
                     this.limit = response.body.limit;
                 } else {
                     const url = `/api/forex-services?brokerness=${
-                        this.isBrokerPage}&trading_softwares=${
+                        this.isBrokerPage}&typed=${
+                        this.typed}&trading_softwares=${
                         this.tradingSoftwares}&regulations=${
                         this.regulations}&broker_types=${
                         this.brokerTypes}&trading_instruments=${
@@ -336,6 +340,14 @@
                         this.selected = arr;
                     }
                 }
+            },
+
+            delayedGetData: _.debounce(function (func) {
+                func()
+            }, 350),
+            filterServicesByName(value) {
+                this.typed = value;
+                this.delayedGetData(this.getData)
             },
         },
     }
