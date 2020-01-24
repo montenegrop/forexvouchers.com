@@ -3,39 +3,66 @@
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
 
-                <fv-all-filters :isBrokerPage="isBrokerPage"
-                                :filterCategories="filterCategories"
-                                :onCategoryChange="onCategoryChange"
-                                :filterTradingTypes="filterTradingTypes"
-                                :onTradingTypeChange="onTradingTypeChange"
-                                :filterTradingSoftwares="filterTradingSoftwares"
-                                :onTradingSoftwareChange="onTradingSoftwareChange"
-                                :filterSystemTypes="filterSystemTypes"
-                                :onSystemTypeChange="onSystemTypeChange"
-                                :filterTradingTools="filterTradingTools"
-                                :onTradingToolChange="onTradingToolChange"
-                                :filterPricingModels="filterPricingModels"
-                                :onPricingModelChange="onPricingModelChange"
-                                :filterRegulations="filterRegulations"
-                                :onRegulationChange="onRegulationChange"
-                                :filterBrokerTypes="filterBrokerTypes"
-                                :onBrokerTypeChange="onBrokerTypeChange"
-                                :onMinLotSizeChange="onMinLotSizeChange"
-                                :onDepositChange="onDepositChange"
-                                :onSpreadChange="onSpreadChange"
-                                :onCommissionChange="onCommissionChange"
-                                :onLeverageChange="onLeverageChange"
-                                :filterTradingInstruments="filterTradingInstruments"
-                                :onTradingInstrumentChange="onTradingInstrumentChange"
-                                :filterDepositMethods="filterDepositMethods"
-                                :onDepositMethodChange="onDepositMethodChange"
-                                :filterWithdrawMethods="filterWithdrawMethods"
-                                :onWithdrawMethodChange="onWithdrawMethodChange"
-                                :filterOperatingSystems="filterOperatingSystems"
-                                :onOperatingSystemChange="onOperatingSystemChange"
-                                :onSearchBarChange="filterServicesByName"></fv-all-filters>
+                <b-row>
+                    <b-col cols="9">
+                        <h5 class="filter-titles info"> {{ showOrHideFilters }} </h5>
+                    </b-col>
+                    <b-col cols="3">
+                        <b-link
+                                :class="visible ? null : 'collapsed'"
+                                :aria-expanded="visible ? 'true' : 'false'"
+                                aria-controls="collapse-4"
+                                @click="visible = !visible"
+                                variant="info"
+                        >
 
+                            <i v-bind:class=" {'fas fa-arrow-circle-down arrows': visible, 'fas fa-arrow-circle-right arrows': !visible}"></i>
+
+                            <!--                    <a href="#" style="background-color: red">-->
+                            <!--                        <div  v-bind:class=" {'fa fa-chevron-up rotate.down': visible, 'fa fa-chevron-up rotate': !visible}"></div>-->
+                            <!--                    </a>-->
+                            <!--                    <i v-if="!visible" class="fas fa-arrow-circle-right arrows"></i>-->
+
+                        </b-link>
+                    </b-col>
+                </b-row>
+                <b-collapse id="collapse-4" v-model="visible" class="mt-2">
+
+                    <fv-all-filters :isBrokerPage="isBrokerPage"
+                                    :filterCategories="filterCategories"
+                                    :onCategoryChange="onCategoryChange"
+                                    :filterTradingTypes="filterTradingTypes"
+                                    :onTradingTypeChange="onTradingTypeChange"
+                                    :filterTradingSoftwares="filterTradingSoftwares"
+                                    :onTradingSoftwareChange="onTradingSoftwareChange"
+                                    :filterSystemTypes="filterSystemTypes"
+                                    :onSystemTypeChange="onSystemTypeChange"
+                                    :filterTradingTools="filterTradingTools"
+                                    :onTradingToolChange="onTradingToolChange"
+                                    :filterPricingModels="filterPricingModels"
+                                    :onPricingModelChange="onPricingModelChange"
+                                    :filterRegulations="filterRegulations"
+                                    :onRegulationChange="onRegulationChange"
+                                    :filterBrokerTypes="filterBrokerTypes"
+                                    :onBrokerTypeChange="onBrokerTypeChange"
+                                    :onMinLotSizeChange="onMinLotSizeChange"
+                                    :onDepositChange="onDepositChange"
+                                    :onSpreadChange="onSpreadChange"
+                                    :onCommissionChange="onCommissionChange"
+                                    :onLeverageChange="onLeverageChange"
+                                    :filterTradingInstruments="filterTradingInstruments"
+                                    :onTradingInstrumentChange="onTradingInstrumentChange"
+                                    :filterDepositMethods="filterDepositMethods"
+                                    :onDepositMethodChange="onDepositMethodChange"
+                                    :filterWithdrawMethods="filterWithdrawMethods"
+                                    :onWithdrawMethodChange="onWithdrawMethodChange"
+                                    :filterOperatingSystems="filterOperatingSystems"
+                                    :onOperatingSystemChange="onOperatingSystemChange"
+                                    :onSearchBarChange="filterServicesByName"></fv-all-filters>
+
+                </b-collapse>
             </b-col>
+
             <b-col md="9">
                 <div class="separator">
                     <FvLetterFilter :options="services.map(service => ({text: service.name}))"
@@ -89,6 +116,9 @@
             return {
                 isBrokerPage,
                 services: [],
+
+                // for hiding filters
+                visible: false,
 
                 // for forex-services:
                 categories: '',
@@ -207,6 +237,14 @@
         mounted() {
             this.getData();
         },
+        computed: {
+            showOrHideFilters: function () {
+                return this.visible ? 'show filters' : 'hide filters'
+            }
+
+
+        },
+
         methods: {
             async getData() {
                 if (!this.isBrokerPage) {
