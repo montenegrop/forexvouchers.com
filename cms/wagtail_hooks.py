@@ -339,7 +339,6 @@ class CommentAdmin(ModelAdmin):
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
 # modeladmin_register(CategoryAdmin)
-modeladmin_register(VouchersGroup)
 modeladmin_register(ProductsGroup)
 modeladmin_register(VouchersGroup)
 modeladmin_register(AffiliateAdmin)

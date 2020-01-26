@@ -1,5 +1,7 @@
 from django.db import models
 
+from cms.helpers.cache_decorators import cache_service_dict
+
 BROKERS = 1
 TRAINING = 2
 VPS = 3
@@ -190,6 +192,7 @@ class ServiceHelper(object):
         value = getattr(self.service, name)
         return value.slug if isinstance(value, models.Model) else str(value)
 
+    @cache_service_dict
     def to_dict(self):
         obj = {}
         for field in self.fields:

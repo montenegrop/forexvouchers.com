@@ -43,12 +43,10 @@ class HomePage(RoutablePageMixin, PageLDMixin, Page):
         )
     ]
 
+
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
         services = Service.objects.filter(category__in=[BROKERS], premium=True).order_by('name')[0:10]
-
-        print('ababa')
-
 
         context['recent_comments'] = []
         context['categories'] = Category.objects.all().order_by('name')
@@ -56,7 +54,6 @@ class HomePage(RoutablePageMixin, PageLDMixin, Page):
         context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
         context['premium_services_models'] = services
         context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
-        context['vouchers'] = [ServiceHelper(service).to_dict() for service in services]
 
         return context
 

@@ -13,8 +13,37 @@ services:
       MYSQL_DATABASE: fxvouchers
       MYSQL_USER: fsxvouchers
       MYSQL_PASSWORD: Coot123X6*
-  memcached:
-    image: sameersbn/memcached:1.5.6-2
+  redis:
+    image: redis:alpine
+    container_name: redis_db
+    command: redis-server --appendonly yes
     ports:
-      - "11211:11211"
+      - 6379:6379
+    #volumes:
+    #  - ./data:/data
     restart: always
+    networks:
+      - redis_net
+  idp:
+    depends_on:
+      - redis
+    image: tenstartups/redis-commander
+    container_name: redis_comndr
+    command: --redis-host redis
+    ports:
+      - 8888:8081
+    links:
+      - redis:redis
+    restart: always
+    networks:
+      - redis_net
+
+networks:
+  redis_net:
+    driver: bridge
+
+#  memcached:
+#    image: sameersbn/memcached:1.5.6-2
+#    ports:
+#      - "11211:11211"
+#    restart: always
