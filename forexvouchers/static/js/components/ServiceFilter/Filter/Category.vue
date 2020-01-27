@@ -1,7 +1,5 @@
 <template>
     <div v-if="!brokerness">
-        <h2 class="filter-titles filter-titles-main mb-0 text-secondary">Forex Services:</h2>
-
         <b-input-group size="sm" class="mb-4">
             <i class="fas fa-search filter-search-icon"></i>
             <b-form-input class="filter-search-bar" placeholder="Search"

@@ -5,23 +5,25 @@
 
                 <b-row>
                     <b-col cols="9">
-                        <h5 class="filter-titles info"> {{ showOrHideFilters }} </h5>
+                        <h2 v-if="isBrokerPage" class="filter-titles filter-titles-main mb-0 text-secondary ">Forex
+                            Brokers:</h2>
+                        <h2 v-if="!isBrokerPage" class="filter-titles filter-titles-main mb-0 text-secondary ">Forex
+                            Services:</h2>
                     </b-col>
                     <b-col cols="3">
-                        <b-link
-                                :class="visible ? null : 'collapsed'"
+                        <b-link :class="visible ? null : 'collapsed'"
                                 :aria-expanded="visible ? 'true' : 'false'"
                                 aria-controls="collapse-4"
                                 @click="visible = !visible"
                                 variant="info"
                         >
 
-                            <i v-bind:class=" {'fas fa-arrow-circle-down arrows': visible, 'fas fa-arrow-circle-right arrows': !visible}"></i>
+                            <div v-if="$mq === 'sm'" class="show-more">
+                                <b-button size="sm" variant="outline-info" href="#" @click.stop.prevent="getLimit">
+                                    {{ showOrHideFilters }}
+                                </b-button>
+                            </div>
 
-                            <!--                    <a href="#" style="background-color: red">-->
-                            <!--                        <div  v-bind:class=" {'fa fa-chevron-up rotate.down': visible, 'fa fa-chevron-up rotate': !visible}"></div>-->
-                            <!--                    </a>-->
-                            <!--                    <i v-if="!visible" class="fas fa-arrow-circle-right arrows"></i>-->
 
                         </b-link>
                     </b-col>
@@ -118,7 +120,7 @@
                 services: [],
 
                 // for hiding filters
-                visible: false,
+                visible: Boolean,
 
                 // for forex-services:
                 categories: '',
@@ -172,9 +174,15 @@
 
                 selected: [],
                 counter: 0,
+
+                $mq: '',
             }
         },
         watch: {
+            $mq: function () {
+                this.smallBreakpoint();
+            },
+
             categories: function () {
                 this.getData();
             },
@@ -236,11 +244,12 @@
         },
         mounted() {
             this.getData();
+            this.smallBreakpoint();
         },
         computed: {
             showOrHideFilters: function () {
-                return this.visible ? 'show filters' : 'hide filters'
-            }
+                return this.visible ? 'hide filters' : 'show filters'
+            },
 
 
         },
@@ -300,6 +309,10 @@
                 if (this.servicesCount + this.limitIncrease > this.services.length) {
                     this.onLimit = true
                 }
+            },
+
+            smallBreakpoint() {
+                this.$mq === 'sm' ? this.visible = false : this.visible = true;
             },
 
             getLimit() {
