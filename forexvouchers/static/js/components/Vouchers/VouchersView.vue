@@ -23,7 +23,9 @@
                         <FvList :vouchers="vouchers.filter(voucher => (voucher.name.charAt(0).toLocaleUpperCase() == startingLetter || startingLetter == '' ) )"/>
                     </div>
                     <div class="show-more">
-                        <a href="#" @click.stop.prevent="limit += 10">show more</a>
+                        <b-button variant="outline-info" :disabled="onLimit" href="#" @click.stop.prevent="getLimit">
+                            show more
+                        </b-button>
                     </div>
                 </div>
             </b-col>
@@ -54,8 +56,14 @@
                 categories: '',
                 vouchers: [],
                 startingLetter: '',
-                limit: '10',
-                sort: ''
+
+                limit: 10,
+                limitIncrease: 10,
+                vouchersCount: 0,
+                onLimit: false,
+
+
+                sort: '',
             }
         },
         watch: {
@@ -67,9 +75,6 @@
             },
             categories: function () {
                 this.getData();
-            },
-            limit: function () {
-                this.getData()
             },
             sort: function () {
                 this.getData()
@@ -86,7 +91,15 @@
                 this.filterServices = response.body.services;
                 this.filterCategories = response.body.categories;
                 this.filterTypes = response.body.types;
-                this.limit = response.body.limit;
+                if (this.vouchersCount + this.limitIncrease > this.vouchers.length) {
+                    this.onLimit = true
+                }
+            },
+
+            getLimit() {
+                this.vouchersCount = this.vouchers.length;
+                this.limit += this.limitIncrease;
+                this.getData()
             },
 
             onTypeChange(value) {

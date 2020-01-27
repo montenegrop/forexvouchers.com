@@ -266,7 +266,6 @@ class ForexServicesView(View):
                         'system_types': self.getSystemTypes(),
                         'trading_tools': self.getTradingTools(),
                         'pricing_models': self.getPricingModels(),
-                        'limit': limit
                         }
             [response['data'].append(service.toDict()) for service in services]
         else:
@@ -297,7 +296,6 @@ class ForexServicesView(View):
                         'withdraw_methods': self.getWithdrawMethods(),
                         'trading_softwares': self.getTradingSoftwaresBrokers(),
                         'operating_systems': self.getOperatingSystems(),
-                        'limit': limit
                         }
             [response['data'].append(ServiceHelper(service).to_dict()) for service in services]
         return HttpResponse(json.dumps(response), content_type="application/json")

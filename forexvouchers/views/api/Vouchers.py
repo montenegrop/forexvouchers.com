@@ -70,7 +70,7 @@ class VouchersView(View):
                     'categories': self.getCategoryCounts(),
                     'services': self.getServiceCounts(),
                     'types': self.getTypeCounts(),
-                    'limit': limit}
+                    }
 
         typeConditions = None
         for type in voucherTypes:

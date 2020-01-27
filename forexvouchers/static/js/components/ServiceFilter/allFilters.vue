@@ -3,17 +3,17 @@
         <!--services-->
         <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories"
                             :onChange="onCategoryChange" :searchBarChange="onSearchBarChange"></fv-filter-category>
-        <fv-filter-trading-type :brokerness="isBrokerPage" :options="filterTradingTypes"
+        <fv-filter-trading-type v-if="filterTradingTypes.length" :brokerness="isBrokerPage" :options="filterTradingTypes"
                                 :onChange="onTradingTypeChange"></fv-filter-trading-type>
 
         <!--        trading software-->
 
 
         <!--brokers-->
-        <fv-filter-regulation :brokerness="isBrokerPage" :options="filterRegulations"
+        <fv-filter-regulation v-if="filterRegulations.length" :brokerness="isBrokerPage" :options="filterRegulations"
                               :onChange="onRegulationChange" :searchBarChange="onSearchBarChange"></fv-filter-regulation>
 
-        <fv-filter-broker-type :brokerness="isBrokerPage" :options="filterBrokerTypes"
+        <fv-filter-broker-type v-if="filterBrokerTypes.length" :brokerness="isBrokerPage" :options="filterBrokerTypes"
                                :onChange="onBrokerTypeChange"></fv-filter-broker-type>
 
         <fv-filter-min-lot-size :brokerness="isBrokerPage"
@@ -30,23 +30,23 @@
         <fv-filter-leverage :brokerness="isBrokerPage"
                             :onChange="onLeverageChange"></fv-filter-leverage>
 
-        <fv-filter-trading-instrument :brokerness="isBrokerPage" :options="filterTradingInstruments"
+        <fv-filter-trading-instrument v-if="filterTradingInstruments.length" :brokerness="isBrokerPage" :options="filterTradingInstruments"
                                       :onChange="onTradingInstrumentChange"></fv-filter-trading-instrument>
 
-        <fv-filter-deposit-method :brokerness="isBrokerPage" :options="filterDepositMethods"
+        <fv-filter-deposit-method v-if="filterDepositMethods.length" :brokerness="isBrokerPage" :options="filterDepositMethods"
                                   :onChange="onDepositMethodChange"></fv-filter-deposit-method>
 
-        <fv-filter-withdraw-method :brokerness="isBrokerPage" :options="filterWithdrawMethods"
+        <fv-filter-withdraw-method v-if="filterWithdrawMethods.length" :brokerness="isBrokerPage" :options="filterWithdrawMethods"
                                    :onChange="onWithdrawMethodChange"></fv-filter-withdraw-method>
 
 <!--        this goes here to mantain order required-->
-        <fv-filter-trading-software :brokerness="isBrokerPage" :options="filterTradingSoftwares"
+        <fv-filter-trading-software v-if="filterTradingSoftwares.length" :brokerness="isBrokerPage" :options="filterTradingSoftwares"
                                     :onChange="onTradingSoftwareChange"></fv-filter-trading-software>
-        <fv-filter-system-type :brokerness="isBrokerPage" :options="filterSystemTypes"
+        <fv-filter-system-type v-if="filterSystemTypes.length" :brokerness="isBrokerPage" :options="filterSystemTypes"
                                :onChange="onSystemTypeChange"></fv-filter-system-type>
-        <fv-filter-trading-tool :brokerness="isBrokerPage" :options="filterTradingTools"
+        <fv-filter-trading-tool v-if="filterTradingTools.length" :brokerness="isBrokerPage" :options="filterTradingTools"
                                 :onChange="onTradingToolChange"></fv-filter-trading-tool>
-        <fv-filter-pricing-model :brokerness="isBrokerPage" :options="filterPricingModels"
+        <fv-filter-pricing-model v-if="filterPricingModels.length" :brokerness="isBrokerPage" :options="filterPricingModels"
                                  :onChange="onPricingModelChange"></fv-filter-pricing-model>
 
         <fv-filter-operating-system v-if="filterOperatingSystems.length" :brokerness="isBrokerPage"

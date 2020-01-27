@@ -10,7 +10,16 @@ import VueCookies from 'vue-cookies'
 import VueCarousel from 'vue-carousel'
 import ReadMore from 'vue-read-more'
 
+import VueMq from 'vue-mq'
 
+Vue.use(VueMq, {
+    breakpoints: { // default breakpoints - customize this
+        sm: 768,
+        md: 1200,
+        lg: Infinity,
+    },
+    defaultBreakpoint: 'sm' // customize this for SSR
+})
 
 
 Vue.use(ReadMore);
