@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <h3>{{ page.title }}</h3>
+
+    {{ page.body|safe }}
+
+{% for entry in blog_entries %}
+    {{ entry.title }}
+{% endfor %}
+
+
+{% endblock %}
