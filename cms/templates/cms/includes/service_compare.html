@@ -10,7 +10,7 @@
                 {% if sers != service %}
                     {% image sers.logo max-60x37 as logo %}
 
-                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', logo: '{{ logo.url }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
+                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', logo: '{{ logo.url }}', link: '/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
                 {% endif %}
             {% endfor %}
         ]" v-model="selected"></fv-compare-typeahead>

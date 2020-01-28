@@ -6,7 +6,6 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtailschemaorg.models import PageLDMixin
-from wagtailschemaorg.utils import extend
 
 
 class BlogPage(Page, PageLDMixin):
@@ -47,9 +46,3 @@ class BlogPage(Page, PageLDMixin):
     subpage_types = []
 
 
-
-    def ld_entity(self):
-        return extend(super().ld_entity(), {
-            '@type': 'Organization',
-            'name': 'Forex Vouchers',
-        })

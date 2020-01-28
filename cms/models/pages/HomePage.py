@@ -1,25 +1,18 @@
 from wagtail.core.models import Page
+from wagtailtrans.models import TranslatablePage
 from django.db import models
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtailschemaorg.models import PageLDMixin
-from wagtailschemaorg.utils import extend, image_ld
+from wagtailschemaorg.utils import extend
 
-from cms.models.business_models import Voucher
 from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
-from cms.helpers.services import get_service_context, get_comments_by_service, get_comparable_services, \
-    get_other_services_names, get_vouchers_by_service, get_products_by_service
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
 
-from django.db.models import Q
+from wagtail.contrib.routable_page.models import RoutablePageMixin
 
-from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-
-from django.shortcuts import render
-
-
-class HomePage(RoutablePageMixin, PageLDMixin, Page):
+class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
     banner_title = models.CharField(max_length=100, default='')
     banner_body = RichTextField(blank=True, default='')
     banner_image = models.ForeignKey(
@@ -57,74 +50,6 @@ class HomePage(RoutablePageMixin, PageLDMixin, Page):
 
         return context
 
-    @route(r'^services/(.+)/$')
-    def get_service_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        slug = args[0]
-        service = Service.objects.get(slug=slug)
-        helper = ServiceHelper(service)
-
-        context['service_helper'] = helper
-
-        context['service'] = service
-        context['comments'] = get_comments_by_service(service)
-        context['services'] = get_comparable_services(service, [BROKERS])
-        context['compare'] = get_other_services_names(service, [BROKERS])
-        context['affiliate'] = service.affiliate
-        context['vouchers'] = get_vouchers_by_service(service)
-        context['products'] = get_products_by_service(service)
-
-        return render(request, "../templates/cms/service_page.html", context)
-
-    @route(r'^f./compare/(.+)/$')
-    def get_compare_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        slugs = args[0].split("-vs-")
-        service1 = Service.objects.get(slug=slugs[0])
-        service2 = Service.objects.get(slug=slugs[1])
-
-        context['service1'] = get_service_context(service1)
-        context['service2'] = get_service_context(service2)
-
-        context['service_helper1'] = ServiceHelper(service1)
-        context['service_helper2'] = ServiceHelper(service2)
-
-        context['affiliate1'] = service1.affiliate
-        context['affiliate2'] = service2.affiliate
-
-        sortedServices = sorted([service1, service2], key=lambda service: service.id)
-
-        compare, _ = Compare.objects.get_or_create(service1=sortedServices[0], service2=sortedServices[1])
-        compare.count += 1
-        compare.save()
-
-        return render(request, "../templates/cms/compare_page.html", context)
-
-    @route(r'^forex-brokers/$')
-    def get_brokers_filters_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        return render(request, "../templates/cms/services_filter_page.html", context)
-
-    @route(r'^forex-services/$')
-    def get_services_filters_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        return render(request, "../templates/cms/services_filter_page.html", context)
-
-    @route(r'^vouchers/$')
-    def get_vouchers_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        return render(request, "../templates/cms/vouchers_page.html", context)
-
-    @route(r'^(discounts|promocodes|offers)/(.+)/$')
-    def get_middleware_context(self, request, *args, **kwargs):
-        context = super(HomePage, self).get_context(request)
-        slug = args[1]
-        voucher = Voucher.objects.get(slug=slug).get_subobject()
-
-        context['voucher'] = voucher.toDict()
-        context['voucher_model'] = voucher
-
-        return render(request, "../templates/cms/vouchers_middleware.html", context)
 
     def ld_entity(self):
         return extend(super().ld_entity(), {

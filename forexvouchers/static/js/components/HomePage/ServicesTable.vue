@@ -21,7 +21,7 @@
             <tr v-for="(service, index) in rows">
                 <th scope="row">{{ index + 1}}</th>
                 <td>
-                    <a :href="`/services/${service.slug}`">
+                    <a :href="`${service.url}`">
                         <img :src="service.logo_url" height="25"/> {{ service.name }}
                     </a>
                 </td>

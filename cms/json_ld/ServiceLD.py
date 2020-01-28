@@ -14,7 +14,7 @@ class ServiceLD(ThingLD):
         self.service = service
 
     def ld_get_url(self):
-        return f'{BASE_URL}/services/{self.service.slug}'
+        return f'{BASE_URL}{self.service.url}'
 
     def ld_entity(self):
         service = ServiceHelper(self.service).to_dict()

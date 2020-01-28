@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
     'wagtail.contrib.modeladmin',
-
     'wagtailautocomplete',
+    'wagtailtrans',
 
     'modelcluster',
     'taggit',
@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
     'wagtail.core.middleware.SiteMiddleware',
+    'wagtailtrans.middleware.TranslationMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -150,6 +151,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+WAGTAILTRANS_SYNC_TREE = True
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -214,3 +217,5 @@ CACHES = {
         }
     }
 }
+
+

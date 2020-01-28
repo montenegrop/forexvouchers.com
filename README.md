@@ -22,7 +22,12 @@
 |----------|----------|
 | admin    | admin    |
 
+### Wagtail plugins
+ - [x] [Translations](https://github.com/wagtail/wagtailtrans)
+ - [x] [Schema.org JSON-LD](https://github.com/neon-jungle/wagtail-schema.org) 
+ - [x] [Autocomplete](https://github.com/wagtail/wagtail-autocomplete) 
 
-### 
-For deployment checkout our deployment steps on deployment directory
+
+### Deployment docs
+For deployment checkout our deployment steps on `deployment` directory
 

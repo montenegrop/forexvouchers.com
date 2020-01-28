@@ -18,7 +18,7 @@
                 <div>
                     <img class="logo-img" :src="service.logo_url"/>
                     <div class="title">
-                        <a :href="`/services/${service.slug}`"> {{ service.name }}</a>
+                        <a :href="`/forex-brokers/${service.slug}`"> {{ service.name }}</a>
                     </div>
                     <div v-if="service.avg_rate"
                          class="rate-container product-stars">
@@ -26,7 +26,7 @@
                     </div>
                     <div v-if="service.avg_rate" class="reviews-count">{{ service.count_rate }} reviews</div>
                     <div>
-                        <a class="btn btn-info btn-lg my-3" :href="`/services/${service.slug}`">Details</a>
+                        <a class="btn btn-info btn-lg my-3" :href="`/forex-brokers/${service.slug}`">Details</a>
                     </div>
                 </div>
             </div>

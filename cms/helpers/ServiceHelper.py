@@ -199,7 +199,7 @@ class ServiceHelper(object):
             if self.service.belongsToCategories(field.categories):
                 obj[field.key] = field.to_dict()
         obj['logo_url'] = self.service.logo.get_rendition('width-100').url if self.service.logo else None
-        obj['url'] = '/services/' + self.service.slug
+        obj['url'] = self.url
         obj['avg_rate'] = self.service.get_avg_rate
         obj['count_rate'] = self.service.get_count_rate
         obj['slug'] = self.service.slug

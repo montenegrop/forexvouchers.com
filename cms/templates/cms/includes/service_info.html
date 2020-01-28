@@ -40,7 +40,7 @@
                         <fv-compare-typeahead :options="[
             {% for sers in services %}
                 {% if sers != service %}
-                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', link: '/fb/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
+                    {id: {{ forloop.counter }}, text: '{{ sers.name }}', link: '/compare/{{ service.slug }}-vs-{{ sers.slug }}'},
                 {% endif %}
             {% endfor %}
         ]" v-model="selected">

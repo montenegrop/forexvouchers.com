@@ -11,4 +11,5 @@ openpyxl==2.6.2
 mysqlclient==1.4.4
 python-memcached==1.59
 wagtail-schema.org==2.0.0
+wagtailtrans==2.0.6
 django-redis==4.11.0

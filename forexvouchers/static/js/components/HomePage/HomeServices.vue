@@ -6,7 +6,7 @@
                     <div class="col-4 col">
                         <img class="logo-img" :src="service.logo_url"/>
                         <div class="title">
-                            <a :href="`/services/${service.slug}`"> {{ service.name }}</a>
+                            <a :href="`${service.url}`"> {{ service.name }}</a>
 
                         </div>
                         <div v-if="service.avg_rate">
@@ -65,7 +65,7 @@
                             Vouchers
                         </div>
                         <div>
-                            <a class="btn btn-info btn-lg" :href="`/services/${service.slug}`">Details</a>
+                            <a class="btn btn-info btn-lg" :href="`${service.url}`">Details</a>
                         </div>
                     </div>
                 </div>
