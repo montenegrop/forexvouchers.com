@@ -3,7 +3,7 @@ from .ComparePage import ComparePage
 from .ForexPage import ForexPage
 from .HomePage import HomePage
 from .ServicePage import ServicePage
-from .ServicesFilterPage import ServicesListPage
+from .ServicesListPage import ServicesListPage
 from .StaticPage import StaticPage
 from .VoucherPage import VoucherPage
 from .VouchersFilterPage import VouchersFilterPage

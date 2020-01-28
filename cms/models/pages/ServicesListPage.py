@@ -4,9 +4,6 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtailschemaorg.models import PageLDMixin
 from wagtailschemaorg.utils import extend
 
-from django.shortcuts import render
-
-
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 
 class ServicesListPage(RoutablePageMixin, PageLDMixin, Page):
