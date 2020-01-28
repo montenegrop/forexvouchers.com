@@ -11,7 +11,8 @@
                             Services:</h2>
                     </b-col>
                     <b-col cols="3">
-                        <b-link :class="visible ? null : 'collapsed'"
+                        <b-link
+                                :class="visible ? null : 'collapsed'"
                                 :aria-expanded="visible ? 'true' : 'false'"
                                 aria-controls="collapse-4"
                                 @click="visible = !visible"
@@ -19,11 +20,11 @@
                         >
 
                             <div v-if="$mq === 'sm'" class="show-more">
-                                <b-button size="sm" variant="outline-info" href="#" @click.stop.prevent="getLimit">
+                                <b-button size="sm" variant="outline-info" href="#"
+                                          @click.stop.prevent="visible=!visible">
                                     {{ showOrHideFilters }}
                                 </b-button>
                             </div>
-
 
                         </b-link>
                     </b-col>
@@ -119,8 +120,9 @@
                 isBrokerPage,
                 services: [],
 
+
                 // for hiding filters
-                visible: Boolean,
+                visible: true,
 
                 // for forex-services:
                 categories: '',
@@ -174,8 +176,6 @@
 
                 selected: [],
                 counter: 0,
-
-                $mq: '',
             }
         },
         watch: {
@@ -242,7 +242,7 @@
                 this.getData()
             }
         },
-        mounted() {
+        mounted: function() {
             this.getData();
             this.smallBreakpoint();
         },
@@ -311,8 +311,8 @@
                 }
             },
 
-            smallBreakpoint() {
-                this.$mq === 'sm' ? this.visible = false : this.visible = true;
+            smallBreakpoint: function() {
+                this.visible = this.$mq != 'sm'
             },
 
             getLimit() {
@@ -402,12 +402,12 @@
                 }
             },
 
-            delayedGetData: _.debounce(function (func) {
+            delayed: _.debounce(function (func) {
                 func()
             }, 350),
             filterServicesByName(value) {
                 this.typed = value;
-                this.delayedGetData(this.getData)
+                this.delayed(this.getData)
             },
         },
     }

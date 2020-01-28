@@ -118,10 +118,6 @@ class Methodology(AbstractField, models.Model):
     name = models.CharField(max_length=100)
 
 
-class TrainingTool(AbstractField, models.Model):
-    name = models.CharField(max_length=100)
-
-
 class PricingModel(AbstractField, models.Model):
     name = models.CharField(max_length=100)
 
