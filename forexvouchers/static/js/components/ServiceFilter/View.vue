@@ -19,7 +19,7 @@
                         >
 
                             <div v-if="$mq === 'sm'" class="show-more">
-                                <b-button size="sm" variant="outline-info" href="#" @click.stop.prevent="getLimit">
+                                <b-button size="sm" variant="outline-info" href="#" @click.stop.prevent="visible=!visible">
                                     {{ showOrHideFilters }}
                                 </b-button>
                             </div>
