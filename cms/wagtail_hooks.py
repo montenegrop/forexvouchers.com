@@ -9,7 +9,7 @@ from .models import Category, Service, Attribute, Voucher, Affiliate, Product, C
 from .models import Status, BrokerType, Location, Regulation, License
 from .models import Timezone, TradingSoftware, PlatformSupported
 from .models import Chat, SupportedLanguage
-from .models import TrainingCourse, TradingType, Methodology, TrainingTool, PricingModel, SystemType, TradingType, \
+from .models import TrainingCourse, TradingType, Methodology, TradingTool, PricingModel, SystemType, TradingType, \
     SignalAlert
 from .models import AccountType, TradingInstrument, RevenueModel, AccountOption, AccountCurrency, PaymentMethod
 
@@ -195,9 +195,9 @@ class MethodologyAdmin(ModelAdmin):
     search_fields = ('name',)
 
 
-class TrainingToolAdmin(ModelAdmin):
-    model = TrainingTool
-    menu_label = 'Training Tools'
+class TradingToolAdmin(ModelAdmin):
+    model = TradingTool
+    menu_label = 'Trading Tools'
 
     list_display = ('name',)
     ordering = ('name',)
@@ -313,7 +313,7 @@ class FieldGroup(ModelAdminGroup):
     items = (
     CategoryAdmin, StatusAdmin, BrokerTypeAdmin, LocationAdmin, RegulationAdmin, LicenseAdmin, TimezoneAdmin, TradingSoftwareAdmin,
     PlatformSupportedAdmin, ChatAdmin, SupportedLanguageAdmin, TrainingCourseAdmin, TradingTypeAdmin, MethodologyAdmin,
-    TrainingToolAdmin, PricingModelAdmin, SystemTypeAdmin, TradingTypeAdmin, SignalAlertAdmin, AccountTypeAdmin,
+    TradingToolAdmin, PricingModelAdmin, SystemTypeAdmin, TradingTypeAdmin, SignalAlertAdmin, AccountTypeAdmin,
     TradingInstrumentAdmin, RevenueModelAdmin, AccountOptionAdmin, AccountCurrencyAdmin, PaymentMethodAdmin)
 
 
