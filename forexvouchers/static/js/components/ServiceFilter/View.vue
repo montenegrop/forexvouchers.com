@@ -115,7 +115,6 @@
         },
         data() {
             const isBrokerPage = document.location.href.indexOf('broker') !== -1;
-            console.log(this.$mq)
 
             return {
                 isBrokerPage,
@@ -245,7 +244,6 @@
         },
         mounted: function() {
             this.getData();
-            console.log(246)
             this.smallBreakpoint();
         },
         computed: {
