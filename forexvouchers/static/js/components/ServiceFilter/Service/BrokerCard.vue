@@ -1,5 +1,5 @@
 <template>
-    <div class="product">
+    <div class="product-card">
         <div class="row">
             <div class="col-3 col mt-4 d-flex justify-content-center">
 
@@ -15,16 +15,16 @@
 
             <div class="col-6 col">
 
-                <img class="logo-img" :src="service.logo_url"/>
+                <img v-if="service.logo_url" class="logo-img" :src="service.logo_url"/>
                 <div class="title">
                     <a :href="`${service.url}`"> {{ service.name }}</a>
 
                 </div>
-                <div v-if="service.avg_rate">
+                <div v-if="service.avg_rate" v-if="service.avg_rate">
                     <div class="rate-container product-stars">
                         <rate :length="5" :value="service.avg_rate" readonly/>
                     </div>
-                    <div v-if="service.avg_rate" class="reviews-count">{{ service.count_rate }} reviews</div>
+                    <div v-if="service.count_rate" class="reviews-count">{{ service.count_rate }} reviews</div>
                 </div>
             </div>
 
@@ -38,50 +38,47 @@
                 </div>
             </div>
         </div>
-        <div class="col row justify-content-center">
-            <table>
-                <tr>
-                    <td class="right">Deposit</td>
-                    <td class="left">{{ service.minimum_deposit ? `$ ${service.minimum_deposit}` : '-'
+
+        <div class="col justify-content-center">
+            <b-table-simple borderless small>
+                <b-tr v-if="service.minimum_deposit">
+                    <b-td class="left">Deposit</b-td>
+                    <b-td class="right">{{ service.minimum_deposit ? `$ ${service.minimum_deposit}` : '-'
                         }}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="right">Spread</td>
-                    <td class="left">{{ service.spread ? `${service.spread}` : '-' }}</td>
-                </tr>
-                <tr>
-                    <td class="right">Leverage</td>
-                    <td class="left">{{ service.leverage ? `${service.leverage}` : '-' }}</td>
-                </tr>
-                <tr>
-                    <td class="right">Commission</td>
-                    <td class="left">{{ service.commission ? `${service.commission}` : '-' }}</td>
-                </tr>
-                <tr>
-                    <td class="right">Broker Type</td>
-                    <td class="left">
+                    </b-td>
+                </b-tr>
+                <b-tr v-if="service.spread">
+                    <b-td class="left">Spread</b-td>
+                    <b-td class="right">{{ service.spread ? `${service.spread}` : '-' }}</b-td>
+                </b-tr>
+                <b-tr v-if="service.leverage">
+                    <b-td class="left">Leverage</b-td>
+                    <b-td class="right">{{ service.leverage ? `${service.leverage}` : '-' }}</b-td>
+                </b-tr>
+                <b-tr v-if="service.comission">
+                    <b-td class="left">Commission</b-td>
+                    <b-td class="right">{{ service.commission ? `${service.commission}` : '-' }}</b-td>
+                </b-tr>
+                <b-tr v-if="service.broker_type">
+                    <b-td class="left">Broker Type</b-td>
+                    <b-td class="right">
                         <div v-for="broker_type in service.broker_type">{{ broker_type }}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="right">Regulation</td>
-                    <td class="left">
+                    </b-td>
+                </b-tr>
+                <b-tr v-if="service.regulation">
+                    <b-td class="left">Regulation</b-td>
+                    <b-td class="right">
 
                         <div>
-
-
                                     <span v-for="regulation in service.regulation"
                                           :class="`m-1 flag flag-icon flag-icon-squared flag-icon-${
                                               regulation.location.code.toLowerCase()} rounded-circle`"></span>
-
-<!--                            <span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>-->
-
                         </div>
-                    </td>
-                </tr>
-            </table>
+                    </b-td>
+                </b-tr>
+            </b-table-simple>
         </div>
+
         <div class="col row justify-content-center">
             <a class="btn btn-info btn-lg" :href="`${service.url}`">Details</a>
         </div>
