@@ -38,7 +38,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col justify-content-center">
             <b-table-simple borderless small>
                 <b-tr v-if="service.minimum_deposit">
