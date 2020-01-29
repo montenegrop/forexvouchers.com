@@ -10,7 +10,7 @@ from .models import Status, BrokerType, Location, Regulation, License
 from .models import Timezone, TradingSoftware, PlatformSupported
 from .models import Chat, SupportedLanguage
 from .models import TrainingCourse, TradingType, Methodology, TradingTool, PricingModel, SystemType, TradingType, \
-    SignalAlert
+    SignalAlert, SecurityOfFunds
 from .models import AccountType, TradingInstrument, RevenueModel, AccountOption, AccountCurrency, PaymentMethod
 
 
@@ -295,6 +295,14 @@ class PaymentMethodAdmin(ModelAdmin):
     ordering = ('name',)
     search_fields = ('name',)
 
+class SecurityOfFundAdmin(ModelAdmin):
+    model = SecurityOfFunds
+    menu_label = 'Security of funds'
+
+    list_display = ('name',)
+    ordering = ('name',)
+    search_fields = ('name',)
+
 
 #     fields_end
 
@@ -314,7 +322,7 @@ class FieldGroup(ModelAdminGroup):
     CategoryAdmin, StatusAdmin, BrokerTypeAdmin, LocationAdmin, RegulationAdmin, LicenseAdmin, TimezoneAdmin, TradingSoftwareAdmin,
     PlatformSupportedAdmin, ChatAdmin, SupportedLanguageAdmin, TrainingCourseAdmin, TradingTypeAdmin, MethodologyAdmin,
     TradingToolAdmin, PricingModelAdmin, SystemTypeAdmin, TradingTypeAdmin, SignalAlertAdmin, AccountTypeAdmin,
-    TradingInstrumentAdmin, RevenueModelAdmin, AccountOptionAdmin, AccountCurrencyAdmin, PaymentMethodAdmin)
+    TradingInstrumentAdmin, RevenueModelAdmin, AccountOptionAdmin, AccountCurrencyAdmin, PaymentMethodAdmin, SecurityOfFundAdmin)
 
 
 class ProductsGroup(ModelAdminGroup):

@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="col-3 col row justify-content-center">
+            <div class="col-3 col justify-content-center">
                 <div>
                     <div class="voucher-count">
                         0
