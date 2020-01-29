@@ -69,19 +69,15 @@
                     <b-td class="right">
 
                         <div>
-
-
                                     <span v-for="regulation in service.regulation"
                                           :class="`m-1 flag flag-icon flag-icon-squared flag-icon-${
                                               regulation.location.code.toLowerCase()} rounded-circle`"></span>
-
-<!--                            <span class="flag flag-icon flag-icon-squared flag-icon-{ value.code.lower() } rounded-circle border border-secondary"></span>-->
-
                         </div>
                     </b-td>
                 </b-tr>
             </b-table-simple>
         </div>
+
         <div class="col row justify-content-center">
             <a class="btn btn-info btn-lg" :href="`${service.url}`">Details</a>
         </div>

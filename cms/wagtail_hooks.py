@@ -304,6 +304,15 @@ class SecurityOfFundAdmin(ModelAdmin):
     search_fields = ('name',)
 
 
+class SecurityOfFundAdmin(ModelAdmin):
+    model = SecurityOfFunds
+    menu_label = 'Security of funds'
+
+    list_display = ('name',)
+    ordering = ('name',)
+    search_fields = ('name',)
+
+
 #     fields_end
 
 #     images begin

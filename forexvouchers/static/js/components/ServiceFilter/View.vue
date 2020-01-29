@@ -122,7 +122,7 @@
 
 
                 // for hiding filters
-                visible: true,
+                visible: Boolean,
 
                 // for forex-services:
                 categories: '',
@@ -242,9 +242,13 @@
                 this.getData()
             }
         },
-        mounted: function() {
-            this.getData();
+
+        beforeMount() {
             this.smallBreakpoint();
+        },
+
+        mounted: function () {
+            this.getData();
         },
         computed: {
             showOrHideFilters: function () {
@@ -311,7 +315,7 @@
                 }
             },
 
-            smallBreakpoint: function() {
+            smallBreakpoint: function () {
                 this.visible = this.$mq != 'sm'
             },
 
