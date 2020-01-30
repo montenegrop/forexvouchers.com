@@ -9,12 +9,10 @@
 
                 <fv-button-compare class="compare-button"
                                    v-if="toCompare.length === 2 && toCompare[1].slug === service.slug"
-                                   :services="toCompare"
-                ></fv-button-compare>
-
+                                   :services="toCompare"></fv-button-compare>
             </div>
 
-            <div class="col-6 col">
+            <div class="col-6 col-md-5 col">
                 <div>
                     <img class="logo-img" :src="service.logo_url"/>
                     <div class="title">
@@ -31,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="col-3 col justify-content-center">
+            <div class="col-3 col-md-4 col d-flex justify-content-center">
                 <div>
                     <div class="voucher-count"
                          v-bind:class="{ 'voucher-count-lg': $mq != 'md', 'voucher-count-md': $mq === 'md'}">
