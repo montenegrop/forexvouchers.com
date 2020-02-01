@@ -17,7 +17,7 @@
                                     id="checkbox-group-regulation"
                                     class="filter-content option-filter"
                                     v-on:input="onChange($event)"
-                                    :options="getNames"
+                                    :options="getNames.slice(0, limit)"
                                     name="flavour-1"
                                     stacked
                             />
@@ -26,13 +26,20 @@
 
                     <b-col v-show="brokerness" cols="3" class="m-0 p-0 checkbox-amount">
                         <b-list-group>
-                            <b-list-group-item v-for="option in options" class="p-0 m-0 border-0 list-group-item"><p
+                            <b-list-group-item v-for="option in options.slice(0, limit)"
+                                               class="p-0 m-0 border-0 list-group-item"><p
                                     class="mt-0 mb-0"> ({{option.total}})</p>
                             </b-list-group-item>
                         </b-list-group>
                     </b-col>
-
                 </b-row>
+
+                <div v-if="limit < options.length">
+                    <a class="show-more-button" href="#"
+                       @click.stop.prevent="limit += limitIncrease">
+                        <u>more choices</u>
+                    </a>
+                </div>
             </div>
         </fv-filter-decorator>
     </div>
@@ -49,7 +56,8 @@
         data() {
             return {
                 searchBar: '',
-                limit: 15,
+                limit: 5,
+                limitIncrease: 5,
             }
         },
         computed: {

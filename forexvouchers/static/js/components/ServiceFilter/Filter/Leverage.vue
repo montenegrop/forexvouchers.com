@@ -1,5 +1,5 @@
 <template>
-    <fv-filter-decorator v-if="brokerness" title="Leverage">
+    <fv-filter-decorator v-if="brokerness" title="Leverage" class="mb-4">
         <div>
             <b-row>
                 <b-col cols="9">

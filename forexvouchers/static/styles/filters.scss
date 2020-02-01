@@ -59,9 +59,10 @@
   text-align: left;
   padding-right: 10px;
   padding-left: 2px;
-  font-family: ralewayextrabold_italic;
+  font-family: ralewayextrabold;
   text-shadow: none;
   color: black;
+  margin-bottom: 0;
 
   &-main {
     margin-bottom: 25px;
@@ -69,7 +70,7 @@
 }
 
 .filter-content {
-  font-family: ralewaybold;
+  font-family: ralewaysemibold;
   text-shadow: none;
   color: $gray-900;
 }
@@ -138,4 +139,18 @@
   .btn-lg {
     font-size: 0.95rem;
   }
+}
+
+.show-more-button {
+  color: $info;
+  margin-left: 20px;
+
+  &:hover {
+    color: $info;
+  }
+
+}
+
+margin-bottom-none {
+  margin-bottom: 0;
 }
