@@ -25,7 +25,7 @@
 
                     <b-col cols="3" class="m-0 p-0 checkbox-amount">
                         <b-list-group>
-                            <b-list-group-item v-for="option in getNames" class="p-0 m-0 border-0 list-group-item"><p
+                            <b-list-group-item v-for="option in getNames.slice(0, limit)" class="p-0 m-0 border-0 list-group-item"><p
                                     class="mt-0 mb-0"> ({{option.total}})</p>
                             </b-list-group-item>
                         </b-list-group>
@@ -33,6 +33,14 @@
 
 
                 </b-row>
+
+                <div v-if="limit < options.length">
+                    <a class="show-more-button" href="#"
+                       @click.stop.prevent="limit += limitIncrease">
+                        <u>more choices</u>
+                    </a>
+                </div>
+
             </div>
         </fv-filter-decorator>
     </div>
@@ -51,6 +59,7 @@
             return {
                 searchBar: '',
                 limit: 15,
+                limitIncrease: 5,
             }
         },
         computed: {

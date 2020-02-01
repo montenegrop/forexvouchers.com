@@ -139,3 +139,17 @@
     font-size: 0.95rem;
   }
 }
+
+.show-more-button {
+  color: $info;
+  margin-left: 20px;
+
+  &:hover {
+    color: $info;
+  }
+
+}
+
+margin-bottom-none {
+  margin-bottom: 0;
+}

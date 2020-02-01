@@ -25,8 +25,6 @@
                         </b-form>
                     </div>
                 </b-col>
-
-
             </b-row>
         </div>
     </fv-filter-decorator>
