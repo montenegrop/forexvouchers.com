@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-5">
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
 
@@ -348,7 +348,7 @@
                 this.regulations = value.join(',')
             },
             onBrokerTypeChange(value) {
-                this.brokerType = value.join(',')
+                this.brokerTypes = value.join(',')
             },
             onTradingInstrumentChange(value) {
                 this.tradingInstruments = value.join(',')

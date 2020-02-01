@@ -9,7 +9,7 @@
                         :class="visible ? null : 'collapsed'"
                         :aria-expanded="visible ? 'true' : 'false'"
                         aria-controls="collapse-4"
-                        @click="visible = !visible"
+                        @click.stop.prevent="visible = !visible"
                         variant="info"
                 >
 
@@ -17,7 +17,7 @@
                 </b-link>
             </b-col>
         </b-row>
-        <b-collapse id="collapse-4" v-model="visible" class="mt-2">
+        <b-collapse id="collapse-4" v-model="visible" class="mt-1 mb-1">
             <slot></slot>
         </b-collapse>
 

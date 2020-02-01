@@ -16,6 +16,17 @@
                         />
                     </b-form-group>
                 </b-col>
+
+
+                <b-col cols="3" class="m-0 p-0 checkbox-amount">
+                    <b-list-group>
+                        <b-list-group-item v-for="option in options.slice(0, limit)"
+                                           class="p-0 m-0 border-0 list-group-item"><p
+                                class="mt-0 mb-0"> ({{option.total}})</p>
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-col>
+
             </b-row>
 
             <div v-if="limit < options.length">
