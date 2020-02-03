@@ -41,3 +41,12 @@ class ServicePage(RoutablePageMixin, PageLDMixin, Page):
             '@type': 'Organization',
             'name': 'Forex Vouchers',
         })
+
+    def get_sitemap_urls(self, request=None):
+        if 'broker' in self.slug:
+            services = Service.objects.filter(category__in=(BROKERS,))
+        else:
+            services = Service.objects.exclude(category__in=(BROKERS,))
+        return map(lambda service: {
+            'location': f"{self.get_full_url()}{service.slug}",
+        }, services)

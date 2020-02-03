@@ -53,3 +53,13 @@ class ComparePage(RoutablePageMixin, PageLDMixin, Page):
         compare.save()
 
         return render(request, "../templates/cms/compare_page.html", context)
+
+
+    def get_sitemap_urls(self, request=None):
+        services = Service.objects.all()
+        for service1 in services:
+            for service2 in services:
+                if service1.id != service2.id and service1.belongsToCategories(service2.getCategoriesIDs()):
+                  yield {
+                     'location': f"{self.get_full_url()}{service1.slug}-vs-{service2.slug}",
+                  }
