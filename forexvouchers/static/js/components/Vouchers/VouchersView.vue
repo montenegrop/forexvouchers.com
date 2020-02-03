@@ -85,7 +85,12 @@
         },
         methods: {
             async getData() {
-                const url = `/api/vouchers?voucher_types=${this.type}&services=${this.services}&categories=${this.categories}&limit=${this.limit}&sort=${this.sort}`;
+                const url = `/api/vouchers?voucher_types=${
+                    this.type}&services=${
+                    this.services}&categories=${
+                    this.categories}&limit=${
+                    this.limit}&sort=${
+                    this.sort}`;
                 let response = await this.$http.get(url);
                 this.vouchers = response.body.data;
                 this.filterServices = response.body.services;

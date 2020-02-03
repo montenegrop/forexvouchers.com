@@ -13,12 +13,10 @@
             <b-col cols="9">
 
                 <b-form-group>
-                    <b-form-checkbox-group id="these-have-SAME-ids"
-                                           class="filter-content option-filter"
+                    <b-form-checkbox-group class="filter-content option-filter"
                                            value="selected"
                                            v-on:input="onChange($event)"
                                            :options="getNames"
-                                           name="flavour-2"
                                            stacked
                     ></b-form-checkbox-group>
                 </b-form-group>
@@ -58,6 +56,7 @@
 
         computed: {
             getNames() {
+                console.log(this.options)
                 return this.options
                     .map(option => ({
                         text: option.name,

@@ -4,15 +4,15 @@
 
         <b-row class="voucher-discount-row">
 
-            <b-col md="3"  align-self="center">
+            <b-col md="3" align-self="center">
 
                 <img :src="voucher.logo" class="product-image">
             </b-col>
 
-            <b-col md="5" align-self="center" class="product-info-discount">
+            <b-col md="5" align-self="center">
 
-                <p> {{ voucher.name }} </p>
-                <div class="vouchers-description" v-html="voucher.description"/>
+                <p class="discount-info discount-info-name"> {{ voucher.name }} </p>
+                <div class="discount-info discount-info-description" v-html="voucher.description"/>
 
             </b-col>
 
@@ -63,6 +63,7 @@
                 <timeago :datetime="voucher.expires"></timeago>
             </b-col>
         </b-row>
+
 
     </b-container>
 
