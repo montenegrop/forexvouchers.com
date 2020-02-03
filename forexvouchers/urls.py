@@ -14,8 +14,12 @@ from forexvouchers.views.api.Vouchers import VouchersView
 from cms.admin.views import import_services, export_services
 from forexvouchers.views.api.ForexServices import ForexServicesView as ServicesView
 from forexvouchers.views.api import Services as ApiServices
+from wagtail.contrib.sitemaps.views import sitemap
+
 
 urlpatterns = [
+
+    url('^sitemap\.xml$', sitemap),
 
     url(r'^out/(.+)/$', cloakedlinks),
     url(r'^visit/(.+)/$', cloakedlinks),
