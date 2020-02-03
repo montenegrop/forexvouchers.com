@@ -12,7 +12,6 @@
                         @click.stop.prevent="visible = !visible"
                         variant="info"
                 >
-
                     <i v-bind:class=" {'fas fa-arrow-circle-down arrows': visible, 'fas fa-arrow-circle-right arrows': !visible}"></i>
                 </b-link>
             </b-col>

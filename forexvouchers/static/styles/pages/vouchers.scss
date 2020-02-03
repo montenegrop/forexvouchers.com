@@ -4,6 +4,7 @@
 
     color: $options;
   }
+
   .col-form-label.pt-0 {
 
     font-weight: bold;
@@ -34,13 +35,16 @@
   border-right: 1px groove $gray-400;
   border-left: 1px groove $gray-400;
   border-top: 3px solid $gray-400;
+
   &-service {
     padding-top: 10px;
     padding-bottom: 10px;
+
     &-expiration {
       padding-top: 10px;
       padding-bottom: 10px;
       text-align: end;
+
       &-never {
         padding-top: 10px;
         padding-bottom: 10px;
@@ -52,9 +56,13 @@
   }
 }
 
+
 .vouchers-description {
   font-family: ralewaythin_italic;
   color: $black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal
 }
 
 .show-more {
@@ -74,9 +82,11 @@
     padding: 1em;
     text-align: center;
   }
+
   &-services {
     margin-bottom: 10px;
     margin-left: 35%;
+
     a {
       border-radius: 4px;
       color: $info;
@@ -92,4 +102,36 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px;
+}
+
+.discount-info {
+  white-space: normal;
+  text-shadow: none;
+
+  &-name {
+    text-shadow: none;
+    font-family: ralewayextrabold;
+    color: black;
+    margin-left: 20%;
+
+  }
+
+  &-description {
+    white-space: normal;
+    font-family: ralewaythin_italic;
+    color: $black;
+
+    p {
+      display: none
+    }
+
+    p:nth-child(-n+1) {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      -webkit-box-orient: vertical;
+    }
+  }
 }
