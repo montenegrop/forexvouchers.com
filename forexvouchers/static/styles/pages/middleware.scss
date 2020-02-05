@@ -7,6 +7,7 @@
 
   .image {
     margin-top: 45px;
+
     img {
       display: block;
       margin-left: auto;
@@ -14,22 +15,27 @@
       max-width: 150px;
     }
   }
+
   .name {
     display: flex;
     justify-content: space-between;
   }
+
   .description {
     font-family: ralewayextrabold_italic;
     color: $gray-800;
   }
+
   .icons {
     margin-top: 0.3rem;
     color: $black;
   }
+
   .button-container {
     margin-bottom: 20px;
     margin-top: 20px;
   }
+
   .button {
     display: flex;
     justify-content: center;
@@ -50,6 +56,20 @@
     text-shadow: none;
     color: $info;
     text-align: center;
+
+    &-more-vouchers {
+      font-weight: 800;
+    }
+  }
+
+  .related-vouchers {
+    background-color: transparent;
+  }
+
+  .VueCarousel-inner-margin{
+    .VueCarousel-inner {
+      margin-bottom: 30px;
+    }
   }
 
 }

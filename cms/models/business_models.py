@@ -4,7 +4,6 @@ from cms.models.fields import *
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
-
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable
 from wagtail.core.fields import RichTextField
@@ -99,7 +98,7 @@ class Service(ClusterableModel):
 
     # Trading account
     account_types = ParentalManyToManyField("AccountType", blank=True)
-    trading_instrument =     ParentalManyToManyField("TradingInstrument", blank=True)
+    trading_instrument = ParentalManyToManyField("TradingInstrument", blank=True)
     revenue_model = ParentalManyToManyField("RevenueModel", blank=True)
     account_options = ParentalManyToManyField("AccountOption", blank=True)
     account_currency = ParentalManyToManyField("AccountCurrency", blank=True)
@@ -200,8 +199,6 @@ class Service(ClusterableModel):
             'avg_rate': self.get_avg_rate,
             'count_rate': self.get_count_rate,
             'slug': self.slug,
-            'avg_rate': self.get_avg_rate,
-            'count_rate': self.get_count_rate,
         }
 
     panels = [
@@ -483,12 +480,14 @@ class Voucher(models.Model):
             'type': self.get_type(),
             'description': self.description.__str__(),
             'logo': self.logo.get_rendition('width-100').url if self.logo else None,
+            'service_id': self.service.id,
             'service_name': self.service.name,
             'service_logo': self.service.logo.get_rendition('width-15').url if self.service.logo else None,
             'service_logo_medium': self.service.logo.get_rendition('width-80').url if self.service.logo else None,
-            'service_category': self.service.category.name,
+            'service_logo_big': self.service.logo.get_rendition('width-80').url if self.service.logo else None,
+            'service_category': self.service.getCategoriesIDs(),
             'service_affiliate': self.service.affiliate.toDict(),
-            'service_rate': self.service.avg_rate,
+            'service_rate': self.service.get_avg_rate,
             'service_url': self.service.url,
             'middleware_url': '/' + self.get_type().lower() + 's/' + self.slug
         }
@@ -563,13 +562,9 @@ class Offer(Voucher):
         )
     ]
 
-
     @cache_to_dict
     def toDict(self):
         return super(Offer, self).toDict()
-
-
-
 
 
 class Comment(models.Model):

@@ -8,6 +8,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtailschemaorg.models import PageLDMixin
 from wagtailschemaorg.utils import extend
 from cms.models.business_models import Voucher, PromoCode, Discount, Offer
+import json
 
 
 class VoucherPage(RoutablePageMixin, PageLDMixin, Page):
@@ -51,7 +52,10 @@ class VoucherPage(RoutablePageMixin, PageLDMixin, Page):
         slug = args[0]
         voucher = Voucher.objects.get(slug=slug).get_subobject()
 
-        context['voucher'] = voucher.toDict()
+        context['voucher_type'] = voucher.get_type()
+        context['voucher'] = json.dumps(voucher.toDict())
+        print(voucher.toDict())
+
         context['voucher_model'] = voucher
 
         return render(request, "../templates/cms/vouchers_middleware.html", context)

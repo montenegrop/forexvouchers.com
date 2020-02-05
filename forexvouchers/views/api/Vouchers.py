@@ -88,6 +88,6 @@ class VouchersView(View):
 
         vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
 
-        [response['data'].append(vouch.toDict()) for vouch in vouchers]
+        [print(vouch.toDict()['service_logo']) for vouch in vouchers]
 
         return HttpResponse(json.dumps(response), content_type="application/json")

@@ -1,6 +1,6 @@
 <template>
     <div v-if="voucher.type === 'Discount'" class="voucher-discount">
-        <fv-discount-small :voucher="voucher"></fv-discount-small>
+        <fv-discount-small :voucher="voucher" :voucherPage="voucherPage"></fv-discount-small>
     </div>
     <div v-else-if="voucher.type === 'PromoCode'" class="voucher-promocode">
         <fv-promocode-small :voucher="voucher"></fv-promocode-small>
@@ -18,7 +18,7 @@
     export default {
         name: "fv-voucher",
         components: {FvDiscountSmall, FvPromocodeSmall, FvOfferSmall},
-        props: ['voucher'],
+        props: ['voucher', 'voucherPage'],
         data() {
             return {}
         }
