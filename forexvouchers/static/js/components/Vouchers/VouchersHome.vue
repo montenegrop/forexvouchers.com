@@ -3,7 +3,7 @@
 
         <!-- for mobile -->
         <div class="d-lg-none">
-            <carousel perPage="1" autoplay="true" autoplayHoverPause="true">
+            <carousel v-bind:class=" {'pt-0 related-vouchers border border-light': voucherPage}" perPage="1" autoplay="true" autoplayHoverPause="true">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher"/>
                 </slide>
@@ -12,9 +12,9 @@
 
         <!-- for desktop -->
         <div class="d-none d-lg-block">
-            <carousel perPage="4" autoplay="true" autoplayHoverPause="true">
+            <carousel v-bind:class=" {'pt-0 related-vouchers border border-light': voucherPage}" perPage="4" autoplay="true" autoplayHoverPause="true">
                 <slide v-for="voucher in vouchers">
-                    <fv-voucher :voucher="voucher"/>
+                    <fv-voucher :voucher="voucher" :voucherPage="voucherPage"/>
                 </slide>
             </carousel>
         </div>
@@ -28,6 +28,7 @@
 
     export default {
         name: "fv-vouchers-home",
+        props: ["service", "sort", "voucherPage"],
         components: {FvVoucher},
         data() {
             return {
@@ -36,7 +37,7 @@
                 categories: '',
                 vouchers: [],
                 startingLetter: '',
-                limit: '10',
+                limit: 10,
             }
         },
         watch: {
@@ -54,14 +55,16 @@
             }
         },
         mounted() {
+            if (this.service) {
+                this.services = this.service
+            }
             this.getData()
         },
         methods: {
             async getData() {
-                const url = `/api/vouchers?voucher_types=${this.type}&services=${this.services}&categories=${this.categories}&limit=${this.limit}`;
+                const url = `/api/vouchers?voucher_types=${this.type}&services=${this.services}&categories=${this.categories}&limit=${this.limit}&sort=${this.sort}`;
                 let response = await this.$http.get(url);
                 this.vouchers = response.body.data;
-                this.limit = response.body.limit;
             },
 
             onTypeChange(value) {

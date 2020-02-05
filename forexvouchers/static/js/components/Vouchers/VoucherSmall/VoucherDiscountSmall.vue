@@ -12,11 +12,11 @@
                 <h5 :title="voucher.name"> {{ voucher.name }} </h5>
             </div>
 
-            <div class="container">
+            <div class="container" v-bind:class=" {'pl-5': voucherPage}">
 
                 <div class="row">
 
-                    <div class="col-7 product-service"> By
+                    <div class="col-7 product-service" v-bind:class=" {'pl-0': voucherPage}"> By
                         <a class="product-service-link"
                            :href="voucher.service_url">
                             {{voucher.service_name }} </a>
@@ -61,8 +61,9 @@
 <script>
     export default {
         name: "fv-vouchers-discount-small",
-        props: ['voucher'],
+        props: ['voucher', 'voucherPage'],
         data() {
+            console.log(this.voucherPage)
             return {}
         }
     }

@@ -6,11 +6,11 @@
 
 {% block content %}
 
-<div class="products row">
+    <div class="products row">
 
-        {% if voucher.type == 'Discount' %}
+        {% if voucher_type == 'Discount' %}
 
-            {% include "includes/vouchers/middleware/discounts.html" %}
+            <fv-middleware-discount vouch="{{ voucher }}" sort="'premium'"></fv-middleware-discount>
 
         {% endif %}
 
@@ -26,7 +26,7 @@
 
         {% endif %}
 
-</div>
-{% ld_for_object voucher_model.json_ld  %}
+    </div>
+    {% ld_for_object voucher_model.json_ld %}
 
 {% endblock %}

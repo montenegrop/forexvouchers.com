@@ -64,6 +64,7 @@
   .rate-container {
     width: 132px;
     margin-bottom: 4px;
+
     f
     .Rate__star .icon {
       width: 0.75rem;
@@ -75,6 +76,13 @@
 
 .show-more {
   margin-top: 0.5rem;
+
+}
+
+.show-more.right {
+  a {
+    padding: 0.66em
+  }
 }
 
 .most-compared-main {
@@ -97,6 +105,7 @@
 .homepage-column {
   border: 1px solid $secondary;
   margin: 1rem 0;
+
   .homepage-header {
     text-align: -webkit-center;
     border: none;

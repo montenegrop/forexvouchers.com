@@ -8,6 +8,13 @@
 
         <div class="col-auto image">
             <img src="{{ voucher.service_logo_medium }}">
+
+            <b-col class="col-auto product-stars rate-container flexible voucher-info-service">
+
+                <rate length="5" value="{{ voucher.service_rate }}" readonly/>
+
+            </b-col>
+
         </div>
         <div class="col information">
             <div class="row  product-info-discount name">
@@ -17,20 +24,18 @@
             <div class="row  description"> {{ voucher.description|safe }} </div>
             <div class="row  icons">
                 {% if voucher.never_expires %}
-                    <col class="product-expires voucher-info-service-expiration-never">
+
                     <p class="icons">
                         <i class="fas fa-hourglass-half"></i> Never Expires
                     </p>
-                    </col>
+
                 {% else %}
-                    <col class="product-expires voucher-info-service-expiration">
 
                     <p class="icons"><i class="fas fa-hourglass-half"></i>
                         Expires in:&nbsp;
                         <timeago datetime="{{ voucher.expires }}"></timeago>
                     </p>
 
-                    </col>
                 {% endif %}
             </div>
             <div class="row button button-container">
@@ -52,6 +57,11 @@
                 <p><i class="fas fa-external-link-square-alt"></i>
                     External <a class="product-service-link"
                                 href="{{ voucher.service_affiliate.url }}">{{ voucher.service_name }} </a> website
+                </p>
+
+                <p>
+                    <i class="fas fa-external-link-alt"></i>
+                    Views {{ voucher.affiliate.clicks }} in-site page
                 </p>
 
 
