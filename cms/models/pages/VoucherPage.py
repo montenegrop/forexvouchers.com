@@ -54,7 +54,6 @@ class VoucherPage(RoutablePageMixin, PageLDMixin, Page):
 
         context['voucher_type'] = voucher.get_type()
         context['voucher'] = json.dumps(voucher.toDict())
-        print(voucher.toDict())
 
         context['voucher_model'] = voucher
 
