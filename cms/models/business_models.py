@@ -467,6 +467,7 @@ class Voucher(models.Model):
 
     def toDict(self):
         return {
+            'id': self.id,
             'name': self.name,
             'affiliate': self.affiliate.toDict(),
             'expires': self.expires.isoformat() if self.expires else None,
@@ -478,7 +479,7 @@ class Voucher(models.Model):
             'service_name': self.service.name,
             'service_logo': self.service.logo.get_rendition('width-15').url if self.service.logo else None,
             'service_logo_medium': self.service.logo.get_rendition('width-80').url if self.service.logo else None,
-            'service_logo_big': self.service.logo.get_rendition('width-80').url if self.service.logo else None,
+            'service_logo_big': self.service.logo.get_rendition('width-120').url if self.service.logo else None,
             'service_category': self.service.getCategoriesIDs(),
             'service_affiliate': self.service.affiliate.toDict(),
             'service_rate': self.service.get_avg_rate,
