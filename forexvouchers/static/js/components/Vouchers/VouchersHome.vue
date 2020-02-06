@@ -3,7 +3,8 @@
 
         <!-- for mobile -->
         <div class="d-lg-none">
-            <carousel v-bind:class=" {'pt-0 related-vouchers border border-light': voucherPage}" perPage="1" autoplay="true" autoplayHoverPause="true">
+            <carousel class="pt-0 related-vouchers border border-light" perPage="1"
+                      autoplay="true" autoplayHoverPause="true">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher"/>
                 </slide>
@@ -12,7 +13,8 @@
 
         <!-- for desktop -->
         <div class="d-none d-lg-block">
-            <carousel v-bind:class=" {'pt-0 related-vouchers border border-light': voucherPage}" perPage="4" autoplay="true" autoplayHoverPause="true">
+            <carousel class="pt-0 related-vouchers border border-light" perPage="4"
+                      autoplay="true" autoplayHoverPause="true">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher" :voucherPage="voucherPage"/>
                 </slide>
@@ -38,6 +40,7 @@
                 vouchers: [],
                 startingLetter: '',
                 limit: 10,
+                sort: '',
             }
         },
         watch: {
@@ -54,10 +57,13 @@
                 this.getData()
             }
         },
-        mounted() {
-            if (this.service) {
-                this.services = this.service
+        beforeMount() {
+            if (this.voucherPage) {
+                this.services = this.service;
+                this.sort = 'mostviewed';
             }
+        },
+        mounted() {
             this.getData()
         },
         methods: {

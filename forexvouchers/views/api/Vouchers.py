@@ -46,13 +46,15 @@ class VouchersView(View):
 
     def getSorting(self, sort):
         if sort == 'premium':
-            return Case(When(Q(service__premium=True), then=0), default=1), 'created_at'
+            return Case(When(Q(service__premium=True), then=0), default=1), '-created_at'
         elif sort == 'mostviewed':
-            return 'service__affiliate__clicks', 'created_at'
+            return 'service__affiliate__clicks', '-created_at'
         elif sort == 'toprated':
-            return '-service__avg_rate',
+            return '-service__avg_rate', '-created_at'
+        elif sort == 'voucher_mostviewed':
+            return 'affiliate__clicks', '-created_at'
         else:
-            return 'created_at',
+            return '-created_at',
 
     def get(self, request):
         voucherTypes = request.GET.get('voucher_types', '')
