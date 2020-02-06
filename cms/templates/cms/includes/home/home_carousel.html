@@ -2,12 +2,35 @@
 
 
 <div class="home-carousel">
-    <h2>Premium Forex Brokers</h2>
+    <h1 class="text-primary display-6">Premium Forex Brokers</h1>
 
 
     <!-- for mobile -->
-    <div class="d-lg-none">
-        <carousel perPage="1" autoplay="true">
+    <div class="d-lg-none border border-light">
+        <carousel per-page="1" autoplay="true">
+            {% for service in premium_services %}
+                <slide>
+                    <div class="card" style="width: 8rem;">
+                        <a href="{{ service.url }}">
+                            <img src="{{ service.logo_url }}" class="card-img-top" alt="{{ service.name }}">
+                        </a>
+                        <div class="card-body">
+                            <a href="{{ service.url }}">
+                                <div class="card-title">{{ service.name }}</div>
+                            </a>
+                        </div>
+                    </div>
+                </slide>
+            {% endfor %}
+        </carousel>
+        <div class="show-more right">
+            <a size="sm" href="/brokers">More Brokers</a>
+        </div>
+    </div>
+
+    <!-- for desktop -->
+    <div class="d-none d-lg-block border border-light">
+        <carousel per-page="4" autoplay="true">
             {% for service in premium_services %}
                 <slide>
                     <div class="card" style="width: 8rem;">
@@ -24,28 +47,11 @@
             {% endfor %}
         </carousel>
     </div>
-
-    <!-- for desktop -->
-    <div class="d-none d-lg-block">
-        <carousel perPage="4" autoplay="true">
-            {% for service in premium_services %}
-                <slide>
-                    <div class="card" style="width: 8rem;">
-                        <a href="{{ service.url }}">
-                            <img src="{{ service.logo_url }}" class="card-img-top" alt="{{ service.name }}">
-                        </a>
-                        <div class="card-body">
-                            <a href="{{ service.url }}">
-                                <div class="card-title">{{ service.name }}</div>
-                            </a>
-                        </div>
-                    </div>
-                </slide>
-            {% endfor %}
-        </carousel>
+    <div class="show-more right">
+        <a size="sm" href="/brokers">More Brokers</a>
     </div>
 </div>
 
 {% for service in premium_services_models %}
-   {% ld_for_object service.json_ld  %}
+    {% ld_for_object service.json_ld %}
 {% endfor %}

@@ -7,7 +7,7 @@
         <div class="row border border-light no-float ">
 
             <div class="col-auto image">
-                <img :src="voucher.service_logo_medium">
+                <img :src="voucher.service_logo_big">
 
                 <b-col class="col-auto product-stars rate-container flexible voucher-info-service pl-3">
 
@@ -37,9 +37,9 @@
                 </div>
                 <div class="row button button-container">
                     <a :href="voucher.affiliate.url">
-                        <button type="button" class="btn btn-info btn-lg">
+                        <b-button squared variant="info" class="button-large">
                             Get Discount
-                        </button>
+                        </b-button>
                     </a>
                 </div>
 
@@ -65,7 +65,7 @@
 
         <div class="mt-2 mb-5">
             <h5 class="title text-left mb-0 title-more-vouchers">Other coupons from {{ voucher.service_name }}:</h5>
-            <fv-vouchers-home class="VueCarousel-inner-margin" :service="voucher.service_id" voucherPage="true">
+            <fv-vouchers-home class="VueCarousel-inner-margin" :service="voucher.service_id" voucherPage="true" :voucherId="voucher.id">
             </fv-vouchers-home>
 
             <div class="show-more right">

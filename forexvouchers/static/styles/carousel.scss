@@ -4,7 +4,7 @@
 }
 
 .VueCarousel {
-  background-color: darken($light, 5%);
+  background-color: transparent;
   padding-top: 1rem;
 
   &-slide {
@@ -23,5 +23,11 @@
 
   .card-title {
     color: $dark;
+  }
+
+  .VueCarousel-pagination {
+    .VueCarousel-dot-container {
+      margin-top: 0
+    }
   }
 }

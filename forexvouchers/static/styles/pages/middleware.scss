@@ -34,6 +34,11 @@
   .button-container {
     margin-bottom: 20px;
     margin-top: 20px;
+
+    a {
+      border: 1px dashed $black;
+      padding: 6px;
+    }
   }
 
   .button {
@@ -42,7 +47,7 @@
     align-items: center;
     border-radius: 0;
     border: none;
-    width: 85%;
+    //width: 85%;
     text-shadow: none;
   }
 
@@ -62,14 +67,21 @@
     }
   }
 
-  .related-vouchers {
-    background-color: transparent;
+  .button-large {
+    padding: 0.66rem 7rem;
+    font-size: 1.33rem;
+    line-height: 1.5;
+    color: $primary;
   }
 
-  .VueCarousel-inner-margin{
-    .VueCarousel-inner {
-      margin-bottom: 30px;
-    }
-  }
+}
 
+.related-vouchers {
+  background-color: transparent;
+}
+
+.VueCarousel-inner-margin {
+  .VueCarousel-inner {
+    margin-bottom: 30px;
+  }
 }
