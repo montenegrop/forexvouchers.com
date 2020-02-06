@@ -56,7 +56,7 @@ class Service(ClusterableModel):
     premium = models.BooleanField(null=False, default=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
     slug = AutoSlugField(populate_from='name', editable=True)
-    affiliate = models.ForeignKey("Affiliate", on_delete=models.SET_NULL, null=True)
+    affiliate = models.ForeignKey("Affiliate", on_delete=models.SET_NULL, null=True, related_name='services')
 
     # Company profile:
     name = models.CharField(max_length=100)
@@ -167,8 +167,6 @@ class Service(ClusterableModel):
     def belongsToCategories(self, categories):
         return bool(list(set(self.getCategoriesIDs()) & set(categories)))
 
-    def getCategoriesLabels(self):
-        return [(cat.name, cat.id) for cat in self.category.all()]
 
     def getTradingTypes(self):
         return [(ttype.name, ttype.id) for ttype in self.trading_type.all()]
@@ -372,7 +370,7 @@ class Affiliate(models.Model):
         choices=linkTypes,
         default='go'
     )
-    cloakedLink = models.URLField(max_length=500)
+    cloakedLink = models.URLField(max_length=500, verbose_name='Cloacked link')
     slug = models.CharField(max_length=200, unique=True, null=False)
     clicks = models.IntegerField(default=0)
 
@@ -392,13 +390,9 @@ class Affiliate(models.Model):
         }
 
     panels = [
-        MultiFieldPanel(
-            [
-                FieldPanel("type"),
-                FieldPanel("cloakedLink"),
-                FieldPanel("slug"),
-            ], heading="Affiliates",
-        )
+                FieldPanel("type", classname="col6"),
+                FieldPanel("cloakedLink", classname="col6"),
+                FieldPanel("slug", classname="col6"),
     ]
 
 
@@ -406,7 +400,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     body = RichTextField(max_length=500, verbose_name='Description')
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
-    affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True)
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True, related_name='products')
     slug = AutoSlugField(populate_from='name', editable=True, null=True)
 
     logo = models.ForeignKey(
@@ -437,7 +431,7 @@ class Product(models.Model):
 class Voucher(models.Model):
     slug = AutoSlugField(populate_from='name', editable=True)
     name = models.CharField(max_length=100)
-    affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True)
+    affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True, related_name='vouchers')
     description = RichTextField(max_length=2500, blank=True, default=None, null=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
 
