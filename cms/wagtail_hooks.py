@@ -35,8 +35,13 @@ class ServiceAdmin(ModelAdmin):
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('name', 'getCategoriesLabels', 'premium')
-    list_filter = ('premium',)
+    list_filter = ('premium', 'category')
     search_fields = ('name',)
+
+    def getCategoriesLabels(self, obj):
+        return ', '.join([cat.name for cat in obj.category.all()])
+
+    getCategoriesLabels.short_description = 'categories'
 
 
 class AttributeAdmin(ModelAdmin):
@@ -47,21 +52,45 @@ class AttributeAdmin(ModelAdmin):
 class VoucherAdmin(ModelAdmin):
     model = Voucher
 
-class PromoCodeAdmin(ModelAdmin):
+    list_display = ('name', 'service', 'slug', 'expires', 'never_expires')
+    search_fields = ('name', 'service__name', 'slug')
+    list_filter = ('service', 'expires', 'never_expires')
+
+
+class PromoCodeAdmin(VoucherAdmin):
     menu_label = 'Promo Codes'
     model = PromoCode
 
-class DiscountAdmin(ModelAdmin):
+
+class DiscountAdmin(VoucherAdmin):
     menu_label = 'Discounts'
     model = Discount
 
-class OfferAdmin(ModelAdmin):
+
+class OfferAdmin(VoucherAdmin):
     menu_label = 'Offers'
     model = Offer
 
 
 class AffiliateAdmin(ModelAdmin):
     model = Affiliate
+
+    list_display = ('cloakedLink', '__str__', 'slug', 'linked_services', 'linked_products', 'linked_vouchers')
+    search_fields = ('cloakedLink', 'slug', 'services__name', 'products__name', 'vouchers__name')
+
+    def linked_services(self, affiliate):
+        return [service.name for service in affiliate.services.all()]
+
+    def linked_products(self, affiliate):
+        return [service.name for service in affiliate.products.all()]
+
+    def linked_vouchers(self, affiliate):
+        return [service.name for service in affiliate.vouchers.all()]
+
+    def linked_to(self, affiliate):
+        linked_resources = self.linked_services(affiliate) + self.linked_products(
+            affiliate) + self.linked_vouchers(affiliate)
+        return ','.join(linked_resources)
 
 
 class ProductAdmin(ModelAdmin):
@@ -295,14 +324,6 @@ class PaymentMethodAdmin(ModelAdmin):
     ordering = ('name',)
     search_fields = ('name',)
 
-class SecurityOfFundAdmin(ModelAdmin):
-    model = SecurityOfFunds
-    menu_label = 'Security of funds'
-
-    list_display = ('name',)
-    ordering = ('name',)
-    search_fields = ('name',)
-
 
 class SecurityOfFundAdmin(ModelAdmin):
     model = SecurityOfFunds
@@ -313,14 +334,13 @@ class SecurityOfFundAdmin(ModelAdmin):
     search_fields = ('name',)
 
 
-#     fields_end
+class SecurityOfFundAdmin(ModelAdmin):
+    model = SecurityOfFunds
+    menu_label = 'Security of funds'
 
-#     images begin
-
-
-
-#     images end
-
+    list_display = ('name',)
+    ordering = ('name',)
+    search_fields = ('name',)
 
 
 class FieldGroup(ModelAdminGroup):
@@ -328,17 +348,20 @@ class FieldGroup(ModelAdminGroup):
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 300  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (
-    CategoryAdmin, StatusAdmin, BrokerTypeAdmin, LocationAdmin, RegulationAdmin, LicenseAdmin, TimezoneAdmin, TradingSoftwareAdmin,
-    PlatformSupportedAdmin, ChatAdmin, SupportedLanguageAdmin, TrainingCourseAdmin, TradingTypeAdmin, MethodologyAdmin,
-    TradingToolAdmin, PricingModelAdmin, SystemTypeAdmin, TradingTypeAdmin, SignalAlertAdmin, AccountTypeAdmin,
-    TradingInstrumentAdmin, RevenueModelAdmin, AccountOptionAdmin, AccountCurrencyAdmin, PaymentMethodAdmin, SecurityOfFundAdmin)
+        CategoryAdmin, StatusAdmin, BrokerTypeAdmin, LocationAdmin, RegulationAdmin, LicenseAdmin, TimezoneAdmin,
+        TradingSoftwareAdmin,
+        PlatformSupportedAdmin, ChatAdmin, SupportedLanguageAdmin, TrainingCourseAdmin, TradingTypeAdmin,
+        MethodologyAdmin,
+        TradingToolAdmin, PricingModelAdmin, SystemTypeAdmin, TradingTypeAdmin, SignalAlertAdmin, AccountTypeAdmin,
+        TradingInstrumentAdmin, RevenueModelAdmin, AccountOptionAdmin, AccountCurrencyAdmin, PaymentMethodAdmin,
+        SecurityOfFundAdmin)
 
 
 class ProductsGroup(ModelAdminGroup):
     menu_label = 'Manage services'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (ServiceAdmin, VoucherAdmin, ProductAdmin)
+    items = (ServiceAdmin, ProductAdmin,)
 
 
 class VouchersGroup(ModelAdminGroup):
@@ -348,10 +371,12 @@ class VouchersGroup(ModelAdminGroup):
     items = (PromoCodeAdmin, DiscountAdmin, OfferAdmin)
 
 
-
-
 class CommentAdmin(ModelAdmin):
     model = Comment
+
+    list_display = ('id', 'service', 'country', 'name', 'active', 'created_at')
+    list_filter = ('active', 'created_at', 'country')
+    search_fields = ('id', 'service__name', 'country', 'name', 'active')
 
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
@@ -361,7 +386,6 @@ modeladmin_register(VouchersGroup)
 modeladmin_register(AffiliateAdmin)
 modeladmin_register(CommentAdmin)
 modeladmin_register(FieldGroup)
-
 
 
 # @hooks.register("insert_global_admin_js", order=100)
