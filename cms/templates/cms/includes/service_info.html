@@ -13,7 +13,7 @@
                 </a>
 
                 <div class="flex-container">
-                    <div class="star-value flexible">{{ service.get_avg_rate|floatformat:0 }}</div>
+                    <div class="star-value flexible">{{ service.avg_rate|floatformat:1 }}</div>
                     <div class="rate-container flexible">
                         <rate :length="5" :value="{{ service.get_avg_rate }}" readonly/>
                     </div>

@@ -19,7 +19,6 @@
             <div class="col information">
                 <div class="row  product-info-discount name">
                     <h3>{{ voucher.name }}</h3>
-                    <h4 class="discount">{{ voucher.discount_percent }}% OFF</h4>
                 </div>
                 <div class="row  description" v-html="voucher.description"></div>
                 <div class="row  icons">
@@ -38,7 +37,7 @@
                 <div class="row button button-container">
                     <a target="_blank" :href="voucher.affiliate.url">
                         <b-button squared variant="info" class="button-large">
-                            Get Discount
+                            See Offer
                         </b-button>
                     </a>
                 </div>
@@ -83,7 +82,7 @@
     import FvVouchersHome from "../VouchersHome";
 
     export default {
-        name: "fv-middleware-discount",
+        name: "fv-middleware-offer",
         components: {FvVouchersHome},
         props: ["vouch"],
         data() {

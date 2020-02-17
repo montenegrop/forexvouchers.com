@@ -12,16 +12,16 @@ logger = logging.getLogger(__name__)
 
 class CommentsView(View):
 
-    def calc_service_rate(self, serviceId):
+    def calc_service_rate(self, newComment, serviceId):
         comments = Comment.objects.filter(service_id=serviceId, active=True)
 
-        sum = 0
-        count = 0
+        sum = newComment.stars
+        count = 1
         for comment in comments:
             count += 1
             sum += comment.stars
 
-        return (count, sum / len(comments) if sum else 0,)
+        return (count, sum / count if sum else 0,)
 
     def get(self, request):
         serviceId = int(request.GET.get('service_id'))
@@ -67,7 +67,7 @@ class CommentsView(View):
 
         g = GeoIP2()
         try:
-            count, avg_rate = self.calc_service_rate(serviceId=data['service_id'])
+            count, avg_rate = self.calc_service_rate(comment, serviceId=data['service_id'])
             service.avg_rate = avg_rate
             service.count_rate = count
             ip = request.META.get('HTTP_X_FORWARDED_FOR') if request.META.get(
@@ -95,5 +95,3 @@ def cloakedlinks(request, slug):
     affiliate.clicks += 1
     affiliate.save()
     return HttpResponseRedirect(affiliate.cloakedLink)
-
-

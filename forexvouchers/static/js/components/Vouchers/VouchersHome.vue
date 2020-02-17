@@ -3,7 +3,7 @@
 
         <!-- for mobile -->
         <div class="d-lg-none">
-            <carousel class="pt-0 related-vouchers border border-light" perPage="1"
+            <carousel class="pt-0 related-vouchers border border-light" per-page="1"
                       autoplay="true" autoplayHoverPause="true">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher"/>
@@ -13,7 +13,7 @@
 
         <!-- for desktop -->
         <div class="d-none d-lg-block">
-            <carousel class="pt-0 related-vouchers border border-light" per-p.age="4"
+            <carousel class="pt-0 related-vouchers border border-light" per-page="4"
                       autoplay="true" autoplayHoverPause="true">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher" :voucherPage="voucherPage"/>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import FvVoucher from './VoucherSmall/index'
+    import FvVoucher from '../Cards/VoucherSmall/index'
 
     export default {
         name: "fv-vouchers-home",
