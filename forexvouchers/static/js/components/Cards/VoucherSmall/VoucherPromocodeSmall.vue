@@ -58,7 +58,7 @@
 
 <script>
 
-    import FvPromocodeButton from '../VoucherPromocodeButton'
+    import FvPromocodeButton from '../../Vouchers/VoucherPromocodeButton'
 
     export default {
         name: "fv-vouchers-promocode",

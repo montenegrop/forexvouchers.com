@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from cms.templatetags import jsonifyModel
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -89,7 +91,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'builtins': ['jsonify.templatetags.jsonify'],
+            'builtins': ['jsonify.templatetags.jsonify', 'cms.templatetags.jsonifyModel'],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -208,7 +210,6 @@ LOGGING = {
     },
 }
 
-
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -218,5 +219,3 @@ CACHES = {
         }
     }
 }
-
-

@@ -8,7 +8,7 @@
 
 
 <script>
-    import FvVoucher from './Voucher/index'
+    import FvVoucher from '../Cards/Voucher/index'
 
     export default {
         name: "fv-vouchers-list",

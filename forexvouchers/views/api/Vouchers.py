@@ -63,6 +63,8 @@ class VouchersView(View):
         limit = int(request.GET.get('limit', 10))
         sort = request.GET.get('sort', 'newest')
         voucherId = request.GET.get('voucher_id', '')
+        if len(voucherId):
+            voucher = Voucher.objects.get(id=int(voucherId))
 
         if voucherTypes == '':
             voucherTypes = ['discount', 'promocode', 'offer']
@@ -79,10 +81,10 @@ class VouchersView(View):
         for voucherType in voucherTypes:
             typeConditions = Q(**{voucherType + '__isnull': False}) if typeConditions is None else typeConditions | Q(
                 **{voucherType + '__isnull': False})
-        serviceConditions = Q(service_id__in=services) if len(services) else Q()
+        serviceConditions = Q()
         categoryConditions = Q(service__category__in=categories) if len(categories) else Q()
-        voucherConditions = ~Q(id=voucherId) if len(voucherId) else Q()
-
+        voucherConditions = ~Q(id=voucherId) & Q(service__category__in=voucher.service.getCategoriesIDs()) if len(
+            voucherId) else Q()
 
         vouchers = Voucher.objects.filter(typeConditions,
                                           serviceConditions,
@@ -92,7 +94,7 @@ class VouchersView(View):
                                               never_expires=True)).distinct().order_by(
             *self.getSorting(sort))[:limit]
 
-        vouchers = list(map(lambda voucher: voucher.get_subobject(), vouchers))
+        vouchers = list(map(lambda vouch: vouch.get_subobject(), vouchers))
 
         [response['data'].append(vouch.toDict()) for vouch in vouchers]
 

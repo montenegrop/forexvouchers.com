@@ -19,7 +19,7 @@
             <div class="col information">
                 <div class="row  product-info-discount name">
                     <h3>{{ voucher.name }}</h3>
-                    <p class="discount">{{ voucher.discount_percent }}% OFF</p>
+                    <h4 class="discount">{{ voucher.discount_percent }}% OFF</h4>
                 </div>
                 <div class="row  description" v-html="voucher.description"></div>
                 <div class="row  icons">
@@ -36,7 +36,7 @@
 
                 </div>
                 <div class="row button button-container">
-                    <a :href="voucher.affiliate.url">
+                    <a target="_blank" :href="voucher.affiliate.url">
                         <b-button squared variant="info" class="button-large">
                             Get Discount
                         </b-button>
@@ -64,8 +64,8 @@
         </div>
 
         <div class="mt-2 mb-5">
-            <h5 class="title text-left mb-0 title-more-vouchers">Other coupons from {{ voucher.service_name }}:</h5>
-            <fv-vouchers-home class="VueCarousel-inner-margin" :service="voucher.service_id" voucherPage="true" :voucherId="voucher.id">
+            <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons:</h5>
+            <fv-vouchers-home class="VueCarousel-inner-margin" :service="voucher.service_id" :voucherPage="true" :voucherId="voucher.id">
             </fv-vouchers-home>
 
             <div class="show-more right">
