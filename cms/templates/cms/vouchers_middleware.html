@@ -14,15 +14,15 @@
 
         {% endif %}
 
-        {% if voucher.type == 'PromoCode' %}
+        {% if voucher_type == 'PromoCode' %}
 
-            {% include "includes/vouchers/middleware/promocodes.html" %}
+            <fv-middleware-promocode vouch="{{ voucher }}" sort="'premium'"></fv-middleware-promocode>
 
         {% endif %}
 
-        {% if voucher.type == 'Offer' %}
+        {% if voucher_type == 'Offer' %}
 
-            {% include "includes/vouchers/middleware/offers.html" %}
+            <fv-middleware-offer vouch="{{ voucher }}" sort="'premium'"></fv-middleware-offer>
 
         {% endif %}
 

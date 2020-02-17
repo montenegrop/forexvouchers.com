@@ -5,34 +5,29 @@
             <img :src="voucher.logo" class="product-image">
         </div>
 
-
         <div class="product-info">
-            <h5 :title="voucher.name"> {{ voucher.name }} </h5>
+            <a :href="voucher.middleware_url">
+                <h5 :title="voucher.name"> {{ voucher.name }} </h5>
+            </a>
         </div>
 
-        <div class="container">
+        <div class="container" v-bind:class=" {'pl-5': voucherPage}">
 
-            <div class="row">
-
-                <div class="col-7 product-service"> By
+                <div class="product-service" v-bind:class=" {'pl-0': voucherPage}"> By
                     <a class="product-service-link"
                        :href="voucher.service_url">
                         {{voucher.service_name }} </a>
                 </div>
 
-                <div class="col-5 product-stars rate-container flexible">
+                <div class="product-stars rate-container flexible">
                     <rate :length="5" :value="voucher.service_rate" readonly/>
                 </div>
-
-            </div>
-
         </div>
-
 
         <div class="product-link text-center">
             <a :href="voucher.middleware_url">
                 <button type="button" class="btn btn-info btn-lg product-link-button">
-                    Show Code
+                    Get Code
                 </button>
             </a>
             <div class="product-clicks">
@@ -53,17 +48,13 @@
             </div>
         </div>
     </div>
-
 </template>
 
+
 <script>
-
-    import FvPromocodeButton from '../../Vouchers/VoucherPromocodeButton'
-
     export default {
-        name: "fv-vouchers-promocode",
-        components: {FvPromocodeButton},
-        props: ['voucher'],
+        name: "fv-vouchers-discount-small",
+        props: ['voucher', 'voucherPage'],
         data() {
             return {}
         }

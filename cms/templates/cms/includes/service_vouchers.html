@@ -6,20 +6,27 @@
     {% for vouch in vouchers %}
 
         {% if vouch.get_type == 'Discount' %}
-                <fv-vouchers-discount-small :voucher="{{ vouch|jsonifyModel }}"
-                                            :voucher-page="true"></fv-vouchers-discount-small>
-            {#            {% include "includes/vouchers/discounts.html" %}#}
+            <fv-vouchers-discount-small :voucher="{{ vouch|jsonifyModel }}"
+                                        :voucher-page="true"></fv-vouchers-discount-small>
 
         {% endif %}
 
         {% if vouch.get_type == 'PromoCode' %}
-                {% include "includes/vouchers/promocodes.html" %}
+            <fv-vouchers-promocode-small :voucher="{{ vouch|jsonifyModel }}"
+                                         :voucher-page="true"></fv-vouchers-promocode-small>
         {% endif %}
 
         {% if vouch.get_type == 'Offer' %}
-            {% include "includes/vouchers/offers.html" %}
+            <fv-vouchers-offer-small :voucher="{{ vouch|jsonifyModel }}"
+                                     :voucher-page="true"></fv-vouchers-offer-small>
         {% endif %}
 
     {% endfor %}
 
 </div>
+
+
+{#                For pure HTML version of vouchers use:#}
+{#            {% include "includes/vouchers/discounts.html" %}#}
+{#                {% include "includes/vouchers/promocodes.html" %}#}
+{#            {% include "includes/vouchers/offers.html" %}#}
