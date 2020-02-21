@@ -1,6 +1,6 @@
 <template>
 
-    <div class="product">
+    <div class="product product-home">
         <div class="product-image-wrapper">
             <img :src="voucher.logo" class="product-image">
         </div>

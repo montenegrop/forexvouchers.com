@@ -1,7 +1,7 @@
 <template>
 
     <b-row>
-        <b-col cols="4" v-for="service in brokers" v-bind:key="service.slug" class="service-summary service-summary-home">
+        <b-col cols="12" md="4" v-for="service in brokers" v-bind:key="service.slug" class="service-summary">
             <fv-broker-card :key="`${service.name} card`" :service="service"></fv-broker-card>
         </b-col>
     </b-row>

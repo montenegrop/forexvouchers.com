@@ -12,15 +12,18 @@
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.12);
   margin: 15px 0;
   transition: all .85s ease;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  min-width: 285px  ;
+  min-width: 285px;
 
   .btn-lg {
     font-size: 0.95rem;
+  }
+
+  &-home {
+    margin: 15px 4px;
   }
 }
 
@@ -71,6 +74,7 @@
     color: black;
     white-space: nowrap;
   }
+
   &-discount {
     overflow: inherit;
     text-overflow: inherit;
@@ -133,6 +137,7 @@
 
 .product-link {
   padding-bottom: 15px;
+
   &-discount {
     padding-bottom: 0px;
   }
@@ -148,6 +153,7 @@
 .product-stars {
   min-width: 100px;
   padding-left: 0;
+
   .Rate {
     .Rate__star {
       .icon {

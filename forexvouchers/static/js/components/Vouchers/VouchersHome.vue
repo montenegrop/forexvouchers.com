@@ -4,7 +4,7 @@
         <!-- for mobile -->
         <div class="d-lg-none">
             <carousel class="pt-0 related-vouchers border border-light" per-page="1"
-                      autoplay="true" autoplayHoverPause="true">
+                      autoplay="true" autoplayHoverPause="true" paginationColor="#7FFFD4">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher"/>
                 </slide>
@@ -14,7 +14,7 @@
         <!-- for desktop -->
         <div class="d-none d-lg-block">
             <carousel class="pt-0 related-vouchers border border-light" per-page="4"
-                      autoplay="true" autoplayHoverPause="true">
+                      autoplay="true" autoplayHoverPause="true" paginationColor="#7FFFD4">
                 <slide v-for="voucher in vouchers">
                     <fv-voucher :voucher="voucher" :voucherPage="voucherPage"/>
                 </slide>

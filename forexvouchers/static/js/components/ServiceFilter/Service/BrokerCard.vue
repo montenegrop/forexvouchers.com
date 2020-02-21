@@ -1,6 +1,6 @@
 <template>
     <div class="product-card">
-        <div class="row">
+        <div class="d-flex row">
             <div class="col-3 col mt-4 d-flex justify-content-center">
 
                 <fv-check :status="status(service)" :slug="service.slug"
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col justify-content-center">
+        <div class="d-flex justify-content-center">
             <b-table-simple borderless small>
                 <b-tr v-if="service.minimum_deposit">
                     <b-td class="left">Deposit</b-td>
@@ -54,7 +54,7 @@
                     <b-td class="left">Leverage</b-td>
                     <b-td class="right">{{ service.leverage ? `${service.leverage}` : '-' }}</b-td>
                 </b-tr>
-                <b-tr v-if="service.comission">
+                <b-tr v-if="service.commission">
                     <b-td class="left">Commission</b-td>
                     <b-td class="right">{{ service.commission ? `${service.commission}` : '-' }}</b-td>
                 </b-tr>
@@ -78,7 +78,7 @@
             </b-table-simple>
         </div>
 
-        <div class="col row justify-content-center">
+        <div class="d-flex justify-content-center pb-3">
             <a class="btn btn-info btn-lg" :href="`${service.url}`">Details</a>
         </div>
     </div>

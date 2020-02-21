@@ -1,7 +1,5 @@
 .service-summary {
 
-  height: 100%;
-
   &.product {
     flex: inherit;
   }
@@ -51,10 +49,5 @@
       background-size: 90%;
     }
   }
-
-  &-home {
-    height: 92%;
-  }
-
 
 }

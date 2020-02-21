@@ -1,10 +1,10 @@
 <template>
-    <div class="row">
-        <div v-for="service in services" v-bind:key="service.slug" class="service-summary col-md-6">
+    <b-row>
+        <b-col cols="12" md="6" v-for="service in services" v-bind:key="service.slug" class="service-summary mb-3">
             <fv-broker-card :toCompare="servicesForCompare" :key="`${service.name} card`" :service="service"
                              :selected="selected" v-on:serviceSelected="checkForCompare($event)"></fv-broker-card>
-        </div>
-    </div>
+        </b-col>
+    </b-row>
 </template>
 
 <script>
