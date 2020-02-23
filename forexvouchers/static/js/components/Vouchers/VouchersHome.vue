@@ -6,7 +6,7 @@
             <carousel class="pt-0 related-vouchers border border-light" per-page="1"
                       autoplay="true" autoplayHoverPause="true" paginationColor="#7FFFD4">
                 <slide v-for="voucher in vouchers">
-                    <fv-voucher :voucher="voucher"/>
+                    <fv-voucher :voucher="voucher" :show-clicks="showClicks"/>
                 </slide>
             </carousel>
         </div>
@@ -16,7 +16,7 @@
             <carousel class="pt-0 related-vouchers border border-light" per-page="4"
                       autoplay="true" autoplayHoverPause="true" paginationColor="#7FFFD4">
                 <slide v-for="voucher in vouchers">
-                    <fv-voucher :voucher="voucher" :voucherPage="voucherPage"/>
+                    <fv-voucher :voucher="voucher" :show-clicks="showClicks"/>
                 </slide>
             </carousel>
         </div>
@@ -30,18 +30,15 @@
 
     export default {
         name: "fv-vouchers-home",
-        props: ["service", "sort", "voucherPage", "voucherId"],
+        props: ["serviceId", "sort", "voucherId", "showClicks"],
         components: {FvVoucher},
         data() {
             return {
                 type: 'discount,promocode,offer',
-                services: '',
                 categories: '',
                 vouchers: [],
                 startingLetter: '',
                 limit: 10,
-                sort: '',
-                voucher: '',
             }
         },
         watch: {
@@ -55,13 +52,6 @@
                 this.getData()
             }
         },
-        beforeMount() {
-            if (this.voucherPage) {
-                this.services = this.service;
-                this.sort = 'mostviewed';
-                this.voucher = this.voucherId;
-            }
-        },
         mounted() {
             this.getData()
         },
@@ -69,20 +59,18 @@
             async getData() {
                 const url = `/api/vouchers?voucher_types=${
                     this.type}&services=${
-                    this.services}&categories=${
+                    this.serviceId || ''}&categories=${
                     this.categories}&limit=${
                     this.limit}&sort=${
-                    this.sort}&voucher_id=${
-                    this.voucher}`;
+                    this.sort || ''}&voucher_id=${
+                    this.voucherId || ''}`;
                 let response = await this.$http.get(url);
+                console.log(this.type)
                 this.vouchers = response.body.data;
             },
 
             onTypeChange(value) {
                 this.type = value.join(',')
-            },
-            onServiceChange(value) {
-                this.services = value.join(',')
             },
             onCategoryChange(value) {
                 this.categories = value.join(',')

@@ -1,22 +1,23 @@
 <template>
     <div class="product-card">
-        <b-row class="row">
-            <b-col cols="8" offset="2" class="text-center p-0">
+        <div class="d-flex row">
+            <div class="offset-3 col-6 col-md-5 col">
 
                 <img v-if="service.logo_url" class="logo-img" :src="service.logo_url"/>
                 <div class="title">
                     <a :href="`${service.url}`"> {{ service.name }}</a>
 
                 </div>
-                <div v-if="service.avg_rate" v-if="service.avg_rate">
+                <div v-if="service.avg_rate">
                     <div class="rate-container product-stars">
                         <rate :length="5" :value="service.avg_rate" readonly/>
                     </div>
                     <div v-if="service.count_rate" class="reviews-count">{{ service.count_rate }} reviews</div>
                 </div>
-            </b-col>
+            </div>
 
-            <b-col cols="2" class="d-flex p-0">
+
+            <div class="col-3 col-md-4 col d-flex justify-content-center">
                 <div>
                     <div class="voucher-count"
                          v-bind:class="{ 'voucher-count-lg': $mq != 'md', 'voucher-count-md': $mq === 'md'}">
@@ -24,9 +25,8 @@
                     </div>
                     <p class="center pr-0">Vouchers</p>
                 </div>
-            </b-col>
-        </b-row>
-
+            </div>
+        </div>
 
         <div class="col justify-content-center">
             <b-table-simple borderless small>
@@ -68,7 +68,7 @@
             </b-table-simple>
         </div>
 
-        <div class="col row justify-content-center">
+        <div class="d-flex justify-content-center pb-3">
             <a class="btn btn-info btn-lg" :href="`${service.url}`">Details</a>
         </div>
     </div>

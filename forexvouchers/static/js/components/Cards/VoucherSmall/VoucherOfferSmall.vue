@@ -1,6 +1,5 @@
 <template>
-
-    <div class="product">
+    <div v-bind:class="[{ 'product': !isFlex } , { 'product-card': isFlex }]">
         <div class="product-image-wrapper">
             <img :src="voucher.logo" class="product-image">
         </div>
@@ -12,17 +11,17 @@
             </a>
         </div>
 
-        <div class="container" v-bind:class=" {'pl-5': voucherPage}">
+        <div class="container" class="pl-5">
 
-                <div class="product-service" v-bind:class=" {'pl-0': voucherPage}"> By
-                    <a class="product-service-link"
-                       :href="voucher.service_url">
-                        {{voucher.service_name }} </a>
-                </div>
+            <div class="voucher-name"> By
+                <a class="product-service-link"
+                   :href="voucher.service_url">
+                    {{voucher.service_name }} </a>
+            </div>
 
-                <div class="product-stars rate-container flexible">
-                    <rate :length="5" :value="voucher.service_rate" readonly/>
-                </div>
+            <div class="product-stars rate-container flexible">
+                <rate :length="5" :value="voucher.service_rate" readonly/>
+            </div>
         </div>
 
         <div class="product-link text-center">
@@ -31,7 +30,7 @@
                     View Offer
                 </button>
             </a>
-            <div class="product-clicks">
+            <div v-if="showClicks" class="product-clicks">
                 {{ voucher.affiliate.clicks }} clicks
             </div>
             <div class="product-expires">
@@ -55,7 +54,7 @@
 <script>
     export default {
         name: "fv-vouchers-discount-small",
-        props: ['voucher', 'voucherPage'],
+        props: ['voucher', 'showClicks', 'isFlex'],
         data() {
             return {}
         }

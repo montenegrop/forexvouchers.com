@@ -64,6 +64,7 @@ class VouchersView(View):
         sort = request.GET.get('sort', 'newest')
         voucherId = request.GET.get('voucher_id', '')
         if len(voucherId):
+            print(3)
             voucher = Voucher.objects.get(id=int(voucherId))
 
         if voucherTypes == '':

@@ -7,6 +7,7 @@ import VouchersView from './Vouchers/VouchersView.vue';
 import VouchersHome from './Vouchers/VouchersHome.vue';
 import ServicesTable from './HomePage/ServicesTable';
 import HomeServices from './HomePage/HomeServices';
+import HomeVouchers from "./HomePage/HomeVouchers";
 import ServicesFilterView from './ServiceFilter/View';
 import discount from "./Vouchers/Middleware/discount";
 import promocode from "./Vouchers/Middleware/promocode";
@@ -26,6 +27,7 @@ export default {
     'fv-vouchers-home': VouchersHome,
     'fv-services-table': ServicesTable, // deprecated
     'fv-home-services': HomeServices,
+    'fv-home-vouchers': HomeVouchers,
     'fv-services-filter-view': ServicesFilterView,
     'fv-middleware-discount': discount,
     'fv-middleware-promocode': promocode,

@@ -19,7 +19,7 @@
                     <a :href="`${service.url}`"> {{ service.name }}</a>
 
                 </div>
-                <div v-if="service.avg_rate" v-if="service.avg_rate">
+                <div v-if="service.avg_rate">
                     <div class="rate-container product-stars">
                         <rate :length="5" :value="service.avg_rate" readonly/>
                     </div>
@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+
         <div class="d-flex justify-content-center">
             <b-table-simple borderless small>
                 <b-tr v-if="service.minimum_deposit">

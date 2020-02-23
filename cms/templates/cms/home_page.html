@@ -11,19 +11,27 @@
 
 {% block content %}
 
-    {% include "includes/home/home_carousel.html" %}
+    {% include "includes/home/home_vouchers.html" %}
 
-    <h1 class="text-primary display-6 text-center">Most Popular Forex Brokers</h1>
+    {#    {% include "includes/home/home_carousel.html" %}#}
+
+    <h1 class="text-primary display-6 text-center">Popular Forex Brokers</h1>
     <div>
         <fv-home-services/>
     </div>
-
     <div class="show-more right">
-        <a size="sm" href="/brokers">More Brokers</a>
+        <a size="sm" href="/brokers">Show More</a>
+    </div>
+
+    <h1 class="text-primary display-6 text-center">Popular Vouchers</h1>
+    <div>
+        <fv-home-vouchers :is-flex="true"/>
+    </div>
+    <div class="show-more right">
+        <a size="sm" href="/vouchers">Show More</a>
     </div>
 
 
-    {% include "includes/home/home_vouchers.html" %}
 
     <div class="row">
         <div class="col-md-4">

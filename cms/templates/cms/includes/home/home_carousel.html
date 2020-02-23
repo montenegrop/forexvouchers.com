@@ -2,7 +2,6 @@
 
 
 <div class="home-carousel">
-    <h1 class="text-primary display-6">Premium Forex Brokers</h1>
 
 
     <!-- for mobile -->
@@ -23,6 +22,7 @@
                 </slide>
             {% endfor %}
         </carousel>
+
         <div class="show-more right">
             <a size="sm" href="/brokers">More Brokers</a>
         </div>
@@ -42,11 +42,18 @@
                                 <div class="card-title">{{ service.name }}</div>
                             </a>
                         </div>
+
+                        <div class="rate-container product-stars">
+                            <rate length="5" value="3" readonly/>
+                        </div>
+
                     </div>
                 </slide>
             {% endfor %}
         </carousel>
     </div>
+
+
     <div class="show-more right">
         <a size="sm" href="/brokers">More Brokers</a>
     </div>

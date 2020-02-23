@@ -1,5 +1,5 @@
-<div class="homepage-column">
-    <table class="table table-sm table-dark most-compared-main">
+<div>
+    <table class="table table-sm table-borderless most-compared-main">
         <thead>
         <tr class="table-secondary">
             <th class="most-compared-header" scope="col" colspan="1">Most compared services</th>
@@ -12,14 +12,31 @@
 
             <tr>
                 <td class="row most-compared-header">
-                    <div class="col-4 product-stars rate-container flexible">
-                        <rate :length="5" :value="{{ compare.service1.get_avg_rate }}" readonly/>
+                    <div class="col-5 product-stars rate-container flexible p-0">
+                        <b-row class="m-0 img-align-row">
+                            <b-col cols="4" class="p-0 img-align-div">
+                                <img src="{{ compare.service1.toDict.logo_url_small }}"/>
+                            </b-col>
+                            <b-col cols="8" class="p-0">
+                                <p class="text-primary">{{ compare.service1.name }}</p>
+                                <rate style="min-width: 82px;" :length="5" :value="{{ compare.service1.get_avg_rate }}" readonly/>
+                            </b-col>
+                        </b-row>
                     </div>
-                    <div class="col 4">
-                        {{ compare.service1.name }} vs {{ compare.service2.name }}
+
+                    <div class="col-2 p-0 text-center">
+                        VS
                     </div>
-                    <div class="col-4 product-stars rate-container flexible">
-                        <rate :length="5" :value="{{ compare.service2.get_avg_rate }}" readonly/>
+                    <div class="col-5 product-stars rate-container flexible p-0">
+                        <b-row class="m-0 img-align-row">
+                            <b-col cols="4" class="p-0 img-align-div">
+                                <img src="{{ compare.service2.toDict.logo_url_small }}"/>
+                            </b-col>
+                            <b-col cols="8" class="p-0">
+                                <p class="one-liner text-primary">{{ compare.service2.name }}</p>
+                                <rate style="min-width: 82px;" :length="5" :value="{{ compare.service2.get_avg_rate }}" readonly/>
+                            </b-col>
+                        </b-row>
                     </div>
                 </td>
             </tr>

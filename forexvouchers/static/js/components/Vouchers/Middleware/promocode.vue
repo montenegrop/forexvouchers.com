@@ -64,7 +64,7 @@
 
         <div class="mt-2 mb-5">
             <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons:</h5>
-            <fv-vouchers-home class="VueCarousel-inner-margin" :service="voucher.service_id" :voucherPage="true" :voucherId="voucher.id">
+            <fv-vouchers-home class="VueCarousel-inner-margin" :service-id="voucher.service_id" sort="mostviewed" :voucher-id="voucher.id">
             </fv-vouchers-home>
 
             <div class="show-more right">

@@ -1,26 +1,24 @@
 <template>
-
     <b-row>
-        <b-col cols="12" md="4" v-for="service in brokers.slice(0, 9)" v-bind:key="service.slug" class="service-summary pb-3">
-            <fv-broker-card :key="`${service.name} card`" :service="service"></fv-broker-card>
+        <b-col cols="12" md="4" v-for="voucher in vouchers" class="service-summary pb-3">
+            <fv-voucher :key="voucher.id" :voucher="voucher" :show-clicks="true" :is-flex="isFlex"></fv-voucher>
         </b-col>
     </b-row>
-
-
 </template>
 
 
 <script>
 
-    import Broker from "../Cards/Broker/Broker";
+    import index from "../Cards/VoucherSmall";
 
     const cache = {};
     export default {
-        components: {FvBrokerCard: Broker},
+        components: {FvVoucher: index},
+        props: ['sort', 'isFlex'],
         data() {
             return {
-                brokers: [],
-                perPage: 10,
+                vouchers: [],
+                perPage: 9,
             }
         },
         mounted() {
@@ -28,7 +26,8 @@
         },
         methods: {
             async getData() {
-                const url = `/api/services?page=0&limit=${this.perPage}`;
+                const url = `/api/vouchers?limit=${
+                    this.perPage}&sort=${this.sort}`;
                 let response;
                 if (cache.hasOwnProperty(url)) {
                     response = cache[url];
@@ -38,9 +37,8 @@
                     cache[url] = response;
                 }
 
-                this.brokers = [...response.data];
+                this.vouchers = [...response.data];
             }
         }
     }
 </script>
-

@@ -135,3 +135,13 @@
     }
   }
 }
+
+.voucher-name {
+  font-family: ralewayregular;
+  text-shadow: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: black;
+  white-space: nowrap;
+  font-size: small;
+}

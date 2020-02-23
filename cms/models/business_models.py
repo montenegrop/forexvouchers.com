@@ -148,7 +148,7 @@ class Service(ClusterableModel):
 
     @property
     def url(self):
-        return '/forex-brokers/' + self.slug
+        return '/forex-' + 'brokers' + '/' + self.slug
 
     def getAttributes(self):
         attributeServices = AttributeService.objects.select_related('attribute').filter(service=self)
@@ -192,6 +192,7 @@ class Service(ClusterableModel):
             'system_types': self.getSystemTypes(),
             'trading_tools': self.getTradingTools(),
             'pricings': self.getPricingModels(),
+            'logo_url_small': self.logo.get_rendition('width-45').url if self.logo else None,
             'logo_url': self.logo.get_rendition('width-100').url if self.logo else None,
             'url': self.url,
             'avg_rate': self.get_avg_rate,
@@ -600,7 +601,9 @@ class Comment(models.Model):
                 'ip': self.ip,
                 'active': self.active,
                 'country_code': self.country_code,
-                'url': self.service.url + '#comments'
+                'url': self.service.url + '#comments',
+                'service_name': self.service.name,
+                'service_url': self.service.url,
                 }
 
 

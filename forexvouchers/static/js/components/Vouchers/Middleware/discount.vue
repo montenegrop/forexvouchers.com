@@ -1,20 +1,14 @@
 <template>
-
     <div class="container middleware-main">
-
         <h2 class="title"> {{ voucher.type }} information </h2>
-
         <div class="row border border-light no-float ">
-
             <div class="col-auto image">
                 <img :src="voucher.service_logo_big">
 
                 <b-col class="col-auto product-stars rate-container flexible voucher-info-service pl-3">
 
                     <rate :length="5" :value="voucher.service_rate" readonly/>
-
                 </b-col>
-
             </div>
             <div class="col information">
                 <div class="row  product-info-discount name">
@@ -60,31 +54,27 @@
                     </p>
                 </div>
             </div>
-
         </div>
 
         <div class="mt-2 mb-5">
-            <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons:</h5>
-            <fv-vouchers-home class="VueCarousel-inner-margin" :service="voucher.service_id" :voucherPage="true" :voucherId="voucher.id">
-            </fv-vouchers-home>
+            <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons1:</h5>
+            <fv-vouchers-home class="VueCarousel-inner-margin" sort="mostviewed"></fv-vouchers-home>
 
             <div class="show-more right">
                 <a size="sm" href="/vouchers">More Vouchers</a>
             </div>
         </div>
-
-
     </div>
-
 </template>
 
 
 <script>
-    import FvVouchersHome from "../VouchersHome";
+
+    import VouchersHome from "../VouchersHome";
 
     export default {
         name: "fv-middleware-discount",
-        components: {FvVouchersHome},
+        components: {FvVouchersHome: VouchersHome},
         props: ["vouch"],
         data() {
             return {
