@@ -1,0 +1,25 @@
+.compare-list {
+  padding-left: 0;
+  margin-bottom: 0;
+
+  li {
+    list-style-type: none;
+    background-color: white;
+    padding: 1em;
+  }
+
+}
+
+.compare-stars {
+  padding-left: 0;
+
+  .Rate {
+    .Rate__star {
+      .icon {
+        margin: 0 1px;
+        width: 0.9rem;
+        height: 0.9rem;
+      }
+    }
+  }
+}
