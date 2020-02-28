@@ -8,6 +8,24 @@
     padding: 1em;
   }
 
+  .compare-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+
+    .service {
+      display: flex;
+      width: 40%;
+    }
+
+    .vs {
+      color: $primary;
+      font-weight: bold;
+      width: 20%;
+      text-align: center;
+    }
+  }
+
 }
 
 .compare-stars {
