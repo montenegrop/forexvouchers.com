@@ -65,7 +65,6 @@
                     this.sort || ''}&voucher_id=${
                     this.voucherId || ''}`;
                 let response = await this.$http.get(url);
-                console.log(this.type)
                 this.vouchers = response.body.data;
             },
 

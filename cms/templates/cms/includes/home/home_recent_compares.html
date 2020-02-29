@@ -6,55 +6,40 @@
 
         {% for compare in compares %}
 
-            <li class="p-0">
+            <li class="compare-item">
 
-                <b-row>
-                    <b-col cols="5" class="d-flex">
+                <div class="service service-left">
 
-                        <b-row>
-                            <b-col cols="4">
+                    <div class="logo">
+                        <img src="{{ compare.service1.toDict.logo_url_small }}"/>
+                    </div>
 
-                                <img src="{{ compare.service1.toDict.logo_url_small }}"/>
+                    <div class="compare-stars rate-container">
+                        <p class="text-primary mb-0">{{ compare.service1.name }}</p>
+                        <rate style="min-width: 85px" :length="5" :value="{{ compare.service1.get_avg_rate }}"
+                              readonly/>
+                    </div>
 
-                            </b-col>
+                </div>
 
-                            <b-col class="text-center compare-stars rate-container pr-0" cols="8">
+                <div class="vs">VS</div>
 
-                                <p class="text-primary mb-0">{{ compare.service1.name }}</p>
-                                <rate style="min-width: 85px" :length="5" :value="{{ compare.service1.get_avg_rate }}"
-                                      readonly/>
-
-                            </b-col>
-
-                        </b-row>
-
-                    </b-col>
-
-                    <b-col offset="1" cols="1" class="p-0 text-center text-primary font-weight-bold d-flex">VS</b-col>
-
-                    <b-col cols="5" class="d-flex">
-
-                        <b-row>
-                            <b-col cols="4">
-
-                                <img src="{{ compare.service2.toDict.logo_url_small }}"/>
-
-                            </b-col>
-
-                            <b-col class="text-center compare-stars rate-container" cols="8">
-
-                                <p class="text-primary mb-0">{{ compare.service1.name }}</p>
-                                <rate style="min-width: 85px" :length="5" :value="{{ compare.service2.get_avg_rate }}"
-                                      readonly/>
-
-                            </b-col>
-
-                        </b-row>
-
-                    </b-col>
+                <div class="service service-right">
 
 
-                </b-row>
+                    <div class="logo">
+                        <img src="{{ compare.service2.toDict.logo_url_small }}"/>
+                    </div>
+
+                    <div class="compare-stars rate-container">
+                        <p class="text-primary mb-0">{{ compare.service2.name }}</p>
+                        <rate style="min-width: 85px" :length="5" :value="{{ compare.service2.get_avg_rate }}"
+                              readonly/>
+                    </div>
+
+
+                </div>
+
 
             </li>
         {% endfor %}

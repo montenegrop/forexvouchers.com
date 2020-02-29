@@ -8,6 +8,44 @@
     padding: 1em;
   }
 
+
+  li {
+    border-bottom: 2px solid $light;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
+
+
+  li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .compare-item {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+
+    .service {
+      display: flex;
+      width: 45%;
+
+      &-left {
+        justify-content: flex-end;
+      }
+    }
+
+    .vs {
+      color: $primary;
+      font-weight: bold;
+      min-width: 25px;
+      text-align: center;
+    }
+  }
+
 }
 
 .compare-stars {

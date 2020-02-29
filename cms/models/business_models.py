@@ -167,7 +167,6 @@ class Service(ClusterableModel):
     def belongsToCategories(self, categories):
         return bool(list(set(self.getCategoriesIDs()) & set(categories)))
 
-
     def getTradingTypes(self):
         return [(ttype.name, ttype.id) for ttype in self.trading_type.all()]
 
@@ -198,6 +197,7 @@ class Service(ClusterableModel):
             'avg_rate': self.get_avg_rate,
             'count_rate': self.get_count_rate,
             'slug': self.slug,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
         }
 
     panels = [
@@ -391,9 +391,9 @@ class Affiliate(models.Model):
         }
 
     panels = [
-                FieldPanel("type", classname="col6"),
-                FieldPanel("cloakedLink", classname="col6"),
-                FieldPanel("slug", classname="col6"),
+        FieldPanel("type", classname="col6"),
+        FieldPanel("cloakedLink", classname="col6"),
+        FieldPanel("slug", classname="col6"),
     ]
 
 

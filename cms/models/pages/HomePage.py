@@ -12,6 +12,9 @@ from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 
+import json
+
+
 class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
     banner_title = models.CharField(max_length=100, default='')
     banner_body = RichTextField(blank=True, default='')
@@ -36,7 +39,6 @@ class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
         )
     ]
 
-
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
         services = Service.objects.filter(category__in=[BROKERS], premium=True).order_by('name')[0:10]
@@ -47,9 +49,9 @@ class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
         context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
         context['premium_services_models'] = services
         context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
+        context['premium_partners'] = Service.objects.filter(premium=True)[:8]
 
         return context
-
 
     def ld_entity(self):
         return extend(super().ld_entity(), {

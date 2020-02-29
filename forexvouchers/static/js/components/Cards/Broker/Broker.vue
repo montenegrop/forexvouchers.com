@@ -31,32 +31,32 @@
         <div class="col justify-content-center">
             <b-table-simple borderless small>
                 <b-tr v-if="service.minimum_deposit">
-                    <b-td class="left">Deposit</b-td>
-                    <b-td class="right">{{ service.minimum_deposit ? `$ ${service.minimum_deposit}` : '-'
+                    <b-td class="left pb-0 pt-0">Deposit</b-td>
+                    <b-td class="right pb-0 pt-0">{{ service.minimum_deposit ? `$ ${service.minimum_deposit}` : '-'
                         }}
                     </b-td>
                 </b-tr>
                 <b-tr v-if="service.spread">
-                    <b-td class="left">Spread</b-td>
-                    <b-td class="right">{{ service.spread ? `${service.spread}` : '-' }}</b-td>
+                    <b-td class="left pb-0 pt-0">Spread</b-td>
+                    <b-td class="right pb-0 pt-0">{{ service.spread ? `${service.spread}` : '-' }}</b-td>
                 </b-tr>
                 <b-tr v-if="service.leverage">
-                    <b-td class="left">Leverage</b-td>
-                    <b-td class="right">{{ service.leverage ? `${service.leverage}` : '-' }}x</b-td>
+                    <b-td class="left pb-0 pt-0">Leverage</b-td>
+                    <b-td class="right pb-0 pt-0">{{ service.leverage ? `${service.leverage}` : '-' }}x</b-td>
                 </b-tr>
                 <b-tr v-if="service.commission">
-                    <b-td class="left">Commission</b-td>
-                    <b-td class="right">${{ service.commission ? `${service.commission}` : '-' }}</b-td>
+                    <b-td class="left pb-0 pt-0">Commission</b-td>
+                    <b-td class="right pb-0 pt-0">${{ service.commission ? `${service.commission}` : '-' }}</b-td>
                 </b-tr>
                 <b-tr v-if="service.broker_type">
-                    <b-td class="left">Broker Type</b-td>
-                    <b-td class="right">
+                    <b-td class="left pb-0 pt-0">Broker Type</b-td>
+                    <b-td class="right pb-0 pt-0">
                         <div v-for="broker_type in service.broker_type">{{ broker_type }}</div>
                     </b-td>
                 </b-tr>
                 <b-tr v-if="service.regulation">
-                    <b-td class="left">Regulation</b-td>
-                    <b-td class="right">
+                    <b-td class="left pb-0 pt-0">Regulation</b-td>
+                    <b-td class="right pb-0 pt-0">
 
                         <div>
                                     <span v-for="regulation in service.regulation"

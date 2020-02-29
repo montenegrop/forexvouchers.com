@@ -56,7 +56,6 @@
 
         computed: {
             getNames() {
-                console.log(this.options)
                 return this.options
                     .map(option => ({
                         text: option.name,

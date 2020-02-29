@@ -29,7 +29,6 @@
   margin-bottom: 2em;
 
   .form-container {
-    display: flex;
     justify-content: center;
     align-items: center;
   }
@@ -65,7 +64,6 @@
     width: 132px;
     margin-bottom: 4px;
 
-    f
     .Rate__star .icon {
       width: 0.75rem;
       height: 0.75rem;
@@ -122,6 +120,7 @@
   }
 }
 
+
 .one-liner {
   white-space: nowrap;
   overflow: hidden;
@@ -135,4 +134,50 @@
 .img-align-div {
   display: table-cell;
   vertical-align: middle;
+}
+
+
+.partner-card {
+  display: flex;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.border-thick-solid {
+  border-width: thick;
+  border: solid 3px;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.home-dropdown {
+  .btn {
+    font-size: min(8vw, 16px);
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+.VueCarousel-inner-margin .VueCarousel-inner {
+  margin-bottom: 0 !important;
+}
+
+.VueCarousel .VueCarousel-pagination .VueCarousel-dot-container {
+  margin-top: 0 !important;
+}
+
+.VueCarousel-dot {
+  margin-top: 0 !important;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
