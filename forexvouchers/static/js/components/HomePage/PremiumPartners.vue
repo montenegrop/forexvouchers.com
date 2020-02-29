@@ -1,17 +1,13 @@
 <template>
-    <div class="container">
 
-        <b-list-group v-for="line in lines" horizontal>
+    <b-row>
+        <b-col v-for="partner in partners" class="border-thick-solid border-light pt-1"
+               v-bind:style=" $mq === 'lg' ? 'max-width: 12.5%;' : 'none'">
+            <fv-premium-partner :service="partner"></fv-premium-partner>
+        </b-col>
+    </b-row>
 
-            <b-list-group-item v-for="partner in partners.slice(line-1, line-1+perLine)"
-                               class="m-0 p-0 border-thick border-light"
-                             >
-                <fv-premium-partner :service="partner"></fv-premium-partner>
-            </b-list-group-item>
 
-        </b-list-group>
-
-    </div>
 </template>
 
 
@@ -24,7 +20,6 @@
     export default {
         name: "fv-premium-partners",
         components: {FvPremiumPartner: PremiumPartner},
-        props: ["services"],
 
         data() {
             return {

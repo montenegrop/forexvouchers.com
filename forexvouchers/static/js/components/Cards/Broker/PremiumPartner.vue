@@ -1,13 +1,13 @@
 <template>
     <div class="container partner-card text-center">
         <div>
-            <img v-if="service.logo_url" :src="service.logo_url"/>
+            <img class="img-center" v-if="service.logo_url" :src="service.logo_url"/>
         </div>
         <div class="text-center mb-2">
-            <p class="mb-0"> {{ service.name }}</p>
+            <a class="mb-0 text-primary" :href="`${service.url}`"> {{ service.name }}</a>
             <div class="text-center compare-stars rate-container pr-0">
 
-                <rate style="min-width: 85px" :length="5" :value="service.get_avg_rate"
+                <rate style="min-width: 85px" :length="5" :value="service.avg_rate"
                       readonly/>
             </div>
         </div>

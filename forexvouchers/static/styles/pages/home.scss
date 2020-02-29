@@ -120,6 +120,7 @@
   }
 }
 
+
 .one-liner {
   white-space: nowrap;
   overflow: hidden;
@@ -146,8 +147,9 @@
 }
 
 
-.border-thick {
+.border-thick-solid {
   border-width: thick;
+  border: solid 3px;
 }
 
 .text-align-center {
@@ -159,4 +161,23 @@
     font-size: min(8vw, 20px);
     padding: 0.4rem 0.8rem;
   }
+}
+
+.VueCarousel-inner-margin .VueCarousel-inner {
+  margin-bottom: 0 !important;
+}
+
+.VueCarousel .VueCarousel-pagination .VueCarousel-dot-container {
+  margin-top: 0 !important;
+}
+
+.VueCarousel-dot {
+  margin-top: 0 !important;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
