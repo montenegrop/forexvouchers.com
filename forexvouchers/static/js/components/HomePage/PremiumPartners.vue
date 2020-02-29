@@ -7,14 +7,12 @@
         </b-col>
     </b-row>
 
-
 </template>
 
 
 <script>
 
     import PremiumPartner from "../Cards/Broker/PremiumPartner";
-
 
     const cache = {};
     export default {
@@ -27,23 +25,6 @@
                 perPage: 8,
             }
         },
-
-
-        computed: {
-            lines: function () {
-                if (this.$mq === 'lg')
-                    return 2 ** 0;
-                else if (this.$mq === 'md')
-                    return 2 ** 1;
-                else
-                    return 2 ** 2
-            },
-            perLine: function () {
-                return Math.floor(this.perPage / this.lines)
-
-            }
-        }
-        ,
 
         mounted() {
             this.getData()
