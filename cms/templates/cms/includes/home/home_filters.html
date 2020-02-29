@@ -1,8 +1,8 @@
 <div class="row home-filters">
-    <div class="container form-container">
-        <div class="form-item mr-3">
+    <div class="container form-container d-sm-flex" v-bind:class="{ 'text-align-center': $mq === 'sm' }">
+        <div class="form-item mr-1">
             <b-form-group label-size="lg" label-for="input-lg" class="mb-1 mt-1">
-                <b-dropdown :size="$mq === 'sm' ? 'md' : $mq" id="dropdown-1" class="m1" text="Category">
+                <b-dropdown :size="$mq === 'sm' ? 'md' : $mq" id="dropdown-1" class="m1 home-dropdown" text="Category">
                     {% for category in categories %}
                         <b-dropdown-item>{{ category.name }}</b-dropdown-item>
                     {% endfor %}
@@ -10,9 +10,9 @@
             </b-form-group>
         </div>
 
-        <div class="form-item mr-3">
+        <div class="form-item mr-1">
             <b-form-group label-size="lg" label-for="input-lg" class="mb-1 mt-1">
-                <b-dropdown :size="$mq === 'sm' ? 'md' : $mq" id="dropdown-2" class="m1" text="Type">
+                <b-dropdown :size="$mq === 'sm' ? 'md' : $mq" id="dropdown-2" class="m1 home-dropdown" text="Type">
                     <b-dropdown-item>1 star</b-dropdown-item>
                     <b-dropdown-item>2 stars</b-dropdown-item>
                     <b-dropdown-item>3 stars</b-dropdown-item>
@@ -22,16 +22,16 @@
             </b-form-group>
 
         </div>
-        <div class="form-item mr-3">
+        <div class="form-item mr-1">
             <b-form-group label-size="lg" label-for="input-lg" class="mb-1 mt-1">
-                <b-dropdown :size="$mq === 'sm' ? 'md' : $mq" id="dropdown-3" class="m1" text="Popularity">
+                <b-dropdown :size="$mq === 'sm' ? 'md' : $mq" id="dropdown-3" class="m1 home-dropdown" text="Popularity">
                     <b-dropdown-item>Premium</b-dropdown-item>
                     <b-dropdown-item>Any</b-dropdown-item>
                 </b-dropdown>
             </b-form-group>
         </div>
 
-        <div class="form-item mb-1 mt-1 mr-3">
+        <div class="form-item mb-1 mt-1 mr-1 home-dropdown">
             <b-button :size="$mq === 'sm' ? 'md' : $mq" class="btn btn-info pull-right">search</b-button>
         </div>
     </div>

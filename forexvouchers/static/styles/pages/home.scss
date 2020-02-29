@@ -29,7 +29,6 @@
   margin-bottom: 2em;
 
   .form-container {
-    display: flex;
     justify-content: center;
     align-items: center;
   }
@@ -65,7 +64,6 @@
     width: 132px;
     margin-bottom: 4px;
 
-    f
     .Rate__star .icon {
       width: 0.75rem;
       height: 0.75rem;
@@ -135,4 +133,30 @@
 .img-align-div {
   display: table-cell;
   vertical-align: middle;
+}
+
+
+.partner-card {
+  display: flex;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.border-thick {
+  border-width: thick;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.home-dropdown {
+  .btn {
+    font-size: min(8vw, 20px);
+    padding: 0.4rem 0.8rem;
+  }
 }

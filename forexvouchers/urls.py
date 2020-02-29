@@ -16,7 +16,6 @@ from forexvouchers.views.api.ForexServices import ForexServicesView as ServicesV
 from forexvouchers.views.api import Services as ApiServices
 from wagtail.contrib.sitemaps.views import sitemap
 
-
 urlpatterns = [
 
     url('^sitemap\.xml$', sitemap),
@@ -37,6 +36,7 @@ urlpatterns = [
     url(r'^api/vouchers', VouchersView.as_view()),
     url(r'^api/forex-services', ServicesView.as_view()),
     url(r'^api/services', ApiServices.get_services),
+    url(r'^api/partners', ApiServices.get_partners),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
