@@ -601,9 +601,9 @@ class Comment(models.Model):
                 'ip': self.ip,
                 'active': self.active,
                 'country_code': self.country_code,
-                'url': self.service.url + '#comments',
-                'service_name': self.service.name,
-                'service_url': self.service.url,
+                'url': self.service.url + '#comments' if self.service else None,
+                'service_name': self.service.name if self.service else None,
+                'service_url': self.service.url if self.service else None,
                 }
 
 
