@@ -21,7 +21,7 @@ class Command(BaseCommand):
                     item = NewsItem(source=source)
                     item.title = entry.title
                     item.description = entry.description
-                    item.link = item.link
+                    item.link = entry.link
                     item.date = datetime.fromtimestamp(mktime(entry.published_parsed))
                     item.save()
 

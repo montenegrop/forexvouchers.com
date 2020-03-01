@@ -9,6 +9,7 @@ from wagtailschemaorg.utils import extend
 from wagtail.images.edit_handlers import ImageChooserPanel
 from cms.models.business_models import Service, Compare, Comment, Category
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
+from cms.models.news import NewsItem
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 
@@ -50,6 +51,8 @@ class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
         context['premium_services_models'] = services
         context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
         context['premium_partners'] = Service.objects.filter(premium=True)[:8]
+        context['news_feeds'] = json.dumps(
+            [json.dumps(entry.toDict()) for entry in NewsItem.objects.all().order_by('-date')[:12]])
 
         return context
 

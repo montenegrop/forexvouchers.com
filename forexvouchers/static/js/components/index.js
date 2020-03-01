@@ -16,6 +16,7 @@ import VoucherDiscountSmall from "./Cards/VoucherSmall/VoucherDiscountSmall";
 import VoucherPromocodeSmall from "./Cards/VoucherSmall/VoucherPromocodeSmall";
 import VoucherOfferSmall from "./Cards/VoucherSmall/VoucherOfferSmall";
 import PremiumPartners from "./HomePage/PremiumPartners";
+import NewsFeeds from "./HomePage/NewsFeeds";
 
 export default {
     'fv-comment': Comment,
@@ -36,4 +37,5 @@ export default {
     'fv-vouchers-promocode-small': VoucherPromocodeSmall,
     'fv-vouchers-offer-small': VoucherOfferSmall,
     'fv-premium-partners': PremiumPartners,
+    'fv-news-feeds': NewsFeeds,
 }
