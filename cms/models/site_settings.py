@@ -1,6 +1,7 @@
 from django.db import models
+from modelcluster.models import ClusterableModel
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.fields import RichTextField
 
@@ -31,4 +32,14 @@ class GeneralSettings(BaseSetting):
 
     ]
 
+@register_setting
+class NewsSettings(BaseSetting, ClusterableModel):
+    # newsSource = models.ForeignKey("NewsSource", on_delete=models.SET_NULL, null=True, related_name='newsSettings')
 
+
+    panels = [
+        MultiFieldPanel([
+            InlinePanel("newsSources", label="source", classname="collapsible")
+        ], heading="News Sources")
+
+    ]
