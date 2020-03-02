@@ -91,7 +91,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'builtins': ['jsonify.templatetags.jsonify', 'cms.templatetags.jsonifyModel'],
+            'builtins': ['jsonify.templatetags.jsonify', 'cms.templatetags.jsonifyModel', 'cms.templatetags.categoryFilter'],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

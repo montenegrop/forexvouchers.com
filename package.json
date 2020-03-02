@@ -45,6 +45,7 @@
     "flag-icon-css": "^3.3.0",
     "lodash": "^4.17.15",
     "payment-icons": "^1.2.1",
+    "query-string": "^6.11.0",
     "vue": "^2.6.10",
     "vue-bootstrap-typeahead": "^0.2.6",
     "vue-carousel": "^0.18.0",

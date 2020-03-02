@@ -18,6 +18,7 @@
                                     v-on:input="onChange($event)"
                                     :options="getNames"
                                     name="flavour-1"
+                                    :checked="cat"
                                     stacked
                             />
                         </b-form-group>
@@ -52,14 +53,14 @@
 
 
     export default {
-        props: ["brokerness", "options", "onChange", "searchBarChange"],
+        props: ["brokerness", "options", "onChange", "searchBarChange", "categories"],
         components: {FvFilterDecorator},
 
         data() {
             return {
                 searchBar: '',
                 limit: 15,
-                limitIncrease: 5,
+                limitIncrease: 5
             }
         },
         computed: {
@@ -71,6 +72,9 @@
                         value: option.id
                     }))
             },
+            cat () {
+                return this.categories? this.categories.split(',') : []
+            }
         },
     }
 </script>

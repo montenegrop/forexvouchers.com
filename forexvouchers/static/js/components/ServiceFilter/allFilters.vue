@@ -2,7 +2,8 @@
     <div>
         <!--services-->
         <fv-filter-category :brokerness="isBrokerPage" :options="filterCategories"
-                            :onChange="onCategoryChange" :searchBarChange="onSearchBarChange"></fv-filter-category>
+                                                                :categories="categories"
+                          :onChange="onCategoryChange" :searchBarChange="onSearchBarChange"></fv-filter-category>
         <fv-filter-trading-type v-if="filterTradingTypes.length" :brokerness="isBrokerPage" :options="filterTradingTypes"
                                 :onChange="onTradingTypeChange"></fv-filter-trading-type>
 
@@ -106,7 +107,8 @@
             "onWithdrawMethodChange",
             "filterOperatingSystems",
             "onOperatingSystemChange",
-            "onSearchBarChange"
+            "onSearchBarChange",
+            "categories"
         ],
         components: {
             FvFilterCategory,

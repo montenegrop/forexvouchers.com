@@ -33,6 +33,7 @@
 
                     <fv-all-filters :isBrokerPage="isBrokerPage"
                                     :filterCategories="filterCategories"
+                                    :categories="categories"
                                     :onCategoryChange="onCategoryChange"
                                     :filterTradingTypes="filterTradingTypes"
                                     :onTradingTypeChange="onTradingTypeChange"
@@ -102,6 +103,7 @@
     import FvAllFilters from './allFilters'
 
     import _ from 'lodash'
+    import queryString from 'query-string'
     //import lodash, add to readMe
 
     export default {
@@ -115,6 +117,7 @@
         },
         data() {
             const isBrokerPage = document.location.href.indexOf('broker') !== -1;
+            const urlParams = queryString.parse(location.search);
 
             return {
                 isBrokerPage,
@@ -125,7 +128,7 @@
                 visible: Boolean,
 
                 // for forex-services:
-                categories: '',
+                categories: urlParams.categories || '',
                 filterCategories: [],
                 tradingTypes: '',
                 filterTradingTypes: [],
@@ -244,6 +247,8 @@
         },
 
         beforeMount() {
+
+
             this.smallBreakpoint();
         },
 
@@ -310,6 +315,7 @@
                     this.filterWithdrawMethods = response.body.withdraw_methods;
                     this.filterOperatingSystems = response.body.operating_systems;
                 }
+
                 if (this.servicesCount + this.limitIncrease > this.services.length) {
                     this.onLimit = true
                 }
