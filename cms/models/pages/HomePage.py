@@ -52,7 +52,7 @@ class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
         context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
         context['premium_partners'] = Service.objects.filter(premium=True)[:8]
         context['news_feeds'] = json.dumps(
-            [json.dumps(entry.toDict()) for entry in NewsItem.objects.all().order_by('-date')[:12]])
+            [json.dumps(entry.toDict()) for entry in NewsItem.objects.all().select_related('source').order_by('-date')[:12]])
 
         return context
 

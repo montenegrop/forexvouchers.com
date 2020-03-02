@@ -7,7 +7,16 @@ class NewsSource(Orderable):
     setting = ParentalKey("NewsSettings", related_name="newsSources")
     title = models.CharField(max_length=200)
     url = models.URLField(blank=True, null=True, help_text="RSS Feed URL")
+    url_site = models.URLField(blank=True, null=True, help_text="URL of the Site")
     active = models.BooleanField(default=True)
+
+
+    def toDict(self):
+        return {
+            'title': self.title,
+            'url': self.url,
+            'url_site': self.url_site,
+        }
 
 
 class NewsItem(models.Model):
@@ -23,4 +32,5 @@ class NewsItem(models.Model):
             'link': self.link if self.link else None,
             'description': self.description if self.description else None,
             'date': self.date.isoformat() if self.date else None,
+            'source': self.source.toDict()
         }

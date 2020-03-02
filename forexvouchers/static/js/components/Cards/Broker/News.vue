@@ -1,9 +1,7 @@
 <template>
     <div class="container partner-card text-center">
         <div class="text-center mb-2">
-            <a class="mb-0 text-primary" :href="`${entry.link}`"> {{ entry.title }}</a>
-            <p>{{ entry.description }}</p>
-
+            <a class="mb-0 text-primary" :href="`${entry.link}`" target="_blank"> {{ entry.title }}</a>
         </div>
     </div>
 </template>

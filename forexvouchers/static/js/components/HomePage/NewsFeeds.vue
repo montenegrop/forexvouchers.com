@@ -3,7 +3,7 @@
     <b-list-group>
         <b-list-group-item v-for="entry in parseNews">
 
-            <fv-new :entry="entry"></fv-new>
+            <fv-news :entry="entry"></fv-news>
 
         </b-list-group-item>
     </b-list-group>
@@ -13,14 +13,12 @@
 
 <script>
 
-    import New from "../Cards/Broker/New";
+    import News from "../Cards/Broker/News";
 
-    const cache = {};
     export default {
         name: "fv-news-feeds",
-        components: {FvNew: New},
+        components: {FvNews: News},
         props: ["news"],
-
 
         computed: {
             parseNews: function () {
