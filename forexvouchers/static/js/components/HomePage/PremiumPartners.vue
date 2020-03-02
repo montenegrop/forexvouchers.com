@@ -12,7 +12,7 @@
 
 <script>
 
-    import PremiumPartner from "../Cards/Broker/PremiumPartner";
+    import PremiumPartner from "../Cards/PremiumPartner";
 
     const cache = {};
     export default {

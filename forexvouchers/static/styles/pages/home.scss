@@ -181,3 +181,27 @@
   margin-right: auto;
   width: 100%;
 }
+
+
+.news-list {
+
+
+  div {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 3px solid $light;
+  }
+
+  div:last-child {
+    border-bottom: none;
+  }
+
+  div {
+    p {
+      font-size: 0.8rem;
+    }
+  }
+
+
+}

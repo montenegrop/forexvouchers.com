@@ -1,7 +1,7 @@
 <template>
 
-    <b-list-group>
-        <b-list-group-item v-for="entry in parseNews">
+    <b-list-group class="news-list">
+        <b-list-group-item class="p-0" v-for="entry in parseNews">
 
             <fv-news :entry="entry"></fv-news>
 
@@ -13,7 +13,7 @@
 
 <script>
 
-    import News from "../Cards/Broker/News";
+    import News from "../Cards/News";
 
     export default {
         name: "fv-news-feeds",
