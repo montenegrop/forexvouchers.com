@@ -24,28 +24,31 @@
   }
 
   .compare-item {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 0;
-    padding-right: 0;
 
-    .service {
+    a {
+
       display: flex;
-      width: 45%;
+      justify-content: space-between;
+      padding-left: 0;
+      padding-right: 0;
 
-      &-left {
-        justify-content: flex-end;
+      .service {
+        display: flex;
+        width: 45%;
+
+        &-left {
+          justify-content: flex-end;
+        }
+      }
+
+      .vs {
+        color: $primary;
+        font-weight: bold;
+        min-width: 25px;
+        text-align: center;
       }
     }
-
-    .vs {
-      color: $primary;
-      font-weight: bold;
-      min-width: 25px;
-      text-align: center;
-    }
   }
-
 }
 
 .compare-stars {
