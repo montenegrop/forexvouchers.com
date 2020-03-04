@@ -69,3 +69,18 @@ mysql -ufxvouchers -p < dump.sql
 There's an script in `scripts/django-update.sh` 
 That's the script we use to get the latest changes when we deploy. 
 You should configure your CI server to run this script everytime you want to deploy.
+<<<<<<< Updated upstream
+=======
+
+# Update News of homepage hourly
+
+There is an script `scripts/news-update.sh` which is meant to run as a cron task
+Run `crontab -e` and then write the following task to run the script hourly
+`0 * * * * /var/www/fxvouchers/scripts/news-update.sh`
+also
+`@hourly /var/www/fxvouchers/scripts/news-update.sh` works too
+also
+`echo -e "$(crontab -u ubuntu -l)\n1 * * * * /var/www/fxvouchers/scripts/news-update.sh 2>&1" | crontab -u ubuntu -`
+writes the task automatically in the cron table
+
+>>>>>>> Stashed changes
