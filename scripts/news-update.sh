@@ -1,3 +1,5 @@
+#!/bin/bash
+
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 source /usr/local/bin/virtualenvwrapper.sh
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 workon fxvouchers
 cd /var/www/fxvouchers
