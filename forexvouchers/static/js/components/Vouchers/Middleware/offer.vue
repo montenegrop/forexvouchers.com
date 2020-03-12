@@ -1,20 +1,14 @@
 <template>
-
     <div class="container middleware-main">
-
         <h2 class="title"> {{ voucher.type }} information </h2>
-
         <div class="row border border-light no-float ">
-
             <div class="col-auto image">
                 <img :src="voucher.service_logo_big">
 
                 <b-col class="col-auto product-stars rate-container flexible voucher-info-service pl-3">
 
                     <rate :length="5" :value="voucher.service_rate" readonly/>
-
                 </b-col>
-
             </div>
             <div class="col information">
                 <div class="row  product-info-discount name">
@@ -35,11 +29,13 @@
 
                 </div>
                 <div class="row button button-container">
-                    <a target="_blank" :href="voucher.affiliate.url">
-                        <b-button squared variant="info" class="button-large">
-                            See Offer
-                        </b-button>
-                    </a>
+                    <div class=" button-border">
+                        <a target="_blank" target="_blank" :href="voucher.affiliate.url">
+                            <b-button squared variant="info" class="button-get-code button-large">
+                                See offer
+                            </b-button>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="product-service">
@@ -59,38 +55,32 @@
                     </p>
                 </div>
             </div>
-
         </div>
 
         <div class="mt-2 mb-5">
             <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons:</h5>
-            <fv-vouchers-home class="VueCarousel-inner-margin" :service-id="voucher.service_id" sort="mostviewed" :voucher-id="voucher.id">
-            </fv-vouchers-home>
+            <fv-vouchers-home class="VueCarousel-inner-margin" sort="mostviewed"></fv-vouchers-home>
 
             <div class="show-more right">
                 <a size="sm" href="/vouchers">More Vouchers</a>
             </div>
         </div>
-
-
     </div>
-
 </template>
 
 
 <script>
-    import FvVouchersHome from "../VouchersHome";
+
+    import VouchersHome from "../VouchersHome";
 
     export default {
         name: "fv-middleware-offer",
-        components: {FvVouchersHome},
-        props: ['voucher'],
+        components: {FvVouchersHome: VouchersHome},
+        props: ["vouch"],
         data() {
             return {
                 voucher: JSON.parse(this.vouch),
             }
         }
     }
-
-
 </script>
