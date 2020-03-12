@@ -34,12 +34,20 @@
                     </p>
 
                 </div>
+
                 <div class="row button button-container">
-                    <a target="_blank" :href="voucher.affiliate.url">
-                        <b-button squared variant="info" class="button-large">
-                            Get Code
-                        </b-button>
-                    </a>
+                    <div class="button-border">
+                        <a @click="revealed" v-if="!showCode" target="_blank" :href="voucher.affiliate.url">
+                            <b-button squared variant="info" class="button-get-code button-large">
+                                Get Code
+                            </b-button>
+                        </a>
+
+                        <div v-if="showCode" class="button-code">
+                            <h3 class="text-code no-shadow text-primary mb-1">{{ voucher.code }}</h3>
+                            <b-button variant="dark" class="copy-code">copy</b-button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="product-service">
@@ -64,7 +72,8 @@
 
         <div class="mt-2 mb-5">
             <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons:</h5>
-            <fv-vouchers-home class="VueCarousel-inner-margin" :service-id="voucher.service_id" sort="mostviewed" :voucher-id="voucher.id">
+            <fv-vouchers-home class="VueCarousel-inner-margin" :service-id="voucher.service_id" sort="mostviewed"
+                              :voucher-id="voucher.id">
             </fv-vouchers-home>
 
             <div class="show-more right">
@@ -79,17 +88,21 @@
 
 
 <script>
-    import FvVouchersHome from "../VouchersHome";
 
     export default {
         name: "fv-middleware-promocode",
-        components: {FvVouchersHome},
-        props: ["vouch"],
+        props: ['vouch'],
         data() {
             return {
+                showCode: false,
                 voucher: JSON.parse(this.vouch),
             }
-        }
+        },
+        methods: {
+            revealed: function () {
+                this.showCode = true
+            },
+        },
     }
 
 

@@ -1,17 +1,13 @@
 <template>
-
-
     <div class="promocodes1">
 
-            <div class="inner-pc">
-                <span class="code-pc">{{ code }}</span>
-                <a @click="onReveal" href="javascript:void(0)" :class="{'button-code peel-btn':true, revealed:revealed}">{{ label }}</a>
-            </div>
-
+        <div class="inner-pc">
+            <span class="code-pc">{{ code }}</span>
+            <a @click="onReveal" href="javascript:void(0)" :class="{'button-code peel-btn':true, revealed:revealed}">{{
+                label }}</a>
+        </div>
 
     </div>
-
-
 </template>
 
 <script>
