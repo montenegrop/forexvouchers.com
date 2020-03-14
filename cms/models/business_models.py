@@ -384,10 +384,23 @@ class Affiliate(models.Model):
     def __str__(self):
         return self.getLink()
 
+    def getClicks(self):
+        if self.clicks < 1000:
+            return str(self.clicks)
+        elif self.clicks < 10000:
+            return str(self.clicks)[:1] + 'K'
+        elif self.clicks < 100000:
+            return str(self.clicks)[:2] + 'K'
+        elif self.clicks < 1000000:
+            return str(self.clicks)[:3] + 'K'
+        elif self.clicks < 10000000:
+            return str(self.clicks)[:1] + 'Mil'
+
     def toDict(self):
         return {
             'url': self.getLink(),
-            'clicks': self.clicks
+            'clicks': self.clicks,
+            'clicks_large': self.getClicks(),
         }
 
     panels = [

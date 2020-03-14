@@ -30,7 +30,7 @@
                 </button>
             </a>
             <div v-if="showClicks" class="product-clicks">
-                {{ voucher.affiliate.clicks }} clicks
+                {{ voucher.affiliate.clicks_large }} clicks
             </div>
             <div class="product-expires">
 
