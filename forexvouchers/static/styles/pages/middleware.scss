@@ -36,7 +36,8 @@
     margin-top: 20px;
 
     .button-border {
-      width: 35%;
+      border: 1px dashed $black;
+      padding: 6px;
 
       .button-get-code {
         color: white;
@@ -59,10 +60,6 @@
 
   }
 
-  .button-border {
-    border: 1px dashed $black;
-    padding: 6px;
-  }
 
   .button {
     display: flex;

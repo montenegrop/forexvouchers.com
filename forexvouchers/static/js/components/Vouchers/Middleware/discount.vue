@@ -30,11 +30,13 @@
 
                 </div>
                 <div class="row button button-container">
-                    <a target="_blank" :href="voucher.affiliate.url">
-                        <b-button squared variant="info" class="button-large">
-                            Get Discount
-                        </b-button>
-                    </a>
+                    <div class=" button-border">
+                        <a target="_blank" target="_blank" :href="voucher.affiliate.url">
+                            <b-button squared variant="info" class="button-get-code button-large">
+                                Get Discount
+                            </b-button>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="product-service">
@@ -57,7 +59,7 @@
         </div>
 
         <div class="mt-2 mb-5">
-            <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons1:</h5>
+            <h5 class="title text-left mb-0 title-more-vouchers">Related Coupons:</h5>
             <fv-vouchers-home class="VueCarousel-inner-margin" sort="mostviewed"></fv-vouchers-home>
 
             <div class="show-more right">
@@ -82,6 +84,4 @@
             }
         }
     }
-
-
 </script>
