@@ -39,8 +39,8 @@ mysql -ufxvouchers -p < dump.sql
 3. tar xvzf ssh-staging-dir.tar.gz
 
 # Prepare log files
-1. `sudo touch /var/log/forexvouchers-debug.log`
-2. `sudo chmod ugo+rw /var/log/forexvouchers-debug.log`
+1. `sudo touch /var/log/forexvouchers-debug.log /var/log/forexvouchers-cron.log`
+2. `sudo chmod ugo+rw /var/log/forexvouchers-debug.log /var/log/forexvouchers-cron.log`
 
 # Clone repository and install dependencies
 1. `sudo mkdir -p /var/www`
@@ -69,31 +69,13 @@ mysql -ufxvouchers -p < dump.sql
 There's an script in `scripts/django-update.sh` 
 That's the script we use to get the latest changes when we deploy. 
 You should configure your CI server to run this script everytime you want to deploy.
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 4453c66e6ee5a4f7c9c8163fe02a19a1b768f030
+
 
 # Update News of homepage hourly
 
 There is an script `scripts/news-update.sh` which is meant to run as a cron task
 Run `crontab -e` and then write the following task to run the script hourly
-<<<<<<< HEAD
-`0 * * * * /var/www/fxvouchers/scripts/news-update.sh`
-also
-`@hourly /var/www/fxvouchers/scripts/news-update.sh` works too
-also
-`echo -e "$(crontab -u ubuntu -l)\n1 * * * * /var/www/fxvouchers/scripts/news-update.sh 2>&1" | crontab -u ubuntu -`
-writes the task automatically in the cron table
 
->>>>>>> Stashed changes
-=======
-`0 * * * * /var/www/fxvoucher/scripts/news-update.sh 2>&1`
-also
-`@hourly /var/www/fxvoucher/scripts/news-update.sh 2>&1` works too
-also
-`echo -e "$(crontab -u ubuntu -l)\n1 * * * * /var/www/fxvoucher/scripts/news-update.sh 2>&1" | crontab -u ubuntu -`
-writes the task automatically in the cron table
-
->>>>>>> 4453c66e6ee5a4f7c9c8163fe02a19a1b768f030
+```
+0 * * * * /var/www/fxvouchers/scripts/news-update.sh >> /var/log/forexvouchers-cron.log 2>&1
+```
