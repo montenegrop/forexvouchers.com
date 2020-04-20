@@ -7,6 +7,7 @@ from django import forms
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable
 from wagtail.core.fields import RichTextField
+from wagtail.search import index
 from modelcluster.fields import ParentalKey
 from modelcluster.fields import ParentalManyToManyField
 
@@ -50,8 +51,14 @@ class Category(models.Model):
     def autocomplete_label(self):
         return self.name
 
+    def toDict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
 
-class Service(ClusterableModel):
+
+class Service(ClusterableModel, index.Indexed):
     category = ParentalManyToManyField('Category', through=Category.services.through, blank=False)
     premium = models.BooleanField(null=False, default=False)
     attributes = models.ManyToManyField('Attribute', blank=True)
@@ -289,6 +296,10 @@ class Service(ClusterableModel):
         )
     ]
 
+    search_fields = [
+        index.SearchField('name', partial_match=True, boost=10),
+    ]
+
     @property
     def json_ld(self):
         return ServiceLD(self)
@@ -442,7 +453,7 @@ class Product(models.Model):
     ]
 
 
-class Voucher(models.Model):
+class Voucher(models.Model, index.Indexed):
     slug = AutoSlugField(populate_from='name', editable=True)
     name = models.CharField(max_length=100)
     affiliate = models.ForeignKey(Affiliate, on_delete=models.SET_NULL, null=True, related_name='vouchers')
@@ -489,6 +500,7 @@ class Voucher(models.Model):
             'type': self.get_type(),
             'description': self.description.__str__(),
             'logo': self.logo.get_rendition('width-100').url if self.logo else None,
+            'logo_url_small': self.logo.get_rendition('width-45').url if self.logo else None,
             'service_id': self.service.id,
             'service_name': self.service.name,
             'service_logo': self.service.logo.get_rendition('width-15').url if self.service.logo else None,
@@ -498,12 +510,19 @@ class Voucher(models.Model):
             'service_affiliate': self.service.affiliate.toDict(),
             'service_rate': self.service.get_avg_rate,
             'service_url': self.service.url,
-            'middleware_url': '/' + self.get_type().lower() + 's/' + self.slug
+            'middleware_url': '/' + self.get_type().lower() + 's/' + self.slug,
+            'url': '/' + self.get_type().lower() + 's/' + self.slug
         }
 
     @property
     def json_ld(self):
         return VoucherLD(self)
+
+    search_fields = [
+        index.SearchField('name', partial_match=True, boost=10),
+        index.FilterField('expires'),
+        index.FilterField('never_expires')
+    ]
 
 
 class PromoCode(Voucher):

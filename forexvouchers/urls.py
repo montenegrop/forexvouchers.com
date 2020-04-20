@@ -8,7 +8,7 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
 
-from search import views as search_views
+from forexvouchers.views.api.Search import SearchView
 from forexvouchers.views import CommentsView, cloakedlinks
 from forexvouchers.views.api.Vouchers import VouchersView
 from cms.admin.views import import_services, export_services
@@ -31,8 +31,9 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search'),
+    # url(r'^search/$', search_views.search, name='search'),
     url(r'^api/comments', CommentsView.as_view()),
+    url(r'^api/search', SearchView.as_view()),
     url(r'^api/vouchers', VouchersView.as_view()),
     url(r'^api/forex-services', ServicesView.as_view()),
     url(r'^api/services', ApiServices.get_services),

@@ -104,7 +104,6 @@
 
     import _ from 'lodash'
     import queryString from 'query-string'
-    //import lodash, add to readMe
 
     export default {
         name: "fv-services-filter-view",
