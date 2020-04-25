@@ -1,6 +1,7 @@
 {% if settings.cms.GeneralSettings.recaptcha_site_key %}
     <fv-comments-list
         service_id="{{ service.id }}"
+        scroll="{{ scroll }}"
         recaptcha_site_key="{{ settings.cms.GeneralSettings.recaptcha_site_key }}"/>
 {% else %}
     <div class="warning">
