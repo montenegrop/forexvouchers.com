@@ -31,12 +31,16 @@
             <hr/>
             <ul class="comment-list">
                 <li v-for="comment in comments" class="margin-comment" :key="comment.id">
-                    <fv-comment :text="comment.review"
+                    <fv-comment
+                                :id="comment.id"
+                                :text="comment.review"
                                 :name="comment.name"
                                 :stars="comment.stars"
                                 :country_code="comment.country_code"
                                 :country_name="comment.country"
-                                :created_at="comment.created_at"/>
+                                :created_at="comment.created_at"
+                                scroll="true"
+                    />
                 </li>
                 <hr/>
                 <ul>
@@ -72,6 +76,7 @@
     import FvComment from './Comment'
     import FvForm from './CommentsForm'
     import FvCommentsStarsFilter from './CommentsStarsFilter'
+    import queryString from 'query-string';
 
     let cache = {}
 
@@ -120,7 +125,8 @@
                 if (!this.currentPage) {
                     return
                 }
-                const url = `/api/comments?sort_by=&service_id=${this.service_id}&stars=${this.stars}&page=${this.currentPage - 1}&limit=${this.perPage}`;
+                const permalink = Object.keys(queryString.parse(window.location.hash)).pop()
+                const url = `/api/comments?sort_by=&permalink=${permalink || ''}&service_id=${this.service_id}&stars=${this.stars}&page=${this.currentPage - 1}&limit=${this.perPage}`;
                 let response;
                 if (cache.hasOwnProperty(url)) {
 
@@ -139,6 +145,7 @@
                 this.stars3 = response.stars3;
                 this.stars4 = response.stars4;
                 this.stars5 = response.stars5;
+                this.currentPage = response.page + 1;
                 return response
             },
             filterChange(stars) {

@@ -624,7 +624,10 @@ class Comment(models.Model):
 
     @cache_to_dict
     def toDict(self):
-        return {'name': self.name,
+        return {
+                'id': self.id,
+                'permalink': f'{self.service.url}#comment-{self.id}' if self.service else '',
+                'name': self.name,
                 'country': self.country,
                 'review': self.review,
                 'stars': self.stars,

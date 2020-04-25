@@ -14,7 +14,6 @@ class CommentsView(View):
 
     def calc_service_rate(self, newComment, serviceId):
         comments = Comment.objects.filter(service_id=serviceId, active=True)
-
         sum = newComment.stars
         count = 1
         for comment in comments:
@@ -30,7 +29,12 @@ class CommentsView(View):
         sortby = request.GET.get('sort_by', 'relevance')
         starsFilter = int(request.GET.get('stars', -1))
         sortType = request.GET.get('sort_type', 'asc')
-        response = {'data': []}
+        permalink = request.GET.get('permalink', '')
+        response = {'data': [], 'page': page}
+
+        comment_id = None
+        if len(permalink.split('-')) > 1:
+            comment_id = int(permalink.split('-')[1])
 
         if serviceId is None:
             raise Exception('serviceId not given in the url')
@@ -38,7 +42,16 @@ class CommentsView(View):
         comments = Comment.objects.filter(service_id=serviceId, active=True).order_by('-created_at')
         parents = list(filter(lambda comment: comment.parent_comment is None, comments))
         filteredParents = list(filter(lambda comment: starsFilter == -1 or comment.stars == starsFilter, parents))
+        if comment_id:
+            permacomment = None
+            pos = 0
+            while permacomment == None and pos < len(parents):
+                if parents[pos].id == comment_id:
+                    permacomment = parents[pos].id
+                pos += 1
+            page = int((pos - 1) / limit) if permacomment else page
         slicedParents = filteredParents[page * limit: page * limit + limit]
+        response['page'] = page
 
         response['total'] = len(parents)
         response['filteredTotal'] = len(filteredParents)

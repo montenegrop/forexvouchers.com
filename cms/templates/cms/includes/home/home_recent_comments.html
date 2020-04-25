@@ -3,7 +3,7 @@
     <ul class="comment-list ">
 
         {% for comment in comments %}
-            <li class="margin-comment" onclick="location.href='{{ comment.url }}'">
+            <li class="comment-link" onclick="location.href='{{ comment.permalink }}'">
                 <fv-comment text="{{ comment.review }}"
                             name="{{ comment.name }}"
                             stars="{{ comment.stars }}"
@@ -11,7 +11,10 @@
                             country_name="{{ comment.country }}"
                             created_at="{{ comment.created_at }}"
                             service_name="{{ comment.service_name }}"
-                            service_url="{{ comment.service_url }}"/>
+                            service_url="{{ comment.service_url }}"
+                            id="{{ comment.id }}"
+                            scroll=""
+                />
             </li>
         {% endfor %}
     </ul>
