@@ -47,16 +47,30 @@
                                  :state="this.submitted ? !this.errors.review : null"/>
             </b-form-group>
 
-            <button type="submit" class="btn btn-info pull-right">Post</button>
+
+            <div v-if="submitted && !captchaVerified" class="invalid-feedback d-block">
+                You didn't pass the captcha validation
+            </div>
+            <vue-recaptcha
+                    @verify="onVerify"
+                    @expired="onExpired"
+                    :sitekey="recaptcha_site_key"
+                    :loadRecaptchaScript="true"></vue-recaptcha>
+
+            <button :disabled="verified" type="submit" class="btn btn-info pull-right mt-3">Post</button>
+
             <div class="clearfix"></div>
         </div>
     </form>
 </template>
 
 <script>
+    import VueRecaptcha from 'vue-recaptcha'
+
     export default {
         name: "fv-comments-form",
-        props: ['service_id', 'showMessage'],
+        props: ['service_id', 'showMessage', 'recaptcha_site_key'],
+        components: {VueRecaptcha},
         data() {
             return {
                 errors: {},
@@ -65,9 +79,16 @@
                 review: null,
                 email: null,
                 rate: null,
+                captchaVerified: false
             }
         },
         methods: {
+            onVerify() {
+                this.captchaVerified = true
+            },
+            onExpired() {
+                this.captchaVerified = false
+            },
             checkForm: function (e) {
                 this.errors = {};
                 this.submitted = true;
@@ -77,6 +98,10 @@
 
                 if (!this.name) {
                     this.errors.name = 'Name is required.';
+                }
+
+                if (!this.captchaVerified) {
+                    this.errors.captchaMessage = 'Name is required.';
                 }
 
                 if (!this.review) {
@@ -99,7 +124,7 @@
                     this.$emit('post', {
                         email, review, name, rate
                     });
-
+                    this.captchaVerified = false
                 }
                 return false;
 

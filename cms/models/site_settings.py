@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import TextField
 from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
@@ -18,7 +19,8 @@ class GeneralSettings(BaseSetting):
 
     footer_custom_text = RichTextField(max_length=2500, blank=True, default=None, null=True)
 
-
+    recaptcha_site_key = TextField(max_length=1000, blank=True, default="", null=True, help_text="Please use reCaptcha v2")
+    recaptcha_secret_key = TextField(max_length=1000, blank=True, default="", null=True, help_text="Please use reCaptcha v2")
 
     panels = [
         MultiFieldPanel([
@@ -28,7 +30,11 @@ class GeneralSettings(BaseSetting):
         ], heading="Social Media Settings"),
         MultiFieldPanel([
             FieldPanel("footer_custom_text"),
-        ], heading="General")
+        ], heading="General"),
+        MultiFieldPanel([
+            FieldPanel("recaptcha_site_key"),
+            FieldPanel("recaptcha_secret_key"),
+        ], heading="Third-party APIs")
 
     ]
 

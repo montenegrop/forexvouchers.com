@@ -53,7 +53,7 @@
 
         <hr/>
         <div class="goto-submit-form">
-            <fv-form v-on:post="post($event)" :show-message="showMessage"/>
+            <fv-form v-on:post="post($event)" :show-message="showMessage" :recaptcha_site_key="recaptcha_site_key"/>
         </div>
     </div>
 
@@ -78,7 +78,7 @@
     export default {
         name: "fv-comments-list",
         components: {FvComment, FvForm, FvCommentsStarsFilter},
-        props: ['service_id'],
+        props: ['service_id', 'recaptcha_site_key'],
         data() {
             return {
                 showMessage: false,

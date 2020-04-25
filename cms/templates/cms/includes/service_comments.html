@@ -1,1 +1,12 @@
-<fv-comments-list service_id="{{ service.id }}"/>
+{% if settings.cms.GeneralSettings.recaptcha_site_key %}
+    <fv-comments-list
+        service_id="{{ service.id }}"
+        recaptcha_site_key="{{ settings.cms.GeneralSettings.recaptcha_site_key }}"/>
+{% else %}
+    <div class="warning">
+     You didn't provide recaptcha_site_key.
+                Go to your admin settings "Settings > General Settings" and configure set your reCaptcha keys.
+    </div>
+{% endif %}
+
+
