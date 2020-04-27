@@ -12,3 +12,4 @@ npm run build:static
 python manage.py migrate wagtailtrans
 python manage.py migrate
 sudo supervisorctl restart all
+redis-cli FLUSHALL
