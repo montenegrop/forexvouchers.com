@@ -29,5 +29,13 @@
 
 
 ### Deployment docs
-For deployment checkout our deployment steps on `deployment` directory
+
+If you are developing and just want to update your changes to the server, we setted up a deployment script.
+You should be able to deploy it by running:
+
+```
+ssh fv /var/www/fxvouchers/scripts/git-update.sh
+```
+
+For deployment checkout our [https://github.com/ahmerkhanz/fxvouchers/blob/master/deployment/Install_Server_Instructions.md](Install_Server_Instructions.md) steps on `deployment` directory
 
