@@ -22,6 +22,11 @@ class GeneralSettings(BaseSetting):
     recaptcha_site_key = TextField(max_length=1000, blank=True, default="", null=True, help_text="Please use reCaptcha v2")
     recaptcha_secret_key = TextField(max_length=1000, blank=True, default="", null=True, help_text="Please use reCaptcha v2")
 
+    mailchimp_api_key = TextField(max_length=500, blank=True, default="", null=True, help_text="API Key")
+    mailchimp_list_id = TextField(max_length=300, blank=True, default="", null=True, help_text="Mailchimp List ID")
+
+
+
     panels = [
         MultiFieldPanel([
             FieldPanel("facebook"),
@@ -34,6 +39,8 @@ class GeneralSettings(BaseSetting):
         MultiFieldPanel([
             FieldPanel("recaptcha_site_key"),
             FieldPanel("recaptcha_secret_key"),
+            FieldPanel("mailchimp_api_key"),
+            FieldPanel("mailchimp_list_id"),
         ], heading="Third-party APIs")
 
     ]
