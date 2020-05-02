@@ -56,6 +56,7 @@ class Regulation(AbstractField, ClusterableModel):
 
     autocomplete_search_field = 'code'
 
+
     def __str__(self):
         return self.code
 

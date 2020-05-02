@@ -57,12 +57,14 @@
                 <b-tr v-if="service.regulation">
                     <b-td class="left pb-0 pt-0">Regulation</b-td>
                     <b-td class="right pb-0 pt-0">
-
-                        <div>
-                                    <span v-for="regulation in service.regulation"
-                                          :class="`m-1 flag flag-icon flag-icon-squared flag-icon-${
-                                              regulation.location.code.toLowerCase()} rounded-circle`"></span>
-                        </div>
+                        <template v-for="regulation in service.regulation">
+                            <span v-b-tooltip.hover
+                                  :title="`${regulation.code} - ${regulation.description}`"
+                                  :class="`m-1 flag flag-icon flag-icon-squared flag-icon-${
+                                              regulation.location.code.toLowerCase()} rounded-circle`"
+                            >
+                            </span>
+                        </template>
                     </b-td>
                 </b-tr>
             </b-table-simple>

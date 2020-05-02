@@ -134,7 +134,7 @@ class RegulationAdmin(ModelAdmin):
 
     list_display = ('code', 'location', 'link')
     ordering = ('code',)
-    search_fields = ('code', 'location')
+    search_fields = ('code', 'location__name')
 
 
 class LicenseAdmin(ModelAdmin):
