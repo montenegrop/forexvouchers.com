@@ -21,7 +21,7 @@
                 <div>
                     <div class="voucher-count"
                          v-bind:class="{ 'voucher-count-lg': $mq != 'md', 'voucher-count-md': $mq === 'md'}">
-                        0
+                        {{ service.voucher_count }}
                     </div>
                     <p class="center pr-0">Vouchers</p>
                 </div>
