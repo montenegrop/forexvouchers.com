@@ -1,3 +1,6 @@
+import datetime
+
+from django.db.models import Q
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 from wagtail.core import hooks
@@ -34,14 +37,35 @@ class ServiceAdmin(ModelAdmin):
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('name', 'getCategoriesLabels', 'premium')
+    list_display = ('name', 'getCategoriesLabels', 'getVouchersColumn', 'getComments', 'premium')
     list_filter = ('premium', 'category')
     search_fields = ('name',)
 
     def getCategoriesLabels(self, obj):
         return ', '.join([cat.name for cat in obj.category.all()])
 
+    def getVouchersColumn(self, obj):
+
+        discount_counts = Discount.objects.filter(service=obj).filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+        promocodes_counts = PromoCode.objects.filter(service=obj).filter(
+            Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+        offers_counts = Offer.objects.filter(service=obj).filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+
+        return (format_html(
+            f'<li><a href="/admin/cms/discount/?service__id__exact={obj.id}">Discounts ({discount_counts})</a></li>'
+            f'<li><a href="/admin/cms/offer/?service__id__exact={obj.id}">Offers ({offers_counts})</a></li>'
+            f'<li><a href="/admin/cms/promocode/?service__id__exact={obj.id}">Promocodes ({promocodes_counts})</a></li>\n'
+        ))
+
+    def getComments(self, obj):
+        count = obj.comment_set.filter(active=True).count()
+        return (format_html('<a href="/admin/cms/comment/?service__id__exact={}">Comments ({})</a>'
+        , obj.id, count))
+
     getCategoriesLabels.short_description = 'categories'
+    getVouchersColumn.short_description = 'vouchers'
+    getComments.short_description = 'comments'
+
 
 
 class AttributeAdmin(ModelAdmin):
@@ -54,7 +78,7 @@ class VoucherAdmin(ModelAdmin):
 
     list_display = ('name', 'service', 'slug', 'expires', 'never_expires')
     search_fields = ('name', 'service__name', 'slug')
-    list_filter = ('service', 'expires', 'never_expires')
+    list_filter = ('expires', 'never_expires')
 
 
 class PromoCodeAdmin(VoucherAdmin):

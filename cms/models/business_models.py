@@ -145,6 +145,10 @@ class Service(ClusterableModel, index.Indexed):
         verbose_name='Preview (More width than height recommended)'
     )
 
+    autocomplete_search_field = 'name'
+    def autocomplete_label(self):
+        return self.name
+
     @property
     def get_avg_rate(self):
         return round(self.avg_rate) if self.avg_rate else 0
@@ -537,7 +541,7 @@ class PromoCode(Voucher):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("service", classname="col6"),
+                AutocompletePanel("service", target_model="cms.Service", classname="col6"),
                 FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
@@ -562,7 +566,7 @@ class Discount(Voucher):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("service", classname="col6"),
+                AutocompletePanel("service", target_model="cms.Service", classname="col6"),
                 FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),
@@ -579,7 +583,7 @@ class Offer(Voucher):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("service", classname="col6"),
+                AutocompletePanel("service", target_model="cms.Service", classname="col6"),
                 FieldPanel("name", classname="col12"),
                 AutocompletePanel("affiliate", target_model="cms.Affiliate"),
                 FieldPanel("description", classname="col12"),

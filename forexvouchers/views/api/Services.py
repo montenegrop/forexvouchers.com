@@ -2,7 +2,7 @@ import json
 from django.http import HttpResponse
 
 from cms.helpers.ServiceHelper import ServiceHelper, BROKERS
-from cms.models import Service, Voucher
+from cms.models import Service
 
 
 def get_services(request):
