@@ -1,5 +1,6 @@
 {% load static wagtailuserbar %}
 
+
 <b-navbar toggleable="lg" type="dark" variant="info" class="bg-dark vue-init">
     <a href="/">
         <b-navbar-brand>
@@ -20,6 +21,10 @@
 
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown text="Lang" right>
+                <template slot="button-content">
+                    <i style="font-size: 1.5rem" class="flag flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></i>
+                </template>
+
                 <b-dropdown-item href="/en"><span class="flag flag-icon flag-icon-squared flag-icon-us"></span> English
                 </b-dropdown-item>
                 <b-dropdown-item href="/es"><span class="flag flag-icon flag-icon-squared flag-icon-es"></span> Spanish
