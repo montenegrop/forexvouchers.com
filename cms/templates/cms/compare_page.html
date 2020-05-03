@@ -6,7 +6,8 @@
 
 <!---->
 {% block body_class %}template-homepage{% endblock %}
-
+{% block title_suffix %}- {{ service1.name }} vs {{ service2.name }}{% endblock %}
+{% block meta_description %}{{  self.search_description }}{% endblock %}
 
 
 {% block content %}
@@ -185,69 +186,3 @@
 
 
 {% endblock %}
-
-
-{#{% block extra_js %}#}
-{#    <script>#}
-{#        window.addEventListener('load', function () {#}
-{#            window.onscroll = function () {#}
-{#                onScroll()#}
-{#            };#}
-{##}
-{#            var header = document.getElementById("compareHeader");#}
-{#            var sticky = header.offsetTop;#}
-{##}
-{#            function onScroll() {#}
-{#                if (window.pageYOffset > sticky) {#}
-{#                    header.classList.add("sticky");#}
-{#                } else {#}
-{#                    header.classList.remove("sticky");#}
-{#                }#}
-{#            }#}
-{#        });#}
-{#    </script>#}
-{#{% endblock %}#}
-
-
-{## # Company profile#}
-{##}
-{## context['founded'] = service.founded#}
-{## context['status'] = service.status#}
-{## context['broker_type'] = service.broker_type#}
-{## context['regulation'] = service.regulation#}
-{## context['countries'] = service.countries#}
-{## context['international_offices'] = service.international_offices#}
-{## context['license'] = service.license#}
-{## context['accept_us_clients'] = service.accept_us_clients#}
-{## context['accept_eu_clients'] = service.accept_eu_clients#}
-{###}
-{## # Trading setup#}
-{###}
-{## context['timezone'] = service.timezone#}
-{## context['trading_software'] = service.trading_software#}
-{## context['platforms_supported'] = service.platforms_supported#}
-{## context['ea_robots'] = service.ea_robots#}
-{## context['scalping'] = service.scalping#}
-{## context['hedging'] = service.hedging#}
-{###}
-{## # Customer support#}
-{###}
-{## context['email'] = service.email#}
-{## context['phone'] = service.phone#}
-{## context['office_address'] = service.office_address#}
-{## context['chat'] = service.chat#}
-{## context['support_languages'] = service.support_languages#}
-{###}
-{## # Details#}
-{###}
-{## context['training_courses'] = service.training_courses#}
-{## context['training_type'] = service.trading_type#}
-{## context['methodology'] = service.methodology#}
-{## context['training_tools'] = service.training_tools#}
-{## context['instructor'] = service.instructor#}
-{## context['pricing_model'] = service.pricing_model#}
-{## context['system_type'] = service.system_type#}
-{## context['trading_type'] = service.trading_type#}
-{## context['required_software'] = service.required_software#}
-{## context['signal_alerts'] = service.signal_alerts#}
-{## context['frequency'] = service.frequency#}

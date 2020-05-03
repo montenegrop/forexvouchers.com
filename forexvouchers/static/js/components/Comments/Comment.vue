@@ -15,8 +15,8 @@
                 <timeago :datetime="created_at"></timeago>
             </p>
             <span v-if="country_code"
-                  :class="['flag flag-icon flag-icon-squared rounded-circle border border-secondary fa-3x', 'flag-icon-' + country_code.toLowerCase()]"></span>
-            <i v-else="country_code" class="fas fa-3x fa-globe-americas"></i>
+                  :class="['flag flag-icon flag-icon-squared rounded-circle border border-secondary fa-2x', 'flag-icon-' + country_code.toLowerCase()]"></span>
+            <i v-else="country_code" class="fas fa-2x fa-globe-americas"></i>
             <div class="text-with-flag"><strong> {{ country_name || 'Unknown' }} </strong></div>
         </b-col>
     </b-row>
