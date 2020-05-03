@@ -3,7 +3,7 @@
     <ul class="comment-list fixed-height">
 
         {% for comment in comments %}
-            <li class="comment-link" onclick="location.href='{{ comment.permalink }}'">
+            <li class="comment-link light-hover" onclick="location.href='{{ comment.permalink }}'">
                 <fv-comment text="{{ comment.review }}"
                             name="{{ comment.name }}"
                             stars="{{ comment.stars }}"

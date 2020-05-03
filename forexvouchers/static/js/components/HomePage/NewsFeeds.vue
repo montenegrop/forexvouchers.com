@@ -1,7 +1,7 @@
 <template>
 
     <b-list-group class="news-list fixed-height">
-        <b-list-group-item class="p-0" v-for="entry in parseNews">
+        <b-list-group-item class="p-0 light-hover" v-for="entry in parseNews">
 
             <fv-news :entry="entry"></fv-news>
 

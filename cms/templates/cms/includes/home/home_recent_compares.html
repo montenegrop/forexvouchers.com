@@ -6,7 +6,7 @@
 
         {% for compare in compares %}
 
-            <li class="compare-item">
+            <li class="compare-item light-hover">
 
 
                 <a class="d-flex -hand-pointer" href='/compare/{{ compare.service1.slug }}-vs-{{ compare.service2.slug }}'>
@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="compare-stars rate-container">
-                            <p class="text-primary mb-0">{{ compare.service1.name }}</p>
+                            <p class="text-primary mb-0 pl-1">{{ compare.service1.name }}</p>
                             <rate style="min-width: 85px" :length="5" :value="{{ compare.service1.get_avg_rate }}"
                                   readonly/>
                         </div>
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="compare-stars rate-container">
-                            <p class="text-primary mb-0">{{ compare.service2.name }}</p>
+                            <p class="text-primary mb-0 pl-1">{{ compare.service2.name }}</p>
                             <rate style="min-width: 85px" :length="5" :value="{{ compare.service2.get_avg_rate }}"
                                   readonly/>
                         </div>

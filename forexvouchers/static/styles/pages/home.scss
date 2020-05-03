@@ -113,9 +113,25 @@
   justify-content: flex-end;
 }
 
+.light-hover {
+  &:hover {
+    background-color: $light !important;
+    .Rate__star {
+      color: $secondary;
+      &.filled {
+        color: #efc20f;
+      }
+    }
+  }
+}
+
 .homepage-column {
   border: 1px solid $secondary;
   margin: 1rem 0;
+
+  li, .list-group-item {
+    padding-bottom: 0.5rem !important;
+  }
 
   @include media-breakpoint-up(md) {
     .fixed-height {

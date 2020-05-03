@@ -25,6 +25,10 @@
     }
   }
 
+  .light-hover:hover {
+    background-color: darken(white, 5%) !important;
+  }
+
 }
 
 .stars-filter-total {
