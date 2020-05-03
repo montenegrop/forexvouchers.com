@@ -11,11 +11,11 @@
         {% endblock %}
         {% block title_suffix %}
             {% with self.get_site.site_name as site_name %}
-                {% if site_name %}- {{ site_name }}{% endif %}
+                {% if site_name %} - {{ site_name }}{% endif %}
             {% endwith %}
         {% endblock %}
     </title>
-    <meta name="description" content=""/>
+    <meta name="description" content="{% block meta_description %}Forex Vouchers - Coupons, Promo codes and offers!{% endblock %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     {# Global stylesheets #}

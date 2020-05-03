@@ -1,6 +1,6 @@
 <div class="homepage-column">
     <div class="homepage-header">Recent comments</div>
-    <ul class="comment-list ">
+    <ul class="comment-list fixed-height">
 
         {% for comment in comments %}
             <li class="comment-link" onclick="location.href='{{ comment.permalink }}'">

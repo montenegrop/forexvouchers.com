@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-
+{% block title_suffix %}- {{ self.title }}{% endblock %}
+{% block meta_description %}{{  self.search_description }}{% endblock %}
 
 {% block content %}
 

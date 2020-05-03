@@ -2,7 +2,9 @@
 {% load wagtailimages_tags %}
 {% load wagtailschemaorg_tags %}
 
-{# Load CSS and JavaScript #}
+{% block meta_description %}{{  voucher.meta_description }}{% endblock %}
+{% block title_suffix %}- {{ voucher.name }} review{% endblock %}
+
 
 {% block content %}
 

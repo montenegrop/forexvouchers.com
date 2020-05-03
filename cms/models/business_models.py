@@ -123,6 +123,9 @@ class Service(ClusterableModel, index.Indexed):
     # About
     about = RichTextField(max_length=2500, blank=True, default=None, null=True)
 
+    # SEO
+    meta_description = models.CharField(max_length=3000, default=None)
+
     # Images
     logo = models.ForeignKey(
         'wagtailimages.Image',
@@ -234,6 +237,7 @@ class Service(ClusterableModel, index.Indexed):
             ],
             heading="Company Profile",
         ),
+        MultiFieldPanel([FieldPanel('meta_description', classname="col12")], heading="Promote"),
         MultiFieldPanel(
             [
                 AutocompletePanel("trading_type", target_model="cms.TradingType", is_single=False),
@@ -466,6 +470,8 @@ class Voucher(models.Model, index.Indexed):
 
     expires = models.DateField(blank=True, null=True)
     never_expires = models.BooleanField(default=True)
+    meta_description = models.CharField(max_length=3000, default=None)
+
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -550,7 +556,8 @@ class PromoCode(Voucher):
                 FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="PromoCode",
-        )
+        ),
+        MultiFieldPanel([FieldPanel('meta_description', classname="col12")], heading="Promote")
     ]
 
 
@@ -575,7 +582,8 @@ class Discount(Voucher):
                 FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Discount",
-        )
+        ),
+        MultiFieldPanel([FieldPanel('meta_description', classname="col6")], heading="Promote")
     ]
 
 
@@ -591,7 +599,8 @@ class Offer(Voucher):
                 FieldPanel("never_expires", classname="col6"),
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Offers",
-        )
+        ),
+        MultiFieldPanel([FieldPanel('meta_description', classname="col6")], heading="Promote")
     ]
 
     @cache_to_dict
