@@ -22,7 +22,8 @@
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown text="Lang" right>
                 <template slot="button-content">
-                    <i style="font-size: 1.5rem" class="flag flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></i>
+                    <i v-if="['us', 'es', 'fr'].indexOf('{{ request.LANGUAGE_CODE }}') != -1" style="font-size: 1.5rem" class="flag flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></i>
+                    <i v-else style="font-size: 1.5rem" class="flag flag-icon flag-icon-us"></i>
                 </template>
 
                 <b-dropdown-item href="/en"><span class="flag flag-icon flag-icon-squared flag-icon-us"></span> English
