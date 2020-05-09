@@ -583,7 +583,7 @@ class Discount(Voucher):
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Discount",
         ),
-        MultiFieldPanel([FieldPanel('meta_description', classname="col6")], heading="Promote")
+        MultiFieldPanel([FieldPanel('meta_description', classname="col12")], heading="Promote")
     ]
 
 
@@ -600,7 +600,7 @@ class Offer(Voucher):
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Offers",
         ),
-        MultiFieldPanel([FieldPanel('meta_description', classname="col6")], heading="Promote")
+        MultiFieldPanel([FieldPanel('meta_description', classname="col12")], heading="Promote")
     ]
 
     @cache_to_dict
