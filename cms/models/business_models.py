@@ -1,3 +1,6 @@
+from wagtailschemaorg.models import PageLDMixin
+from wagtailschemaorg.utils import extend
+
 from cms.helpers.cache_decorators import cache_to_dict
 from cms.models.fields import *
 
@@ -17,6 +20,22 @@ from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
     InlinePanel,
     FieldPanel,
+)
+
+# notifications:
+from django.db import models
+
+from modelcluster.fields import ParentalKey
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
+    MultiFieldPanel
+)
+from wagtail.core.fields import RichTextField
+from wagtail.contrib.forms.models import (
+    AbstractEmailForm,
+    AbstractFormField
 )
 
 ### images ####
@@ -149,6 +168,7 @@ class Service(ClusterableModel, index.Indexed):
     )
 
     autocomplete_search_field = 'name'
+
     def autocomplete_label(self):
         return self.name
 
@@ -472,7 +492,6 @@ class Voucher(models.Model, index.Indexed):
     never_expires = models.BooleanField(default=True)
     meta_description = models.CharField(max_length=3000, default=None)
 
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_subobject(self):
@@ -638,21 +657,21 @@ class Comment(models.Model):
     @cache_to_dict
     def toDict(self):
         return {
-                'id': self.id,
-                'permalink': f'{self.service.url}#comment-{self.id}' if self.service else '',
-                'name': self.name,
-                'country': self.country,
-                'review': self.review,
-                'stars': self.stars,
-                'created_at': self.created_at.isoformat() if self.created_at else None,
-                'updated_at': self.updated_at.isoformat() if self.updated_at else None,
-                'ip': self.ip,
-                'active': self.active,
-                'country_code': self.country_code,
-                'url': self.service.url + '#comments' if self.service else None,
-                'service_name': self.service.name if self.service else None,
-                'service_url': self.service.url if self.service else None,
-                }
+            'id': self.id,
+            'permalink': f'{self.service.url}#comment-{self.id}' if self.service else '',
+            'name': self.name,
+            'country': self.country,
+            'review': self.review,
+            'stars': self.stars,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'ip': self.ip,
+            'active': self.active,
+            'country_code': self.country_code,
+            'url': self.service.url + '#comments' if self.service else None,
+            'service_name': self.service.name if self.service else None,
+            'service_url': self.service.url if self.service else None,
+        }
 
 
 class Compare(models.Model):
@@ -662,9 +681,47 @@ class Compare(models.Model):
                                  related_name='compare_service2')
     count = models.IntegerField(default=0)
 
+
 # def getCount(self):
 #     complement = Compare.objects.get(service1=self.service2, service2=self.service1)
 #     if complement:
 #         return sum(self.count + complement.count)
 #     else:
 #         return self.count
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey(
+        'ContactPage',
+        on_delete=models.CASCADE,
+        related_name='form_fields',
+    )
+
+
+class ContactPage(AbstractEmailForm, PageLDMixin):
+    template = "../templates/cms/contact_page.html"
+    # This is the default path.
+    # If ignored, Wagtail adds _landing.html to your template name
+    landing_page_template = "../templates/cms/contact_page_landing.html"
+
+    def ld_entity(self):
+        return extend(super().ld_entity(), {
+            '@type': 'Organization',
+            'name': 'Forex Vouchers',
+        })
+
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel('intro'),
+        InlinePanel('form_fields', label='Form Fields'),
+        FieldPanel('thank_you_text'),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel("subject"),
+        ], heading="Email Settings"),
+    ]
