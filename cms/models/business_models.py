@@ -1,8 +1,11 @@
 from cms.helpers.cache_decorators import cache_to_dict
 from cms.models.fields import *
 
+
 from django_extensions.db.fields import AutoSlugField
 from django import forms
+from django.db.models import Q
+import datetime
 
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable
@@ -471,6 +474,11 @@ class Voucher(models.Model, index.Indexed):
     expires = models.DateField(blank=True, null=True)
     never_expires = models.BooleanField(default=True)
     meta_description = models.CharField(max_length=3000, default=None)
+
+    @classmethod
+    def not_expired_condition(cls):
+        return Q(expires__gte=datetime.date.today()) | Q(
+            never_expires=True)
 
 
     created_at = models.DateTimeField(auto_now_add=True)

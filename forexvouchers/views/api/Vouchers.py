@@ -1,6 +1,6 @@
 import json
 
-from cms.models import Discount, PromoCode, Offer, Voucher, Category, Service
+from cms.models import Discount, PromoCode, Offer, Voucher
 
 from django.views import View
 from django.http import HttpResponse
@@ -37,10 +37,9 @@ class VouchersView(View):
                 service_counts))
 
     def getTypeCounts(self):
-        discount_counts = Discount.objects.filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
-        promocodes_counts = PromoCode.objects.filter(
-            Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
-        offers_counts = Offer.objects.filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+        discount_counts = Discount.objects.filter(Discount.not_expired_condition()).count()
+        promocodes_counts = PromoCode.objects.filter(PromoCode.not_expired_condition()).count()
+        offers_counts = Offer.objects.filter(Offer.not_expired_condition()).count()
 
         return {'discount': discount_counts, 'promocode': promocodes_counts, 'offer': offers_counts}
 
@@ -64,7 +63,6 @@ class VouchersView(View):
         sort = request.GET.get('sort', 'newest')
         voucherId = request.GET.get('voucher_id', '')
         if len(voucherId):
-            print(3)
             voucher = Voucher.objects.get(id=int(voucherId))
 
         if voucherTypes == '':

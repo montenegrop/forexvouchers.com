@@ -46,10 +46,9 @@ class ServiceAdmin(ModelAdmin):
 
     def getVouchersColumn(self, obj):
 
-        discount_counts = Discount.objects.filter(service=obj).filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
-        promocodes_counts = PromoCode.objects.filter(service=obj).filter(
-            Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
-        offers_counts = Offer.objects.filter(service=obj).filter(Q(expires__gte=datetime.date.today()) | Q(never_expires=True)).count()
+        discount_counts = Discount.objects.filter(service=obj).filter(Discount.not_expired_condition()).count()
+        promocodes_counts = PromoCode.objects.filter(service=obj).filter(PromoCode.not_expired_condition()).count()
+        offers_counts = Offer.objects.filter(service=obj).filter(Offer.not_expired_condition()).count()
 
         return (format_html(
             f'<li><a href="/admin/cms/discount/?service__id__exact={obj.id}">Discounts ({discount_counts})</a></li>'
