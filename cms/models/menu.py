@@ -47,7 +47,7 @@ class MenuItem(Orderable):
 @register_snippet
 class Menu(ClusterableModel):
     title = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from="title", editable=True)
+    slug = AutoSlugField(populate_from="title", editable=False)
 
     autocomplete_search_field = 'title'
 
