@@ -193,7 +193,7 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'cms.models.business_models.NotificationBackend'
 
 GEOIP_PATH = BASE_DIR + '/forexvouchers/geolocation'
 
