@@ -11,7 +11,7 @@
             </a>
         </div>
 
-        <div class="container" class="pl-5">
+        <div class="container text-center pl-5">
 
             <div class="voucher-name"> By
                 <a class="product-service-link"

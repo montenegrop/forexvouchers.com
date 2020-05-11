@@ -157,7 +157,7 @@ class Service(ClusterableModel, index.Indexed):
 
     @property
     def get_avg_rate(self):
-        return round(self.avg_rate) if self.avg_rate else 0
+        return int(round(self.avg_rate)) if self.avg_rate else 0
 
     @property
     def get_count_rate(self):
