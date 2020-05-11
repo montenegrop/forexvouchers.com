@@ -68,3 +68,29 @@ class Menu(ClusterableModel):
 
     def autocomplete_label(self):
         return self.title
+
+
+@register_snippet
+class Language(ClusterableModel):
+    name = models.CharField(max_length=100)
+    language_code = models.CharField(max_length=2, null=True)
+    flag_code = models.CharField(max_length=2, help_text="This is used to display the right flag. Search for the correct 2-digit country code here: https://www.iso.org/obp/ui/#search ")
+
+    autocomplete_search_field = 'name'
+
+    panels = [
+        MultiFieldPanel([
+            FieldPanel('name'),
+            FieldPanel('language_code'),
+            FieldPanel('flag_code')
+        ], heading='Language')
+    ]
+
+    def __str__(self):
+        return self.name
+
+    def get_label(self):
+        return self.__class__.__name__
+
+    def autocomplete_label(self):
+        return self.name

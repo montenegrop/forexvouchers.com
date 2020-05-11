@@ -1,3 +1,9 @@
+{% load menus_tags %}
+{% get_menu "vouchers" as vouchers %}
+{% get_menu "services" as services %}
+{% get_menu "information" as information %}
+
+
 <div class="footer row">
     <div class="container">
 
@@ -30,26 +36,29 @@
         <div class="row section-links">
             <div class="col-md-4">
                 <div class="footer-title underline">Information</div>
-                <div class="link"><a href="/about">About us</a></div>
-                <div class="link"><a href="/privacy-policy">Privacy Policy</a></div>
-                <div class="link"><a href="/disclaimer">Disclaimer</a></div>
-                <div class="link"><a href="/contact-us">Contact us</a></div>
+                {% for item in information.menu_items.all %}
+                    <div class="link">
+                        <a href="{{ item.link }}" target="{{ item.target }}">{{ item.link_title }}</a>
+                    </div>
+                {% endfor %}
             </div>
             <div class="col-md-4">
                 <div class="footer-title underline">Reviews</div>
                 <div class="link"><a href="/brokers">Forex Brokers</a></div>
-                <div class="link"><a href="{{ 'signal'|urlToCategory }}">Forex Signals</a></div>
-                <div class="link"><a href="{{ 'training'|urlToCategory }}">Forex Training</a></div>
-                <div class="link"><a href="{{ 'trading'|urlToCategory }}">Forex Systems</a></div>
-                <div class="link"><a href="{{ 'vps'|urlToCategory }}">Forex VPS</a></div>
+
+                {% for item in services.menu_items.all %}
+                    <div class="link">
+                        <a href="{{ item.link }}" target="{{ item.target }}">{{ item.link_title }}</a>
+                    </div>
+                {% endfor %}
             </div>
             <div class="col-md-4">
                 <div class="footer-title underline">Vouchers</div>
-                <div class="link"><a href="/vouchers">Forex Brokers</a></div>
-                <div class="link"><a href="/vouchers">Forex Signals</a></div>
-                <div class="link"><a href="/vouchers">Forex Training</a></div>
-                <div class="link"><a href="/vouchers">Forex Systems</a></div>
-                <div class="link"><a href="/vouchers">Forex VPS</a></div>
+                {% for item in vouchers.menu_items.all %}
+                    <div class="link">
+                        <a href="{{ item.link }}" target="{{ item.target }}">{{ item.link_title }}</a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 

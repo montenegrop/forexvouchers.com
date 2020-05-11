@@ -1,5 +1,6 @@
 {% load static wagtailuserbar menus_tags %}
 {% get_menu "navbar" as navbar %}
+{% get_languages as languages %}
 
 
 <b-navbar toggleable="lg" type="dark" variant="info" class="bg-dark vue-init">
@@ -29,17 +30,13 @@
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown text="Lang" right>
                 <template slot="button-content">
-                    <i v-if="['us', 'es', 'fr'].indexOf('{{ request.LANGUAGE_CODE }}') != -1" style="font-size: 1.5rem"
-                       class="flag flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></i>
-                    <i v-else style="font-size: 1.5rem" class="flag flag-icon flag-icon-us"></i>
+                    <i style="font-size: 1.5rem" class="flag flag-icon flag-icon-{% flagIconCode request.LANGUAGE_CODE languages.languages %}"></i>
                 </template>
 
-                <b-dropdown-item href="/en"><span class="flag flag-icon flag-icon-squared flag-icon-us"></span> English
+                {% for lang in languages.languages %}
+                <b-dropdown-item href="/{{ lang.language_code }}"><span class="flag flag-icon flag-icon-squared flag-icon-{{ lang.flag_code }}"></span> {{ lang.name }}
                 </b-dropdown-item>
-                <b-dropdown-item href="/es"><span class="flag flag-icon flag-icon-squared flag-icon-es"></span> Spanish
-                </b-dropdown-item>
-                <b-dropdown-item href="/fr"><span class="flag flag-icon flag-icon-squared flag-icon-fr"></span> French
-                </b-dropdown-item>
+                {% endfor %}
             </b-nav-item-dropdown>
         </b-navbar-nav>
 
