@@ -26,10 +26,11 @@ class GeneralSettings(BaseSetting):
     mailchimp_list_id = TextField(max_length=300, blank=True, default="", null=True, help_text="Mailchimp List ID")
 
 
-    smtp_host = models.CharField(default='smtp.gmail.com', max_length=100)
+    smtp_host = models.CharField(max_length=100)
     smtp_username = models.EmailField(blank=True, default=None, null=True)
     smtp_password = models.CharField(max_length=100)
-    smtp_use_tsl = models.BooleanField(default=True)
+    smtp_use_tls = models.BooleanField(default=False)
+    smtp_use_ssl = models.BooleanField(default=True)
     smtp_port = models.IntegerField(default=587)
 
     panels = [
@@ -51,7 +52,8 @@ class GeneralSettings(BaseSetting):
             FieldPanel("smtp_host"),
             FieldPanel("smtp_username"),
             FieldPanel("smtp_password"),
-            FieldPanel("smtp_use_tsl"),
+            FieldPanel("smtp_use_tls"),
+            FieldPanel("smtp_use_ssl"),
             FieldPanel("smtp_port"),
         ], heading="Smtp-configuration")
 
