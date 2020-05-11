@@ -1,20 +1,23 @@
+from django.core.mail.backends.smtp import EmailBackend
 from wagtailschemaorg.models import PageLDMixin
 from wagtailschemaorg.utils import extend
 
 from cms.helpers.cache_decorators import cache_to_dict
+from cms.models.site_settings import GeneralSettings
 from cms.models.fields import *
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
 
 from modelcluster.models import ClusterableModel
-from wagtail.core.models import Orderable
+from wagtail.core.models import Orderable, Site
 from wagtail.core.fields import RichTextField
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
 from modelcluster.fields import ParentalManyToManyField
 
 from wagtailautocomplete.edit_handlers import AutocompletePanel
+
 
 from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
@@ -725,3 +728,23 @@ class ContactPage(AbstractEmailForm, PageLDMixin):
             FieldPanel("subject"),
         ], heading="Email Settings"),
     ]
+
+
+
+class NotificationBackend(EmailBackend):
+
+
+    def __init__(self, host=None, port=None, username=None, password=None,
+                 use_tls=None, fail_silently=False, use_ssl=None, timeout=None,
+                 ssl_keyfile=None, ssl_certfile=None,
+                 **kwargs):
+        site_settings = GeneralSettings.for_site(Site.objects.get(is_default_site=True))
+        EMAIL_USE_TLS = site_settings.smtp_use_tsl
+        EMAIL_HOST = site_settings.smtp_host
+        EMAIL_PORT = site_settings.smtp_port
+        EMAIL_HOST_USER = site_settings.smtp_username
+        EMAIL_HOST_PASSWORD = site_settings.smtp_password
+        super().__init__(host=EMAIL_HOST, port=EMAIL_PORT, username=EMAIL_HOST_USER, password=EMAIL_HOST_PASSWORD,
+                         use_tls=EMAIL_USE_TLS, fail_silently=False, use_ssl=None, timeout=None,
+                         ssl_keyfile=None, ssl_certfile=None,
+                         **kwargs)

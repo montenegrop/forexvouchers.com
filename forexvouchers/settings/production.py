@@ -16,6 +16,8 @@ MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'password')
 MYSQL_HOST = os.environ.get('MYSQL_HOST', '127.0.0.1')
 MYSQL_PORT = os.environ.get('MYSQL_PORT', '3306')
 
+EMAIL_BACKEND = 'cms.models.business_models.NotificationBackend'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
