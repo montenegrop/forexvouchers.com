@@ -16,7 +16,7 @@
             {% for item in navbar.menu_items.all %}
                 {% if item.link.slug %}
                     <b-nav-item-dropdown text="{{ item.link_title }}" right>
-                    {% for sub_item in item.menu_items.all %}
+                    {% for sub_item in item.link.menu_items.all %}
                         <b-dropdown-item href="{{ sub_item.link_url }}" target="{{ sub_item.target }}">{{ sub_item.link_title }}</b-dropdown-item>
                     {% endfor %}
                     </b-nav-item-dropdown>
