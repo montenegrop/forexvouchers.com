@@ -1,4 +1,5 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar menus_tags %}
+{% get_menu "navbar" as navbar %}
 
 
 <b-navbar toggleable="lg" type="dark" variant="info" class="bg-dark vue-init">
@@ -12,17 +13,24 @@
 
     <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-nav-item href="/brokers">Forex Brokers</b-nav-item>
-            <b-nav-item href="{{ 'training'|urlToCategory }}">Forex Training</b-nav-item>
-            <b-nav-item href="{{ 'vps'|urlToCategory }}">Forex VPS</b-nav-item>
-            <b-nav-item href="{{ 'trading'|urlToCategory }}">Forex Trading System</b-nav-item>
-            <b-nav-item href="{{ 'signal'|urlToCategory }}">Forex Signals</b-nav-item>
+            {% for item in navbar.menu_items.all %}
+                {% if item.link.slug %}
+                    <b-nav-item-dropdown text="{{ item.link_title }}" right>
+                    {% for sub_item in item.menu_items.all %}
+                        <b-dropdown-item href="{{ sub_item.link_url }}" target="{{ sub_item.target }}">{{ sub_item.link_title }}</b-dropdown-item>
+                    {% endfor %}
+                    </b-nav-item-dropdown>
+                {% else %}
+                    <b-nav-item href="{{ item.link_url }}" target="{{ item.target }}">{{ item.link_title }}</b-nav-item>
+                {% endif %}
+            {% endfor %}
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown text="Lang" right>
                 <template slot="button-content">
-                    <i v-if="['us', 'es', 'fr'].indexOf('{{ request.LANGUAGE_CODE }}') != -1" style="font-size: 1.5rem" class="flag flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></i>
+                    <i v-if="['us', 'es', 'fr'].indexOf('{{ request.LANGUAGE_CODE }}') != -1" style="font-size: 1.5rem"
+                       class="flag flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></i>
                     <i v-else style="font-size: 1.5rem" class="flag flag-icon flag-icon-us"></i>
                 </template>
 

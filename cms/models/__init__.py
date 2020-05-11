@@ -3,4 +3,4 @@ from .business_models import *
 from .pages import *
 from .site_settings import *
 from .news import *
-
+from .menu import *
