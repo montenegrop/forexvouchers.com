@@ -3,7 +3,6 @@ from .base import *
 
 SECRET_KEY = 'l3l=c@)xb2wid_q9upki$ggwi^nj85)z^lie9qt*q0ojc&68+%'
 ALLOWED_HOSTS = ['*']
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEBUG = False
 
 MEDIA_ROOT = '/var/www/media'
@@ -15,6 +14,7 @@ MYSQL_USER = os.environ.get('MYSQL_USER', 'fxvouchers')
 MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'password')
 MYSQL_HOST = os.environ.get('MYSQL_HOST', '127.0.0.1')
 MYSQL_PORT = os.environ.get('MYSQL_PORT', '3306')
+
 
 DATABASES = {
     'default': {

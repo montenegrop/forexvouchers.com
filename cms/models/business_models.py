@@ -1,6 +1,10 @@
-from cms.helpers.cache_decorators import cache_to_dict
-from cms.models.fields import *
+from django.core.mail.backends.smtp import EmailBackend
+from wagtailschemaorg.models import PageLDMixin
+from wagtailschemaorg.utils import extend
 
+from cms.helpers.cache_decorators import cache_to_dict
+from cms.models.site_settings import GeneralSettings
+from cms.models.fields import *
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
@@ -8,7 +12,7 @@ from django.db.models import Q
 import datetime
 
 from modelcluster.models import ClusterableModel
-from wagtail.core.models import Orderable
+from wagtail.core.models import Orderable, Site
 from wagtail.core.fields import RichTextField
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
@@ -16,10 +20,27 @@ from modelcluster.fields import ParentalManyToManyField
 
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
+
 from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
     InlinePanel,
     FieldPanel,
+)
+
+# notifications:
+from django.db import models
+
+from modelcluster.fields import ParentalKey
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
+    MultiFieldPanel
+)
+from wagtail.core.fields import RichTextField
+from wagtail.contrib.forms.models import (
+    AbstractEmailForm,
+    AbstractFormField
 )
 
 ### images ####
@@ -152,6 +173,7 @@ class Service(ClusterableModel, index.Indexed):
     )
 
     autocomplete_search_field = 'name'
+
     def autocomplete_label(self):
         return self.name
 
@@ -646,21 +668,21 @@ class Comment(models.Model):
     @cache_to_dict
     def toDict(self):
         return {
-                'id': self.id,
-                'permalink': f'{self.service.url}#comment-{self.id}' if self.service else '',
-                'name': self.name,
-                'country': self.country,
-                'review': self.review,
-                'stars': self.stars,
-                'created_at': self.created_at.isoformat() if self.created_at else None,
-                'updated_at': self.updated_at.isoformat() if self.updated_at else None,
-                'ip': self.ip,
-                'active': self.active,
-                'country_code': self.country_code,
-                'url': self.service.url + '#comments' if self.service else None,
-                'service_name': self.service.name if self.service else None,
-                'service_url': self.service.url if self.service else None,
-                }
+            'id': self.id,
+            'permalink': f'{self.service.url}#comment-{self.id}' if self.service else '',
+            'name': self.name,
+            'country': self.country,
+            'review': self.review,
+            'stars': self.stars,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'ip': self.ip,
+            'active': self.active,
+            'country_code': self.country_code,
+            'url': self.service.url + '#comments' if self.service else None,
+            'service_name': self.service.name if self.service else None,
+            'service_url': self.service.url if self.service else None,
+        }
 
 
 class Compare(models.Model):
@@ -670,9 +692,67 @@ class Compare(models.Model):
                                  related_name='compare_service2')
     count = models.IntegerField(default=0)
 
+
 # def getCount(self):
 #     complement = Compare.objects.get(service1=self.service2, service2=self.service1)
 #     if complement:
 #         return sum(self.count + complement.count)
 #     else:
 #         return self.count
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey(
+        'ContactPage',
+        on_delete=models.CASCADE,
+        related_name='form_fields',
+    )
+
+
+class ContactPage(AbstractEmailForm, PageLDMixin):
+    template = "../templates/cms/contact_page.html"
+    # This is the default path.
+    # If ignored, Wagtail adds _landing.html to your template name
+    landing_page_template = "../templates/cms/contact_page_landing.html"
+
+    def ld_entity(self):
+        return extend(super().ld_entity(), {
+            '@type': 'Organization',
+            'name': 'Forex Vouchers',
+        })
+
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel('intro'),
+        InlinePanel('form_fields', label='Form Fields'),
+        FieldPanel('thank_you_text'),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel("subject"),
+        ], heading="Email Settings"),
+    ]
+
+
+
+class NotificationBackend(EmailBackend):
+
+
+    def __init__(self, host=None, port=None, username=None, password=None,
+                 use_tls=None, fail_silently=False, use_ssl=None, timeout=None,
+                 ssl_keyfile=None, ssl_certfile=None,
+                 **kwargs):
+        site_settings = GeneralSettings.for_site(Site.objects.get(is_default_site=True))
+        EMAIL_USE_TLS = site_settings.smtp_use_tsl
+        EMAIL_HOST = site_settings.smtp_host
+        EMAIL_PORT = site_settings.smtp_port
+        EMAIL_HOST_USER = site_settings.smtp_username
+        EMAIL_HOST_PASSWORD = site_settings.smtp_password
+        super().__init__(host=EMAIL_HOST, port=EMAIL_PORT, username=EMAIL_HOST_USER, password=EMAIL_HOST_PASSWORD,
+                         use_tls=EMAIL_USE_TLS, fail_silently=False, use_ssl=None, timeout=None,
+                         ssl_keyfile=None, ssl_certfile=None,
+                         **kwargs)
