@@ -52,13 +52,13 @@ def get_other_services_names(service, category):
 def get_vouchers_by_service(service):
     vouchers = []
 
-    for voucher in Discount.objects.filter(service=service):
+    for voucher in Discount.objects.filter(service=service).filter(Discount.not_expired_condition()):
         vouchers.append(voucher)
 
-    for voucher in PromoCode.objects.filter(service=service):
+    for voucher in PromoCode.objects.filter(service=service).filter(PromoCode.not_expired_condition()):
         vouchers.append(voucher)
 
-    for voucher in Offer.objects.filter(service=service):
+    for voucher in Offer.objects.filter(service=service).filter(Offer.not_expired_condition()):
         vouchers.append(voucher)
 
     return vouchers

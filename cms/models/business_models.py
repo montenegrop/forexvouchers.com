@@ -8,6 +8,8 @@ from cms.models.fields import *
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
+from django.db.models import Q
+import datetime
 
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable, Site
@@ -177,7 +179,7 @@ class Service(ClusterableModel, index.Indexed):
 
     @property
     def get_avg_rate(self):
-        return round(self.avg_rate) if self.avg_rate else 0
+        return int(round(self.avg_rate)) if self.avg_rate else 0
 
     @property
     def get_count_rate(self):
@@ -495,6 +497,12 @@ class Voucher(models.Model, index.Indexed):
     never_expires = models.BooleanField(default=True)
     meta_description = models.CharField(max_length=3000, default=None)
 
+    @classmethod
+    def not_expired_condition(cls):
+        return Q(expires__gte=datetime.date.today()) | Q(
+            never_expires=True)
+
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_subobject(self):
@@ -605,7 +613,7 @@ class Discount(Voucher):
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Discount",
         ),
-        MultiFieldPanel([FieldPanel('meta_description', classname="col6")], heading="Promote")
+        MultiFieldPanel([FieldPanel('meta_description', classname="col12")], heading="Promote")
     ]
 
 
@@ -622,7 +630,7 @@ class Offer(Voucher):
                 ImageChooserPanel("logo", classname="col12"),
             ], heading="Offers",
         ),
-        MultiFieldPanel([FieldPanel('meta_description', classname="col6")], heading="Promote")
+        MultiFieldPanel([FieldPanel('meta_description', classname="col12")], heading="Promote")
     ]
 
     @cache_to_dict

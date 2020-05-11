@@ -18,7 +18,7 @@
 
 
             <div class="col-3 col-md-4 col d-flex justify-content-center">
-                <div>
+                <div class="voucher-count-float-right">
                     <div class="voucher-count"
                          v-bind:class="{ 'voucher-count-lg': $mq != 'md', 'voucher-count-md': $mq === 'md'}">
                         {{ service.voucher_count }}
