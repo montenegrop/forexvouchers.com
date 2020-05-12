@@ -723,6 +723,7 @@ class ContactPage(AbstractEmailForm, PageLDMixin):
     thank_you_text = RichTextField(blank=True)
 
     content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel('title'),
         FieldPanel('intro'),
         InlinePanel('form_fields', label='Form Fields'),
         FieldPanel('thank_you_text'),

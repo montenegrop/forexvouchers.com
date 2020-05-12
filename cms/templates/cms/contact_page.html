@@ -3,19 +3,27 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <p>
+
+
+
+
+    <h1 class="service-title text-center no-shadow text-dark">{{ self.title }}</h1>
+
+    <div class="text-dark service-title no-shadow ml-5 primary">
         {{ self.intro|richtext }}
-    </p>
+    </div>
+    <div class="border border-primary mb-5 p-5">
+        <form action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
 
-    <form action="{% pageurl page %}" method="POST">
-        {% csrf_token %}
-        <ul>
-            {{ form.as_ul }}
-        </ul>
+            <ul class="contact-form">
+                {{ form.as_ul }}
+            </ul>
 
-        <button type="submit" class="btn btn-success">
-            Submit Form
-        </button>
-    </form>
+            <button type="submit" class="btn btn-success">
+                Submit Form
+            </button>
+        </form>
+    </div>
 {% endblock %}
+

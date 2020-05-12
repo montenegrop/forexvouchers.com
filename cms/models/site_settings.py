@@ -31,7 +31,7 @@ class GeneralSettings(BaseSetting):
     smtp_password = models.CharField(max_length=100)
     smtp_use_tls = models.BooleanField(default=False)
     smtp_use_ssl = models.BooleanField(default=True)
-    smtp_port = models.IntegerField(default=587)
+    smtp_port = models.IntegerField()
 
     panels = [
         MultiFieldPanel([
