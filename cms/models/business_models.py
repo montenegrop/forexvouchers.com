@@ -748,7 +748,7 @@ class NotificationBackend(EmailBackend):
         email_port = site_settings.smtp_port
         email_host_user = site_settings.smtp_username
         email_host_password = site_settings.smtp_password
-        email_use_ssl = site_settings.smtp_ssl
+        email_use_ssl = site_settings.smtp_use_ssl
 
         super().__init__(host=email_host, port=email_port, username=email_host_user, password=email_host_password,
                          use_tls=email_use_tls, fail_silently=False, use_ssl=email_use_ssl, timeout=None,
