@@ -43,7 +43,7 @@ For deployment checkout our [https://github.com/ahmerkhanz/fxvouchers/blob/maste
 
 If python error happens on production you can use these logs:
 
- For python errors: /var/log/fxvoucher.err.log
- For background jobs: /var/log/forexvouchers-cron.log
+- For python errors: /var/log/fxvoucher.err.log
+- For background jobs: /var/log/forexvouchers-cron.log
 
 
