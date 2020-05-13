@@ -19,6 +19,8 @@ from modelcluster.fields import ParentalKey
 from modelcluster.fields import ParentalManyToManyField
 
 from wagtailautocomplete.edit_handlers import AutocompletePanel
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
+
 
 from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
@@ -707,11 +709,11 @@ class FormField(AbstractFormField):
     )
 
 
-class ContactPage(AbstractEmailForm, PageLDMixin):
+class ContactPage(WagtailCaptchaEmailForm, PageLDMixin):
     template = "../templates/cms/contact_page.html"
-    # This is the default path.
-    # If ignored, Wagtail adds _landing.html to your template name
     landing_page_template = "../templates/cms/contact_page_landing.html"
+
+
 
     def ld_entity(self):
         return extend(super().ld_entity(), {
