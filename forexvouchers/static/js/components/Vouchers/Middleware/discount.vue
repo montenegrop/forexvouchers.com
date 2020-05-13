@@ -54,6 +54,7 @@
                     <p><i class="fas fa-eye"></i>
                         {{ voucher.affiliate.clicks }} Views
                     </p>
+                        <Likes classes="btn btn-sm" :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
                 </div>
             </div>
         </div>
@@ -73,10 +74,12 @@
 <script>
 
     import VouchersHome from "../VouchersHome";
+    import Likes from "../../Cards/Likes"
+
 
     export default {
         name: "fv-middleware-discount",
-        components: {FvVouchersHome: VouchersHome},
+        components: {FvVouchersHome: VouchersHome, Likes},
         props: ["vouch"],
         data() {
             return {

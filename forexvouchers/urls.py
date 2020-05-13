@@ -8,6 +8,7 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
 
+from forexvouchers.views.api.Likes import LikesView
 from forexvouchers.views.api.Search import SearchView
 from forexvouchers.views import CommentsView, cloakedlinks
 from forexvouchers.views.api.Subscribe import SubscribeView
@@ -40,6 +41,7 @@ urlpatterns = [
     url(r'^api/services', ApiServices.get_services),
     url(r'^api/partners', ApiServices.get_partners),
     url(r'^api/subscribe', SubscribeView.as_view()),
+    url(r'^api/likes', LikesView.as_view()),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

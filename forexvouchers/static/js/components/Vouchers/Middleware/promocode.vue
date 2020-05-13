@@ -65,6 +65,7 @@
                     <p><i class="fas fa-eye"></i>
                         {{ voucher.affiliate.clicks }} Views
                     </p>
+                        <Likes classes="btn btn-sm" :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
                 </div>
             </div>
 
@@ -88,10 +89,12 @@
 
 
 <script>
+    import Likes from "../../Cards/Likes"
 
     export default {
         name: "fv-middleware-promocode",
         props: ['vouch'],
+        components: { Likes },
         data() {
             return {
                 showCode: false,
