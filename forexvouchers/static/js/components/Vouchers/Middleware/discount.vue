@@ -3,7 +3,7 @@
         <h2 class="title"> {{ voucher.type }} information </h2>
         <div class="row border border-light no-float ">
             <div class="col-auto image">
-                <img :src="voucher.service_logo_big">
+                <img :src="voucher.logo">
 
                 <b-col class="col-auto product-stars rate-container flexible voucher-info-service pl-3">
 

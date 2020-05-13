@@ -7,7 +7,6 @@
                        type="text"
                        name="search"
                        ref="search"
-                       autofocus
                        v-model="search"
                        @focus="onFocus"
                        @blur="onBlur"
