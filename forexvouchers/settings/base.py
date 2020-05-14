@@ -196,7 +196,7 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
-EMAIL_BACKEND = 'cms.models.business_models.NotificationBackend'
+EMAIL_BACKEND = 'cms.models.notification_models.NotificationBackend'
 
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # RECAPTCHA_PUBLIC_KEY = "6LdfMe4UAAAAAGi1RqlTG0He4Ei1shUpWNd3OuSX"

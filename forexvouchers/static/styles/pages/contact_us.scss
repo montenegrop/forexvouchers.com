@@ -1,14 +1,14 @@
+.contact-title {
+  padding-left: 5%;
+}
+
 .contact-form {
   list-style-type: none;
   padding-left: 0;
 }
 
-.contact-form li {
+.contact-form div {
   margin-bottom: 1.5rem;
-
-  .g-recaptcha {
-    text-align: -webkit-center;
-  }
 }
 
 .contact-form label {
@@ -20,4 +20,11 @@
 .contact-form .helptext {
   display: block;
   font-size: 80%;
+}
+
+.gc-reset{
+transform:scale(0.95) !important;
+-webkit-transform:scale(0.95) !important;
+transform-origin:0 0 !important;
+-webkit-transform-origin:0 0 !important;
 }
