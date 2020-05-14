@@ -104,6 +104,11 @@
   max-width: 200px;
 }
 
+.align-center {
+  text-align: center;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
 .discount-info {
   white-space: normal;
   text-shadow: none;
@@ -112,8 +117,6 @@
     text-shadow: none;
     font-family: ralewayextrabold;
     color: black;
-    margin-left: 20%;
-
   }
 
   &-description {

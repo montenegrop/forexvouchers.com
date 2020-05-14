@@ -3,7 +3,7 @@
         <h2 class="title"> {{ voucher.type }} information </h2>
         <div class="row border border-light no-float ">
             <div class="col-auto image">
-                <img :src="voucher.service_logo_big">
+                <img :src="voucher.logo">
 
                 <b-col class="col-auto product-stars rate-container flexible voucher-info-service pl-3">
 
@@ -53,6 +53,7 @@
                     <p><i class="fas fa-eye"></i>
                         {{ voucher.affiliate.clicks }} Views
                     </p>
+                        <Likes classes="btn btn-sm" :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
                 </div>
             </div>
         </div>
@@ -72,10 +73,11 @@
 <script>
 
     import VouchersHome from "../VouchersHome";
+    import Likes from "../../Cards/Likes"
 
     export default {
         name: "fv-middleware-offer",
-        components: {FvVouchersHome: VouchersHome},
+        components: {FvVouchersHome: VouchersHome, Likes},
         props: ["vouch"],
         data() {
             return {

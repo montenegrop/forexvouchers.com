@@ -5,8 +5,10 @@
         <b-row class="voucher-discount-row">
 
             <b-col md="3" align-self="center">
-
                 <img :src="voucher.logo" class="product-image">
+                <div class="align-center">
+                    <Likes :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
+                </div>
             </b-col>
 
             <b-col md="5" align-self="center" class="product-info-discount">
@@ -68,10 +70,12 @@
 <script>
 
     import FvPromocodeButton from '../../Vouchers/VoucherPromocodeButton'
+    import Likes from '../Likes'
+
 
     export default {
         name: "fv-vouchers-promocode",
-        components: {FvPromocodeButton},
+        components: {FvPromocodeButton, Likes},
         props: ['voucher'],
         data() {
             return {}

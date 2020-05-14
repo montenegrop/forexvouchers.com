@@ -1,5 +1,7 @@
 <template>
     <div v-bind:class="[{ 'product': !isFlex } , { 'product-card': isFlex }]">
+        <Likes :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
+
         <div class="product-image-wrapper">
             <img :src="voucher.logo" class="product-image">
         </div>
@@ -53,8 +55,11 @@
 
 
 <script>
+    import Likes from '../Likes'
+
     export default {
         name: "fv-vouchers-discount-small",
+        components: {Likes},
         props: ['voucher', 'showClicks', 'isFlex'],
     }
 

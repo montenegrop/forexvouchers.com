@@ -502,6 +502,10 @@ class Voucher(models.Model, index.Indexed):
     never_expires = models.BooleanField(default=True)
     meta_description = models.CharField(max_length=3000, default=None)
 
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
+
+
     @classmethod
     def not_expired_condition(cls):
         return Q(expires__gte=datetime.date.today()) | Q(
@@ -555,6 +559,8 @@ class Voucher(models.Model, index.Indexed):
             'service_rate': self.service.get_avg_rate,
             'service_url': self.service.url,
             'middleware_url': '/' + self.get_type().lower() + 's/' + self.slug,
+            'likes': self.likes,
+            'dislikes': self.dislikes,
             'url': '/' + self.get_type().lower() + 's/' + self.slug
         }
 
