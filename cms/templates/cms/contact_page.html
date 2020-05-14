@@ -2,40 +2,42 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-<div>
-    <div class="service-page mb-0 pb-0 contact-title">
-        <h2 class="service-title left no-shadow text-dark">{{ self.title }}</h2>
-    </div>
-    <div class="mb-5 p-3">
-        <form action="{% pageurl page %}" class="ml-5" method="POST">
-            {% csrf_token %}
+    <div>
+        <div class="service-page mb-0 pb-0 contact-title">
+            <h2 class="service-title left no-shadow text-dark">{{ self.title }}</h2>
+        </div>
+        <div class="mb-5 p-3">
+            <form action="{% pageurl page %}" class="ml-5" method="POST" novalidate>
+                {% csrf_token %}
 
-            <div class="row">
-                {% for field in form.visible_fields %}
-                {% if field.name != 'wagtailcaptcha' %}
+                <div class="row">
+                    {% for field in form.visible_fields %}
+                        {% if field.name != 'wagtailcaptcha' %}
 
-                <div class="col col-12 col-md-6">
-                    <div class="info form-group">
-                        {{ field.label_tag }}
+                            <div class="col col-12 {% if field.name != 'message' %}col-md-6{% endif %}">
+                                <div class="info form-group">
+                                    {{ field.label_tag }}
 
-                        {{ field.errors }}
-                        {{ field }}
-                        {{ field.help_text }}
+                                    {{ field }}
+                                    <div class="text-danger contact-error">
+                                        {{ field.errors }}
+                                    </div>
+                                    {{ field.help_text }}
 
-                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% endif %}
-                {% endfor %}
-            </div>
 
-            <div class="gc-reset">
-                {{ form.wagtailcaptcha }}
-            </div>
+                <div class="gc-reset">
+                    {{ form.wagtailcaptcha }}
+                </div>
 
-            <button type="submit" class="btn btn-success">
-                Submit
-            </button>
-        </form>
+                <button type="submit" class="btn btn-success">
+                    Submit
+                </button>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}

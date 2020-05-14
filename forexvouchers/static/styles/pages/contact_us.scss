@@ -7,6 +7,14 @@
   padding-left: 0;
 }
 
+.contact-error {
+
+  .errorlist {
+    padding: 0;
+    list-style-type: none;
+  }
+}
+
 .contact-form div {
   margin-bottom: 1.5rem;
 }
@@ -22,9 +30,9 @@
   font-size: 80%;
 }
 
-.gc-reset{
-transform:scale(0.95) !important;
--webkit-transform:scale(0.95) !important;
-transform-origin:0 0 !important;
--webkit-transform-origin:0 0 !important;
+.gc-reset {
+  transform: scale(0.95) !important;
+  -webkit-transform: scale(0.95) !important;
+  transform-origin: 0 0 !important;
+  -webkit-transform-origin: 0 0 !important;
 }
