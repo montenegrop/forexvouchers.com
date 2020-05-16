@@ -53,8 +53,15 @@ class MultiField(Field):
         return value.all()
 
     def to_csv(self):
-        return ','.join(
-            [value.slug if hasattr(value, 'slug') else value.name for value in getattr(self.service, self.key).all()])
+        values = []
+        for value in getattr(self.service, self.key).all():
+            if hasattr(value, 'slug'):
+                values.append(value.slug)
+            elif hasattr(value, 'name'):
+                values.append(value.name)
+            else:
+                values.append(value.code)
+        return ','.join(values)
 
     def __str__(self):
         return ', '.join([value.__str__() for value in self.get_all_values()])
@@ -93,6 +100,12 @@ class LogoField(MultiField):
 
 class ServiceHelper(object):
     def __init__(self, service):
+
+
+        self.csvFiels = {
+            'category': MultiField(service, 'category', '', 'Category')
+        }
+
         self.fields = [
 
             # common fields for all:
@@ -188,6 +201,9 @@ class ServiceHelper(object):
         for field in self.fields:
             if field.key == name:
                 return field.to_csv()
+
+        if name in self.csvFiels:
+            return self.csvFiels[name].to_csv()
 
         value = getattr(self.service, name)
         return value.slug if isinstance(value, models.Model) else str(value)

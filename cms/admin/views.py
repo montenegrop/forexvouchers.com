@@ -19,6 +19,8 @@ def getForeignObject(ForeignModel, value):
             return ForeignModel.objects.get(slug=value)
         if hasattr(ForeignModel, 'name'):
             return ForeignModel.objects.get(name=value)
+        if hasattr(ForeignModel, 'code'):
+            return ForeignModel.objects.get(code=value)
     except ForeignModel.DoesNotExist:
         return None
 
