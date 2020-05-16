@@ -62,6 +62,9 @@ INSTALLED_APPS = [
 
     'django.contrib.gis',
     'wagtailschemaorg',
+
+    'captcha',
+    'wagtailcaptcha',
 ]
 
 MIDDLEWARE = [
@@ -193,7 +196,12 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
-EMAIL_BACKEND = 'cms.models.business_models.NotificationBackend'
+EMAIL_BACKEND = 'cms.models.notification_models.NotificationBackend'
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+# RECAPTCHA_PUBLIC_KEY = "6LdfMe4UAAAAAGi1RqlTG0He4Ei1shUpWNd3OuSX"
+# RECAPTCHA_PRIVATE_KEY = "6LdfMe4UAAAAAC6zURzt_96hS4jiW9FKA43l_vik"
+NOCAPTCHA = True
 
 GEOIP_PATH = BASE_DIR + '/forexvouchers/geolocation'
 

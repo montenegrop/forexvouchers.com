@@ -1,4 +1,7 @@
+from captcha.fields import ReCaptchaField
 from django.core.mail.backends.smtp import EmailBackend
+from wagtail.contrib.forms.forms import FormBuilder
+from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
 from wagtailschemaorg.models import PageLDMixin
 from wagtailschemaorg.utils import extend
 
@@ -19,6 +22,9 @@ from modelcluster.fields import ParentalKey
 from modelcluster.fields import ParentalManyToManyField
 
 from wagtailautocomplete.edit_handlers import AutocompletePanel
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
+
+from wagtail.core import hooks
 
 from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
@@ -716,51 +722,6 @@ class FormField(AbstractFormField):
     )
 
 
-class ContactPage(AbstractEmailForm, PageLDMixin):
-    template = "../templates/cms/contact_page.html"
-    # This is the default path.
-    # If ignored, Wagtail adds _landing.html to your template name
-    landing_page_template = "../templates/cms/contact_page_landing.html"
-
-    def ld_entity(self):
-        return extend(super().ld_entity(), {
-            '@type': 'Organization',
-            'name': 'Forex Vouchers',
-        })
-
-    intro = RichTextField(blank=True)
-    thank_you_text = RichTextField(blank=True)
-
-    content_panels = AbstractEmailForm.content_panels + [
-        FieldPanel('title'),
-        FieldPanel('intro'),
-        InlinePanel('form_fields', label='Form Fields'),
-        FieldPanel('thank_you_text'),
-        MultiFieldPanel([
-            FieldRowPanel([
-                FieldPanel('from_address', classname="col6"),
-                FieldPanel('to_address', classname="col6"),
-            ]),
-            FieldPanel("subject"),
-        ], heading="Email Settings"),
-    ]
 
 
-class NotificationBackend(EmailBackend):
 
-    def __init__(self, host=None, port=None, username=None, password=None,
-                 use_tls=None, fail_silently=False, use_ssl=None, timeout=None,
-                 ssl_keyfile=None, ssl_certfile=None,
-                 **kwargs):
-        site_settings = GeneralSettings.for_site(Site.objects.get(is_default_site=True))
-        email_use_tls = site_settings.smtp_use_tls
-        email_host = site_settings.smtp_host
-        email_port = site_settings.smtp_port
-        email_host_user = site_settings.smtp_username
-        email_host_password = site_settings.smtp_password
-        email_use_ssl = site_settings.smtp_use_ssl
-
-        super().__init__(host=email_host, port=email_port, username=email_host_user, password=email_host_password,
-                         use_tls=email_use_tls, fail_silently=False, use_ssl=email_use_ssl, timeout=None,
-                         ssl_keyfile=None, ssl_certfile=None,
-                         **kwargs)

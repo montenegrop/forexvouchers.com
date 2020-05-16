@@ -1,19 +1,64 @@
+.contact-title {
+  padding-left: 5%;
+}
+
 .contact-form {
   list-style-type: none;
   padding-left: 0;
 }
 
-.contact-form li {
+.contact-error {
+
+  .errorlist {
+    padding: 0;
+    list-style-type: none;
+  }
+}
+
+.contact-form div {
   margin-bottom: 1.5rem;
 }
 
 .contact-form label {
   display: block;
   font-weight: bold;
-  color: $primary;
+  color: $info;
 }
 
 .contact-form .helptext {
   display: block;
   font-size: 80%;
+}
+
+.gc-reset {
+  transform: scale(0.95) !important;
+  -webkit-transform: scale(0.95) !important;
+  transform-origin: 0 0 !important;
+  -webkit-transform-origin: 0 0 !important;
+}
+
+.mailchimp-agreement {
+  .form-control {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+  }
+}
+
+.thanks-message {
+  text-align: -webkit-center;
+}
+
+.thanks-follow {
+  font-weight: bold;
+}
+
+.thanks-box {
+  max-width: 400px;
+}
+
+.thanks-mail {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
