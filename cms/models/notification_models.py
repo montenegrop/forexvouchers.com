@@ -1,6 +1,7 @@
 from captcha.fields import ReCaptchaField
 from django.core.mail.backends.smtp import EmailBackend
 from django.forms import widgets
+from mailchimp3 import MailChimp
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, FieldRowPanel
 from wagtail.contrib.forms.models import AbstractEmailForm
 from wagtail.core.fields import RichTextField
@@ -27,6 +28,10 @@ class WagtailCaptchaFormBuilderCustom(WagtailCaptchaFormBuilder):
         return fields
 
 
+def social_media_settings(args):
+    pass
+
+
 class ContactPage(WagtailCaptchaEmailForm, PageLDMixin):
     template = "../templates/cms/contact_page.html"
     landing_page_template = "../templates/cms/contact_page_landing.html"
@@ -45,6 +50,18 @@ class ContactPage(WagtailCaptchaEmailForm, PageLDMixin):
             css_classes.append('form-control')
             field.widget.attrs.update({'class': ' '.join(css_classes)})
         return form
+
+    def process_form_submission(self, form):
+        email = form.cleaned_data['email']
+        social_media_settings = GeneralSettings.for_site(Site.objects.get(is_default_site=True))
+        try:
+            client = MailChimp(social_media_settings.mailchimp_api_key)
+            user_data = client.lists.members.create(social_media_settings.mailchimp_list_id, {
+                'email_address': email,
+                'status': 'subscribed',
+            })
+        finally:
+            return super(ContactPage, self).process_form_submission(form)
 
     def ld_entity(self):
         return extend(super().ld_entity(), {

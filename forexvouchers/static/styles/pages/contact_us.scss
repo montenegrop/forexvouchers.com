@@ -36,3 +36,28 @@
   transform-origin: 0 0 !important;
   -webkit-transform-origin: 0 0 !important;
 }
+
+.mailchimp-agreement {
+  .form-control {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+  }
+}
+
+.contact-thank-you {
+  .rich-text {
+    h3 {
+      background-color: $cyan;
+      text-align: center;
+      color: black;
+      text-shadow: none;
+    }
+
+    p {
+      b {
+        color: black;
+      }
+    }
+  }
+}

@@ -12,22 +12,31 @@
 
                 <div class="row">
                     {% for field in form.visible_fields %}
-                        {% if field.name != 'wagtailcaptcha' %}
-
-                            <div class="col col-12 {% if field.name != 'message' %}col-md-6{% endif %}">
+                        {% if field.name != 'wagtailcaptcha' and field.name != 'subscribe' %}
+                            <div class="col col-12 {% if field.name != 'message-for-us' %}col-md-6{% endif %}">
                                 <div class="info form-group">
                                     {{ field.label_tag }}
-
                                     {{ field }}
                                     <div class="text-danger contact-error">
                                         {{ field.errors }}
                                     </div>
                                     {{ field.help_text }}
-
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %}
+                </div>
+
+                <div class="col col-12">
+                    <div class="info form-group">
+                        <div class="d-flex mailchimp-agreement d-inline m-auto ml-auto">
+                            {{ form.subscribe }}
+                            {{ form.subscribe.help_text }}
+                        </div>
+                        <div class="text-danger contact-error">
+                            {{ form.subscribe.errors }}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="gc-reset">
