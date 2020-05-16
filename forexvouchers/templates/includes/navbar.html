@@ -34,7 +34,7 @@
                 </template>
 
                 {% for lang in languages.languages %}
-                <b-dropdown-item href="/{{ lang.language_code }}"><span class="flag flag-icon flag-icon-squared flag-icon-{{ lang.flag_code }}"></span> {{ lang.name }}
+                <b-dropdown-item href="/{{ lang.language_code.code }}"><span class="flag flag-icon flag-icon-squared flag-icon-{{ lang.flag_code }}"></span> {{ lang.name }}
                 </b-dropdown-item>
                 {% endfor %}
             </b-nav-item-dropdown>

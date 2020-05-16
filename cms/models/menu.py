@@ -11,6 +11,7 @@ from wagtail.admin.edit_handlers import (
     PageChooserPanel)
 from wagtail.snippets.models import register_snippet
 from wagtailautocomplete.edit_handlers import AutocompletePanel
+from wagtailtrans.models import TranslatablePage
 
 
 class MenuItem(Orderable):
@@ -34,7 +35,7 @@ class MenuItem(Orderable):
         if self.sub_menu_id:
             return self.sub_menu
         elif self.link_page:
-            return self.link_page.url
+            return self.link_page
         elif self.link_url:
             return self.link_url
         return '#'
@@ -73,7 +74,7 @@ class Menu(ClusterableModel):
 @register_snippet
 class Language(ClusterableModel):
     name = models.CharField(max_length=100)
-    language_code = models.CharField(max_length=2, null=True)
+    language_code = models.ForeignKey("wagtailtrans.Language", null=True, blank=True, related_name="+", on_delete=models.CASCADE, default=1, help_text="Please make sure this language is available in 'Settings > Languages' ")
     flag_code = models.CharField(max_length=2, help_text="This is used to display the right flag. Search for the correct 2-digit country code here: https://www.iso.org/obp/ui/#search ")
 
     autocomplete_search_field = 'name'

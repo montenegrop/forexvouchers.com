@@ -38,7 +38,7 @@
                 <div class="footer-title underline">Information</div>
                 {% for item in information.menu_items.all %}
                     <div class="link">
-                        <a href="{{ item.link }}" target="{{ item.target }}">{{ item.link_title }}</a>
+                        <a href="{% translatablePage request.LANGUAGE_CODE item.link %}" target="{{ item.target }}">{{ item.link_title }}</a>
                     </div>
                 {% endfor %}
             </div>
