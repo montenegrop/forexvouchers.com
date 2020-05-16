@@ -11,6 +11,8 @@ from wagtailcaptcha.models import WagtailCaptchaEmailForm
 from wagtailschemaorg.models import PageLDMixin
 from wagtailschemaorg.utils import extend
 
+from django.db import models
+
 from cms.models import GeneralSettings
 
 
@@ -70,13 +72,18 @@ class ContactPage(WagtailCaptchaEmailForm, PageLDMixin):
         })
 
     intro = RichTextField(blank=True)
-    thank_you_text = RichTextField(blank=True)
+    Thank_you_box = models.CharField(max_length=300, blank=True, default=None, null=True)
+    Thank_you_follow = models.CharField(max_length=150, blank=True, default=None, null=True)
+    Thank_you_mail = models.CharField(max_length=100, blank=True, default=None, null=True)
 
     content_panels = AbstractEmailForm.content_panels + [
         FieldPanel('title'),
         FieldPanel('intro'),
         InlinePanel('form_fields', label='Form Fields'),
-        FieldPanel('thank_you_text'),
+        FieldPanel('Thank_you_box'),
+        FieldPanel('Thank_you_follow'),
+        FieldPanel('Thank_you_mail'),
+
         MultiFieldPanel([
             FieldRowPanel([
                 FieldPanel('from_address', classname="col6"),

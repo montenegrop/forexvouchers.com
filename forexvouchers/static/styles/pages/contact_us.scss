@@ -45,19 +45,20 @@
   }
 }
 
-.contact-thank-you {
-  .rich-text {
-    h3 {
-      background-color: $cyan;
-      text-align: center;
-      color: black;
-      text-shadow: none;
-    }
+.thanks-message {
+  text-align: -webkit-center;
+}
 
-    p {
-      b {
-        color: black;
-      }
-    }
-  }
+.thanks-follow {
+  font-weight: bold;
+}
+
+.thanks-box {
+  max-width: 400px;
+}
+
+.thanks-mail {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
 }
