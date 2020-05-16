@@ -45,7 +45,6 @@ class ServiceAdmin(ModelAdmin):
         return ', '.join([cat.name for cat in obj.category.all()])
 
     def getVouchersColumn(self, obj):
-
         discount_counts = Discount.objects.filter(service=obj).filter(Discount.not_expired_condition()).count()
         promocodes_counts = PromoCode.objects.filter(service=obj).filter(PromoCode.not_expired_condition()).count()
         offers_counts = Offer.objects.filter(service=obj).filter(Offer.not_expired_condition()).count()
@@ -59,12 +58,11 @@ class ServiceAdmin(ModelAdmin):
     def getComments(self, obj):
         count = obj.comment_set.filter(active=True).count()
         return (format_html('<a href="/admin/cms/comment/?service__id__exact={}">Comments ({})</a>'
-        , obj.id, count))
+                            , obj.id, count))
 
     getCategoriesLabels.short_description = 'categories'
     getVouchersColumn.short_description = 'vouchers'
     getComments.short_description = 'comments'
-
 
 
 class AttributeAdmin(ModelAdmin):
@@ -135,6 +133,7 @@ class StatusAdmin(ModelAdmin):
 class BrokerTypeAdmin(ModelAdmin):
     model = BrokerType
     menu_label = 'Broker Type'
+    menu_order = 000
 
     list_display = ('name',)
     ordering = ('name',)
@@ -371,13 +370,31 @@ class FieldGroup(ModelAdminGroup):
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 300  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (
-        CategoryAdmin, StatusAdmin, BrokerTypeAdmin, LocationAdmin, RegulationAdmin, LicenseAdmin, TimezoneAdmin,
-        TradingSoftwareAdmin,
-        PlatformSupportedAdmin, ChatAdmin, SupportedLanguageAdmin, TrainingCourseAdmin, TradingTypeAdmin,
+        AccountCurrencyAdmin,
+        AccountOptionAdmin,
+        BrokerTypeAdmin,
+        CategoryAdmin,
+        ChatAdmin,
+        LicenseAdmin,
+        LocationAdmin,
         MethodologyAdmin,
-        TradingToolAdmin, PricingModelAdmin, SystemTypeAdmin, TradingTypeAdmin, SignalAlertAdmin, AccountTypeAdmin,
-        TradingInstrumentAdmin, RevenueModelAdmin, AccountOptionAdmin, AccountCurrencyAdmin, PaymentMethodAdmin,
-        SecurityOfFundAdmin)
+        SystemTypeAdmin,
+        SignalAlertAdmin,
+        AccountTypeAdmin,
+        PaymentMethodAdmin,
+        PlatformSupportedAdmin,
+        PricingModelAdmin,
+        RegulationAdmin,
+        RevenueModelAdmin,
+        SecurityOfFundAdmin,
+        StatusAdmin,
+        SupportedLanguageAdmin,
+        TimezoneAdmin,
+        TradingInstrumentAdmin,
+        TradingTypeAdmin,
+        TradingSoftwareAdmin,
+        TradingToolAdmin,
+        TrainingCourseAdmin)
 
 
 class ProductsGroup(ModelAdminGroup):

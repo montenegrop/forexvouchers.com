@@ -5,6 +5,9 @@ from wagtail.core.models import Orderable, ClusterableModel
 class AbstractField(object):
     autocomplete_search_field = 'name'
 
+    class Meta:
+        ordering = ['name']
+
     def get_label(self):
         return self.__class__.__name__
 
@@ -53,6 +56,9 @@ class Regulation(AbstractField, ClusterableModel):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     description = models.CharField(max_length=500)
     link = models.URLField()
+
+    class Meta:
+        ordering = ['code']
 
     autocomplete_search_field = 'code'
 

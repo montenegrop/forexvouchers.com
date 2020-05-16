@@ -176,6 +176,9 @@ class Service(ClusterableModel, index.Indexed):
     def autocomplete_label(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
     @property
     def get_avg_rate(self):
         return int(round(self.avg_rate)) if self.avg_rate else 0
