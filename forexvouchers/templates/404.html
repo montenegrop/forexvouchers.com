@@ -1,9 +1,29 @@
-{% extends "base.html" %}
+<head>
+    <title>Not found</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-{% block body_class %}template-404{% endblock %}
+</head>
 
-{% block content %}
-    <h1>Page not found</h1>
+<body>
+<nav class="navbar bg-dark navbar-dark bg-info navbar-expand-lg"><a href="/">
+    <div class="navbar-brand">
+        <img src="/static/images/forexvouchers-logo.jpg" height="46" alt="FV"
+             class="logo-img">
+    </div>
+</a>
+</nav>
 
-    <h2>Sorry, this page could not be found.</h2>
-{% endblock %}
+<div class="container" style="display: flex; align-items: center; justify-content: center; margin-top: 4rem;">
+
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Content not found</h5>
+            <p class="card-text">It seems the content you are trying to access doesn't exist. You can still find more if you visit our home page.
+            </p>
+            <a href="https://forexvouchers.com/" class="btn btn-primary">Go to main page</a>
+        </div>
+    </div>
+
+</div>
+</body>
