@@ -48,7 +48,7 @@
 
                 {% for item in services.menu_items.all %}
                     <div class="link">
-                        <a href="{{ item.link }}" target="{{ item.target }}">{{ item.link_title }}</a>
+                        <a href="{% translatablePage request.LANGUAGE_CODE item.link %}" target="{{ item.target }}">{{ item.link_title }}</a>
                     </div>
                 {% endfor %}
             </div>
@@ -56,7 +56,7 @@
                 <div class="footer-title underline">Vouchers</div>
                 {% for item in vouchers.menu_items.all %}
                     <div class="link">
-                        <a href="{{ item.link }}" target="{{ item.target }}">{{ item.link_title }}</a>
+                        <a href="{% translatablePage request.LANGUAGE_CODE item.link %}" target="{{ item.target }}">{{ item.link_title }}</a>
                     </div>
                 {% endfor %}
             </div>

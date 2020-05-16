@@ -18,11 +18,11 @@
                 {% if item.link.slug %}
                     <b-nav-item-dropdown text="{{ item.link_title }}" right>
                     {% for sub_item in item.link.menu_items.all %}
-                        <b-dropdown-item href="{{ sub_item.link_url }}" target="{{ sub_item.target }}">{{ sub_item.link_title }}</b-dropdown-item>
+                        <b-dropdown-item href="{% translatablePage request.LANGUAGE_CODE sub_item.link %}" target="{{ sub_item.target }}">{{ sub_item.link_title }}</b-dropdown-item>
                     {% endfor %}
                     </b-nav-item-dropdown>
                 {% else %}
-                    <b-nav-item href="{{ item.link_url }}" target="{{ item.target }}">{{ item.link_title }}</b-nav-item>
+                    <b-nav-item href="{% translatablePage request.LANGUAGE_CODE item.link %}" target="{{ item.target }}">{{ item.link_title }}</b-nav-item>
                 {% endif %}
             {% endfor %}
         </b-navbar-nav>
