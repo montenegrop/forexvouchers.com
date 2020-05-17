@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from django.db.models.fields import BooleanField, IntegerField
+from django.db.models.fields import BooleanField, IntegerField, CharField
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
@@ -17,10 +17,10 @@ def getForeignObject(ForeignModel, value):
     try:
         if hasattr(ForeignModel, 'slug'):
             return ForeignModel.objects.get(slug=value)
-        if hasattr(ForeignModel, 'name'):
-            return ForeignModel.objects.get(name=value)
         if hasattr(ForeignModel, 'code'):
             return ForeignModel.objects.get(code=value)
+        if hasattr(ForeignModel, 'name'):
+            return ForeignModel.objects.get(name=value)
     except ForeignModel.DoesNotExist:
         return None
 
@@ -45,14 +45,22 @@ def row_to_object(Model, headers, data):
             model = getForeignObject(column_type.related_model, value)
             if model:
                 object.__setattr__(attr_name + '_id', model.id)
-        elif isinstance(column_type, ManyToManyField):
-            pass
-        elif isinstance(column_type, IntegerField):
+        elif isinstance(column_type, ManyToManyField) and value:
+            object.save()
+            for v in value.split(','):
+                model = getForeignObject(column_type.related_model, v)
+                if model:
+                  object.__getattribute__(attr_name).add(model)
+        elif isinstance(column_type, IntegerField) and value:
             object.__setattr__(attr_name, int(value))
         elif isinstance(column_type, BooleanField):
             object.__setattr__(attr_name, True if value.lower() == 'yes' else False)
-        else:
+        elif isinstance(column_type, CharField):
+            object.__setattr__(attr_name, value if value else '')
+        elif value:
             object.__setattr__(attr_name, value)
+
+
 
     object.save()
     for n, attr_name in enumerate(headers):
@@ -115,7 +123,7 @@ def export_services(request):
     worksheet.title = 'Services'
 
     # define available columns
-    columns = ['slug', 'category']
+    columns = ['slug', 'category', 'meta_description']
     rows = []
     for field in helper.fields:
         if cat in field.categories:

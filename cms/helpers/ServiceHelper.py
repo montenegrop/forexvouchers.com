@@ -103,7 +103,8 @@ class ServiceHelper(object):
 
 
         self.csvFiels = {
-            'category': MultiField(service, 'category', '', 'Category')
+            'category': MultiField(service, 'category', '', 'Category'),
+            'meta_description': Field(service, 'meta_description', '', '')
         }
 
         self.fields = [
