@@ -32,9 +32,9 @@ def translatablePage(code, page):
     if isinstance(page, Page):
         try:
            transpage = TranslatablePage.objects.get(Q(Q(canonical_page=page.id) | Q(translatable_page_ptr=page)) & Q(language__code=code))
+           return transpage.url
         except:
-            page.url
-        return transpage.url if transpage else page.url
+            return page.url
 
     return page
 

@@ -15,7 +15,7 @@
     <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
             {% for item in navbar.menu_items.all %}
-                {% if item.link.slug %}
+                {% if item.sub_menu_id %}
                     <b-nav-item-dropdown text="{{ item.link_title }}" right>
                     {% for sub_item in item.link.menu_items.all %}
                         <b-dropdown-item href="{% translatablePage request.LANGUAGE_CODE sub_item.link %}" target="{{ sub_item.target }}">{{ sub_item.link_title }}</b-dropdown-item>
