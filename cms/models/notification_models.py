@@ -71,13 +71,14 @@ class ContactPage(WagtailCaptchaEmailForm, PageLDMixin):
             'name': 'Forex Vouchers',
         })
 
+    contact_title = models.CharField(max_length=200, blank=True, default=None, null=True)
     Thank_you_box = models.CharField(max_length=300, blank=True, default=None, null=True)
     Thank_you_follow = models.CharField(max_length=150, blank=True, default=None, null=True)
     Thank_you_mail = models.CharField(max_length=100, blank=True, default=None, null=True)
 
     content_panels = AbstractEmailForm.content_panels + [
-        FieldPanel('title'),
         InlinePanel('form_fields', label='Form Fields'),
+        FieldPanel('contact_title'),
         FieldPanel('Thank_you_box'),
         FieldPanel('Thank_you_follow'),
         FieldPanel('Thank_you_mail'),
