@@ -16,22 +16,38 @@
 
         <b-container class="comment-wrapper no-shadow">
             <b-row class="text-dark">
-                <b-col cols="8">
+                <b-col cols="10">
                     <h5>Reviews:</h5>
                 </b-col>
-                <b-col cols="2" class="border-left">
+                <!--b-col cols="2">
                     <i class="fa fa-sort"></i>
                     Sort: <strong>Relevance</strong>
-                </b-col>
-                <b-col cols="2" class="border-left border-right">
-                    <i class="fas fa-filter"></i>
-                    Filter: <strong>All star</strong>
+                </b-col-->
+                <b-col cols="2" class="border-left button-filter-stars">
+                    <b-dropdown variant="link">
+                        <template v-slot:button-content>
+                            <i class="fas fa-filter"></i>
+                            Filter:
+                            <strong v-if="stars == -1">All stars</strong>
+                            <strong v-else>{{ stars }} stars</strong>
+                        </template>
+                        <b-dropdown-item @click="filterChange(-1)">All stars</b-dropdown-item>
+                        <b-dropdown-item @click="filterChange(1)">1 star</b-dropdown-item>
+                        <b-dropdown-item @click="filterChange(2)">2 star</b-dropdown-item>
+                        <b-dropdown-item @click="filterChange(3)">3 star</b-dropdown-item>
+                        <b-dropdown-item @click="filterChange(4)">4 star</b-dropdown-item>
+                        <b-dropdown-item @click="filterChange(5)">5 star</b-dropdown-item>
+
+                    </b-dropdown>
+
+
                 </b-col>
             </b-row>
             <hr/>
             <ul class="comment-list">
-                <li v-for="comment in comments" class="margin-comment" :key="comment.id">
-                    <fv-comment
+                <template v-for="comment in comments" :key="`parent-${comment.id}`">
+                    <li class="margin-comment">
+                        <fv-comment
                                 :id="comment.id"
                                 :text="comment.review"
                                 :name="comment.name"
@@ -40,7 +56,11 @@
                                 :country_name="comment.country"
                                 :created_at="comment.created_at"
                                 scroll="true"
-                    />
+                        />
+                    </li>
+                </template>
+                <li v-show="comments.length == 0">
+                    No comments to show
                 </li>
                 <hr/>
                 <ul>
