@@ -6,7 +6,7 @@
             <carousel class="pt-0 related-vouchers border border-light" per-page="1"
                       autoplay="true" autoplayHoverPause="true" paginationColor="#7FFFD4">
                 <slide v-for="voucher in vouchers">
-                    <fv-voucher :voucher="voucher" :show-clicks="showClicks"/>
+                    <fv-voucher :voucher="voucher" :show-clicks="showClicks" :show-likes="false"/>
                 </slide>
             </carousel>
         </div>
@@ -16,7 +16,7 @@
             <carousel class="pt-0 related-vouchers border border-light" per-page="4"
                       autoplay="true" autoplayHoverPause="true" paginationColor="#7FFFD4">
                 <slide v-for="voucher in vouchers">
-                    <fv-voucher :voucher="voucher" :show-clicks="showClicks"/>
+                    <fv-voucher :voucher="voucher" :show-clicks="showClicks" :show-likes="false"/>
                 </slide>
             </carousel>
         </div>
