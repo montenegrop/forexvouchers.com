@@ -7,7 +7,7 @@
         </div>
 
 
-        <div class="product-info">
+        <div class="product-info hover-link">
             <a :href="voucher.middleware_url">
                 <h5 :title="voucher.name"> {{ voucher.name }} </h5>
             </a>
