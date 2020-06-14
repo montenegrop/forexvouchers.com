@@ -27,7 +27,7 @@
 
         <div class="product-link text-center">
             <a :href="voucher.middleware_url">
-                <button type="button" class="btn btn-info btn-lg product-link-button">
+                <button type="button" class="btn btn-info btn-lg product-link-button w-50">
                     Get Code
                 </button>
             </a>
