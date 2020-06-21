@@ -37,7 +37,7 @@ You should be able to deploy it by running:
 ssh fv /var/www/fxvouchers/scripts/git-update.sh
 ```
 
-For deployment checkout our [https://github.com/ahmerkhanz/fxvouchers/blob/master/deployment/Install_Server_Instructions.md](Install_Server_Instructions.md) steps on `deployment` directory
+For deployment checkout our [Install_Server_Instructions.md](https://github.com/ahmerkhanz/fxvouchers/blob/master/deployment/Install_Server_Instructions.md) steps on `deployment` directory
 
 ### Production logs
 
