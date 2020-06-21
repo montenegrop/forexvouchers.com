@@ -1,7 +1,10 @@
 <template>
-    <fv-discount-small v-if="voucher.type === 'Discount'" :voucher="voucher" :show-clicks="showClicks" :is-flex="isFlex"></fv-discount-small>
-    <fv-promocode-small v-else-if="voucher.type === 'PromoCode'" :voucher="voucher" :show-clicks="showClicks" :is-flex="isFlex"></fv-promocode-small>
-    <fv-offer-small v-else="voucher.type === 'Offer'" :voucher="voucher" :show-clicks="showClicks" :is-flex="isFlex"></fv-offer-small>
+    <fv-discount-small v-if="voucher.type === 'Discount'" :voucher="voucher" :show-clicks="showClicks" :is-flex="isFlex"
+                       :show-likes="showLikes"></fv-discount-small>
+    <fv-promocode-small v-else-if="voucher.type === 'PromoCode'" :voucher="voucher" :show-clicks="showClicks"
+                        :is-flex="isFlex" :show-likes="showLikes"></fv-promocode-small>
+    <fv-offer-small v-else="voucher.type === 'Offer'" :voucher="voucher" :show-clicks="showClicks" :is-flex="isFlex"
+                    :show-likes="showLikes"></fv-offer-small>
 </template>
 
 <script>
@@ -12,7 +15,7 @@
     export default {
         name: "fv-voucher",
         components: {FvDiscountSmall, FvPromocodeSmall, FvOfferSmall},
-        props: ['voucher', 'showClicks', 'isFlex'],
+        props: ['voucher', 'showClicks', 'isFlex', 'showLikes'],
         data() {
             return {}
         }

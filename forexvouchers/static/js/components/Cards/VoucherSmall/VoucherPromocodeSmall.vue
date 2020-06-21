@@ -1,12 +1,12 @@
 <template>
     <div v-bind:class="[{ 'product': !isFlex } , { 'product-card': isFlex }]">
-        <Likes :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
+        <Likes v-if="showVoucherLikes" :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
 
         <div class="product-image-wrapper">
             <img :src="voucher.logo" class="product-image">
         </div>
 
-        <div class="product-info">
+        <div class="product-info hover-link">
             <a :href="voucher.middleware_url">
                 <h5 :title="voucher.name"> {{ voucher.name }} </h5>
             </a>
@@ -27,7 +27,7 @@
 
         <div class="product-link text-center">
             <a :href="voucher.middleware_url">
-                <button type="button" class="btn btn-info btn-lg product-link-button">
+                <button type="button" class="btn btn-info btn-lg product-link-button w-50">
                     Get Code
                 </button>
             </a>
@@ -58,9 +58,16 @@
     export default {
         name: "fv-vouchers-discount-small",
         components: {Likes},
-        props: ['voucher', 'showClicks', 'isFlex'],
-        data() {
-            return {}
-        }
+        props: ['voucher', 'showClicks', 'isFlex', 'showLikes'],
+
+        computed: {
+            showVoucherLikes: function () {
+                if (typeof (this.showLikes) !== 'undefined') {
+                    return this.showLikes
+                } else {
+                    return true
+                }
+            },
+        },
     }
 </script>
