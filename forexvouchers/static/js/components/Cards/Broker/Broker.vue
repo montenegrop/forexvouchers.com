@@ -17,7 +17,6 @@
                 </div>
             </div>
 
-
             <div class="col-3 col-md-4 col d-flex justify-content-center">
                 <div class="voucher-count-float-right">
                     <div class="voucher-count"
@@ -33,7 +32,7 @@
             <b-table-simple borderless small>
                 <b-tr v-if="service.minimum_deposit">
                     <b-td class="left pb-0 pt-0">Deposit</b-td>
-                    <b-td class="right pb-0 pt-0">{{ service.minimum_deposit ? `${service.minimum_deposit}` : '-'
+                    <b-td class="right pb-0 pt-0">{{ service.minimum_deposit ? `$ ${service.minimum_deposit}` : '-'
                         }}
                     </b-td>
                 </b-tr>
@@ -47,7 +46,7 @@
                 </b-tr>
                 <b-tr v-if="service.commission">
                     <b-td class="left pb-0 pt-0">Commission</b-td>
-                    <b-td class="right pb-0 pt-0">${{ service.commission ? `${service.commission}` : '-' }}</b-td>
+                    <b-td class="right pb-0 pt-0">${{ service.commission ? ` ${service.commission}` : '-' }}</b-td>
                 </b-tr>
                 <b-tr v-if="service.broker_type">
                     <b-td class="left pb-0 pt-0">Broker Type</b-td>
@@ -78,8 +77,6 @@
 </template>
 
 <script>
-
-
     export default {
         props: ["service"],
         methods: {
