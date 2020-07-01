@@ -4,9 +4,10 @@
             <div class="offset-3 col-6 col-md-5 col">
 
                 <img v-if="service.logo_url" class="logo-img" :src="service.logo_url"/>
-                <div class="title">
-                    <a :href="`${service.url}`"> {{ service.name }}</a>
-
+                <div class="product-info hover-link">
+                    <a :href="`${service.url}`">
+                        <h5 :title="service.name"> {{ service.name }} </h5>
+                    </a>
                 </div>
                 <div v-if="service.avg_rate">
                     <div class="rate-container product-stars">
@@ -32,13 +33,13 @@
             <b-table-simple borderless small>
                 <b-tr v-if="service.minimum_deposit">
                     <b-td class="left pb-0 pt-0">Deposit</b-td>
-                    <b-td class="right pb-0 pt-0">{{ service.minimum_deposit ? `$ ${service.minimum_deposit}` : '-'
+                    <b-td class="right pb-0 pt-0">{{ service.minimum_deposit ? `${service.minimum_deposit}` : '-'
                         }}
                     </b-td>
                 </b-tr>
                 <b-tr v-if="service.spread">
                     <b-td class="left pb-0 pt-0">Spread</b-td>
-                    <b-td class="right pb-0 pt-0">{{ service.spread ? `${service.spread}` : '-' }}</b-td>
+                    <b-td class="right pb-0 pt-0">{{ spreadFloat(service.spread) }}</b-td>
                 </b-tr>
                 <b-tr v-if="service.leverage">
                     <b-td class="left pb-0 pt-0">Leverage</b-td>
@@ -81,5 +82,10 @@
 
     export default {
         props: ["service"],
+        methods: {
+            spreadFloat(spread) {
+                return parseFloat(spread).toFixed(1)
+            },
+        },
     }
 </script>
