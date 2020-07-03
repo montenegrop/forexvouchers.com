@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
+import BootstrapVueIcons from 'bootstrap-vue'
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 import rate from 'vue-rate'
 import VueResource from 'vue-resource'
@@ -24,6 +25,7 @@ Vue.use(VueMq, {
 
 Vue.use(ReadMore);
 Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 Vue.use(VueResource)
 Vue.use(VueCookies)
 Vue.use(rate)
