@@ -1,23 +1,28 @@
 <template>
+    <div>
+        <b-list-group ref="newsContainer" class="news-list fixed-height position-relative">
 
-    <b-list-group class="news-list fixed-height">
-        <b-list-group-item class="p-0 light-hover" v-for="entry in parseNews">
+            <scroller-up container="newsContainer"></scroller-up>
 
-            <fv-news :entry="entry"></fv-news>
+            <b-list-group-item class="p-0 light-hover" v-for="entry in parseNews">
+                <fv-news :entry="entry"></fv-news>
+            </b-list-group-item>
 
-        </b-list-group-item>
-    </b-list-group>
+            <scroller-down container="newsContainer"></scroller-down>
 
+        </b-list-group>
+    </div>
 </template>
-
 
 <script>
 
     import News from "../Cards/News";
+    import ScrollerDown from "../ScrollerDown";
+    import ScrollerUp from "../ScrollerUp"
 
     export default {
         name: "fv-news-feeds",
-        components: {FvNews: News},
+        components: {FvNews: News, ScrollerDown, ScrollerUp},
         props: ["news"],
 
         computed: {

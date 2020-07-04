@@ -136,7 +136,7 @@
   @include media-breakpoint-up(md) {
     .fixed-height {
       height: 340px;
-      overflow-y: auto;
+      overflow-y: hidden;
     }
   }
 
@@ -155,6 +155,29 @@
   table {
     margin-bottom: 0;
   }
+
+  .top-scroll-button {
+    color: red;
+    top: 0;
+    z-index: 1000;
+    display: none;
+
+    @include media-breakpoint-up(md) {
+       display: block;
+     }
+  }
+
+  .bottom-scroll-button {
+    color: green;
+    bottom: 0;
+    z-index: 1000;
+    display: none;
+
+     @include media-breakpoint-up(md) {
+       display: block;
+     }
+  }
+
 }
 
 .one-liner {
