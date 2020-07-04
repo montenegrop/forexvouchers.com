@@ -65,6 +65,7 @@ INSTALLED_APPS = [
 
     'captcha',
     'wagtailcaptcha',
+    'robots',
 ]
 
 MIDDLEWARE = [

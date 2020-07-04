@@ -21,6 +21,8 @@ from wagtail.contrib.sitemaps.views import sitemap
 urlpatterns = [
 
     url('^sitemap\.xml$', sitemap),
+    url(r'^robots\.txt', include('robots.urls')),
+
 
     url(r'^out/(.+)/$', cloakedlinks),
     url(r'^visit/(.+)/$', cloakedlinks),
