@@ -3,7 +3,7 @@
         Join thousands of forex traders worldwide
 
         <form method="post" @submit.prevent="submit" v-show="!success" novalidate>
-            <div class="input-group subscribe w-50">
+            <div class="input-group subscribe email-text">
                 <input type="email"
                        class="form-control"
                        v-model="email"
