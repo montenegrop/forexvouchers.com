@@ -18,6 +18,10 @@
     <meta name="description" content="{% block meta_description %}Forex Vouchers - Coupons, Promo codes and offers!{% endblock %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    {# Prereload resources #}
+    <link rel="preload" as="font" href="{% static 'fonts/raleway-extrabold.woff2' %}">
+    <link rel="preload" as="font" href="{% static 'fonts/raleway-regular.woff2' %}">
+
     {# Global stylesheets #}
     <link rel="stylesheet" type="text/css" href="{% static 'dist/styles/base.css' %}">
 
