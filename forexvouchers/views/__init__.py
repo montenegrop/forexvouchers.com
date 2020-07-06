@@ -7,6 +7,11 @@ from cms.models.business_models import Comment, Service, Affiliate, Discount, Pr
 from django.contrib.gis.geoip2 import GeoIP2
 from django.views import View
 
+from cms.models import GeneralSettings
+from mailchimp3 import MailChimp
+from mailchimp3.mailchimpclient import MailChimpError
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -69,6 +74,25 @@ class CommentsView(View):
 
         return HttpResponse(json.dumps(response), content_type="application/json")
 
+    def subscribe(self, email, request):
+        social_media_settings = GeneralSettings.for_site(request.site)
+
+        try:
+            client = MailChimp(social_media_settings.mailchimp_api_key)
+            user_data = client.lists.members.create(social_media_settings.mailchimp_list_id, {
+                'email_address': email,
+                'status': 'subscribed',
+            })
+            return (True, '')
+        except MailChimpError as e:
+            try:
+                if e.args[0]['title'] == 'Member Exists':
+                    return (False, 'You are already subscribed')
+            except:
+                return (False, 'We could not register this email')
+        except:
+            return (False, 'We could not register this email')
+
     def post(self, request):
         data = json.loads(request.body)
         service = Service.objects.get(pk=data['service_id'])
@@ -98,6 +122,9 @@ class CommentsView(View):
         finally:
             comment.save()
             service.save()
+
+        if 'email' in data and data['email']:
+            self.subscribe(data['email'], request)
 
         response = {'data': comment.toDict()}
         return HttpResponse(json.dumps(response), content_type="application/json")
