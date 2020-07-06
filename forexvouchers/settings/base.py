@@ -233,4 +233,5 @@ CACHES = {
     }
 }
 
+ROBOTS_USE_HOST = False
 ROBOTS_USE_SCHEME_IN_HOST = True
