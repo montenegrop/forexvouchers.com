@@ -2,17 +2,15 @@
     <div class="homepage-header">Popular Comparisons</div>
     {#class="table table-sm table-borderless most-compared-main"#}
 
-    <ul class="compare-list fixed-height">
+    <ul class="compare-list fixed-height" ref="comparesContainer">
+
+        <fv-scroller-up container="comparesContainer"></fv-scroller-up>
 
         {% for compare in compares %}
-
             <li class="compare-item light-hover">
-
-
-                <a class="d-flex -hand-pointer" href='/compare/{{ compare.service1.slug }}-vs-{{ compare.service2.slug }}'>
-
+                <a class="d-flex -hand-pointer"
+                   href='/compare/{{ compare.service1.slug }}-vs-{{ compare.service2.slug }}'>
                     <div class="service service-left">
-
                         <div class="logo">
                             <img src="{{ compare.service1.toDict.logo_url_small }}"/>
                         </div>
@@ -22,13 +20,9 @@
                             <rate style="min-width: 85px" :length="5" :value="{{ compare.service1.get_avg_rate }}"
                                   readonly/>
                         </div>
-
                     </div>
-
                     <div class="vs">VS</div>
-
                     <div class="service service-right">
-
 
                         <div class="logo">
                             <img src="{{ compare.service2.toDict.logo_url_small }}"/>
@@ -39,14 +33,13 @@
                             <rate style="min-width: 85px" :length="5" :value="{{ compare.service2.get_avg_rate }}"
                                   readonly/>
                         </div>
-
-
                     </div>
                 </a>
-
             </li>
         {% endfor %}
-    </ul>
 
+        <fv-scroller-down container="comparesContainer"></fv-scroller-down>
+
+    </ul>
 </div>
 

@@ -57,6 +57,7 @@
       justify-content: center;
       align-items: center;
     }
+
     .badge {
       margin-left: 0.2rem;
     }
@@ -116,8 +117,10 @@
 .light-hover {
   &:hover {
     background-color: $light !important;
+
     .Rate__star {
       color: $secondary;
+
       &.filled {
         color: #efc20f;
       }
@@ -157,25 +160,25 @@
   }
 
   .top-scroll-button {
-    color: red;
+    color: $info;
     top: 0;
     z-index: 1000;
     display: none;
 
     @include media-breakpoint-up(md) {
-       display: block;
-     }
+      display: block;
+    }
   }
 
   .bottom-scroll-button {
-    color: green;
+    color: $info;
     bottom: 0;
     z-index: 1000;
     display: none;
 
-     @include media-breakpoint-up(md) {
-       display: block;
-     }
+    @include media-breakpoint-up(md) {
+      display: block;
+    }
   }
 
 }
@@ -277,12 +280,14 @@
   cursor: pointer;
   padding: 0.1rem 1rem !important;
 
+
   p {
     margin: 0;
-    font-size: 0.6rem;
+    font-size: 14px;
   }
+
   .text-primary {
-    font-size: 0.6rem;
+    font-size: 14px;
   }
 
   .rate-container {

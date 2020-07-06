@@ -1,5 +1,5 @@
 <template>
-    <b-button v-if="!top" class="top-scroll-button w-100 p-0 m-0 position-sticky" @click="onScrollUp">
+    <b-button v-if="!top" variant="light" class="top-scroll-button w-100 p-0 m-0 position-sticky" @click="onScrollUp">
         <i class="fa fa-caret-up" aria-hidden="true"></i>
     </b-button>
 </template>
