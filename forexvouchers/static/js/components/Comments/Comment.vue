@@ -4,9 +4,9 @@
             <div class="rate-container">
                 <rate :length="5" :value="stars" readonly/>
             </div>
-            <p>by {{ name }}</p>
-            <p class="text-primary">{{text}}</p>
-            <a :href="service_url" class="text-primary"> {{ service_name }}</a>
+            <p class="font-16">by {{ name }}</p>
+            <p class="font-16 text-primary">{{text}}</p>
+            <a :href="service_url" class="hover-link font-16 text-primary"> {{ service_name }}</a>
 
 
         </b-col>

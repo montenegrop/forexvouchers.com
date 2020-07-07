@@ -2,13 +2,13 @@
     <div>
         <b-list-group ref="newsContainer" class="news-list fixed-height position-relative">
 
-            <scroller-up container="newsContainer"></scroller-up>
+            <fv-scroller-up container="newsContainer"></fv-scroller-up>
 
             <b-list-group-item class="p-0 light-hover" v-for="entry in parseNews">
                 <fv-news :entry="entry"></fv-news>
             </b-list-group-item>
 
-            <scroller-down container="newsContainer"></scroller-down>
+            <fv-scroller-down container="newsContainer"></fv-scroller-down>
 
         </b-list-group>
     </div>
@@ -22,7 +22,7 @@
 
     export default {
         name: "fv-news-feeds",
-        components: {FvNews: News, ScrollerDown, ScrollerUp},
+        components: {FvNews: News, FvScrollerDown: ScrollerDown, FvScrollerUp: ScrollerUp},
         props: ["news"],
 
         computed: {

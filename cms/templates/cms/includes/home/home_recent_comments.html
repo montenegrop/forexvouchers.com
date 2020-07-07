@@ -1,8 +1,13 @@
 <div class="homepage-column">
     <div class="homepage-header">Recent comments</div>
-    <ul class="comment-list fixed-height">
+    <ul class="comment-list fixed-height" ref="commentsContainer">
+
+        <fv-scroller-up container="commentsContainer"></fv-scroller-up>
+
 
         {% for comment in comments %}
+
+
             <li class="comment-link light-hover" onclick="location.href='{{ comment.permalink }}'">
                 <fv-comment text="{{ comment.review }}"
                             name="{{ comment.name }}"
@@ -17,5 +22,8 @@
                 />
             </li>
         {% endfor %}
+
+        <fv-scroller-down container="commentsContainer"></fv-scroller-down>
+
     </ul>
 </div>
