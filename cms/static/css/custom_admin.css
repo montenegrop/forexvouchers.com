@@ -17,3 +17,12 @@
     padding: 5px;
     border-radius: 5px;
 }
+
+
+.hidden {
+    display: none;
+}
+
+.comment_template {
+    padding-left: 50px;
+}

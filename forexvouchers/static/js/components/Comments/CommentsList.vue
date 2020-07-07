@@ -56,7 +56,28 @@
                                 :country_name="comment.country"
                                 :created_at="comment.created_at"
                                 scroll="true"
-                        />
+                        ></fv-comment>
+
+
+                        <ul class="child-comments">
+                            <template v-for="parentComment in comment.children"
+                                      :key="`parent-parent-${parentComment.id}`">
+                                <li class="margin-comment child-comment">
+                                    <fv-comment-answer
+                                            :id="parentComment.id"
+                                            :text="parentComment.review"
+                                            :name="parentComment.name"
+                                            :stars="parentComment.stars"
+                                            :country_code="parentComment.country_code"
+                                            :country_name="parentComment.country"
+                                            :created_at="parentComment.created_at"
+                                            scroll="false"
+                                    ></fv-comment-answer>
+                                </li>
+                            </template>
+                        </ul>
+
+
                     </li>
                 </template>
                 <li v-show="comments.length == 0">
@@ -94,6 +115,7 @@
 
 <script>
     import FvComment from './Comment'
+    import FvCommentAnswer from './CommentAnswer'
     import FvForm from './CommentsForm'
     import FvCommentsStarsFilter from './CommentsStarsFilter'
     import queryString from 'query-string';
@@ -102,7 +124,7 @@
 
     export default {
         name: "fv-comments-list",
-        components: {FvComment, FvForm, FvCommentsStarsFilter},
+        components: {FvComment, FvForm, FvCommentsStarsFilter, FvCommentAnswer},
         props: ['service_id', 'recaptcha_site_key'],
         data() {
             return {

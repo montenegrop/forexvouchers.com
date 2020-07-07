@@ -32,6 +32,10 @@
     }
   }
 
+  .child-comment {
+    border-left: 1rem solid $comment-answer;
+  }
+
   .light-hover:hover {
     background-color: darken(white, 5%) !important;
   }

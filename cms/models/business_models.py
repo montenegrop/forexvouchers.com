@@ -664,16 +664,14 @@ class Comment(models.Model):
     active = models.BooleanField(default=False)
     country_code = models.CharField(max_length=2)
 
-    panels = [
-        FieldPanel("review"),
-        FieldPanel("service"),
-        FieldPanel("stars"),
-        FieldPanel("name"),
-        FieldPanel("country"),
-        FieldPanel("parent_comment"),
-        FieldPanel("active"),
-        FieldPanel("country_code")
-    ]
+    panels = [MultiFieldPanel([
+        AutocompletePanel("service", target_model="cms.Service", classname="col6"),
+        FieldPanel("stars", classname="col6"),
+        FieldPanel("name", classname="col6"),
+        FieldPanel("parent_comment", classname="col6 hidden", widget=forms.HiddenInput),
+        FieldPanel("active", classname="col6"),
+        FieldPanel("review", widget=forms.Textarea, classname="col12"),
+    ], heading="")]
 
     def __str__(self):
         return self.review[:20]
