@@ -1,6 +1,6 @@
 <template>
     <div class="container middleware-main">
-        <h2 class="title"> {{ voucher.name }}</h2>
+        <h2 class="title">{{ voucher.discount_percent }}% OFF {{ voucher.name }}</h2>
         <div class="row border border-light no-float ">
 
             <div class="col information">
@@ -18,12 +18,9 @@
                     </b-col>
                 </div>
 
-                <div class="row  product-info-discount name justify-content-end">
-                    <h4 class="discount mr-3">{{ voucher.discount_percent }}% OFF</h4>
-                </div>
-                <div class="row  description" v-html="voucher.description"></div>
-                <div class="row  icons justify-content-center">
-                    <p v-if="voucher.never_expires" class="icons">
+                <div class="row description mx-5" v-html="voucher.description"></div>
+                <div class="row icons justify-content-center">
+                    <p v-if="voucher.never_expires" class="icons text-success">
                         <i class="fas fa-hourglass-half"></i> Never Expires
                     </p>
                     <p v-else class="icons"><i class="fas fa-hourglass-half"></i>
@@ -53,7 +50,7 @@
                         </p>
                     </b-col>
                     <b-col class="text-right">
-                        <Likes classes="btn btn-sm" :likes="voucher.likes" :dislikes="voucher.dislikes"
+                        <Likes classes="btn btn-sm likes-width" :likes="voucher.likes" :dislikes="voucher.dislikes"
                                :id="voucher.id"></Likes>
                     </b-col>
                 </div>
