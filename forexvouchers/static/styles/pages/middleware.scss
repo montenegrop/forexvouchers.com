@@ -22,7 +22,7 @@
   }
 
   .description {
-    font-family: ralewayextrabold_italic;
+    //font-family: ralewayextrabold_italic;
     color: $gray-800;
   }
 
@@ -108,4 +108,8 @@
 
 .copy-code {
   border-radius: 0;
+}
+
+.likes-width {
+  width: 50px;
 }
