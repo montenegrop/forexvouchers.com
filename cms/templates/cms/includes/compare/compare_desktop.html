@@ -101,6 +101,25 @@
             </tr>
         {% endfor %}
 
+        {% for field1 in service_helper1.trading_account %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">{{ 'Trading Account' }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.trading_account %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+
         {% for field1 in service_helper1.trading_setup %}
             {% if forloop.counter == 1 %}
                 <tr>
@@ -148,6 +167,25 @@
                 <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
                 <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
                 {% for field2 in service_helper2.details %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        {% for field1 in service_helper1.about %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">Details
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.about %}
                     {% if field1.label == field2.label %}
                         <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
                     {% endif %}

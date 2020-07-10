@@ -15,6 +15,20 @@
         </tr>
     {% endfor %}
 
+    {% for field1 in service_helper.trading_account %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Trading Account' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+            <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
     {% for field1 in service_helper.trading_setup %}
         {% if forloop.counter == 1 %}
             <tr>
@@ -54,7 +68,19 @@
         <tr>
             <td class="border border-light" scope="row">{{ field1.label }}:</td>
             <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
 
+    {% for field1 in service_helper.about %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Details' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" colspan="2">{{ field1 | safe }}</td>
         </tr>
     {% endfor %}
 
