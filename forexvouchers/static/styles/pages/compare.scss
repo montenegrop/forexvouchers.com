@@ -53,10 +53,16 @@
       color: $cyan;
     }
     height: 100%;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   ul.nav-tabs {
     align-items: stretch;
+  }
+
+  .icon {
+    margin: 0 2px !important;
   }
 
   .service-name {

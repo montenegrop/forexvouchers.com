@@ -1,50 +1,6 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 
-<div class="row col-12 sticky d-none">
-
-    <div class="col-2"></div>
-
-    <div class="col-5">
-
-
-    </div>
-
-    <div class="col-5">
-
-        <div class="row justify-content-center">
-
-            <b-col class="col-2">
-
-            </b-col>
-
-            <b-col class="col-6 compare-overview">
-
-                {% image service2.logo max-112x70 %}
-
-                <div class="rate-container flexible">
-                    <rate :length="5" :value="{{ service2.rate }}" :readonly="true"/>
-                </div>
-
-            </b-col>
-
-            <b-col class="col-4 compare-overview">
-
-                <a href="{{ affiliate2.getLink }}">
-
-                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
-
-                </a>
-
-            </b-col>
-
-
-        </div>
-
-    </div>
-
-</div>
-
 <div class="row">
 
 
@@ -52,7 +8,7 @@
         <b-tab active>
             <template v-slot:title>
                 <div class="align-center">
-                    {% image service1.logo max-112x70 %}
+                    {% image service1.logo max-56x35 %}
                         <div class="service-name">{{ service1.name }}</div>
 
                     <div class="rate-container flexible">
@@ -68,7 +24,7 @@
         <b-tab>
             <template v-slot:title>
                 <div class="align-center">
-                    {% image service2.logo max-112x70 %}
+                    {% image service2.logo max-56x35 %}
                     <div class="service-name">{{ service2.name }}</div>
 
                     <div class="rate-container flexible">
