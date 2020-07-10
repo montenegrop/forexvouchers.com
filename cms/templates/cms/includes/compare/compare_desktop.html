@@ -17,7 +17,9 @@
             <b-col class="col-6 compare-overview">
 
                 {% image service1.logo max-112x70 %}
-                <div class="service-name">{{ service1.name }}</div>
+                <a class="service-name" href="{{ service1.url }}">
+                    {{ service1.name }}
+                </a>
 
                 <div class="rate-container flexible">
                     <rate :length="5" :value="{{ service1.rate }}" :readonly="true"/>
@@ -51,7 +53,9 @@
             <b-col class="col-6 compare-overview">
 
                 {% image service2.logo max-112x70 %}
-                <div class="service-name">{{ service2.name }}</div>
+                <a class="service-name" href="{{ service2.url }}">
+                    {{ service2.name }}
+                </a>
 
                 <div class="rate-container flexible">
                     <rate :length="5" :value="{{ service2.rate }}" :readonly="true"/>
