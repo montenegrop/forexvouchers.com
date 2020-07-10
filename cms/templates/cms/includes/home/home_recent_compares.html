@@ -30,7 +30,7 @@
 
                         <div class="compare-stars rate-container">
                             <p class="text-primary mb-0 pl-1">{{ compare.service2.name }}</p>
-                            <rate style="min-width: 85px" :length="5" :value="3"
+                            <rate style="min-width: 85px" :length="5" :value="{{ compare.service2.get_avg_rate }}"
                                   readonly></rate>
                         </div>
                     </div>

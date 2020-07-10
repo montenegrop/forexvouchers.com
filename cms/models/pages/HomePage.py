@@ -47,7 +47,7 @@ class HomePage(RoutablePageMixin, PageLDMixin, TranslatablePage, Page):
         context['recent_comments'] = []
         context['categories'] = Category.objects.all().order_by('name')
         context['comments'] = [comment.toDict() for comment in Comment.objects.filter(active=True, service__isnull=False, parent_comment__isnull=True).order_by('-created_at')[:5]]
-        context['compares'] = [compare for compare in Compare.objects.all().order_by('-count')][:8]
+        context['compares'] = [compare for compare in Compare.objects.filter(service1__isnull=False, service2__isnull=False).order_by('-count')][:8]
         context['premium_services_models'] = services
         context['premium_services'] = [ServiceHelper(service).to_dict() for service in services]
         context['premium_partners'] = Service.objects.filter(premium=True)[:8]
