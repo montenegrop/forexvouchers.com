@@ -28,7 +28,7 @@ class ServicePage(RoutablePageMixin, PageLDMixin, Page):
         context['service'] = service
         context['comments'] = get_comments_by_service(service)
         context['services'] = get_comparable_services(service, [BROKERS])
-        context['compare'] = get_other_services_names(service, [BROKERS])
+        context['compare'] = get_other_services_names(service, service.getCategoriesIDs())
         context['affiliate'] = service.affiliate
         context['vouchers'] = get_vouchers_by_service(service)
         context['products'] = get_products_by_service(service)

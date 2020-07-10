@@ -7,7 +7,8 @@
             <b-col md="3" align-self="center">
                 <img :src="voucher.logo" class="product-image">
                 <div class="align-center">
-                    <Likes :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
+                    <Likes v-if="showLikes" :likes="voucher.likes" :dislikes="voucher.dislikes"
+                           :id="voucher.id"></Likes>
                 </div>
             </b-col>
 
@@ -26,7 +27,7 @@
 
             <b-col md="3" align-self="center">
 
-                <div class="product-link-discount">
+                <div class="product-link-discount mb-2 d-flex justify-content-center">
 
                     <a :href="voucher.middleware_url">
 
@@ -78,8 +79,8 @@
 
     export default {
         name: "fv-vouchers-discount",
-        components: { Likes },
-        props: ['voucher'],
+        components: {Likes},
+        props: {voucher: {type: Object}, showLikes: {type: Boolean, default: true}},
         data() {
             return {}
         }

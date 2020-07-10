@@ -1,11 +1,25 @@
 <template>
     <div>
-        <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
+        <b-row>
+            <b-col cols="9">
+                <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
+            </b-col>
+            <b-col cols="3">
+                <div v-if="$mq === 'sm'" class="show-more">
+                    <b-button size="sm" variant="outline-info" href="#"
+                              @click.stop.prevent="visible=!visible">
+                        {{ showOrHideFilters }}
+                    </b-button>
+                </div>
+            </b-col>
+        </b-row>
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
-                <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
-                <fv-filter-type :options="filterTypes" :onChange="onTypeChange"></fv-filter-type>
-                <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
+                <b-collapse id="collapse-4" v-model="visible" class="mt-2">
+                    <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
+                    <fv-filter-type :options="filterTypes" :onChange="onTypeChange"></fv-filter-type>
+                    <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
+                </b-collapse>
             </b-col>
             <b-col md="9">
                 <div>
@@ -42,12 +56,12 @@
     import LetterFilter from '../LetterFilter/index'
     import FvSort from './VoucherSorting'
 
-
     export default {
         name: "fv-vouchers-view",
         components: {FvList, FvFilterType, FvFilterService, FvFilterCategory, FvLetterFilter: LetterFilter, FvSort},
         data() {
             return {
+                visible: true,
                 filterTypes: {},
                 type: 'discount,promocode,offer',
                 filterServices: [],
@@ -67,6 +81,9 @@
             }
         },
         watch: {
+            $mq: function () {
+                this.smallBreakpoint();
+            },
             type: function () {
                 this.getData();
             },
@@ -84,6 +101,9 @@
             this.getData()
         },
         methods: {
+            smallBreakpoint: function () {
+                this.visible = this.$mq != 'sm'
+            },
             async getData() {
                 const url = `/api/vouchers?voucher_types=${
                     this.type}&services=${
@@ -123,5 +143,10 @@
                 this.sort = $event.sort;
             }
         },
+        computed: {
+            showOrHideFilters: function () {
+                return this.visible ? 'hide filters' : 'show filters'
+            }
+        }
     }
 </script>

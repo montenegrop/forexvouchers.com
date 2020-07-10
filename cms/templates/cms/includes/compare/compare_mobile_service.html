@@ -1,0 +1,88 @@
+<table class="table text-dark table-home table-bordered border-warning table-service no-shadow" width="100%">
+    <tbody>
+
+    {% for field1 in service_helper.company_profile %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Company Profile' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+            <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for field1 in service_helper.trading_account %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Trading Account' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+            <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for field1 in service_helper.trading_setup %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Trading Setup' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+            <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for field1 in service_helper.customer_support %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Customer Support' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+            <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for field1 in service_helper.details %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Details' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row">{{ field1.label }}:</td>
+            <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for field1 in service_helper.about %}
+        {% if forloop.counter == 1 %}
+            <tr>
+                <td class="text-center border border-light text-dark font-weight-bold bg-light"
+                    scope="row"
+                    colspan="3">{{ 'Details' }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="border border-light" scope="row" colspan="2">{{ field1 | safe }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>

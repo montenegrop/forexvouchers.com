@@ -16,14 +16,28 @@ class ForexServicesView(View):
         category_counts = Service.objects.select_related('category') \
             .filter(~Q(category=BROKERS)) \
             .values('category__name', 'category__short_name', 'category') \
-            .annotate(total=Count('category'))
+            .annotate(total=Count('category')) \
+            .distinct()
 
-        return list(
+
+
+        items = list(
             map(lambda x: {'name': x['category__name'],
                            'short_name': x['category__short_name'],
                            'id': x['category'],
                            'total': x['total']},
                 category_counts))
+
+        category_names = set()
+        new_list = []
+        for obj in items:
+            if obj['name'] not in category_names:
+                new_list.append(obj)
+                category_names.add(obj['name'])
+
+        return new_list
+
+
 
     def getTradingTypes(self):
         services = Service.objects.filter(~Q(category=BROKERS)) \

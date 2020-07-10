@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5 class="filter-titles">Type</h5>
+        <fv-filter-decorator title="Type">
 
         <b-row>
             <b-col cols="9">
@@ -32,14 +32,18 @@
                     </b-list-group-item>
                 </b-list-group>
             </b-col>
-
-
+        </b-row>
+        </fv-filter-decorator>
     </div>
 </template>
 
 <script>
+    import FvFilterDecorator from '../FilterDecorator/index'
+
+
     export default {
         props: ["options", "onChange"],
+        components: {FvFilterDecorator},
 
         data() {
             return {

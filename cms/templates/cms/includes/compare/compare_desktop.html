@@ -1,0 +1,205 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<div class="row col-12 sticky">
+
+    <div class="col-2"></div>
+
+    <div class="col-5">
+
+        <div class="row justify-content-center">
+
+            <b-col class="col-2">
+
+            </b-col>
+
+
+            <b-col class="col-6 compare-overview">
+
+                {% image service1.logo max-112x70 %}
+                <a class="service-name" href="{{ service1.url }}">
+                    {{ service1.name }}
+                </a>
+
+                <div class="rate-container flexible">
+                    <rate :length="5" :value="{{ service1.rate }}" :readonly="true"/>
+                </div>
+
+            </b-col>
+
+            <b-col class="col-4 compare-overview">
+
+                <a href="{{ affiliate1.getLink }}">
+
+                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                </a>
+
+            </b-col>
+
+
+        </div>
+
+    </div>
+
+    <div class="col-5">
+
+        <div class="row justify-content-center">
+
+            <b-col class="col-2">
+
+            </b-col>
+
+            <b-col class="col-6 compare-overview">
+
+                {% image service2.logo max-112x70 %}
+                <a class="service-name" href="{{ service2.url }}">
+                    {{ service2.name }}
+                </a>
+
+                <div class="rate-container flexible">
+                    <rate :length="5" :value="{{ service2.rate }}" :readonly="true"/>
+                </div>
+
+            </b-col>
+
+            <b-col class="col-4 compare-overview">
+
+                <a href="{{ affiliate2.getLink }}">
+
+                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                </a>
+
+            </b-col>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+
+    <table class="table text-dark table-home table-bordered border-warning table-service no-shadow">
+        <tbody>
+
+
+        {% for field1 in service_helper1.company_profile %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">{{ 'Company Profile' }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.company_profile %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        {% for field1 in service_helper1.trading_account %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">{{ 'Trading Account' }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.trading_account %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+
+        {% for field1 in service_helper1.trading_setup %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">{{ 'Trading Setup' }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.trading_setup %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        {% for field1 in service_helper1.customer_support %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">{{ 'Customer Support' }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.customer_support %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        {% for field1 in service_helper1.details %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">{{ 'Details' }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row" width="40%">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.details %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        {% for field1 in service_helper1.about %}
+            {% if forloop.counter == 1 %}
+                <tr>
+                    <td class="text-center border border-light text-dark font-weight-bold bg-light" scope="row"
+                        colspan="3">Details
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="border border-light" scope="row" width="20%">{{ field1.label }}:</td>
+                <td class="border border-light" scope="row">{{ field1 | safe }}</td>
+                {% for field2 in service_helper2.about %}
+                    {% if field1.label == field2.label %}
+                        <td class="border border-light" scope="col" width="40%">{{ field2 | safe }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+</div>

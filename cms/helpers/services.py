@@ -15,6 +15,8 @@ def get_service_context(service):
     data['slug'] = service.slug
     data['category'] = service.category
     data['logo'] = service.logo
+    data['rate'] = service.get_avg_rate
+    data['url'] = service.url
     return data
 
 
