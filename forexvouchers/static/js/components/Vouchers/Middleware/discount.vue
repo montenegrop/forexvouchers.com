@@ -42,11 +42,11 @@
                     <b-col>
                         <p class="mb-0"><i class="fas fa-external-link-square-alt"></i>
                             <a class="product-service-link"
-                               :href="voucher.service_affiliate.url"></a>
+                               :href="voucher.service_affiliate.url">Website</a>
                         </p>
 
                         <p><i class="fas fa-eye"></i>
-                            {{ voucher.affiliate.clicks }} Views
+                            {{ voucher.service_affiliate.clicks }} Views
                         </p>
                     </b-col>
                     <b-col class="text-right">

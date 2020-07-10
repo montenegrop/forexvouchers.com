@@ -52,7 +52,7 @@
 
                         <p class="mb-0"><i class="fas fa-external-link-square-alt"></i>
                             <a class="product-service-link"
-                                        :href="voucher.service_affiliate.url">website </a>
+                                        :href="voucher.service_affiliate.url">website</a>
 
                         </p>
 
