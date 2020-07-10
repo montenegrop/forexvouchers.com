@@ -46,4 +46,7 @@ If python error happens on production you can use these logs:
 - For python errors: /var/log/fxvoucher.err.log
 - For background jobs: /var/log/forexvouchers-cron.log
 
+### Development environment:
 
+- Important: when opening the website, open `http://localhost:8000/en` cause there won't be an automatic redirect in 
+your dev environment from `http://localhost:8000/` to `http://localhost:8000/en`
