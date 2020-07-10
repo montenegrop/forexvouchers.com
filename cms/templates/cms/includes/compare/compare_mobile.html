@@ -1,0 +1,87 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<div class="row col-12 sticky d-none">
+
+    <div class="col-2"></div>
+
+    <div class="col-5">
+
+
+    </div>
+
+    <div class="col-5">
+
+        <div class="row justify-content-center">
+
+            <b-col class="col-2">
+
+            </b-col>
+
+            <b-col class="col-6 compare-overview">
+
+                {% image service2.logo max-112x70 %}
+
+                <div class="rate-container flexible">
+                    <rate :length="5" :value="{{ service2.rate }}" :readonly="true"/>
+                </div>
+
+            </b-col>
+
+            <b-col class="col-4 compare-overview">
+
+                <a href="{{ affiliate2.getLink }}">
+
+                    <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+
+                </a>
+
+            </b-col>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+
+    <b-tabs nav-wrapper-class="sticky" content-class="mt-3 tabs-margin">
+        <b-tab active>
+            <template v-slot:title>
+                <div class="align-center">
+                    {% image service1.logo max-112x70 %}
+                        <div class="service-name">{{ service1.name }}</div>
+
+                    <div class="rate-container flexible">
+                        <rate :length="5" :value="{{ service1.rate }}" :readonly="true"/>
+                    </div>
+                </div>
+            </template>
+            <b-card-text>
+                <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+                {% include 'includes/compare/compare_mobile_service.html' with service_helper=service_helper1 %}
+            </b-card-text>
+        </b-tab>
+        <b-tab>
+            <template v-slot:title>
+                <div class="align-center">
+                    {% image service2.logo max-112x70 %}
+                    <div class="service-name">{{ service2.name }}</div>
+
+                    <div class="rate-container flexible">
+                        <rate :length="5" :value="{{ service2.rate }}" :readonly="true"/>
+                    </div>
+                </div>
+            </template>
+            <b-card-text>
+                                <button type="button" class="btn btn-success font-weight-bold h4">website</button>
+                {% include 'includes/compare/compare_mobile_service.html' with service_helper=service_helper2 %}
+            </b-card-text>
+        </b-tab>
+    </b-tabs>
+
+
+</div>

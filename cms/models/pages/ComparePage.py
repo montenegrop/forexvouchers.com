@@ -40,6 +40,13 @@ class ComparePage(RoutablePageMixin, PageLDMixin, Page):
         context['service1'] = get_service_context(service1)
         context['service2'] = get_service_context(service2)
 
+        cats1 = service1.category.all()
+        # Merging both categories
+        for category in service2.category.all():
+            service1.category.add(category)
+        for category in cats1:
+            service2.category.add(category)
+
         context['service_helper1'] = ServiceHelper(service1)
         context['service_helper2'] = ServiceHelper(service2)
 

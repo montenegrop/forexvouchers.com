@@ -36,12 +36,35 @@
     width: 100%;
     background-color: white;
     border-bottom: 1px solid #ccc;
-    z-index: 10000;
+    z-index: 100;
     margin-bottom: 25px;
     padding-bottom: 8px;
     padding-top: 8px;
   }
 
 
+  .Rate {
+    display: flex;
+  }
+
+  .nav-link {
+    color: $dark;
+    &.active, &:hover {
+      color: $cyan;
+    }
+    height: 100%;
+  }
+
+  ul.nav-tabs {
+    align-items: stretch;
+  }
+
+  .service-name {
+    color: $cyan
+  }
+
+  .tabs {
+    width: 100%;
+  }
 
 }
