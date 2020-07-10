@@ -23,9 +23,16 @@
 | admin    | admin    |
 
 ### Wagtail plugins
+
+##### Main:
  - [x] [Translations](https://github.com/wagtail/wagtailtrans)
  - [x] [Schema.org JSON-LD](https://github.com/neon-jungle/wagtail-schema.org) 
  - [x] [Autocomplete](https://github.com/wagtail/wagtail-autocomplete) 
+
+##### More plugins: 
+   - [requirements.txt](https://github.com/ahmerkhanz/fxvouchers/blob/master/requirements.txt) for python packages
+   - [package.json](https://github.com/ahmerkhanz/fxvouchers/blob/master/package.json#L40) for Javascript packages
+   
 
 
 ### Deployment docs
@@ -51,4 +58,7 @@ If python error happens on production you can use these logs:
 - Cache refresh, Whilst cache is refreshed once you edit a service,  sometimes you might need to make a manual refresh. To do that, enter the server and run `redis-cli FLUSHALL` 
 - When opening the website in your dev environment, open `http://localhost:8000/en` cause there won't be an automatic redirect in 
 your dev environment from `http://localhost:8000/` to `http://localhost:8000/en`. On production, ngninx takes care of that
-
+- If some service stops working just restart the server. All services are autostarted when the server is boot. Otherwise you could:
+  * Restart nginx: `sudo service nginx restart`
+  * Restart supervisor `sudo service supervisor restart`
+  If there are other issues, please check production logs, but the safest option is just to restarting the server
