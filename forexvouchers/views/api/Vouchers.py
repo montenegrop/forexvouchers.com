@@ -80,7 +80,7 @@ class VouchersView(View):
         for voucherType in voucherTypes:
             typeConditions = Q(**{voucherType + '__isnull': False}) if typeConditions is None else typeConditions | Q(
                 **{voucherType + '__isnull': False})
-        serviceConditions = Q()
+        serviceConditions = Q(service_id__in=services) if len(services) else Q()
         categoryConditions = Q(service__category__in=categories) if len(categories) else Q()
         voucherConditions = ~Q(id=voucherId) & Q(service__category__in=voucher.service.getCategoriesIDs()) if len(
             voucherId) else Q()
