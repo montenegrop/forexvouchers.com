@@ -23,7 +23,7 @@
 
             <b-col md="3" align-self="center">
 
-                <div class="product-link-discount">
+                <div class="product-link-discount  mb-2 d-flex justify-content-center">
 
                     <a :href="voucher.middleware_url">
 
