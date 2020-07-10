@@ -45,11 +45,8 @@
                                :href="voucher.service_affiliate.url" target="_blank">Website</a>
                         </p>
 
-
-
-
                         <p><i class="fas fa-eye"></i>
-                            {{ voucher.service_affiliate.clicks }} Views
+                            {{ clicks_large }} Views
                         </p>
                     </b-col>
                     <b-col class="text-right">
@@ -81,7 +78,13 @@
     export default {
         name: "fv-middleware-discount",
         components: {FvVouchersHome: VouchersHome, Likes},
-        props: ["vouch"],
+        props: {
+            vouch: { type: Object },
+            clicks_large: {
+                default: '0',
+                type: String
+            }
+        },
         data() {
             return {
                 voucher: JSON.parse(this.vouch),

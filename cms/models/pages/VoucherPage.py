@@ -55,6 +55,7 @@ class VoucherPage(RoutablePageMixin, PageLDMixin, Page):
         context['voucher_type'] = voucher.get_type()
         context['voucher'] = json.dumps(voucher.toDict())
 
+        context['clicks_large'] = voucher.service.affiliate.getClicks()
         context['voucher_model'] = voucher
 
         return render(request, "../templates/cms/vouchers_middleware.html", context)

@@ -12,19 +12,19 @@
 
         {% if voucher_type == 'Discount' %}
 
-            <fv-middleware-discount vouch="{{ voucher }}"></fv-middleware-discount>
+            <fv-middleware-discount vouch="{{ voucher }}" clicks_large="{{ clicks_large }}"></fv-middleware-discount>
 
         {% endif %}
 
         {% if voucher_type == 'PromoCode' %}
 
-            <fv-middleware-promocode vouch="{{ voucher }}" sort="'premium'"></fv-middleware-promocode>
+            <fv-middleware-promocode vouch="{{ voucher }}" sort="'premium'" clicks_large="{{ clicks_large }}"></fv-middleware-promocode>
 
         {% endif %}
 
         {% if voucher_type == 'Offer' %}
 
-            <fv-middleware-offer vouch="{{ voucher }}" sort="'premium'"></fv-middleware-offer>
+            <fv-middleware-offer vouch="{{ voucher }}" sort="'premium'" clicks_large="{{ clicks_large }}"></fv-middleware-offer>
 
         {% endif %}
 
