@@ -42,7 +42,7 @@
                     <b-col>
                         <p class="mb-0"><i class="fas fa-external-link-square-alt"></i>
                             <a class="product-service-link"
-                               :href="voucher.service_affiliate.url">Website</a>
+                               :href="voucher.service_affiliate.url" target="_blank">Website</a>
                         </p>
 
                         <p><i class="fas fa-eye"></i>
