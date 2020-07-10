@@ -40,9 +40,9 @@
 
                 <div class="product-service row">
                     <b-col>
-                        <p><i class="fas fa-external-link-square-alt"></i>
+                        <p class="mb-0"><i class="fas fa-external-link-square-alt"></i>
                             <a class="product-service-link"
-                               :href="voucher.service_affiliate.url"></a> website
+                               :href="voucher.service_affiliate.url"></a>
                         </p>
 
                         <p><i class="fas fa-eye"></i>

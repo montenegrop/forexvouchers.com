@@ -45,10 +45,10 @@
 
                 <div class="product-service row">
                     <b-col>
-                        <p><i class="fas fa-external-link-square-alt"></i>
-                            External <a class="product-service-link"
-                                        :href="voucher.service_affiliate.url"><u>{{ voucher.service_name }}</u> </a>
-                            website
+                        <p class="mb-0"><i class="fas fa-external-link-square-alt"></i>
+                            <a class="product-service-link"
+                                        :href="voucher.service_affiliate.url">website </a>
+
                         </p>
 
                         <p><i class="fas fa-eye"></i>
