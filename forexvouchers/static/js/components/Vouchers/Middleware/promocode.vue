@@ -52,9 +52,10 @@
 
                         <p class="mb-0"><i class="fas fa-external-link-square-alt"></i>
                             <a class="product-service-link"
-                                        :href="voucher.service_affiliate.url" target="_blank">website</a>
+                               :href="voucher.service_affiliate.url" target="_blank">website</a>
 
                         </p>
+
 
                         <p><i class="fas fa-eye"></i>
                             {{ voucher.service_affiliate.clicks }} Views

@@ -45,6 +45,9 @@
                                :href="voucher.service_affiliate.url" target="_blank">Website</a>
                         </p>
 
+
+
+
                         <p><i class="fas fa-eye"></i>
                             {{ voucher.service_affiliate.clicks }} Views
                         </p>
