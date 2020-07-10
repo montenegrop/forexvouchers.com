@@ -49,7 +49,7 @@
             return {
                 startingLetter: '',
                 search: '',
-                limit: 3,
+                limit: 2,
             }
         },
 
