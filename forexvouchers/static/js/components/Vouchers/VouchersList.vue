@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="voucher in vouchers">
-            <fv-voucher :voucher="voucher"></fv-voucher>
+            <fv-voucher :voucher="voucher" :show-likes="false"></fv-voucher>
         </div>
     </div>
 </template>

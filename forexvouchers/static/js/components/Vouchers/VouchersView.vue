@@ -3,7 +3,7 @@
         <h2 class="filter-titles filter-titles-main">Search for Discounts, Offers and PromoCodes:</h2>
         <b-row>
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
-                <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
+                <!--fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service -->
                 <fv-filter-type :options="filterTypes" :onChange="onTypeChange"></fv-filter-type>
                 <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
             </b-col>
