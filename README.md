@@ -46,7 +46,9 @@ If python error happens on production you can use these logs:
 - For python errors: /var/log/fxvoucher.err.log
 - For background jobs: /var/log/forexvouchers-cron.log
 
-### Development environment:
+### Common issues:
 
-- Important: when opening the website, open `http://localhost:8000/en` cause there won't be an automatic redirect in 
-your dev environment from `http://localhost:8000/` to `http://localhost:8000/en`
+- Cache refresh, Whilst cache is refreshed once you edit a service,  sometimes you might need to make a manual refresh. To do that, enter the server and run `redis-cli FLUSHALL` 
+- When opening the website in your dev environment, open `http://localhost:8000/en` cause there won't be an automatic redirect in 
+your dev environment from `http://localhost:8000/` to `http://localhost:8000/en`. On production, ngninx takes care of that
+
