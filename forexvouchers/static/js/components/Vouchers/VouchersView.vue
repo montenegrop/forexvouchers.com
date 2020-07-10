@@ -42,7 +42,6 @@
     import LetterFilter from '../LetterFilter/index'
     import FvSort from './VoucherSorting'
 
-
     export default {
         name: "fv-vouchers-view",
         components: {FvList, FvFilterType, FvFilterService, FvFilterCategory, FvLetterFilter: LetterFilter, FvSort},
