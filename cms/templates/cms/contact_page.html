@@ -9,46 +9,48 @@
             <h2 class="service-title left no-shadow text-dark">{{ self.contact_title }}</h2>
         </div>
         <div class="mb-5">
-            <form action="{% pageurl page %}" class="ml-0 ml-sm-5" method="POST" novalidate>
-                {% csrf_token %}
 
-                <div class="row">
-                    {% for field in form.visible_fields %}
-                        {% if field.name != 'wagtailcaptcha' and field.name != 'subscribe' %}
-                            <div class="col col-12 {% if field.name != 'message-for-us' %}col-md-6{% endif %}">
-                                <div class="info form-group">
-                                    {{ field.label_tag }}
-                                    {{ field }}
-                                    <div class="text-danger contact-error">
-                                        {{ field.errors }}
+            <div class="col-lg-8 px-0">
+                <form action="{% pageurl page %}" class="ml-0 ml-sm-5" method="POST" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for field in form.visible_fields %}
+                            {% if field.name != 'wagtailcaptcha' and field.name != 'subscribe' %}
+                                <div class="col col-12">
+                                    <div class="info form-group">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        <div class="text-danger contact-error">
+                                            {{ field.errors }}
+                                        </div>
+                                        {{ field.help_text }}
                                     </div>
-                                    {{ field.help_text }}
                                 </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
 
-                <div class="col col-12">
-                    <div class="info form-group">
-                        <div class="d-flex mailchimp-agreement d-inline m-auto ml-auto">
-                            {{ form.subscribe }}
-                            {{ form.subscribe.help_text }}
-                        </div>
-                        <div class="text-danger contact-error">
-                            {{ form.subscribe.errors }}
+                    <div class="col col-12">
+                        <div class="info form-group">
+                            <div class="d-flex mailchimp-agreement d-inline m-auto ml-auto">
+                                {{ form.subscribe }}
+                                {{ form.subscribe.help_text }}
+                            </div>
+                            <div class="text-danger contact-error">
+                                {{ form.subscribe.errors }}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="gc-reset">
-                    {{ form.wagtailcaptcha }}
-                </div>
+                    <div class="gc-reset">
+                        {{ form.wagtailcaptcha }}
+                    </div>
 
-                <button type="submit" class="btn btn-success">
-                    Submit
-                </button>
-            </form>
+                    <button type="submit" class="btn btn-success">
+                        Submit
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

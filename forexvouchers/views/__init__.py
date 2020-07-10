@@ -100,7 +100,7 @@ class CommentsView(View):
                           review=data['review'],
                           stars=data['rate'],
                           name=data['name'],
-                          active=True)
+                          active=False)
 
         g = GeoIP2()
         try:

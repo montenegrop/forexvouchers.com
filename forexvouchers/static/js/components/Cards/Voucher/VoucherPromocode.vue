@@ -7,13 +7,21 @@
             <b-col md="3" align-self="center">
                 <img :src="voucher.logo" class="product-image">
                 <div class="align-center">
-                    <Likes v-if="showLikes" :likes="voucher.likes" :dislikes="voucher.dislikes" :id="voucher.id"></Likes>
+                    <Likes v-if="showLikes" :likes="voucher.likes" :dislikes="voucher.dislikes"
+                           :id="voucher.id"></Likes>
                 </div>
             </b-col>
 
             <b-col md="5" align-self="center" class="product-info-discount">
 
-                <p> {{ voucher.name }} </p>
+                <div class="product-info hover-link text-left p-0">
+                    <a :href="voucher.middleware_url">
+                        <h5>
+                            {{ voucher.name }}
+                        </h5>
+                    </a>
+                </div>
+
                 <div class="vouchers-description" v-html="voucher.description"/>
             </b-col>
 
@@ -76,7 +84,7 @@
     export default {
         name: "fv-vouchers-promocode",
         components: {FvPromocodeButton, Likes},
-        props: { voucher: { type: Object}, showLikes: { type: Boolean, default: true }},
+        props: {voucher: {type: Object}, showLikes: {type: Boolean, default: true}},
         data() {
             return {}
         }

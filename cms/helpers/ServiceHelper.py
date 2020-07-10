@@ -90,6 +90,10 @@ class FlagField(MultiField):
     def to_csv(self):
         return ','.join([value.code for value in getattr(self.service, self.key).all()])
 
+class LeverageField(Field):
+    def __str__(self):
+        return f"{getattr(self.service, self.key)}x" if getattr(self.service, self.key) else '-'
+
 
 class LogoField(MultiField):
     def __str__(self):
@@ -144,7 +148,7 @@ class ServiceHelper(object):
             MultiField(service, 'withdraw_method', 'ta', 'Withdraw Method', [BROKERS]),  #
             Field(service, 'minimum_deposit', 'ta', 'Minimum deposit ($)', [BROKERS]),
             Field(service, 'commission', 'ta', 'Commission ($)', [BROKERS]),
-            Field(service, 'leverage', 'ta', 'Leverage', [BROKERS]),
+            LeverageField(service, 'leverage', 'ta', 'Leverage', [BROKERS]),
             Field(service, 'spread', 'ta', 'Spread', [BROKERS]),
             Field(service, 'min_lot_size', 'ta', 'Min lot size', [BROKERS]),  #
             MultiField(service, 'security_of_funds', 'ta', 'Security of Funds', [BROKERS]),  #

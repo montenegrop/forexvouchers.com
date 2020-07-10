@@ -14,8 +14,13 @@
 
             <b-col md="5" align-self="center">
 
-                <p class="discount-info discount-info-name"> {{ voucher.name }}</p>
-
+                <div class="product-info hover-link text-left p-0">
+                    <a :href="voucher.middleware_url">
+                        <h5>
+                            {{ voucher.name }}
+                        </h5>
+                    </a>
+                </div>
                 <div class="discount-info discount-info-description" v-html="voucher.description"/>
 
             </b-col>
