@@ -1,13 +1,5 @@
-from captcha.fields import ReCaptchaField
-from django.core.mail.backends.smtp import EmailBackend
-from wagtail.contrib.forms.forms import FormBuilder
-from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
-from wagtailschemaorg.models import PageLDMixin
-from wagtailschemaorg.utils import extend
-
 from cms.helpers.cache_decorators import cache_to_dict
-from cms.models.site_settings import GeneralSettings
-from cms.models.fields import *
+
 
 from django_extensions.db.fields import AutoSlugField
 from django import forms
@@ -16,21 +8,13 @@ import datetime
 
 from modelcluster.models import ClusterableModel
 from wagtail.core.models import Orderable, Site
-from wagtail.core.fields import RichTextField
 from wagtail.search import index
-from modelcluster.fields import ParentalKey
 from modelcluster.fields import ParentalManyToManyField
 
 from wagtailautocomplete.edit_handlers import AutocompletePanel
-from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
-from wagtail.core import hooks
 
-from wagtail.admin.edit_handlers import (
-    MultiFieldPanel,
-    InlinePanel,
-    FieldPanel,
-)
+
 
 # notifications:
 from django.db import models
@@ -53,7 +37,6 @@ from wagtail.contrib.forms.models import (
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-# from wagtail.core.blocks import ChoiceBlock
 from cms.json_ld.ServiceLD import ServiceLD
 from cms.json_ld.VoucherLD import VoucherLD
 

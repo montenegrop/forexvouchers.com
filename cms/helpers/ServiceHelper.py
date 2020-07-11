@@ -1,5 +1,6 @@
 from django.db import models
 
+from cms.helpers import not_expired_condition
 from cms.helpers.cache_decorators import cache_service_dict
 
 BROKERS = 1
@@ -223,6 +224,6 @@ class ServiceHelper(object):
         obj['url'] = self.service.url
         obj['avg_rate'] = self.service.get_avg_rate
         obj['count_rate'] = self.service.get_count_rate
-        obj['voucher_count'] = self.service.voucher_set.count()
+        obj['voucher_count'] = self.service.voucher_set.filter(not_expired_condition()).count()
         obj['slug'] = self.service.slug
         return obj
