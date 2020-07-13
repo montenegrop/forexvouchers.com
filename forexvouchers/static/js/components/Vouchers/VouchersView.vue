@@ -17,7 +17,7 @@
             <b-col md="3" class="vouchers-menu vouchers-menu-margin-top">
                 <b-collapse id="collapse-4" v-model="visible" class="mt-2">
                     <fv-filter-service :options="filterServices" :onChange="onServiceChange"></fv-filter-service>
-                    <fv-filter-type :options="filterTypes" :onChange="onTypeChange"></fv-filter-type>
+                    <fv-filter-type :options="filterTypes" :selected="type" :onChange="onTypeChange"></fv-filter-type>
                     <fv-filter-category :options="filterCategories" :onChange="onCategoryChange"></fv-filter-category>
                 </b-collapse>
             </b-col>
@@ -49,6 +49,7 @@
 
 <script>
 
+    import queryString from 'query-string'
     import FvList from './VouchersList'
     import FvFilterType from './VouchersFilterType'
     import FvFilterService from './VouchersFilterService'
@@ -56,14 +57,18 @@
     import LetterFilter from '../LetterFilter/index'
     import FvSort from './VoucherSorting'
 
+
     export default {
         name: "fv-vouchers-view",
         components: {FvList, FvFilterType, FvFilterService, FvFilterCategory, FvLetterFilter: LetterFilter, FvSort},
+
         data() {
+            const urlParams = queryString.parse(location.search)
+
             return {
                 visible: true,
                 filterTypes: {},
-                type: 'discount,promocode,offer',
+                type: urlParams.type || 'discount,promocode,offer',
                 filterServices: [],
                 services: '',
                 filterCategories: [],
