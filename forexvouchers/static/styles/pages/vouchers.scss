@@ -62,7 +62,24 @@
   color: $black;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal
+  white-space: normal;
+
+  hr {
+    display: none;
+  }
+
+  p {
+    display: none;
+  }
+
+  p:nth-child(-n+1) {
+    display: block;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    overflow: hidden;
+  }
 }
 
 .show-more {
@@ -128,13 +145,17 @@
       display: none
     }
 
+    hr {
+      display: none;
+    }
+
     p:nth-child(-n+1) {
       display: block;
-      overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 2; /* number of lines to show */
       -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      overflow: hidden;
     }
   }
 }
